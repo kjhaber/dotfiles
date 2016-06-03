@@ -14,4 +14,5 @@ export PATH=~/.bin:$PATH
 alias xeit=exit
 alias :q=exit
 
+. ~/.zsh_aliases
 
