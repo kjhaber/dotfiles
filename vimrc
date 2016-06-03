@@ -11,7 +11,7 @@ inoremap <C-@> <C-x><C-o>
 set t_Co=256
 colorscheme molokai
 set background=dark
-set guifont=Inconsolata-g\ for\ Powerline:h14
+set guifont=Inconsolata:h12
 let g:airline_powerline_fonts = 1
 
 set laststatus=2
