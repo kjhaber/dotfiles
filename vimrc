@@ -75,9 +75,9 @@ nnoremap <leader>S :Sexplore
 nnoremap <leader>v :Vexplore<CR>
 nnoremap <leader>V :Vexplore
 
-" stop requiring shift key for commands (big source of command typos)
-nnoremap ; :
-vnoremap ; :
+" " stop requiring shift key for commands (big source of command typos)
+" nnoremap ; :
+" vnoremap ; :
 
 
 " toggle between number and nonumber
