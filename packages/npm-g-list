@@ -1,0 +1,15 @@
+/usr/local/lib
+├── babel-eslint@6.0.2
+├── diceroll@0.0.1
+├── eslint@2.8.0
+├── eslint-plugin-react@5.0.1
+├── generator-react-webpack@3.3.0
+├── generator-react-webpack-redux@0.7.0
+├── http-server@0.7.5
+├── jsonlint@1.6.2
+├── npm@3.8.9
+├── react-tools@0.13.3
+├── reinstall@1.1.0
+├── typescript@1.8.10
+└── yo@1.7.0
+
