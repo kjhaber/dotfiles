@@ -5,7 +5,7 @@
 # Back up any existing dotfiles
 dir=`pwd`                    # dotfiles directory
 olddir=~/dotfiles_old        # old dotfiles backup directory
-files="zshrc zshenv vimrc tmux.conf gitconfig gitignore_global"    # list of files/folders to symlink in homedir
+files="zprofile zshrc zshenv zsh_aliases vimrc tmux.conf gitconfig gitignore_global"    # list of files/folders to symlink in homedir
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
