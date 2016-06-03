@@ -1,0 +1,6 @@
+# Not a standard zsh file, sourced from .zshenv.
+# Meant for shell shortcuts to various directories that I cd to frequently.
+#
+# I have different project and document directories for home and work, and they
+# change often; no real need to back these up publicly.
+
