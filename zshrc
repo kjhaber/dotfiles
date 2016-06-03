@@ -40,14 +40,6 @@ RPROMPT='%{$fg[red]%}[%1~]%{$reset_color%}$(git_rprompt)'
 
 precmd () { print -Pn "\e]2;%n@%M | ${PWD##*/}\a" } # title bar prompt
 
-function tmuxa() {
-  tmux attach-session -t $1
-}
-
-function tmuxnew() {
-  tmux new -s $1
-}
-
 function tm() {
     [[ -z "$1" ]] && { echo "usage: tm <session>" >&2; return 1; }
     tmux has -t $1 && tmux attach -t $1 || tmux new -s $1
@@ -60,7 +52,4 @@ function __tmux-sessions() {
     _describe -t sessions 'sessions' sessions "$@"
 }
 compdef __tmux-sessions tm
-
-
-. ~/.profile
 
