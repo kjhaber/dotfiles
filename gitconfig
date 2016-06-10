@@ -1,24 +1,28 @@
 [user]
-	name = Keith Haber
-	email = kjhaber@gmail.com
+  name = Keith Haber
+  email = kjhaber@gmail.com
 [color]
-	ui = true
+  ui = true
 [alias]
-	s = status
-	d = diff
-	dc = diff --cached
-	diffw = diff --word-diff
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  c = commit
+  ca = commit --amend
+  co = checkout
+  cob = checkout -b
+  d = diff
   dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+  dc = diff --cached
+  diffw = diff --word-diff
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
   lone = log --oneline
-  cam = commit --amend
-  tuneout = update-index --assume-unchanged
+  s = status
   tunein = update-index --no-assume-unchanged
+  tuneout = update-index --assume-unchanged
 [core]
-	autocrlf = false
-	excludesfile = /Users/keith/.gitignore_global
+  autocrlf = false
+  excludesfile = /Users/keith/.gitignore_global
+  pager = less -FMRiX
 [push]
-	default = simple
-
+  default = simple
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
+
