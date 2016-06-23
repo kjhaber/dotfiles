@@ -150,6 +150,6 @@ let g:syntastic_json_checkers = ['jsonlint']
 
 let g:vim_markdown_folding_disabled = 1
 
-let g:startify_bookmarks = [ {'.': '.'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
+let g:startify_bookmarks = [ {'.': '.'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'} ]
 
 
