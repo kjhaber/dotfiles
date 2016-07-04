@@ -1,0 +1,5 @@
+#!/bin/sh
+# Adapted from comment on
+# https://www.reddit.com/r/osx/comments/48b3f0/what_are_some_must_have_homebrew_packages/
+/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
+
