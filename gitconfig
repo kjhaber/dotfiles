@@ -17,7 +17,7 @@
   s = status
   tunein = update-index --no-assume-unchanged
   tuneout = update-index --assume-unchanged
-  tunelist = ls-files -v | grep '^h'
+  tunelist = !git ls-files -v | grep "^[[:lower:]]"
 [core]
   autocrlf = false
   excludesfile = /Users/keith/.gitignore_global
