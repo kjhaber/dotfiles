@@ -1,0 +1,5 @@
+" Sourced from vimrc
+" Used by simplenote.vim plugin to get Simplenote credentials
+let g:SimplenoteUsername = "FIXME"
+let g:SimplenotePassword = "FIXME"
+
