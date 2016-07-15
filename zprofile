@@ -13,6 +13,7 @@ export PATH=~/.bin:$PATH
 
 alias xeit=exit
 alias :q=exit
+alias cddotfiles=cd ~/Library/dotfiles
 
 eval "$(thefuck --alias)"
 alias doh=fuck
