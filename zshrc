@@ -35,7 +35,23 @@ git_rprompt() {
   fi
 }
 
-PROMPT='%{$fg[white]%}%n@%m%#%{$reset_color%} '
+# Add vim mode indicator to beginning of PROMPT.
+# Setting color code within zle-keymap-select didn't work for me, but using
+# separate variables for text and color works.
+VIMODE_INSERT_TXT='[I]'
+VIMODE_NORMAL_TXT='[N]'
+VIMODE_TXT=$VIMODE_INSERT_TXT
+VIMODE_INSERT_COLOR='blue'
+VIMODE_NORMAL_COLOR='cyan'
+VIMODE_COLOR=$VIMODE_INSERT_COLOR
+function zle-keymap-select {
+    VIMODE_TXT="${${KEYMAP/vicmd/${VIMODE_NORMAL_TXT}}/(main|viins)/${VIMODE_INSERT_TXT}}"
+    VIMODE_COLOR="${${KEYMAP/vicmd/${VIMODE_NORMAL_COLOR}}/(main|viins)/${VIMODE_INSERT_COLOR}}"
+    zle reset-prompt
+}
+zle -N zle-keymap-select
+
+PROMPT='%{$fg[${VIMODE_COLOR}]%}${VIMODE_TXT} %{$fg[white]%}%n@%m%#%{$reset_color%} '
 RPROMPT='%{$fg[red]%}[%1~]%{$reset_color%}$(git_rprompt)'
 
 precmd () { print -Pn "\e]2;%n@%M | ${PWD##*/}\a" } # title bar prompt
