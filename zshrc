@@ -1,4 +1,5 @@
 bindkey -v
+export KEYTIMEOUT=1
 
 autoload -U compinit colors
 
@@ -38,17 +39,18 @@ git_rprompt() {
 # Add vim mode indicator to beginning of PROMPT.
 # Setting color code within zle-keymap-select didn't work for me, but using
 # separate variables for text and color works.
-VIMODE_INSERT_TXT='[I]'
-VIMODE_NORMAL_TXT='[N]'
+VIMODE_INSERT_TXT='I'
+VIMODE_NORMAL_TXT='N'
 VIMODE_TXT=$VIMODE_INSERT_TXT
-VIMODE_INSERT_COLOR='blue'
-VIMODE_NORMAL_COLOR='cyan'
+VIMODE_INSERT_COLOR='cyan'
+VIMODE_NORMAL_COLOR='magenta'
 VIMODE_COLOR=$VIMODE_INSERT_COLOR
-function zle-keymap-select {
+function zle-line-init zle-keymap-select {
     VIMODE_TXT="${${KEYMAP/vicmd/${VIMODE_NORMAL_TXT}}/(main|viins)/${VIMODE_INSERT_TXT}}"
     VIMODE_COLOR="${${KEYMAP/vicmd/${VIMODE_NORMAL_COLOR}}/(main|viins)/${VIMODE_INSERT_COLOR}}"
     zle reset-prompt
 }
+zle -N zle-line-init
 zle -N zle-keymap-select
 
 PROMPT='%{$fg[${VIMODE_COLOR}]%}${VIMODE_TXT} %{$fg[white]%}%n@%m%#%{$reset_color%} '
