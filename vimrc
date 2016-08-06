@@ -79,6 +79,10 @@ nnoremap <leader>V :Vexplore
 " nnoremap ; :
 " vnoremap ; :
 
+" Convert '%%' to '%:h<Tab>', for use with :edit to expand path of current buffer
+" (from Practical Vim book)
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
 
 " toggle between number and nonumber
 function! ToggleNumber()
