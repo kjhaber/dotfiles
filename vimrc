@@ -155,8 +155,8 @@ let g:syntastic_json_checkers = ['jsonlint']
 let g:vim_markdown_folding_disabled = 1
 
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
-let g:startify_bookmarks = [ {'.': '.'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'} ]
-let g:startify_commands = [ {'s': 'enew | Simplenote -l'} ]
+let g:startify_bookmarks = [ {'.': '.'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'}, {'s': '~/.ssh/config'} ]
+let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
