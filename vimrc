@@ -59,9 +59,28 @@ set colorcolumn=81
 
 syntax enable
 
-
+" Use both \ and space as leader
+" I still have some habits for \, and space doesn't show up for showcmd
 let mapleader="\\"
-nnoremap <leader><space> :nohlsearch<CR> " turn off search highlight
+map <Space> <leader>
+
+" from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+nnoremap <leader>o :CtrlP<CR>
+nnoremap <leader>w :w<CR>
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+
+nmap <leader><leader> V
+
+" used with vim-expand-region plugin
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+nnoremap <leader>h :nohlsearch<CR> " turn off search highlight
 nnoremap <leader># :call ToggleNumber()<CR>
 nnoremap <leader>@ :call ToggleNumberRel()<CR>
 nnoremap <leader>} :call StripTrailingWhitespaces()<CR>
@@ -75,9 +94,8 @@ nnoremap <leader>S :Sexplore
 nnoremap <leader>v :Vexplore<CR>
 nnoremap <leader>V :Vexplore
 
-" " stop requiring shift key for commands (big source of command typos)
-" nnoremap ; :
-" vnoremap ; :
+" stop that window from popping up
+map q: :q
 
 " Convert '%%' to '%:h<Tab>', for use with :edit to expand path of current buffer
 " (from Practical Vim book)
@@ -129,6 +147,21 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " netrw options
 let g:netrw_altv=1  " open files on right
+
+" The Silver Searcher
+let g:ctrlp_use_caching = 0
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+endif
+
+nmap <leader>/ :Ag<Space>
+
 
 " vim-jsx options
 let g:jsx_ext_required = 0
