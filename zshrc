@@ -39,8 +39,8 @@ git_rprompt() {
 # Add vim mode indicator to beginning of PROMPT.
 # Setting color code within zle-keymap-select didn't work for me, but using
 # separate variables for text and color works.
-VIMODE_INSERT_TXT='-'
-VIMODE_NORMAL_TXT='+'
+VIMODE_INSERT_TXT='↪ '
+VIMODE_NORMAL_TXT='✦ '
 VIMODE_TXT=$VIMODE_INSERT_TXT
 VIMODE_INSERT_COLOR='cyan'
 VIMODE_NORMAL_COLOR='magenta'
