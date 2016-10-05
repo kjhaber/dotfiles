@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# tmdir [-n <session-name>] [-v|-h] [-e]
+#
+# Creates a tmux session with a window for each subdirectory of the current
+# directory.
+#
+# Options:
+# -n <name>  Session name
+# -v         Creates a vertical split in each window (cannot be used with -h)
+# -h         Creates a horizontal split in each window (cannot be used with -v)
+# -e         Opens $EDITOR in the first pane of each window
+
+while getopts ":n:vhe" opt; do
+  case $opt in
+    n)
+      SESSION_NAME="$OPTARG"
+      ;;
+    v)
+      VSPLIT=1
+      if [[ (($HSPLIT)) ]]; then
+        echo "-v option cannot be used with -h option"
+        exit 1
+      fi
+      ;;
+    h)
+      HSPLIT=1
+      if [[ (($VSPLIT)) ]]; then
+        echo "-v option cannot be used with -h option"
+        exit 1
+      fi
+      ;;
+    e)
+      EDIT=1
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+
+if [[ -n $SESSION_NAME ]]; then
+  tmux -2 new-session -d -c . -n 'initial' -s $SESSION_NAME
+else
+  tmux -2 new-session -d -c . -n 'initial'
+fi
+
+if [[ ($EDIT) ]]; then
+  EDIT_COMMAND="$EDITOR ."
+fi
+
+for dir in *
+do
+  if [[ -d $dir ]]; then
+    # FIXME: map dir name to short window name somewhere
+    tmux new-window -c $dir -n $dir
+
+    if [[ ($VSPLIT) ]]; then
+      if [[ ($EDIT) ]]; then
+        tmux split-window -c "$dir" "$EDITOR"
+      else
+        tmux split-window -c "$dir"
+      fi
+    fi
+
+    if [[ ($HSPLIT) ]]; then
+      if [[ ($EDIT) ]]; then
+        tmux split-window -c "$dir" -h "$EDITOR"
+      else
+        tmux split-window -c "$dir" -h
+      fi
+    fi
+
+    tmux swap-pane -U
+    tmux select-pane -t '^'
+  fi
+
+
+done
+
+tmux kill-window -t initial
+tmux select-window -t '^'
+tmux attach -t $SESSION_NAME
+
