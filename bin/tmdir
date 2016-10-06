@@ -1,9 +1,21 @@
-#!/bin/sh
+#!/bin/zsh
 
 # tmdir [-n <session-name>] [-v|-h] [-e]
 #
 # Creates a tmux session with a window for each subdirectory of the current
 # directory.
+#
+# If a .tmdir file is in the current directory, the lines of the file will
+# be used to create tmux windows instead of creating one for every subdir.
+# Lines may follow the pattern "DIRNAME:WINDOWNAME" to customize the window
+# name for the subdirectory.  If no colon present, the window name will match
+# the directory name.  A .tmdir directory may be useful to limit the tmux
+# windows created in a tmdir command, and make the naming for windows more
+# useful.
+#
+# In either case, this command always creates tmux windows for subdirectories
+# of the current directory.  Extra lines in .tmdir that don't match a
+# subdirectory name will be ignored.
 #
 # Options:
 # -n <name>  Session name
@@ -11,6 +23,7 @@
 # -h         Creates a horizontal split in each window (cannot be used with -v)
 # -e         Opens $EDITOR in the first pane of each window
 
+# process options
 while getopts ":n:vhe" opt; do
   case $opt in
     n)
@@ -37,23 +50,48 @@ while getopts ":n:vhe" opt; do
 done
 shift $((OPTIND-1))
 
-
-if [[ -n $SESSION_NAME ]]; then
-  tmux -2 new-session -d -c . -n 'initial' -s $SESSION_NAME
-else
-  tmux -2 new-session -d -c . -n 'initial'
+# If session name not provided via -n arg, default session name is current
+# directory's name
+if [[ -z $SESSION_NAME ]]; then
+  SESSION_NAME=$(basename `pwd`)
 fi
 
 if [[ ($EDIT) ]]; then
   EDIT_COMMAND="$EDITOR ."
 fi
 
-for dir in *
-do
-  if [[ -d $dir ]]; then
-    # FIXME: map dir name to short window name somewhere
-    tmux new-window -c $dir -n $dir
+# Read lines from .tmdir file if it exists, use current directory contents
+# otherwise
+ORIG_IFS="$IFS"
+IFS=$'\n'
+if [[ -f .tmdir ]]; then
+  ELEMENTS=(${(f)$(cat .tmdir)})
+else
+  ELEMENTS=(${(f)$(ls -A -1 .)})
+fi
+IFS="$ORIG_IFS"
 
+
+tmux -2 new-session -d -c . -n 'initial' -s $SESSION_NAME
+
+for elt in $ELEMENTS
+do
+
+  # If current entry is in "DIRNAME:WINNAME" format, extract fields
+  # Otherewise entry is dirname and winname
+  if [[ $elt =~ '([^:]+):(.*)' ]]; then
+    dir=$match[1]
+    win=$match[2]
+  else
+    dir=$elt
+    win=$elt
+  fi
+
+  # Create tmux window only if dirname is actually a directory
+  if [[ -d $dir ]]; then
+    tmux new-window -c "$dir" -n "$win"
+
+    # Create vertical or horizontal split, per command line opts
     if [[ ($VSPLIT) ]]; then
       if [[ ($EDIT) ]]; then
         tmux split-window -c "$dir" "$EDITOR"
@@ -70,14 +108,22 @@ do
       fi
     fi
 
+    # Swap panes to ensure that editor is opened in first pane, if that option
+    # was provided.
     tmux swap-pane -U
+
+    # Select first tmux pane in this window
     tmux select-pane -t '^'
   fi
 
-
 done
 
+# Get rid of dummy initial window tmux
 tmux kill-window -t initial
+
+# Select first window within session
 tmux select-window -t '^'
+
+# Connecto to session
 tmux attach -t $SESSION_NAME
 
