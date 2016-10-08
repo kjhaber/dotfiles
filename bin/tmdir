@@ -80,7 +80,7 @@ do
   # If current entry is in "DIRNAME:WINNAME" format, extract fields
   # Otherewise entry is dirname and winname
   if [[ $elt =~ '([^:]+):(.*)' ]]; then
-    dir=$match[1]
+    dir="$(pwd)/$match[1]"
     win=$match[2]
   else
     dir=$elt
@@ -94,7 +94,7 @@ do
     # Create vertical or horizontal split, per command line opts
     if [[ ($VSPLIT) ]]; then
       if [[ ($EDIT) ]]; then
-        tmux split-window -c "$dir" "$EDITOR"
+        tmux split-window -c "$dir" "$EDITOR ."
       else
         tmux split-window -c "$dir"
       fi
@@ -102,7 +102,7 @@ do
 
     if [[ ($HSPLIT) ]]; then
       if [[ ($EDIT) ]]; then
-        tmux split-window -c "$dir" -h "$EDITOR"
+        tmux split-window -c "$dir" -h "$EDITOR ."
       else
         tmux split-window -c "$dir" -h
       fi
