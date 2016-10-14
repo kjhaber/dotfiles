@@ -2,9 +2,8 @@ android-file-transfer
 audacity
 cool-retro-term
 cyberduck
-evernote
 firefox
-font-inconsolata (!)
+font-inconsolata
 gimp
 gmail-notifr
 gog-downloader
@@ -12,6 +11,8 @@ google-chrome
 handbrake
 inkscape
 iterm2
+java
+karabiner-elements
 libreoffice
 licecap
 macvim
@@ -26,5 +27,6 @@ textmate
 the-unarchiver
 tiled
 virtualbox
+virtualbox-extension-pack
 vlc
 wacom-tablet
