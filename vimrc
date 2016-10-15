@@ -2,7 +2,38 @@ set encoding=utf-8
 scriptencoding utf-8
 set shell=bash
 
-execute pathogen#infect()
+" Vundle
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'MarcWeber/vim-addon-mw-utils.git'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'editorconfig/editorconfig-vim.git'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+Plugin 'justinmk/vim-sneak'
+Plugin 'mhinz/vim-startify'
+Plugin 'moll/vim-node'
+Plugin 'mrtazz/simplenote.vim.git'
+Plugin 'mxw/vim-jsx.git'
+Plugin 'pangloss/vim-javascript'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'rking/ag.vim'
+Plugin 'terryma/vim-expand-region'
+Plugin 'tmux-plugins/vim-tmux'
+Plugin 'tomtom/tlib_vim.git'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+
+call vundle#end()
+
+
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 inoremap <C-Space> <C-x><C-o>

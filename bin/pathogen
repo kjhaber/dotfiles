@@ -1,4 +1,0 @@
-#!/bin/sh
-cd ~/.vim/bundle
-git clone "$1"
-
