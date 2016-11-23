@@ -36,6 +36,7 @@ call vundle#end()
 
 
 filetype plugin on
+runtime macros/matchit.vim
 set omnifunc=syntaxcomplete#Complete
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-x><C-o>
