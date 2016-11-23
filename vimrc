@@ -22,6 +22,7 @@ Plugin 'mxw/vim-jsx.git'
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tomtom/tlib_vim.git'
@@ -178,6 +179,8 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " netrw options
 let g:netrw_altv=1  " open files on right
+let g:NERDTreeHijackNetrw = 0
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " The Silver Searcher
 let g:ctrlp_use_caching = 0
