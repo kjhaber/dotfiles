@@ -33,6 +33,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/zoomwintab.vim'
 Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
@@ -238,6 +239,12 @@ nmap <leader>md :InstantMarkdownPreview<CR>
 " Enable vim-highlightedyank plugin
 map y <Plug>(highlightedyank)
 let g:highlightedyank_highlight_duration = 300
+
+" Change mapping of zoomwintab plugin (default is <C-w>o, but I want that to
+" still have its default behavior of making current window the only open one)
+let g:zoomwintab_remap = 0
+nmap <C-w>z :ZoomWinTabToggle<CR>
+nmap <C-w><C-z> :ZoomWinTabToggle<CR>
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
