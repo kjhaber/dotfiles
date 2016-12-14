@@ -31,6 +31,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 
@@ -225,6 +226,8 @@ let g:vim_markdown_folding_disabled = 1
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
 let g:startify_bookmarks = [ {'.': '.'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'}, {'s': '~/.ssh/config'} ]
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
+
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki'}]
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
