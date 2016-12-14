@@ -15,6 +15,7 @@ Plugin 'editorconfig/editorconfig-vim.git'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'justinmk/vim-sneak'
+Plugin 'machakann/vim-highlightedyank'
 Plugin 'mhinz/vim-startify'
 Plugin 'moll/vim-node'
 Plugin 'mrtazz/simplenote.vim.git'
@@ -233,6 +234,10 @@ let g:vimwiki_list = [{'path': '~/Documents/vimwiki'}]
 " vim-instant-markdown: requires `sudo npm -g install instant-markdown-d`
 let g:instant_markdown_autostart = 0
 nmap <leader>md :InstantMarkdownPreview<CR>
+
+" Enable vim-highlightedyank plugin
+map y <Plug>(highlightedyank)
+let g:highlightedyank_highlight_duration = 300
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
