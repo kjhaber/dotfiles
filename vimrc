@@ -23,6 +23,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tomtom/tlib_vim.git'
@@ -228,6 +229,10 @@ let g:startify_bookmarks = [ {'.': '.'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki'}]
+
+" vim-instant-markdown: requires `sudo npm -g install instant-markdown-d`
+let g:instant_markdown_autostart = 0
+nmap <leader>md :InstantMarkdownPreview<CR>
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
