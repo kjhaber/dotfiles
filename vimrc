@@ -10,6 +10,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
+Plugin 'cespare/vim-toml'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim.git'
 Plugin 'garbas/vim-snipmate'
@@ -22,10 +23,13 @@ Plugin 'mrtazz/simplenote.vim.git'
 Plugin 'mxw/vim-jsx.git'
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'racer-rust/vim-racer'
 Plugin 'rking/ag.vim'
+Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-expand-region'
+Plugin 'timonv/vim-cargo'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tomtom/tlib_vim.git'
 Plugin 'tpope/vim-abolish'
@@ -243,13 +247,20 @@ let g:syntastic_style_warning_symbol = '!'
 
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_json_checkers = ['jsonlint']
+let g:syntastic_rust_checkers = ['rustc']
 
 let g:vim_markdown_folding_disabled = 1
 
+" vim-racer
+let g:racer_cmd = "~/.cargo/bin/racer"
+let $RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"
+
+" vim-startify
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
 let g:startify_bookmarks = [ {'.': '.'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'}, {'s': '~/.ssh/config'} ]
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
+" vimwiki
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki'}]
 
 " vim-instant-markdown: requires `sudo npm -g install instant-markdown-d`
