@@ -34,6 +34,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/zoomwintab.vim'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
@@ -205,21 +206,40 @@ nmap <leader>/ :Ag<Space>
 " vim-jsx options
 let g:jsx_ext_required = 0
 
-" syntastic options
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+" start of default statusline
+set statusline=
+set statusline+=%<\       "cut at start
+set statusline+=%t\       "tail of the filename
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}]\  "file format
+set statusline+=%h        "help file flag
+set statusline+=%m        "modified flag
+set statusline+=%r        "read only flag
+set statusline+=%y\       "filetype
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+set statusline+=%=      "left/right separator
+set statusline+=%{v:register}\     "currently active register
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L\  "cursor line/total lines
+set statusline+=(%P)    "percent through file
+
+
+
+" syntastic options
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=5
 let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = '✗'
+let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_style_error_symbol = '∆'
-let g:syntastic_style_warning_symbol = '∆'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '!'
 
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_json_checkers = ['jsonlint']
