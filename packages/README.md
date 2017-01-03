@@ -15,4 +15,7 @@
   of these: most dev tools are project-specific, and a couple are personal toy
   projects/utilities.)
 
+* rust-cargo-list.sh
+  Steps for installing Rust compiler and toolchain.  (I've been dabbling with
+  Rust a bit lately.)
 

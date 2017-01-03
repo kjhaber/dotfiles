@@ -9,6 +9,7 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=$JAVA_HOME/bin:$PATH
+export PATH=~/.cargo/bin:$PATH
 export PATH=~/.bin:$PATH
 
 alias xeit=exit
