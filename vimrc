@@ -29,6 +29,7 @@ Plugin 'racer-rust/vim-racer'
 Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'sjl/gundo.vim'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-expand-region'
 Plugin 'timonv/vim-cargo'
@@ -287,6 +288,10 @@ let g:highlightedyank_highlight_duration = 300
 let g:zoomwintab_remap = 0
 nmap <C-w>z :ZoomWinTabToggle<CR>
 nmap <C-w><C-z> :ZoomWinTabToggle<CR>
+
+" gundo.vim
+let g:gundo_return_on_revert = 0
+nnoremap <leader>u :GundoToggle<CR>
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
