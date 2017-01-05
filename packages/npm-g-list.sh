@@ -1,0 +1,6 @@
+#!/bin/sh
+npm install -g eslint
+npm install -g http-server
+npm install -g instant-markdown-d
+npm install -g typescript
+
