@@ -246,11 +246,15 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '!'
 
 let g:syntastic_css_checkers = ['csslint']
+let g:syntastic_html_checkers = ['tidy']
+let g:syntastic_less_checkers = ['lesshint']
+let g:syntastic_java_checkers = ['javac']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_rust_checkers = ['rustc']
 let g:syntastic_sass_checkers = ['sass_lint']
 let g:syntastic_scss_checkers = ['sass_lint']
+let g:syntastic_xml_checkers = ['xmllint']
 
 let g:vim_markdown_folding_disabled = 1
 
