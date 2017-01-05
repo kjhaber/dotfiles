@@ -123,7 +123,9 @@ nmap <leader><leader> V
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-nnoremap <leader>h :nohlsearch<CR> " turn off search highlight
+" turn off search highlight
+nnoremap <leader>h :nohlsearch<CR>
+
 nnoremap <leader># :call ToggleNumber()<CR>
 nnoremap <leader>@ :call ToggleNumberRel()<CR>
 nnoremap <leader>} :call StripTrailingWhitespaces()<CR>
