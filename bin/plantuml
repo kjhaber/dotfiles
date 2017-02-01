@@ -1,0 +1,3 @@
+#!/bin/bash
+# Modified from the script installed from `brew install plantuml` but with the `-spash:no` argument added
+GRAPHVIZ_DOT="/usr/local/opt/graphviz/bin/dot" exec java -splash:no -jar /usr/local/Cellar/plantuml/8053/libexec/plantuml.jar "$@"
