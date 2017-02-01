@@ -30,6 +30,7 @@ Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sjl/gundo.vim'
+Plugin 'skywind3000/asyncrun.vim'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-expand-region'
 Plugin 'timonv/vim-cargo'
@@ -288,6 +289,10 @@ let g:highlightedyank_highlight_duration = 300
 let g:zoomwintab_remap = 0
 nmap <C-w>z :ZoomWinTabToggle<CR>
 nmap <C-w><C-z> :ZoomWinTabToggle<CR>
+
+" asyncrun.vim
+" Defines :Make to run makeprg async - improves fugitive.vim too
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 " gundo.vim
 let g:gundo_return_on_revert = 0
