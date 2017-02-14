@@ -9,6 +9,7 @@ imagemagick
 netcat
 nmap
 node
+pandoc
 plantuml
 pstree
 python
