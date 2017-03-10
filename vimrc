@@ -45,6 +45,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/zoomwintab.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'vimwiki/vimwiki'
+Plugin 'Yggdroot/indentLine'
 
 call vundle#end()
 
