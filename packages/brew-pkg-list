@@ -6,6 +6,7 @@ fortune
 go
 iftop
 imagemagick
+moreutils
 netcat
 nmap
 node
