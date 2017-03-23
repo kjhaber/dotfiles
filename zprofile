@@ -20,5 +20,8 @@ alias cddotfiles="cd ~/Library/dotfiles"
 eval "$(thefuck --alias)"
 alias doh=fuck
 
+eval "$(fasd --init auto)"
+alias v='f -e vim' # quick opening files with vim
+
 . ~/.zsh_aliases
 

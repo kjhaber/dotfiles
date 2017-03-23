@@ -2,6 +2,7 @@ coreutils
 cowsay
 curl
 editorconfig
+fasd
 fortune
 go
 iftop
