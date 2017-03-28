@@ -17,6 +17,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim.git'
 Plugin 'honza/vim-snippets'
 Plugin 'justinmk/vim-sneak'
+Plugin 'lifepillar/vim-mucomplete'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'mhinz/vim-startify'
 Plugin 'moll/vim-node'
@@ -283,6 +284,10 @@ nmap <leader>md :InstantMarkdownPreview<CR>
 " Enable vim-highlightedyank plugin
 map y <Plug>(highlightedyank)
 let g:highlightedyank_highlight_duration = 300
+
+" vim-mucomplete
+set completeopt+=menuone
+set shortmess+=c
 
 " Change mapping of zoomwintab plugin (default is <C-w>o, but I want that to
 " still have its default behavior of making current window the only open one)
