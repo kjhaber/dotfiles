@@ -15,7 +15,6 @@ Plugin 'aklt/plantuml-syntax'
 Plugin 'cespare/vim-toml'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim.git'
-Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'justinmk/vim-sneak'
 Plugin 'machakann/vim-highlightedyank'
@@ -30,6 +29,7 @@ Plugin 'racer-rust/vim-racer'
 Plugin 'rking/ag.vim'
 Plugin 'mckinnsb/rust.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'sirver/ultisnips'
 Plugin 'sjl/gundo.vim'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'suan/vim-instant-markdown'
@@ -190,8 +190,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
@@ -299,6 +297,14 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 " gundo.vim
 let g:gundo_return_on_revert = 0
 nnoremap <leader>u :GundoToggle<CR>
+
+" Ultisnips
+" Ctrl-S for 'snippet'
+" Ctrl-K/J for down/up (not to be confused with ctrl-down/up outside of insert
+" mode for moving lines up and down)
+let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
