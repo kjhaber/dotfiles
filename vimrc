@@ -306,10 +306,10 @@ nnoremap <leader>u :GundoToggle<CR>
 " Ultisnips
 " Ctrl-S for 'snippet'
 " Ctrl-K/J for down/up (not to be confused with ctrl-down/up outside of insert
-" mode for moving lines up and down)
+" mode for moving lines up and down).  Down means forward towards end of doc.
 let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
