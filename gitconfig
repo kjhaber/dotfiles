@@ -4,6 +4,7 @@
 [color]
   ui = true
 [alias]
+  abort = reset --hard HEAD
   c = commit
   ca = commit --amend
   co = checkout
@@ -14,10 +15,13 @@
   diffw = diff --word-diff
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
   lone = log --oneline
+  recommit = commit --amend --no-edit
   s = status
   tunein = update-index --no-assume-unchanged
   tuneout = update-index --assume-unchanged
   tunelist = !git ls-files -v | grep "^[[:lower:]]"
+  undo = reset HEAD~1
+  unstage = reset HEAD --
 [core]
   autocrlf = false
   excludesfile = /Users/keith/.gitignore_global
