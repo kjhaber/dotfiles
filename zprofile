@@ -23,5 +23,8 @@ alias doh=fuck
 eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
 
+export NVM_DIR=~/.nvm
+. "/usr/local/opt/nvm/nvm.sh"
+
 . ~/.zsh_aliases
 

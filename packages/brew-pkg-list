@@ -10,7 +10,7 @@ imagemagick
 moreutils
 netcat
 nmap
-node
+nvm
 pandoc
 plantuml
 pstree

@@ -1,4 +1,11 @@
 #!/bin/sh
+
+# Get nvm from homebrew, then use latest node from nvm.  Easier to control node
+# version in use.  NVM_DIR is set to ~/.nvm, so ensure it exists.
+mkdir -p ~/.nvm
+nvm install node
+nvm use node
+
 npm install -g csslint
 npm install -g eslint
 npm install -g http-server
