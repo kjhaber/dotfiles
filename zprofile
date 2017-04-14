@@ -17,6 +17,9 @@ alias :q=exit
 alias cddesktop="cd ~/Desktop"
 alias cddotfiles="cd ~/Library/dotfiles"
 
+# cd to git root
+alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
+
 eval "$(thefuck --alias)"
 alias doh=fuck
 
