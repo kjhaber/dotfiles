@@ -15,6 +15,7 @@ Plugin 'aklt/plantuml-syntax'
 Plugin 'cespare/vim-toml'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim.git'
+Plugin 'godlygeek/tabular'
 Plugin 'honza/vim-snippets'
 Plugin 'justinmk/vim-sneak'
 Plugin 'lifepillar/vim-mucomplete'
@@ -311,6 +312,15 @@ nnoremap <leader>u :GundoToggle<CR>
 let g:UltiSnipsExpandTrigger="<c-s>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" Tabularize
+" 'align' mappings
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
