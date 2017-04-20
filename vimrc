@@ -189,12 +189,15 @@ endfunction
 " go ahead and strip trailing whitespace on save too
 autocmd BufWritePre * :%s/\s\+$//e
 
-
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+" Adjusting my mapping to use alt instead of ctrl so I can use
+" <C-j> and <C-k> for split navigation.
+" On a Mac you have to use a trick: <ALT+j> ==> ∆, <ALT+k> ==> ˚
+" http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
 
 " netrw options
 let g:netrw_altv=1  " open files on right
