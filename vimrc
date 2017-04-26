@@ -13,6 +13,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'aklt/plantuml-syntax'
 Plugin 'cespare/vim-toml'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim.git'
 Plugin 'godlygeek/tabular'
@@ -313,8 +314,8 @@ nnoremap <leader>u :GundoToggle<CR>
 " Ctrl-K/J for down/up (not to be confused with ctrl-down/up outside of insert
 " mode for moving lines up and down).  Down means forward towards end of doc.
 let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Tabularize
 " 'align' mappings
