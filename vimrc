@@ -139,14 +139,9 @@ nnoremap <leader># :call ToggleNumber()<CR>
 nnoremap <leader>@ :call ToggleNumberRel()<CR>
 nnoremap <leader>} :call StripTrailingWhitespaces()<CR>
 
-nnoremap <leader>e :Explore<CR>
-nnoremap <leader>E :Explore
-
-nnoremap <leader>s :Sexplore<CR>
-nnoremap <leader>S :Sexplore
-
-nnoremap <leader>v :Vexplore<CR>
-nnoremap <leader>V :Vexplore
+" shortcuts for splits similar to my bindings for tmux
+nnoremap <leader>- :Sexplore<CR>
+nnoremap <leader>\| :Vexplore<CR>
 
 " stop that window from popping up
 map q: :q
