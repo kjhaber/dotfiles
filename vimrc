@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'aklt/plantuml-syntax'
+Plugin 'benmills/vimux'
 Plugin 'cespare/vim-toml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -320,6 +321,22 @@ nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
+
+" vimux
+" from https://blog.bugsnag.com/tmux-and-vim/
+" Prompt for a command to run
+nmap <Leader>vp :VimuxPromptCommand<CR>
+
+" Run last command executed by VimuxRunCommand
+nmap <Leader>vl :VimuxRunLastCommand<CR>
+
+" Inspect runner pane
+nmap <Leader>vi :VimuxInspectRunner<CR>
+
+" Zoom the tmux runner pane
+nmap <Leader>vz :VimuxZoomRunner<CR>
+
+
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
