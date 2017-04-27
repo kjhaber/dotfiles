@@ -17,6 +17,7 @@ Plugin 'cespare/vim-toml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim.git'
+Plugin 'elzr/vim-json'
 Plugin 'godlygeek/tabular'
 Plugin 'honza/vim-snippets'
 Plugin 'justinmk/vim-sneak'
@@ -336,7 +337,8 @@ nmap <Leader>vi :VimuxInspectRunner<CR>
 " Zoom the tmux runner pane
 nmap <Leader>vz :VimuxZoomRunner<CR>
 
-
+" vim-json
+let g:vim_json_syntax_conceal = 0
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 source ~/.simplenoterc
