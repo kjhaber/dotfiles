@@ -99,7 +99,7 @@ bindkey '^Z' ctrl-z-widget
 
 function tm() {
     [[ -z "$1" ]] && { echo "usage: tm <session>" >&2; return 1; }
-    tmux has -t $1 && tmux attach -t $1 || tmux new -s $1
+    tmux has -t "$1" 2> /dev/null && tmux attach -t "$1" || tmux new -s "$1"
 }
 
 function __tmux-sessions() {
