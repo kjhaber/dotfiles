@@ -16,6 +16,7 @@ alias xeit=exit
 alias :q=exit
 alias cddesktop="cd ~/Desktop"
 alias cddotfiles="cd ~/Library/dotfiles"
+alias cdnotes="cd ~/Documents/notes"
 
 # cd to git root
 alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'

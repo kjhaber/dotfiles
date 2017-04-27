@@ -1,0 +1,16 @@
+#! /bin/sh
+# Opens vim in a new Markdown file in ~/Documents/notes prefixed with current date.
+
+DATE=`date +"%Y-%m-%d"`
+LABEL="$1"
+if [ -z "$LABEL" ]; then
+  LABEL="note"
+fi
+FILENAME="${DATE}_${LABEL}.md"
+NOTESDIR=~/Documents/notes
+mkdir -p $NOTESDIR
+
+echo "Opening ${NOTESDIR}/${FILENAME}"
+cd "${NOTESDIR}"
+vi "${FILENAME}"
+
