@@ -11,10 +11,12 @@ export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=~/.cargo/bin:$PATH
 export PATH=~/.bin:$PATH
+export PATH=~/.bin/local:$PATH
 
 alias xeit=exit
 alias :q=exit
 alias cddesktop="cd ~/Desktop"
+alias cddocuments="cd ~/Documents"
 alias cddotfiles="cd ~/Library/dotfiles"
 alias cdnotes="cd ~/Documents/notes"
 
