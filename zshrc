@@ -97,6 +97,10 @@ function ctrl-z-widget() {
 zle -N ctrl-z-widget
 bindkey '^Z' ctrl-z-widget
 
+# Prevent accidentally entering zsh command mode (execute-named-cmd) when I hit esc
+# (https://superuser.com/questions/928846/what-is-execute-on-the-command-line-and-how-to-i-avoid-it)
+bindkey -a -r ':'
+
 function tm() {
     [[ -z "$1" ]] && { echo "usage: tm <session>" >&2; return 1; }
     tmux has -t "$1" 2> /dev/null && tmux attach -t "$1" || tmux new -s "$1"
