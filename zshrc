@@ -15,8 +15,6 @@ fpath=($HOME/.zsh/completion $fpath)
 compinit
 colors
 
-
-setopt prompt_subst
 setopt complete_in_word
 setopt auto_cd
 
@@ -39,34 +37,7 @@ zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
-git_rprompt() {
-  CURBRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-  if [ "$CURBRANCH" = "" ] ; then
-    echo ""
-  else
-    echo " %{$fg[magenta]%}[$CURBRANCH]%{$reset_color%}"
-  fi
-}
-
-# Add vim mode indicator to beginning of PROMPT.
-# Setting color code within zle-keymap-select didn't work for me, but using
-# separate variables for text and color works.
-VIMODE_INSERT_TXT='↪ '
-VIMODE_NORMAL_TXT='✦ '
-VIMODE_TXT=$VIMODE_INSERT_TXT
-VIMODE_INSERT_COLOR='cyan'
-VIMODE_NORMAL_COLOR='magenta'
-VIMODE_COLOR=$VIMODE_INSERT_COLOR
-function zle-line-init zle-keymap-select {
-    VIMODE_TXT="${${KEYMAP/vicmd/${VIMODE_NORMAL_TXT}}/(main|viins)/${VIMODE_INSERT_TXT}}"
-    VIMODE_COLOR="${${KEYMAP/vicmd/${VIMODE_NORMAL_COLOR}}/(main|viins)/${VIMODE_INSERT_COLOR}}"
-    zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-PROMPT='%{$fg[${VIMODE_COLOR}]%}${VIMODE_TXT}%{$fg[white]%}%n@%m%#%{$reset_color%} '
-RPROMPT='%{$fg[red]%}[%1~]%{$reset_color%}$(git_rprompt)'
+source $DOTFILE_HOME/zsh/kjhaber.zsh-theme
 
 precmd () { print -Pn "\e]2;%n@%M | ${PWD##*/}\a" } # title bar prompt
 
