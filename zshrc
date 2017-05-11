@@ -11,7 +11,7 @@ bindkey -v
 
 autoload -U compinit colors
 
-fpath=(~/.zsh/completion $fpath)
+fpath=($HOME/.zsh/completion $fpath)
 compinit
 colors
 
@@ -20,7 +20,7 @@ setopt prompt_subst
 setopt complete_in_word
 setopt auto_cd
 
-HISTFILE=~/.zsh-histfile
+HISTFILE=$HOME/.zsh-histfile
 HISTSIZE=5000
 SAVEHIST=5000
 setopt inc_append_history
@@ -125,10 +125,10 @@ compdef __tmux-sessions tm
 # aliases for common typos and jump to favorite directories
 alias xeit=exit
 alias :q=exit
-alias cddesktop="cd ~/Desktop"
-alias cddocuments="cd ~/Documents"
-alias cddotfiles="cd ~/Library/dotfiles"
-alias cdnotes="cd ~/Documents/notes"
+alias cddesktop="cd $HOME/Desktop"
+alias cddocuments="cd $HOME/Documents"
+alias cddotfiles="cd $HOME/Library/dotfiles"
+alias cdnotes="cd $HOME/Documents/notes"
 
 # cd to git root
 alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
@@ -136,7 +136,7 @@ alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 # Source separate file for environment-specific aliases, as these differ between
 # work and home.  I probably still need a better approach for separating my
 # environment-specific settings.
-. ~/.zsh_aliases
+source $HOME/.zsh_aliases
 
 
 # Enable various tools

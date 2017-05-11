@@ -4,11 +4,11 @@
 
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
-export PATH=~/.cargo/bin:$PATH # toying around with Rust a little lately...
-export PATH=~/.bin:$PATH
-export PATH=~/.bin/local:$PATH
+export PATH=$HOME/.cargo/bin:$PATH # toying around with Rust a little lately...
+export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.bin/local:$PATH
 
-export DOTFILE_HOME="~/Library/dotfiles"
+export DOTFILE_HOME="$HOME/Library/dotfiles"
 
 # I haven't needed JAVA_HOME set lately, but this is where it would be declared
 # if I decided to enable it.  This is macOS-specific.
@@ -18,6 +18,6 @@ export DOTFILE_HOME="~/Library/dotfiles"
 # slows down shell startup (including new tmux splits/windows) noticeably.
 # Leaving it commented out for now, might just add latest nvm version of node
 # directly to my path.
-export NVM_DIR=~/.nvm
+export NVM_DIR=$HOME/.nvm
 # . "/usr/local/opt/nvm/nvm.sh"
 
