@@ -1,5 +1,13 @@
-bindkey -v
+# zshrc
+# Declares variables and settings useful for any interactive usage of zsh, such
+# as prompt, shortcuts, zsh feature settings, etc.
+
+export EDITOR=/usr/local/bin/vim
+export CLICOLOR=1
+export HOMEBREW_NO_ANALYTICS=1
 export KEYTIMEOUT=1
+
+bindkey -v
 
 autoload -U compinit colors
 
@@ -9,7 +17,6 @@ colors
 
 
 setopt prompt_subst
-#setopt correct_all
 setopt complete_in_word
 setopt auto_cd
 
@@ -113,4 +120,32 @@ function __tmux-sessions() {
     _describe -t sessions 'sessions' sessions "$@"
 }
 compdef __tmux-sessions tm
+
+
+# aliases for common typos and jump to favorite directories
+alias xeit=exit
+alias :q=exit
+alias cddesktop="cd ~/Desktop"
+alias cddocuments="cd ~/Documents"
+alias cddotfiles="cd ~/Library/dotfiles"
+alias cdnotes="cd ~/Documents/notes"
+
+# cd to git root
+alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
+
+# Source separate file for environment-specific aliases, as these differ between
+# work and home.  I probably still need a better approach for separating my
+# environment-specific settings.
+. ~/.zsh_aliases
+
+
+# Enable various tools
+# thefuck is helpful for autocorrecting typos. I add the 'doh' alias to be a
+# shade more polite at my shell; YMMV.
+eval "$(thefuck --alias)"
+alias doh=fuck
+
+# fasd is meant to make switching between directories more convenient.
+eval "$(fasd --init auto)"
+alias v='f -e vim' # quick opening files with vim
 
