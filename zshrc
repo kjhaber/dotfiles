@@ -79,8 +79,13 @@ export NVM_DIR=$HOME/.nvm
 # source "/usr/local/opt/nvm/nvm.sh"
 
 
-# finally, source all configs in ./zsh/bin/*.zsh
+# finally, load external configs
 for file in $DOTFILE_HOME/zsh/bin/*.zsh; do
   source "$file"
 done
+
+if [[ -f "/usr/local/bin/antibody" ]]; then
+  source <(antibody init)
+  antibody bundle < $DOTFILE_HOME/zsh/plugin-list
+fi
 
