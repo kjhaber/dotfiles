@@ -4,8 +4,17 @@
 
 export EDITOR=/usr/local/bin/vim
 export CLICOLOR=1
-export HOMEBREW_NO_ANALYTICS=1
 export KEYTIMEOUT=1
+
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH # toying around with Rust a little lately...
+export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.bin/local:$PATH
+
+# I haven't needed JAVA_HOME set lately, but this is where it would be declared
+# if I decided to enable it.  This is macOS-specific.
+# export JAVA_HOME=`/usr/libexec/java_home`
 
 bindkey -v
 
@@ -105,6 +114,13 @@ alias doh=fuck
 # fasd is meant to make switching between directories more convenient.
 eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
+
+# nvm is a handy thing when I'm actively working with Node on projects, but it
+# slows down shell startup (including new tmux splits/windows) noticeably.
+# Leaving it commented out for now, might just add latest nvm version of node
+# directly to my path.
+export NVM_DIR=$HOME/.nvm
+# source "/usr/local/opt/nvm/nvm.sh"
 
 
 # finally, source all configs in ./zsh/bin/*.zsh
