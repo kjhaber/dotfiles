@@ -79,20 +79,6 @@ bindkey '^Z' ctrl-z-widget
 # (https://superuser.com/questions/928846/what-is-execute-on-the-command-line-and-how-to-i-avoid-it)
 bindkey -a -r ':'
 
-function tm() {
-    [[ -z "$1" ]] && { echo "usage: tm <session>" >&2; return 1; }
-    tmux has -t "$1" 2> /dev/null && tmux attach -t "$1" || tmux new -s "$1"
-}
-
-function __tmux-sessions() {
-    local expl
-    local -a sessions
-    sessions=( ${${(f)"$(command tmux list-sessions 2> /dev/null)"}/:[ $'\t']##/:} )
-    _describe -t sessions 'sessions' sessions "$@"
-}
-compdef __tmux-sessions tm
-
-
 # aliases for common typos and jump to favorite directories
 alias xeit=exit
 alias :q=exit
@@ -119,4 +105,10 @@ alias doh=fuck
 # fasd is meant to make switching between directories more convenient.
 eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
+
+
+# finally, source all configs in ./zsh/bin/*.zsh
+for file in $DOTFILE_HOME/zsh/bin/*.zsh; do
+  source "$file"
+done
 
