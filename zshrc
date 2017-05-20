@@ -48,6 +48,9 @@ bindkey -a -r ':'
 # aliases for common typos and jump to favorite directories
 alias xeit=exit
 alias :q=exit
+# using dash to go up a directory is same as netrw in vim
+alias -- -='cd ..'
+
 alias cddesktop="cd $HOME/Desktop"
 alias cddocuments="cd $HOME/Documents"
 alias cddotfiles="cd $HOME/Library/dotfiles"
