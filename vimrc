@@ -134,8 +134,9 @@ nmap <leader><leader> V
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-" turn off search highlight
+" turn off search highlight (two-h mapping is to avoid wait for timeout)
 nnoremap <leader>h :nohlsearch<CR>
+nnoremap <leader>hh :nohlsearch<CR>
 
 nnoremap <leader># :call ToggleNumber()<CR>
 nnoremap <leader>@ :call ToggleNumberRel()<CR>
