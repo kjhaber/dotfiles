@@ -309,11 +309,12 @@ nnoremap <leader>u :GundoToggle<CR>
 
 " Ultisnips
 " Ctrl-S for 'snippet'
-" Ctrl-K/J for down/up (not to be confused with ctrl-down/up outside of insert
-" mode for moving lines up and down).  Down means forward towards end of doc.
+" Alt-L for forward
+" Alt-H for backward
+" On a Mac you have to use a trick: <ALT+L> ==> ¬, <ALT+H> ==> ˙
 let g:UltiSnipsExpandTrigger="<c-s>"
-"let g:UltiSnipsJumpForwardTrigger="<c-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="¬"
+let g:UltiSnipsJumpBackwardTrigger="˙"
 
 " Tabularize
 " 'align' mappings
