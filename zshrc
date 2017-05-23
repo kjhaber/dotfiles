@@ -60,6 +60,13 @@ alias cdnotes="cd $HOME/Documents/notes"
 # cd to git root
 alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
+# quick calculator function
+# usage
+# http://www.commandlinefu.com/commands/view/2520/define-a-quick-calculator-function#comment
+= () {
+  echo $(($*))
+}
+
 # Source separate file for environment-specific aliases, as these differ between
 # work and home.  I probably still need a better approach for separating my
 # environment-specific settings.
