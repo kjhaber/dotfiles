@@ -3,7 +3,6 @@ build
 .project
 .classpath
 eclipse-bin
-bin
 target
 node_modules
 gen
