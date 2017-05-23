@@ -9,3 +9,6 @@
 export DOTFILE_HOME="$HOME/Library/dotfiles"
 export HOMEBREW_NO_ANALYTICS=1
 
+# JAVA_HOME is set mostly for Eclipse.  This is macOS-specific.
+export JAVA_HOME=`/usr/libexec/java_home`
+

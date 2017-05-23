@@ -12,10 +12,6 @@ export PATH=$HOME/.cargo/bin:$PATH # toying around with Rust a little lately...
 export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/.bin/local:$PATH
 
-# I haven't needed JAVA_HOME set lately, but this is where it would be declared
-# if I decided to enable it.  This is macOS-specific.
-# export JAVA_HOME=`/usr/libexec/java_home`
-
 bindkey -v
 
 autoload -U compinit colors
