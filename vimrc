@@ -27,7 +27,6 @@ Plugin 'machakann/vim-highlightedyank'
 Plugin 'mhinz/vim-startify'
 Plugin 'moll/vim-node'
 Plugin 'mrtazz/simplenote.vim.git'
-Plugin 'mtth/scratch.vim'
 Plugin 'mxw/vim-jsx.git'
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
@@ -36,7 +35,6 @@ Plugin 'rking/ag.vim'
 Plugin 'mckinnsb/rust.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sirver/ultisnips'
-Plugin 'sjl/gundo.vim'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-expand-region'
@@ -303,10 +301,6 @@ nmap <C-w><C-z> :ZoomWinTabToggle<CR>
 " asyncrun.vim
 " Defines :Make to run makeprg async - improves fugitive.vim too
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-
-" gundo.vim
-let g:gundo_return_on_revert = 0
-nnoremap <leader>u :GundoToggle<CR>
 
 " Ultisnips
 " Ctrl-S for 'snippet'
