@@ -82,6 +82,9 @@ alias doh=fuck
 eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
 
+# todo.txt
+alias t='/usr/local/bin/todo.sh -d $HOME/Dropbox/todo/todo.cfg'
+
 # nvm is a handy thing when I'm actively working with Node on projects, but it
 # slows down shell startup (including new tmux splits/windows) noticeably.
 # Leaving it commented out for now, might just add latest nvm version of node
