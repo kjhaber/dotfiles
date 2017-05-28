@@ -2,7 +2,7 @@
 # Declares variables and settings useful for any interactive usage of zsh, such
 # as prompt, shortcuts, zsh feature settings, etc.
 
-export EDITOR=/usr/local/bin/vim
+export EDITOR="$DOTFILE_HOME/bin/vim"
 export CLICOLOR=1
 export KEYTIMEOUT=1
 
