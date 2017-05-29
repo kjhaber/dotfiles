@@ -2,6 +2,11 @@ set encoding=utf-8
 scriptencoding utf-8
 set shell=bash
 
+" Setting to allow use with 'TerminalVim.app', a Mac AppleScript app that opens
+" files double-clicked in Finder within vim in terminal.
+let g:python_host_prog="/usr/local/bin/python"
+let g:python3_host_prog="/usr/local/bin/python3"
+
 " Vundle
 set nocompatible
 filetype off
