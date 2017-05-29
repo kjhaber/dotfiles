@@ -85,6 +85,11 @@ alias v='f -e vim' # quick opening files with vim
 # todo.txt
 alias t='/usr/local/bin/todo.sh -d $HOME/Dropbox/todo/todo.cfg'
 
+# tmuxinator
+if [[ ! -z "$EXT_REPO_DIR" ]]; then
+  source "$EXT_REPO_DIR/tmuxinator/completion/tmuxinator.zsh"
+fi
+
 # nvm is a handy thing when I'm actively working with Node on projects, but it
 # slows down shell startup (including new tmux splits/windows) noticeably.
 # Leaving it commented out for now, might just add latest nvm version of node

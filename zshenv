@@ -6,7 +6,10 @@
 # .zshenv, which clobbers the $PATH on macOS.  This reduces the utility of zshenv
 # to setting certain environment variables only.
 
-export DOTFILE_HOME="$HOME/Library/dotfiles"
+export LIB_DIR="$HOME/Library"
+export DOTFILE_HOME="$LIB_DIR/dotfiles"
+export EXT_REPO_DIR="$LIB_DIR/repos"
+
 export HOMEBREW_NO_ANALYTICS=1
 
 # JAVA_HOME is set mostly for Eclipse.  This is macOS-specific.
