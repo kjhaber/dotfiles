@@ -272,6 +272,7 @@ let g:syntastic_scss_checkers = ['sass_lint']
 let g:syntastic_xml_checkers = ['xmllint']
 
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
 
 " vim-racer
 let g:racer_cmd = "~/.cargo/bin/racer"
