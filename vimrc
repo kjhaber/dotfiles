@@ -205,7 +205,7 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 " netrw options
 let g:netrw_altv=1  " open files on right
 let g:NERDTreeHijackNetrw = 0
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
 
 " The Silver Searcher
 let g:ctrlp_use_caching = 0
