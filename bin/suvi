@@ -1,3 +1,3 @@
 #!/bin/sh
-sudo ~/Library/dotfiles/bin/vi "$@"
+sudo $DOTFILE_HOME/bin/vi "$@"
 
