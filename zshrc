@@ -39,7 +39,11 @@ setopt hist_find_no_dups
 
 source $DOTFILE_HOME/zsh/kjhaber.zsh-theme
 
-precmd () { print -Pn "\e]2;%n@%M | ${PWD##*/}\a" } # title bar prompt
+# title bar prompt
+precmd () {
+  print -Pn "\e]2;%n@%M | ${PWD##*/}\a" # iterm2 window title
+  print -Pn "\e]1;${PWD##*/}\a"         # iterm2 tab title
+}
 
 
 # Prevent accidentally entering zsh command mode (execute-named-cmd) when I hit esc
