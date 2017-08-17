@@ -129,8 +129,13 @@ vmap <leader>y "+y
 vmap <leader>d "+d
 nmap <leader>p "+p
 nmap <leader>P "+P
-vmap <leader>p "+p
-vmap <leader>P "+P
+
+" <leader>P during a visual selection will replace the selection with
+" current clipboard without changing current clipboard like 'd' or 'c' usually
+" does.  In this case <leader>p and <leader>P do the same thing, unlike in
+" other modes.
+vmap <leader>p "_d"+P
+vmap <leader>P "_d"+P
 
 nmap <leader><leader> V
 
