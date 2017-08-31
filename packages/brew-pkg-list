@@ -9,6 +9,7 @@ go
 iftop
 imagemagick
 moreutils
+neovim
 netcat
 nmap
 nvm
