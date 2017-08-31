@@ -166,6 +166,13 @@ nnoremap <leader>\| :Vexplore<CR>
 " stop that window from popping up
 map q: :q
 
+" Quit vim when quickfix is the last open window/tab
+" https://stackoverflow.com/questions/7476126/how-to-automatically-close-the-quick-fix-window-when-leaving-a-file
+aug QFClose
+  au!
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+aug END
+
 " Convert '%%' to '%:h<Tab>', for use with :edit to expand path of current buffer
 " (from Practical Vim book)
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
