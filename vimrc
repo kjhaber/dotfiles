@@ -92,7 +92,7 @@ endif
 set mouse=a
 set clipboard=unnamed
 
-nmap <leader>l :set list!<CR>
+nmap <Leader>l :set list!<CR>
 set listchars+=tab:»\ ,eol:¶,space:⋅,trail:✗
 
 set whichwrap+=<,>,h,l,[,]
@@ -128,53 +128,54 @@ syntax enable
 " Use both \ and space as leader
 " I still have some habits for \, and space doesn't show up for showcmd
 let mapleader="\\"
-map <Space> <leader>
+map <Space> <Leader>
 
 " from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
-nnoremap <leader>o :CtrlP<CR>
-nnoremap <leader>w :w<CR>
-vmap <leader>y "+y
-vmap <leader>d "+d
-nmap <leader>p "+p
-nmap <leader>P "+P
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>w :w<CR>
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
 
-" <leader>P during a visual selection will replace the selection with
+" <Leader>P during a visual selection will replace the selection with
 " current clipboard without changing current clipboard like 'd' or 'c' usually
-" does.  In this case <leader>p and <leader>P do the same thing, unlike in
+" does.  In this case <Leader>p and <Leader>P do the same thing, unlike in
 " other modes.
-vmap <leader>p "_d"+P
-vmap <leader>P "_d"+P
+vmap <Leader>p "_d"+P
+vmap <Leader>P "_d"+P
 
-nmap <leader><leader> V
+nmap <Leader><Leader> V
+nmap <Leader><Space> V
 
 " used with vim-expand-region plugin
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 " turn off search highlight (two-h mapping is to avoid wait for timeout)
-nnoremap <leader>h :nohlsearch<CR>
-nnoremap <leader>hh :nohlsearch<CR>
+nnoremap <Leader>h :nohlsearch<CR>
+nnoremap <Leader>hh :nohlsearch<CR>
 
-nnoremap <leader># :call ToggleNumber()<CR>
-nnoremap <leader>@ :call ToggleNumberRel()<CR>
-nnoremap <leader>} :call StripTrailingWhitespaces()<CR>
+nnoremap <Leader># :call ToggleNumber()<CR>
+nnoremap <Leader>@ :call ToggleNumberRel()<CR>
+nnoremap <Leader>} :call StripTrailingWhitespaces()<CR>
 
 " shortcuts for splits similar to my bindings for tmux
-nnoremap <leader>- :Sexplore<CR>
-nnoremap <leader>\| :Vexplore<CR>
+nnoremap <Leader>- :Sexplore<CR>
+nnoremap <Leader>\| :Vexplore<CR>
 
 " fugitive shortcuts
 " inspired by https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>ge :Gedit<CR>
-nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
-nnoremap <leader>gm :Gmove<Space>
-nnoremap <leader>gp :Ggrep<Space>
-nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gw :Gwrite<CR><CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>ge :Gedit<CR>
+nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <Leader>gm :Gmove<Space>
+nnoremap <Leader>gp :Ggrep<Space>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gw :Gwrite<CR><CR>
 
 " stop that window from popping up
 map q: :q
@@ -238,7 +239,7 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 " netrw options
 let g:netrw_altv=1  " open files on right
 let g:NERDTreeHijackNetrw = 0
-nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>t :NERDTreeToggle<CR>
 
 " The Silver Searcher
 let g:ctrlp_use_caching = 0
@@ -252,7 +253,7 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
 endif
 
-nmap <leader>/ :Ag<Space>
+nmap <Leader>/ :Ag<Space>
 
 
 " vim-jsx options
@@ -322,7 +323,7 @@ let g:vimwiki_list = [{'path': '~/Documents/vimwiki'}]
 
 " vim-instant-markdown: requires `sudo npm -g install instant-markdown-d`
 let g:instant_markdown_autostart = 0
-nmap <leader>md :InstantMarkdownPreview<CR>
+nmap <Leader>md :InstantMarkdownPreview<CR>
 
 " Enable vim-highlightedyank plugin
 map y <Plug>(highlightedyank)
