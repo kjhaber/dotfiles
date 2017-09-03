@@ -362,17 +362,11 @@ vmap <Leader>a= :Tabularize /=<CR>
 
 " vimux
 " from https://blog.bugsnag.com/tmux-and-vim/
-" Prompt for a command to run
-nmap <Leader>vp :VimuxPromptCommand<CR>
-
-" Run last command executed by VimuxRunCommand
-nmap <Leader>vl :VimuxRunLastCommand<CR>
-
-" Inspect runner pane
+nmap <Leader>vv :VimuxPromptCommand<CR>
+nmap <Leader>vr :VimuxRunLastCommand<CR>
 nmap <Leader>vi :VimuxInspectRunner<CR>
-
-" Zoom the tmux runner pane
 nmap <Leader>vz :VimuxZoomRunner<CR>
+nmap <Leader>vq :VimuxCloseRunner<CR>
 
 " vim-json
 let g:vim_json_syntax_conceal = 0
