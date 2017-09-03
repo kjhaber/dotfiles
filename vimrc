@@ -163,6 +163,19 @@ nnoremap <leader>} :call StripTrailingWhitespaces()<CR>
 nnoremap <leader>- :Sexplore<CR>
 nnoremap <leader>\| :Vexplore<CR>
 
+" fugitive shortcuts
+" inspired by https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>gp :Ggrep<Space>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gw :Gwrite<CR><CR>
+
 " stop that window from popping up
 map q: :q
 
@@ -261,7 +274,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 set statusline+=%=      "left/right separator
-set statusline+=%{v:register}\     "currently active register
+set statusline+=%{fugitive#statusline()}\  "current git branch
+set statusline+=%{v:register}\             "currently active register
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L\  "cursor line/total lines
 set statusline+=(%P)    "percent through file
