@@ -1,3 +1,3 @@
 #!/bin/sh
-sudo $DOTFILE_HOME/bin/vi "$@"
+sudo -e "$@"
 
