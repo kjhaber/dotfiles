@@ -13,4 +13,6 @@ npm install -g instant-markdown-d
 npm install -g lesshint
 npm install -g sass-lint
 npm install -g typescript
+npm install -g js-beautify
+npm install -g remark-cli
 

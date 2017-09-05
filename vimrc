@@ -14,6 +14,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'aklt/plantuml-syntax'
@@ -282,6 +283,11 @@ set statusline+=%l/%L\  "cursor line/total lines
 set statusline+=(%P)    "percent through file
 
 
+" vim-autoformat
+nmap <Leader>ff :Autoformat<CR>
+
+" (not really related to the autoformat plugin, but related to formatting)
+nmap <Leader>fi mzgg=G`z
 
 " syntastic options
 let g:syntastic_always_populate_loc_list = 1
