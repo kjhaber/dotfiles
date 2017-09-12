@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
+Plugin 'Olical/vim-enmasse'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'aklt/plantuml-syntax'
 Plugin 'benmills/vimux'
