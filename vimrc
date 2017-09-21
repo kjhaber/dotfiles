@@ -72,9 +72,6 @@ call vundle#end()
 
 filetype plugin on
 runtime macros/matchit.vim
-set omnifunc=syntaxcomplete#Complete
-inoremap <C-Space> <C-x><C-o>
-inoremap <C-@> <C-x><C-o>
 
 set t_Co=256
 colorscheme molokai
@@ -336,9 +333,15 @@ nmap <Leader>md :InstantMarkdownPreview<CR>
 map y <Plug>(highlightedyank)
 let g:highlightedyank_highlight_duration = 300
 
-" vim-mucomplete
+" omnicomplete and vim-mucomplete
+set omnifunc=syntaxcomplete#Complete
 set completeopt+=menuone
-set shortmess+=c
+set completeopt+=noinsert
+set completeopt+=preview
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-x><C-o>
+" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Change mapping of zoomwintab plugin (default is <C-w>o, but I want that to
 " still have its default behavior of making current window the only open one)
