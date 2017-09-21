@@ -59,6 +59,7 @@ alias -- -='cd ..'
 alias cddesktop="cd $HOME/Desktop"
 alias cddocuments="cd $HOME/Documents"
 alias cddotfiles="cd $DOTFILE_HOME"
+alias cddotfiles-local="cd $LIB_DIR/dotfiles-local"
 alias cdnotes="cd $HOME/Documents/notes"
 
 # cd to git root
