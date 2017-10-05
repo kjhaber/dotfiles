@@ -288,6 +288,8 @@ nmap <Leader>ff :Autoformat<CR>
 nmap <Leader>fi mzgg=G`z
 
 " syntastic options
+nmap <Leader>st :SystasticToggleMode<CR>
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
