@@ -176,6 +176,13 @@ nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
 
+" Normally <ctrl-L> forces a redraw of the terminal, but I've mapped that to
+" change between vim splits and tmux panes.  <Leader>l alone does a `:set list`
+" to show/hide hidden characters, so I'm setting <Leader>ll as my shortcut to
+" redraw the screen (which I end up wanting regularly when I do a command-K to
+" clear the buffer in iTerm).
+nnoremap <Leader>ll :redraw!<CR>
+
 " stop that window from popping up
 map q: :q
 
