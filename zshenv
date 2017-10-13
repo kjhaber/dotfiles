@@ -10,6 +10,11 @@ export LIB_DIR="$HOME/Library"
 export DOTFILE_HOME="$LIB_DIR/dotfiles"
 export EXT_REPO_DIR="$LIB_DIR/repos"
 
+export TODO_DIR="$HOME/.config/todo"
+if [[ -d "$HOME/Dropbox" ]] then
+  export TODO_DIR="$HOME/Dropbox/todo"
+fi
+
 export HOMEBREW_NO_ANALYTICS=1
 
 # JAVA_HOME is set mostly for Eclipse.  This is macOS-specific.

@@ -328,7 +328,7 @@ let $RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/
 
 " vim-startify
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
-let g:startify_bookmarks = [ {'.': '.'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'}, {'s': '~/.ssh/config'} ]
+let g:startify_bookmarks = [ {'.': '.'}, {'d': '$TODO_DIR/todo.txt'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'}, {'s': '~/.ssh/config'} ]
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
 " vimwiki

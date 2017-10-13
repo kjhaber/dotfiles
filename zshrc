@@ -61,6 +61,7 @@ alias cddocuments="cd $HOME/Documents"
 alias cddotfiles="cd $DOTFILE_HOME"
 alias cddotfiles-local="cd $LIB_DIR/dotfiles-local"
 alias cdnotes="cd $HOME/Documents/notes"
+alias cdtodo="cd $TODO_DIR"
 
 # cd to git root
 alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
@@ -88,7 +89,8 @@ eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
 
 # todo.txt
-alias t='/usr/local/bin/todo.sh -d $HOME/Dropbox/todo/todo.cfg'
+alias t='/usr/local/bin/todo.sh -d "~/.todo.cfg"'
+compdef t='todo.sh'
 
 # tmuxinator
 if [[ ! -z "$EXT_REPO_DIR" ]]; then
