@@ -157,7 +157,7 @@ nnoremap <Leader>hh :nohlsearch<CR>
 
 nnoremap <Leader># :call ToggleNumber()<CR>
 nnoremap <Leader>@ :call ToggleNumberRel()<CR>
-nnoremap <Leader>} :call StripTrailingWhitespaces()<CR>
+nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
 
 " shortcuts for splits similar to my bindings for tmux
 nnoremap <Leader>- :Sexplore<CR>
