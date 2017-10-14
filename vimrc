@@ -229,6 +229,10 @@ function! StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
+" Insert today's numeric ISO 8601 date (https://xkcd.com/1179/) and
+" remain in insert mode. (Mnemonic: <leader>DateToday)
+nnoremap <Leader>dt a<CR><ESC>:.-1put =strftime('%Y-%m-%d')<CR>k<ESC>J<ESC>Ji
+
 " go ahead and strip trailing whitespace on save too
 autocmd BufWritePre * :%s/\s\+$//e
 
