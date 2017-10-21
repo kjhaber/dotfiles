@@ -84,6 +84,12 @@ source $HOME/.zsh_aliases
 eval "$(thefuck --alias)"
 alias doh=fuck
 
+# fzf: fuzzy finder, locate files quickly
+# - ctrl-t to insert filename in current command,
+# - ctrl-r for recent command history)
+export FZF_DEFAULT_COMMAND="rg --files --no-ignore --ignore-case --hidden --follow --glob '!{.git,node_modules,vendor,build,dist}/*'"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # fasd is meant to make switching between directories more convenient.
 eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim

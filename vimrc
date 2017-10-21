@@ -22,13 +22,15 @@ Plugin 'aklt/plantuml-syntax'
 Plugin 'benmills/vimux'
 Plugin 'cespare/vim-toml'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim.git'
 Plugin 'elzr/vim-json'
 Plugin 'freitass/todo.txt-vim'
 Plugin 'fvictorio/vim-textobj-backticks'
 Plugin 'godlygeek/tabular'
 Plugin 'honza/vim-snippets'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'kana/vim-textobj-entire'
 Plugin 'kana/vim-textobj-lastpat'
@@ -252,18 +254,19 @@ let g:NERDTreeHijackNetrw = 0
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
 " The Silver Searcher
-let g:ctrlp_use_caching = 0
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+" (transitioning to fzf + ripgrep, commenting for now)
+" let g:ctrlp_use_caching = 0
+" if executable('ag')
+"   " Use ag over grep
+"   set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-  " ag is fast enough that CtrlP doesn't need to cache
-endif
+"   " ag is fast enough that CtrlP doesn't need to cache
+" endif
 
-nmap <Leader>/ :Ag<Space>
+"nmap <Leader>/ :Ag<Space>
 
 
 " vim-jsx options
@@ -374,6 +377,20 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 let g:UltiSnipsExpandTrigger="<c-s>"
 let g:UltiSnipsJumpForwardTrigger="¬"
 let g:UltiSnipsJumpBackwardTrigger="˙"
+
+" fzf
+" Search filenames with Ctrl-p
+" Search file contents with <leader>/
+let g:rg_command = '
+  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+  \ -g "!{.git,node_modules,vendor,build,dist}/*" '
+
+command! -bang -nargs=* FzfFind call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+nnoremap <C-p> :FZF<CR>
+nmap <Leader>/ :FzfFind<CR>
+nmap <Leader>[b :Buffers<CR>
+nmap <Leader>[h :History<CR>
+nmap <Leader>[f :Files<CR>
 
 " Tabularize
 " 'align' mappings
