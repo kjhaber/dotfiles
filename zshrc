@@ -95,7 +95,7 @@ eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
 
 # todo.txt
-alias t='/usr/local/bin/todo.sh -d "~/.todo.cfg"'
+alias t='/usr/local/bin/todo.sh -a -d "~/.todo.cfg"'
 compdef t='todo.sh'
 
 # tmuxinator
