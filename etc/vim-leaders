@@ -1,0 +1,53 @@
+leader:
+
+a - Align (Tabularize)
+b
+c
+d - Delete (cut to system clipboard)
+e
+f - autoFormat
+  ff -- format (uses format external prog if available)
+  fi -- indent
+g - fuGitive
+  gs -- git status
+h - Highlight toggle
+  hh -- highlight toggle (fast)
+  hs -- gitgutter Hunk Stage
+  hr -- gitgutter Hunk Revert
+i
+j
+k
+l - List toggle (hidden characters)
+m - instant Markdown preview
+n
+o - Open (CtrlP search)
+p - Paste from system clipboard
+q
+r
+s
+  ss  strip trailing whitespace
+t - nerdTree
+u
+v - vimux
+  vv  prompt command
+  vr  repeat last command
+  vi  inspect runner pane
+  vz  zoom runner pane
+  vq  quit runner pane
+w - write (:w)
+x
+y - Yank to system clipboard
+z
+/ - search (fzf + ripgrep)
+# - toggle line number
+@ - toggle relative line numbers
+space - visual select current line (why?)
+- - horizontal split
+| - vertical split
+}
+[ - search for previous...
+  [b  search buffers
+  [f  search files
+  [h  search history
+
+
