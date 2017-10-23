@@ -222,8 +222,7 @@ function! ToggleNumberRel()
 endfunc
 nmap <Leader>nr :call ToggleNumberRel()<CR>
 
-" strips trailing whitespace at the end of files. this
-" is called on buffer write in the autogroup above.
+" strips trailing whitespace at the end of files
 function! StripTrailingWhitespaces()
     " save last search & cursor position
     let _s=@/
@@ -237,9 +236,6 @@ endfunction
 " Insert today's numeric ISO 8601 date (https://xkcd.com/1179/) and
 " remain in insert mode. (Mnemonic: <leader>DateToday)
 nnoremap <Leader>dt a<CR><ESC>:.-1put =strftime('%Y-%m-%d')<CR>k<ESC>J<ESC>Ji
-
-" go ahead and strip trailing whitespace on save too
-autocmd BufWritePre * :%s/\s\+$//e
 
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
 " Adjusting my mapping to use alt instead of ctrl so I can use
