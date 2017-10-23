@@ -20,6 +20,8 @@ k
 l - List toggle (hidden characters)
 m - instant Markdown preview
 n
+  nn  toggle line numbers
+  nr  toggle between relative and absolute line numbers
 o - Open (CtrlP search)
 p - Paste from system clipboard
 q
@@ -39,8 +41,6 @@ x
 y - Yank to system clipboard
 z
 / - search (fzf + ripgrep)
-# - toggle line number
-@ - toggle relative line numbers
 space - visual select current line (why?)
 - - horizontal split
 | - vertical split

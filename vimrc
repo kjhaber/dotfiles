@@ -157,8 +157,6 @@ vmap <C-v> <Plug>(expand_region_shrink)
 nnoremap <Leader>h :nohlsearch<CR>
 nnoremap <Leader>hh :nohlsearch<CR>
 
-nnoremap <Leader># :call ToggleNumber()<CR>
-nnoremap <Leader>@ :call ToggleNumberRel()<CR>
 nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
 
 " shortcuts for splits similar to my bindings for tmux
@@ -200,16 +198,20 @@ aug END
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 
-" toggle between number and nonumber
+" toggle between number and nonumber (show always enables relatvie number,
+" my preferred default)
 function! ToggleNumber()
     if(&number == 1)
         set nonumber
+        set norelativenumber
     else
         set number
+        set relativenumber
     endif
 endfunc
+nmap <Leader>nn :call ToggleNumber()<CR>
 
-" toggle between number and relativenumber
+" toggle between absolute number and relativenumber
 function! ToggleNumberRel()
     if(&relativenumber == 1)
         set norelativenumber
@@ -218,6 +220,7 @@ function! ToggleNumberRel()
         set relativenumber
     endif
 endfunc
+nmap <Leader>nr :call ToggleNumberRel()<CR>
 
 " strips trailing whitespace at the end of files. this
 " is called on buffer write in the autogroup above.
