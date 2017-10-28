@@ -123,6 +123,8 @@ set ignorecase
 set smartcase
 set linebreak
 set colorcolumn=81
+set splitbelow
+set splitright
 
 syntax enable
 
