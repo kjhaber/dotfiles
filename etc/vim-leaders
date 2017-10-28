@@ -3,7 +3,9 @@ leader:
 a - Align (Tabularize)
 b
 c
-d - Delete (cut to system clipboard)
+d
+  dd - Delete line (cut to system clipboard)
+  dt - Insert today's date in YYYY-MM-DD format, leave in insert mode
 e
 f - autoFormat
   ff -- format (uses format external prog if available)
@@ -18,6 +20,7 @@ i
 j
 k
 l - List toggle (hidden characters)
+  ll -- redraw terminal (since ctrl-L is remapped)
 m - instant Markdown preview
 n
   nn  toggle line numbers
@@ -45,7 +48,7 @@ space - visual select current line (why?)
 - - horizontal split
 | - vertical split
 }
-[ - search for previous...
+[
   [b  search buffers
   [f  search files
   [h  search history
