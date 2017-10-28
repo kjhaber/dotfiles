@@ -1,7 +1,43 @@
 #! /bin/sh
-# Opens vim in a new Markdown file in ~/Documents/notes prefixed with current date.
+# Opens vim in a new Markdown file in ~/Documents/notes prefixed with current date
+# (or optionally an alternate date).
+#
+# Usage:
+# mdnote [-v ARG | --days-ago NUM | --yesterday] [NOTE_LABEL]
+#
+# Examples:
+# % mdnote
+#     Opens note for today with label "note"
+#
+# % mdnote dailynotes
+#     Opens note for today with label "dailynotes"
+#
+# % mdnote --days-ago 7 dailynotes
+#     Opens note for 7 days ago with label "dailynotes"
+#
+# % mdnote --yesterday ideas
+#     Opens note for yesterday with label "ideas"
+#
+# % mdnote +1y futuristic
+#     Opens note dated one year from today with label "futuristic"
+#
+set -e
 
-DATE=`date +"%Y-%m-%d"`
+while true; do
+  case "$1" in
+    -v ) DATE_V_ARG="$2"; shift 2 ;;
+    --days-ago ) DATE_V_ARG="-$2d"; shift 2 ;;
+    --yesterday ) DATE_V_ARG="-1d"; shift ;;
+    * ) LABEL="$1"; break ;;
+  esac
+done
+
+DATE_EXPR="/bin/date -v $DATE_V_ARG +%Y-%m-%d"
+if [ -z "$DATE_V_ARG" ]; then
+  DATE_EXPR="/bin/date +%Y-%m-%d"
+fi
+DATE=$($DATE_EXPR)
+
 LABEL="$1"
 if [ -z "$LABEL" ]; then
   LABEL="note"
