@@ -11,8 +11,10 @@ export DOTFILE_HOME="$LIB_DIR/dotfiles"
 export EXT_REPO_DIR="$LIB_DIR/repos"
 
 export TODO_DIR="$HOME/.config/todo"
+export VIMWIKI_DIR="$HOME/Documents/vimwiki"
 if [[ -d "$HOME/Dropbox" ]] then
   export TODO_DIR="$HOME/Dropbox/todo"
+  export VIMWIKI_DIR="$HOME/Dropbox/vimwiki"
 fi
 
 export HOMEBREW_NO_ANALYTICS=1

@@ -39,6 +39,7 @@ Plugin 'kana/vim-textobj-line'
 Plugin 'kana/vim-textobj-user'
 Plugin 'lifepillar/vim-mucomplete'
 Plugin 'machakann/vim-highlightedyank'
+Plugin 'mattn/calendar-vim'
 Plugin 'mhinz/vim-startify'
 Plugin 'moll/vim-node'
 Plugin 'mrtazz/simplenote.vim.git'
@@ -135,7 +136,6 @@ map <Space> <Leader>
 
 " from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 nnoremap <Leader>o :CtrlP<CR>
-nnoremap <Leader>w :w<CR>
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
@@ -340,7 +340,13 @@ let g:startify_bookmarks = [ {'.': '.'}, {'d': '$TODO_DIR/todo.txt'}, {'v': '~/.
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
 " vimwiki
-let g:vimwiki_list = [{'path': '~/Documents/vimwiki'}]
+let g:vimwiki_list = [{'path': "$VIMWIKI_DIR", 'syntax': 'markdown', 'ext': '.md'}]
+nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
+nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
+
+" calendar.vim
+nmap <Leader>wc :Calendar<CR><C-w>5>
 
 " vim-instant-markdown: requires `sudo npm -g install instant-markdown-d`
 let g:instant_markdown_autostart = 0

@@ -39,7 +39,13 @@ v - vimux
   vi  inspect runner pane
   vz  zoom runner pane
   vq  quit runner pane
-w - write (:w)
+w
+  ww          vimwiki main
+  w<leader>w  vimwiki diary today
+  w<leader>y  vimwiki diary yesterday
+  wi          vimwiki diary index
+  w<leader>i  vimwiki diary index generate links
+  wc          open calendar (enter on date opens diary)
 x
 y - Yank to system clipboard
 z
