@@ -382,13 +382,15 @@ let g:UltiSnipsJumpBackwardTrigger="˙"
 " fzf
 " Search filenames with Ctrl-p
 " Search file contents with <leader>/
-let g:rg_command = '
-  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-  \ -g "!{.git,node_modules,vendor,build,dist}/*" '
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
-command! -bang -nargs=* FzfFind call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 nnoremap <C-p> :FZF<CR>
-nmap <Leader>/ :FzfFind<CR>
+nmap <Leader>/ :Rg<CR>
 nmap <Leader>[b :Buffers<CR>
 nmap <Leader>[h :History<CR>
 nmap <Leader>[f :Files<CR>
