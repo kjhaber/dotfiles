@@ -341,6 +341,7 @@ let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
 " vimwiki
 let g:vimwiki_list = [{'path': "$VIMWIKI_DIR", 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0
 nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
