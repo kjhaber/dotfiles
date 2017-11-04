@@ -10,11 +10,15 @@ export LIB_DIR="$HOME/Library"
 export DOTFILE_HOME="$LIB_DIR/dotfiles"
 export EXT_REPO_DIR="$LIB_DIR/repos"
 
-export TODO_DIR="$HOME/.config/todo"
-export VIMWIKI_DIR="$HOME/Documents/vimwiki"
-if [[ -d "$HOME/Dropbox" ]] then
-  export TODO_DIR="$HOME/Dropbox/todo"
-  export VIMWIKI_DIR="$HOME/Dropbox/vimwiki"
+# On home machine $REMOTE_SYNC_DIR is a symlink to ~/Dropbox
+# At work it's a directory configured to sync with network drive
+export REMOTE_SYNC_DIR="$HOME/Documents/RemoteSync"
+export TODO_DIR="$REMOTE_SYNC_DIR/todo"
+export VIMWIKI_DIR="$REMOTE_SYNC_DIR/vimwiki"
+if [[ ! -d "$REMOTE_SYNC_DIR" ]] then
+  echo "Warning: REMOTE_SYNC_DIR does not exist ($REMOTE_SYNC_DIR)"
+  export TODO_DIR="$HOME/.config/todo"
+  export VIMWIKI_DIR="$HOME/Documents/vimwiki"
 fi
 
 export HOMEBREW_NO_ANALYTICS=1
