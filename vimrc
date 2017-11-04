@@ -195,6 +195,10 @@ aug QFClose
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 aug END
 
+" Also quit vim when NERDTree or Calendar is last open window/tab
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:Calendar")) | q | endif
+
 " Convert '%%' to '%:h<Tab>', for use with :edit to expand path of current buffer
 " (from Practical Vim book)
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
