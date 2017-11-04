@@ -347,7 +347,7 @@ nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 
 " calendar.vim
-nmap <Leader>wc :Calendar<CR><C-w>5>
+nmap <Leader>wc :Calendar<CR><C-w>5>0t
 
 " vim-instant-markdown: requires `sudo npm -g install instant-markdown-d`
 let g:instant_markdown_autostart = 0
