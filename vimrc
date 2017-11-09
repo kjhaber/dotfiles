@@ -405,6 +405,7 @@ nmap <Leader>/ :Rg<CR>
 nmap <Leader>[b :Buffers<CR>
 nmap <Leader>[h :History<CR>
 nmap <Leader>[f :Files<CR>
+nmap <Leader>[l :Lines<CR>
 
 " Tabularize
 " 'align' mappings
