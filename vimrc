@@ -428,5 +428,7 @@ nmap <Leader>vq :VimuxCloseRunner<CR>
 let g:vim_json_syntax_conceal = 0
 
 " put Simplenote creds into separate file for simplenote.vim plugin
-source ~/.simplenoterc
+if filereadable($DOTFILE_LOCAL_HOME . "/simplenoterc")
+  source $DOTFILE_LOCAL_HOME/simplenoterc
+endif
 
