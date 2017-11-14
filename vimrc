@@ -39,6 +39,7 @@ Plugin 'kana/vim-textobj-line'
 Plugin 'kana/vim-textobj-user'
 Plugin 'lifepillar/vim-mucomplete'
 Plugin 'machakann/vim-highlightedyank'
+Plugin 'maksimr/vim-jsbeautify'
 Plugin 'mattn/calendar-vim'
 Plugin 'mhinz/vim-startify'
 Plugin 'moll/vim-node'
@@ -164,6 +165,23 @@ nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
 " shortcuts for splits similar to my bindings for tmux
 nnoremap <Leader>- :Sexplore<CR>
 nnoremap <Leader>\| :Vexplore<CR>
+
+" vim-jsbeautify
+" indent the entire file
+nnoremap <Leader>i  gg=G<cr>
+
+autocmd FileType javascript noremap <buffer> <Leader>i :call JsBeautify()<cr>
+autocmd FileType json noremap <buffer> <Leader>i :call JsonBeautify()<cr>
+autocmd FileType jsx noremap <buffer> <Leader>i :call JsxBeautify()<cr>
+autocmd FileType html noremap <buffer> <Leader>i :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <Leader>i :call CSSBeautify()<cr>
+
+autocmd FileType javascript vnoremap <buffer> <Leader>i :call RangeJsBeautify()<cr>
+autocmd FileType json vnoremap <buffer> <Leader>i :call RangeJsonBeautify()<cr>
+autocmd FileType jsx vnoremap <buffer> <Leader>i :call RangeJsxBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <Leader>i :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <Leader>i :call RangeCSSBeautify()<cr>
+
 
 " fugitive shortcuts
 " inspired by https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/
