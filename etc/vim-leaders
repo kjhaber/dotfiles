@@ -16,7 +16,7 @@ h - Highlight toggle
   hh -- highlight toggle (fast)
   hs -- gitgutter Hunk Stage
   hr -- gitgutter Hunk Revert
-i
+i - indent entire file
 j
 k
 l - List toggle (hidden characters)
