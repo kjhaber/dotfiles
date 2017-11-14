@@ -8,6 +8,7 @@
 
 export LIB_DIR="$HOME/Library"
 export DOTFILE_HOME="$LIB_DIR/dotfiles"
+export DOTFILE_LOCAL_HOME="$LIB_DIR/dotfiles-local"
 export EXT_REPO_DIR="$LIB_DIR/repos"
 
 # On home machine $REMOTE_SYNC_DIR is a symlink to ~/Dropbox

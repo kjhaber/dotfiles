@@ -59,7 +59,7 @@ alias -- -='cd ..'
 alias cddesktop="cd $HOME/Desktop"
 alias cddocuments="cd $HOME/Documents"
 alias cddotfiles="cd $DOTFILE_HOME"
-alias cddotfiles-local="cd $LIB_DIR/dotfiles-local"
+alias cddotfiles-local="cd $DOTFILE_LOCAL_HOME"
 alias cdnotes="cd $HOME/Documents/notes"
 alias cdtodo="cd $TODO_DIR"
 
@@ -77,6 +77,9 @@ alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 # work and home.  I probably still need a better approach for separating my
 # environment-specific settings.
 source $HOME/.zsh_aliases
+if [[ -f "$DOTFILE_LOCAL_HOME/zsh_aliases_local" ]] then
+  source "$DOTFILE_LOCAL_HOME/zsh_aliases_local"
+fi
 
 # Enable various tools
 # thefuck is helpful for autocorrecting typos. I add the 'doh' alias to be a
