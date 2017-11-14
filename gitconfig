@@ -26,7 +26,7 @@
   unstage = reset HEAD --
 [core]
   autocrlf = false
-  excludesfile = /Users/keith/.gitignore_global
+  excludesfile = ~/.gitignore_global
   pager = less -FMRiX
 [push]
   default = simple
@@ -37,3 +37,6 @@
 	autostash = true
 [pull]
 	ff = only
+[include]
+  path = ~/.gitconfig-local
+
