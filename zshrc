@@ -9,8 +9,8 @@ export KEYTIMEOUT=1
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH # toying around with Rust a little lately...
-export PATH=$HOME/.bin:$PATH
-export PATH=$HOME/.bin/local:$PATH
+export PATH=$DOTFILE_HOME/bin:$PATH
+export PATH=$DOTFILE_LOCAL_HOME/bin:$PATH
 
 bindkey -v
 
