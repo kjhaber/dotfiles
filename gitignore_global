@@ -3,6 +3,7 @@ build
 .project
 .classpath
 eclipse-bin
+*.iml
 target
 node_modules
 gen
