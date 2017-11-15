@@ -71,6 +71,10 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'vimwiki/vimwiki'
 Plugin 'Yggdroot/indentLine'
 
+if filereadable($DOTFILE_LOCAL_HOME . "/vimrc-plugin-local")
+  source $DOTFILE_LOCAL_HOME/vimrc-plugin-local
+endif
+
 call vundle#end()
 
 
