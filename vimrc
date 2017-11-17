@@ -170,7 +170,7 @@ nnoremap <Leader>- :Sexplore<CR>
 nnoremap <Leader>\| :Vexplore<CR>
 
 " indent the entire file
-nnoremap <Leader>i  gg=G
+nnoremap <Leader>=  gg=G
 
 
 " fugitive shortcuts

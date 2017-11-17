@@ -16,7 +16,7 @@ h - Highlight toggle
   hh -- highlight toggle (fast)
   hs -- gitgutter Hunk Stage
   hr -- gitgutter Hunk Revert
-i - indent entire file
+i
 j
 k
 l - List toggle (hidden characters)
@@ -58,5 +58,5 @@ space - visual select current line (why?)
   [b  search buffers
   [f  search files
   [h  search history
-
+= - indent entire file
 
