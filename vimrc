@@ -443,3 +443,8 @@ if filereadable($DOTFILE_LOCAL_HOME . "/simplenoterc")
   source $DOTFILE_LOCAL_HOME/simplenoterc
 endif
 
+" Define any local-specific mappings/abbreviations
+if filereadable($DOTFILE_LOCAL_HOME . "/vimrc-local")
+  source $DOTFILE_LOCAL_HOME/vimrc-local
+endif
+
