@@ -352,7 +352,7 @@ let g:startify_bookmarks = [ {'.': '.'}, {'d': '$TODO_DIR/todo.txt'}, {'v': '~/.
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
 " vimwiki
-let g:vimwiki_list = [{'path': "$VIMWIKI_DIR", 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': "$VIMWIKI_DIR", 'syntax': 'markdown', 'ext': '.mdwiki'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_url_maxsave = 0
 let g:vimwiki_use_mouse = 1
