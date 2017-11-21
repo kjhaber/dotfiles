@@ -2,7 +2,7 @@
 # Declares variables and settings useful for any interactive usage of zsh, such
 # as prompt, shortcuts, zsh feature settings, etc.
 
-export EDITOR="$DOTFILE_HOME/bin/vim"
+export EDITOR=nvim
 export CLICOLOR=1
 export KEYTIMEOUT=1
 
@@ -50,9 +50,14 @@ precmd () {
 # (https://superuser.com/questions/928846/what-is-execute-on-the-command-line-and-how-to-i-avoid-it)
 bindkey -a -r ':'
 
+alias vi=nvim
+alias vim=nvim
+alias vimdiff='nvim -d'
+
 # aliases for common typos and jump to favorite directories
 alias xeit=exit
 alias :q=exit
+
 # using dash to go up a directory is same as netrw in vim
 alias -- -='cd ..'
 
