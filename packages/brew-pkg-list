@@ -3,6 +3,7 @@ coreutils
 cowsay
 curl
 editorconfig
+entr
 fasd
 fortune
 
