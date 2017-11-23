@@ -49,7 +49,7 @@ w
 x
 y - Yank to system clipboard
 z
-/ - search (fzf + ripgrep)
+/ - search (fzf + ripgrep) (same as <leader>[t )
 space - visual select current line (why?)
 - - horizontal split
 | - vertical split
@@ -58,5 +58,8 @@ space - visual select current line (why?)
   [b  search buffers
   [f  search files
   [h  search history
+  [l  search lines (current file)
+  [[  search lines (current file)
+  [t  search text (all files under vim pwd)
 = - indent entire file
 
