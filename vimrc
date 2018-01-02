@@ -412,7 +412,7 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 nnoremap <C-p> :FZF<CR>
-nmap <Leader>/ :Rg<CR>
+nmap <Leader>/ :Ag<Space>
 nmap <Leader>[b :Buffers<CR>
 nmap <Leader>[f :Files<CR>
 nmap <Leader>[h :History<CR>
