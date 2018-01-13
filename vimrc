@@ -68,6 +68,7 @@ Plugin 'vim-scripts/closetag.vim'
 Plugin 'vim-scripts/zoomwintab.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'vimwiki/vimwiki'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Yggdroot/indentLine'
 
 if filereadable($DOTFILE_LOCAL_HOME . "/vimrc-plugin-local")
