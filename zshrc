@@ -65,6 +65,7 @@ alias cddesktop="cd $HOME/Desktop"
 alias cddocuments="cd $DOC_DIR"
 alias cddotfiles="cd $DOTFILE_HOME"
 alias cddotfiles-local="cd $DOTFILE_LOCAL_HOME"
+alias cddiary="cd $VIMWIKI_DIARY_DIR"
 alias cdnotes="cd $DOC_DIR/notes"
 alias cdtodo="cd $TODO_DIR"
 

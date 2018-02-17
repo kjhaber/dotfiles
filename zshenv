@@ -11,6 +11,7 @@ export DOTFILE_HOME="$LIB_DIR/dotfiles"
 export DOTFILE_LOCAL_HOME="$LIB_DIR/dotfiles-local"
 export DOC_DIR="$HOME/Documents"
 export VIMWIKI_DIR="$DOC_DIR/vimwiki"
+export VIMWIKI_DIARY_DIR="$VIMWIKI_DIR/diary"
 export EXT_REPO_DIR="$LIB_DIR/repos"
 
 # On home machine $REMOTE_SYNC_DIR is a symlink to ~/Dropbox
