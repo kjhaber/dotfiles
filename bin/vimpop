@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# Inspired by post on https://news.ycombinator.com/item?id=16395379
+# Based on https://github.com/cknadler/vim-anywhere but redone to work with
+# my TerminalVim.app launcher.
+
+# To use:
+# * Open Automator
+# * Create new Service that receives selected text in any application.
+# * Add the "Run Shell Script" operation.  Select shell /bin/sh, pass input to
+#   stdin, and the command is just the path to this script.
+# * Save as "VimPop"
+# * In System Preferences -> Keyboard -> Shortcuts, pick Services, then find
+#   VimPop under the Text section.  Map Ctrl-Shift-Command-V to VimPop.
+#
+# Now in any application, select some text, then do Ctrl-Shift-Command-V.
+# Vim will pop open in editor (assuming TerminalVim.app) with selected text
+# in buffer.  Edit text as desired, then save and quit (:wq).  The original
+# application should regain focus, the text from the vim buffer should be
+# pasted over the selected text, and the original clipboard contents should
+# remain unchanged.
+
+set -e
+
+# Get the name of the active application with AppleScript
+read -d '' read_current_app_name_script << EOF || true
+tell application "System Events"
+  copy (name of application processes whose frontmost is true) to stdout
+end tell
+EOF
+app=$(/usr/bin/osascript -e "$read_current_app_name_script")
+
+# Create temp file containing stdin content to be opened in vim
+tmp=$(mktemp -t "vimpop_tmp")
+cat > "$tmp"
+
+# Save initial clipboard content
+clipboard_content=$(/usr/bin/pbpaste)
+
+# Open preferred editor
+open -W -n /Applications/TerminalVim.app --args "$tmp"
+
+# Wait for vim process that has temp file open to be closed
+# (TerminalVim.app is just a launcher for terminal vim that exits right away,
+# otherwise the -W args to open would be enough)
+while [ -n "$(ps aux | grep "$tmp" | grep -v "grep" | tr -s " " | cut -d " " -f 2)" ]; do
+  sleep 1
+done
+
+# Copy temp file contents to clipboard and clean up temp file
+# Kill extra trailing newline with echo -n
+/bin/echo -n `cat "$tmp"` | /usr/bin/pbcopy
+rm "$tmp"
+
+# Restore focus on original application and paste with Command-V keystroke,
+# then restore initial clipboard contents
+read -d '' focus_app_and_replace_selection_script << EOF || true
+activate application "$app"
+tell application "System Events"
+  keystroke "v" using {command down}
+end tell
+do shell script "/bin/sleep 1 && /bin/echo -n " & quoted form of "$clipboard_content" & space & " | /usr/bin/pbcopy"
+EOF
+/usr/bin/osascript -e "$focus_app_and_replace_selection_script"
+
