@@ -368,6 +368,9 @@ nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 
+" Initialize my daily diary entry
+command! InitDiary execute "normal! ggo<cr><cr>## TODO<cr>* [ ] <cr><esc>kA"
+
 " calendar.vim
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
 
