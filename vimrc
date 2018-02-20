@@ -15,6 +15,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'Julian/vim-textobj-variable-segment'
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
 Plugin 'Olical/vim-enmasse'
 Plugin 'airblade/vim-gitgutter'
