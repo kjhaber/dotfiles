@@ -22,8 +22,6 @@ k
 l - List toggle (hidden characters)
   ll -- redraw terminal (since ctrl-L is remapped)
 m - instant Markdown preview
-  mb  italicize WORD or visual selection (surround with asterisks)
-  mi  italicize WORD or visual selection (surround with underscores)
 n
   nn  toggle line numbers
   nr  toggle between relative and absolute line numbers

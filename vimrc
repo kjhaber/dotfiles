@@ -343,10 +343,10 @@ let g:syntastic_xml_checkers = ['xmllint']
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
-nmap <Leader>mb ysiW*
-vmap <Leader>mb S*
-nmap <Leader>mi ysiW_
-vmap <Leader>mi S_
+nnoremap ** :exe "normal ysiW*"<cr>
+vmap * S*
+nnoremap __ :exe "normal ysiW_"<cr>
+vmap _ S_
 
 " vim-racer
 let g:racer_cmd = "~/.cargo/bin/racer"
