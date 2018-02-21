@@ -115,6 +115,16 @@ command CDC cd %:p:h
 set number
 set relativenumber
 
+" highlight line with cursor
+" https://stackoverflow.com/questions/14068751/how-to-hide-cursor-line-when-focus-in-on-other-window-in-vim
+augroup CursorLine
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
+
 set backspace=2
 set tabstop=2
 set shiftwidth=2
