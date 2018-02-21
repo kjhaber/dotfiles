@@ -43,6 +43,7 @@ Plugin 'machakann/vim-highlightedyank'
 Plugin 'mattn/calendar-vim'
 Plugin 'mhinz/vim-startify'
 Plugin 'moll/vim-node'
+Plugin 'morhetz/gruvbox'
 Plugin 'mrtazz/simplenote.vim.git'
 Plugin 'mxw/vim-jsx.git'
 Plugin 'pangloss/vim-javascript'
@@ -84,6 +85,10 @@ runtime macros/matchit.vim
 
 set t_Co=256
 colorscheme molokai
+augroup colors
+  autocmd FileType vimwiki colorscheme gruvbox
+augroup END
+
 set background=dark
 set guifont=Inconsolata:h12
 let g:airline_powerline_fonts = 1
