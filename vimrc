@@ -4,13 +4,13 @@ set shell=bash
 
 " Setting to allow use with 'TerminalVim.app', a Mac AppleScript app that opens
 " files double-clicked in Finder within vim in terminal.
-let g:python_host_prog="/usr/local/bin/python2"
-let g:python3_host_prog="/usr/local/bin/python3"
+let g:python_host_prog='/usr/local/bin/python2'
+let g:python3_host_prog='/usr/local/bin/python3'
 
 " Vundle
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
@@ -73,7 +73,7 @@ Plugin 'w0rp/ale'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Yggdroot/indentLine'
 
-if filereadable($DOTFILE_LOCAL_HOME . "/vimrc-plugin-local")
+if filereadable($DOTFILE_LOCAL_HOME . '/vimrc-plugin-local')
   source $DOTFILE_LOCAL_HOME/vimrc-plugin-local
 endif
 
@@ -94,9 +94,9 @@ set guifont=Inconsolata:h12
 let g:airline_powerline_fonts = 1
 
 set laststatus=2
-if $TERM_PROGRAM =~ "iTerm"
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+if $TERM_PROGRAM =~# 'iTerm'
+  let &t_SI = '\<Esc>]50;CursorShape=1\x7' " Vertical bar in insert mode
+  let &t_EI = '\<Esc>]50;CursorShape=0\x7' " Block in normal mode
 endif
 
 if has('mouse_sgr')
@@ -111,7 +111,7 @@ set listchars+=tab:»\ ,eol:¶,space:⋅,trail:✗
 set whichwrap+=<,>,h,l,[,]
 
 set title
-let &titleold=$USER . "@" . hostname() . " | " . fnamemodify(getcwd(), ':t')
+let &titleold=$USER . '@' . hostname() . ' | ' . fnamemodify(getcwd(), ':t')
 set ruler
 
 " set autochdir
@@ -152,7 +152,7 @@ syntax enable
 
 " Use both \ and space as leader
 " I still have some habits for \, and space doesn't show up for showcmd
-let mapleader="\\"
+let g:mapleader='\\'
 map <Space> <Leader>
 
 " from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
