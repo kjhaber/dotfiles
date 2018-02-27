@@ -14,6 +14,7 @@ getantibody/tap/antibody
 go
 iftop
 imagemagick
+jq
 moreutils
 neovim
 netcat
@@ -24,6 +25,7 @@ plantuml
 pstree
 python
 reattach-to-user-namespace
+redpen
 ripgrep
 sl
 the_silver_searcher
@@ -35,6 +37,7 @@ tomcat
 tree
 vim
 wget
+write-good
 wtf
 yank
 zsh

@@ -69,7 +69,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/closetag.vim'
 Plugin 'vim-scripts/zoomwintab.vim'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Yggdroot/indentLine'
 
@@ -314,7 +314,6 @@ set statusline+=%r        "read only flag
 set statusline+=%y\       "filetype
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 set statusline+=%=      "left/right separator
@@ -331,30 +330,14 @@ nmap <Leader>ff :Autoformat<CR>
 " (not really related to the autoformat plugin, but related to formatting)
 nmap <Leader>fi mzgg=G`z
 
-" syntastic options
-nmap <Leader>st :SyntasticToggleMode<CR>
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=5
-let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '!'
-
-let g:syntastic_css_checkers = ['csslint']
-let g:syntastic_html_checkers = ['tidy']
-let g:syntastic_less_checkers = ['lesshint']
-let g:syntastic_java_checkers = ['javac']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_json_checkers = ['jsonlint']
-let g:syntastic_rust_checkers = ['cargo']
-let g:syntastic_sass_checkers = ['sass_lint']
-let g:syntastic_scss_checkers = ['sass_lint']
-let g:syntastic_xml_checkers = ['xmllint']
+" ALE
+let g:ale_lint_on_enter = 0
+nnoremap [l :lprevious<CR>
+nnoremap ]l :lnext<CR>
+nmap <Leader>aa :ALEToggle<CR>
+nmap <Leader>af :ALEFix<CR>
+nmap <Leader>an <Plug>(ale_next_wrap)
+nmap <Leader>ap <Plug>(ale_previous_wrap)
 
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1

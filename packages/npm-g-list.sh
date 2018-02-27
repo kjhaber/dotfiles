@@ -15,4 +15,5 @@ npm install -g sass-lint
 npm install -g typescript
 npm install -g js-beautify
 npm install -g remark-cli
+npm install -g stylelint
 
