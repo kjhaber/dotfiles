@@ -256,12 +256,9 @@ nmap <Leader>nr :call ToggleNumberRel()<CR>
 " strips trailing whitespace at the end of files
 function! StripTrailingWhitespaces()
     " save last search & cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
+    let l:save=winsaveview()
+    silent! %substitute/\s\+$//e
+    call winrestview(l:save)
 endfunction
 
 " Insert today's numeric ISO 8601 date (https://xkcd.com/1179/) and
@@ -348,8 +345,8 @@ nnoremap __ :exe "normal ysiW_"<cr>
 vmap _ S_
 
 " vim-racer
-let g:racer_cmd = "~/.cargo/bin/racer"
-let $RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"
+let g:racer_cmd = '~/.cargo/bin/racer'
+let $RUST_SRC_PATH='~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 
 " vim-startify
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
@@ -366,7 +363,7 @@ if !empty(g:personal_fortune)
 endif
 
 " vimwiki
-let g:vimwiki_list = [{'path': "$VIMWIKI_DIR", 'syntax': 'markdown', 'ext': '.mdwiki'}]
+let g:vimwiki_list = [{'path': '$VIMWIKI_DIR', 'syntax': 'markdown', 'ext': '.mdwiki'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_url_maxsave = 0
 let g:vimwiki_use_mouse = 1
@@ -414,9 +411,9 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 " Alt-L for forward
 " Alt-H for backward
 " On a Mac you have to use a trick: <ALT+L> ==> ¬, <ALT+H> ==> ˙
-let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsJumpForwardTrigger="¬"
-let g:UltiSnipsJumpBackwardTrigger="˙"
+let g:UltiSnipsExpandTrigger='<c-s>'
+let g:UltiSnipsJumpForwardTrigger='¬'
+let g:UltiSnipsJumpBackwardTrigger='˙'
 
 " fzf
 " Search filenames with Ctrl-p
@@ -445,6 +442,8 @@ nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
 
 " vimux
 " from https://blog.bugsnag.com/tmux-and-vim/
@@ -458,12 +457,12 @@ nmap <Leader>vq :VimuxCloseRunner<CR>
 let g:vim_json_syntax_conceal = 0
 
 " put Simplenote creds into separate file for simplenote.vim plugin
-if filereadable($DOTFILE_LOCAL_HOME . "/simplenoterc")
+if filereadable($DOTFILE_LOCAL_HOME . '/simplenoterc')
   source $DOTFILE_LOCAL_HOME/simplenoterc
 endif
 
 " Define any local-specific mappings/abbreviations
-if filereadable($DOTFILE_LOCAL_HOME . "/vimrc-local")
+if filereadable($DOTFILE_LOCAL_HOME . '/vimrc-local')
   source $DOTFILE_LOCAL_HOME/vimrc-local
 endif
 
