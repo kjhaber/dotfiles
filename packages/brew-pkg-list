@@ -24,6 +24,7 @@ pandoc
 plantuml
 pstree
 python
+python2
 reattach-to-user-namespace
 redpen
 ripgrep
