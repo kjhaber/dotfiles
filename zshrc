@@ -130,3 +130,6 @@ if [[ -f "/usr/local/bin/antibody" ]]; then
   antibody bundle < $DOTFILE_HOME/zsh/plugin-list
 fi
 
+# Enable iTerm2 integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
