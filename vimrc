@@ -356,6 +356,15 @@ let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands'
 let g:startify_bookmarks = [ {'.': '.'}, {'d': '$TODO_DIR/todo.txt'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'}, {'s': '~/.ssh/config'} ]
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
+" Customize fortune messages that appear in Startify header
+" (Idea is to put work personal goals/areas of improvement into
+" personal-fortune as reminders to keep them front-and-center.)
+execute 'source ' . fnameescape($DOTFILE_HOME . '/vim/personal-fortune.vim')
+if !empty(g:personal_fortune)
+  " let g:startify_custom_header = 'startify#fortune#cowsay()'
+  let g:startify_custom_header_quotes = g:personal_fortune
+endif
+
 " vimwiki
 let g:vimwiki_list = [{'path': "$VIMWIKI_DIR", 'syntax': 'markdown', 'ext': '.mdwiki'}]
 let g:vimwiki_global_ext = 0
