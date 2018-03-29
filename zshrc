@@ -61,6 +61,9 @@ alias :q=exit
 # using dash to go up a directory is same as netrw in vim
 alias -- -='cd ..'
 
+# cd to pwd - handy when pwd is log or test dir that is reset by clean/rebuild or deployment
+alias cdpwd='cd "$(pwd)"; pwd'
+
 alias cddesktop="cd $HOME/Desktop"
 alias cddocuments="cd $DOC_DIR"
 alias cddotfiles="cd $DOTFILE_HOME"
