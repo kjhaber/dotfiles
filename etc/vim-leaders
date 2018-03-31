@@ -29,7 +29,7 @@ j
 k
 l - List toggle (hidden characters)
   ll -- redraw terminal (since ctrl-L is remapped)
-m - instant Markdown preview
+m - :Make
 n
   nn  toggle line numbers
   nr  toggle between relative and absolute line numbers

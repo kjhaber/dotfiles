@@ -55,7 +55,6 @@ Plugin 'mckinnsb/rust.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sirver/ultisnips'
 Plugin 'skywind3000/asyncrun.vim'
-Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-expand-region'
 Plugin 'timonv/vim-cargo'
 Plugin 'tmux-plugins/vim-tmux'
@@ -189,6 +188,8 @@ nnoremap <Leader>\| :Vexplore<CR>
 " indent the entire file
 nnoremap <Leader>=  gg=G
 
+" run make command
+nnoremap <Leader>m :Make<CR>
 
 " fugitive shortcuts
 " inspired by https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/
@@ -385,10 +386,6 @@ command! InitDiary execute "normal! ggo<cr><cr>## TODO<cr>* [ ] <cr><esc>kA"
 
 " calendar.vim
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
-
-" vim-instant-markdown: requires `sudo npm -g install instant-markdown-d`
-let g:instant_markdown_autostart = 0
-nmap <Leader>md :InstantMarkdownPreview<CR>
 
 " Enable vim-highlightedyank plugin
 map y <Plug>(highlightedyank)
