@@ -449,6 +449,8 @@ nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a<Space> :Tabularize /<Space><CR>
+vmap <Leader>a<Space> :Tabularize /<Space><CR>
 
 " vimux
 " from https://blog.bugsnag.com/tmux-and-vim/
