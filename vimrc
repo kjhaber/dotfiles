@@ -7,78 +7,80 @@ set shell=bash
 let g:python_host_prog='/usr/local/bin/python2'
 let g:python3_host_prog='/usr/local/bin/python3'
 
-" Vundle
-set nocompatible
-filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+"auto-install vim-plug if not present on current machine (https://www.reddit.com/r/vim/comments/3thtrv/just_switched_to_vimplug_from_vundle/)
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'Julian/vim-textobj-variable-segment'
-Plugin 'MarcWeber/vim-addon-mw-utils.git'
-Plugin 'Olical/vim-enmasse'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'aklt/plantuml-syntax'
-Plugin 'benmills/vimux'
-Plugin 'cespare/vim-toml'
-Plugin 'christoomey/vim-tmux-navigator'
-" Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'editorconfig/editorconfig-vim.git'
-Plugin 'elzr/vim-json'
-Plugin 'freitass/todo.txt-vim'
-Plugin 'fvictorio/vim-textobj-backticks'
-Plugin 'godlygeek/tabular'
-Plugin 'honza/vim-snippets'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'justinmk/vim-sneak'
-Plugin 'kana/vim-textobj-entire'
-Plugin 'kana/vim-textobj-lastpat'
-Plugin 'kana/vim-textobj-underscore'
-Plugin 'kana/vim-textobj-line'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kjhaber/vimwiki'
-Plugin 'lifepillar/vim-mucomplete'
-Plugin 'machakann/vim-highlightedyank'
-Plugin 'mattn/calendar-vim'
-Plugin 'mhinz/vim-startify'
-Plugin 'moll/vim-node'
-Plugin 'morhetz/gruvbox'
-Plugin 'mrtazz/simplenote.vim.git'
-Plugin 'mxw/vim-jsx.git'
-Plugin 'pangloss/vim-javascript'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'racer-rust/vim-racer'
-Plugin 'rking/ag.vim'
-Plugin 'mckinnsb/rust.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sirver/ultisnips'
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'terryma/vim-expand-region'
-Plugin 'timonv/vim-cargo'
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'tomasr/molokai'
-Plugin 'tomtom/tlib_vim.git'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-scripts/closetag.vim'
-Plugin 'vim-scripts/zoomwintab.vim'
-Plugin 'w0rp/ale'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'Yggdroot/indentLine'
+" Vim-Plug
+call plug#begin('~/.vim/plugged')
+
+Plug 'Chiel92/vim-autoformat'
+Plug 'Julian/vim-textobj-variable-segment'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'Olical/vim-enmasse'
+Plug 'airblade/vim-gitgutter'
+Plug 'aklt/plantuml-syntax'
+Plug 'benmills/vimux'
+Plug 'cespare/vim-toml'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'elzr/vim-json'
+Plug 'freitass/todo.txt-vim'
+Plug 'fvictorio/vim-textobj-backticks'
+Plug 'godlygeek/tabular'
+Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-lastpat'
+Plug 'kana/vim-textobj-underscore'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-user'
+Plug 'kjhaber/vimwiki'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'machakann/vim-highlightedyank'
+Plug 'mattn/calendar-vim'
+Plug 'mhinz/vim-startify'
+Plug 'moll/vim-node'
+Plug 'morhetz/gruvbox'
+Plug 'mrtazz/simplenote.vim'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
+Plug 'racer-rust/vim-racer'
+Plug 'rking/ag.vim'
+Plug 'mckinnsb/rust.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'sirver/ultisnips'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'terryma/vim-expand-region'
+Plug 'timonv/vim-cargo'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'tomasr/molokai'
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/closetag.vim'
+Plug 'vim-scripts/zoomwintab.vim'
+Plug 'w0rp/ale'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Yggdroot/indentLine'
 
 if filereadable($DOTFILE_LOCAL_HOME . '/vimrc-plugin-local')
   source $DOTFILE_LOCAL_HOME/vimrc-plugin-local
 endif
 
-call vundle#end()
+call plug#end()
 
+" Make updating plugins more convenient
+command! PU PlugUpdate | PlugUpgrade
 
 filetype plugin indent on
 runtime macros/matchit.vim
