@@ -385,7 +385,10 @@ nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 
 " Initialize my daily diary entry
-command! InitDiary execute "normal! ggo<cr><cr>## TODO<cr>* [ ] <cr><esc>kA"
+" -- creates two sections, 'JOURNAL' and 'TODO'
+" -- creates mark j for Journal section
+" -- creates mark t for Todo section
+command! InitDiary execute "normal! ggi## JOURNAL<cr>* <esc>mji<cr><cr><cr>## TODO<esc>mto* [ ] <cr><esc>kA"
 
 " calendar.vim
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
