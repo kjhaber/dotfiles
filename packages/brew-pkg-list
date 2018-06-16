@@ -28,6 +28,7 @@ python2
 reattach-to-user-namespace
 redpen
 ripgrep
+shellcheck
 sl
 the_silver_searcher
 thefuck
