@@ -214,6 +214,9 @@ nnoremap <Leader>gw :Gwrite<CR><CR>
 nnoremap <Leader>hr :GitGutterUndoHunk<CR>
 nnoremap <Leader>hs :GitGutterStageHunk<CR>
 
+" update Gitgutter signs on file save
+autocmd BufWritePost * GitGutter
+
 " Normally <ctrl-L> forces a redraw of the terminal, but I've mapped that to
 " change between vim splits and tmux panes.  <Leader>l alone does a `:set list`
 " to show/hide hidden characters, so I'm setting <Leader>ll as my shortcut to
