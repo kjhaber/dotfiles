@@ -1,0 +1,15 @@
+{
+    "editor.fontFamily": "Inconsolata, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.lineNumbers": "relative",
+    "searchrg.enable": true,
+    "terminal.explorerKind": "external",
+    "terminal.external.osxExec": "iTerm.app",
+    "vim.cmdLineInitialColon": true,
+    "vim.enableNeovim": true,
+    "vim.leader": "<space>",
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.sneak": true,
+    "vim.useSystemClipboard": true,
+    "workbench.startupEditor": "newUntitledFile"
+}
