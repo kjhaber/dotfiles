@@ -166,6 +166,14 @@ vmap <Leader>d "+d
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 
+" make quick macros easier
+" workflow is:
+" 1) `qq` to start macro (register q)
+" 2) do stuff
+" 3) `q` to stop recording
+" 4) `Shift-Q` to replay
+nmap Q @q
+
 " <Leader>P during a visual selection will replace the selection with
 " current clipboard without changing current clipboard like 'd' or 'c' usually
 " does.  In this case <Leader>p and <Leader>P do the same thing, unlike in
