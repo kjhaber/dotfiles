@@ -9,11 +9,11 @@ nvm use node
 npm install -g csslint
 npm install -g eslint
 npm install -g http-server
-npm install -g instant-markdown-d
-npm install -g lesshint
-npm install -g sass-lint
-npm install -g typescript
 npm install -g js-beautify
+npm install -g lesshint
 npm install -g remark-cli
+npm install -g sass-lint
 npm install -g stylelint
+npm install -g typescript
+npm install -g typescript-language-server
 

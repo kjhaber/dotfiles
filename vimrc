@@ -39,6 +39,7 @@ Plug 'kana/vim-textobj-underscore'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-user'
 Plug 'kjhaber/vimwiki'
+Plug 'leafgarland/typescript-vim'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mattn/calendar-vim'
@@ -49,6 +50,8 @@ Plug 'mrtazz/simplenote.vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'racer-rust/vim-racer'
 Plug 'rking/ag.vim'
 Plug 'mckinnsb/rust.vim'
@@ -228,10 +231,10 @@ autocmd BufWritePost * GitGutter
 
 " Normally <ctrl-L> forces a redraw of the terminal, but I've mapped that to
 " change between vim splits and tmux panes.  <Leader>l alone does a `:set list`
-" to show/hide hidden characters, so I'm setting <Leader>ll as my shortcut to
+" to show/hide hidden characters, so I'm setting <Leader>r as my shortcut to
 " redraw the screen (which I end up wanting regularly when I do a command-K to
 " clear the buffer in iTerm).
-nnoremap <Leader>ll :redraw!<CR>
+nnoremap <Leader>r :redraw!<CR>
 
 " stop that window from popping up
 map q: :q
@@ -481,6 +484,29 @@ nmap <Leader>vq :VimuxCloseRunner<CR>
 
 " vim-json
 let g:vim_json_syntax_conceal = 0
+
+" vim-lsp
+if executable('typescript-language-server')
+  augroup lsp_ts
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript', 'javascript'],
+        \ })
+    autocmd FileType typescript setlocal omnifunc=lsp#complete
+    autocmd FileType javascript setlocal omnifunc=lsp#complete
+  augroup end
+endif
+nmap <Leader>ji :LspImplementation<CR>
+nmap <Leader>jd :LspDefinition<CR>
+nmap <Leader>jr :LspReferences<CR>
+nmap <Leader>lf :LspDocumentFormat<CR>
+vmap <Leader>lf :LspDocumentRangeFormat<CR>
+nmap <Leader>ll :LspHover<CR>
+nmap <Leader>lr :LspRename<CR>
+nmap <Leader>lsd :LspDocumentSymbol<CR>
+nmap <Leader>lwd :LspWorkspaceSymbol<CR>
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 if filereadable($DOTFILE_LOCAL_HOME . '/simplenoterc')

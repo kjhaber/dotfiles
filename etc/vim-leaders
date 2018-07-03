@@ -1,19 +1,19 @@
 leader:
 
 a - Align (Tabularize) or ALE
-  a|  align using bar character
-  a:  align using colon character
-  a=  align using equal character
+  a| -- align using bar character
+  a: -- align using colon character
+  a= -- align using equal character
 
-  aa  toggle ALE lint
-  af  ALE fix
-  an  ALE next error
-  ap  ALE previous error
+  aa -- toggle ALE lint
+  af -- ALE fix
+  an -- ALE next error
+  ap -- ALE previous error
 b
 c
 d
-  dd - Delete line (cut to system clipboard)
-  dt - Insert today's date in YYYY-MM-DD format, leave in insert mode
+  dd -- Delete line (cut to system clipboard)
+  dt -- Insert today's date in YYYY-MM-DD format, leave in insert mode
 e
 f - autoFormat
   ff -- format (uses format external prog if available)
@@ -25,35 +25,41 @@ h - Highlight toggle
   hs -- gitgutter Hunk Stage
   hr -- gitgutter Hunk Revert
 i
-j
+j - LSP Jump...
+  jd -- LSP Jump to Definition
+  jr -- LSP Jump to References (find references)
 k
 l - List toggle (hidden characters)
-  ll -- redraw terminal (since ctrl-L is remapped)
+  lf  -- LSP Format (range format when in visual mode)
+  ll  -- LSP Hover
+  lr  -- LSP Rename
+  lsd -- LSP Symbols: Document
+  lwd -- LSP Symbols: Workspace
 m - :Make
 n
-  nn  toggle line numbers
-  nr  toggle between relative and absolute line numbers
+  nn -- toggle line numbers
+  nr -- toggle between relative and absolute line numbers
 o - Open (CtrlP search)
 p - Paste from system clipboard
 q
-r
+r - redraw terminal (since ctrl-L is remapped)
 s
   ss  strip trailing whitespace
 t - nerdTree
 u
 v - vimux
-  vv  prompt command
-  vr  repeat last command
-  vi  inspect runner pane
-  vz  zoom runner pane
-  vq  quit runner pane
+  vv -- prompt command
+  vr -- repeat last command
+  vi -- inspect runner pane
+  vz -- zoom runner pane
+  vq -- quit runner pane
 w
-  ww          vimwiki main
-  w<leader>w  vimwiki diary today
-  w<leader>y  vimwiki diary yesterday
-  wi          vimwiki diary index
-  w<leader>i  vimwiki diary index generate links
-  wc          open calendar (enter on date opens diary)
+  ww         -- vimwiki main
+  w<leader>w -- vimwiki diary today
+  w<leader>y -- vimwiki diary yesterday
+  wi         -- vimwiki diary index
+  w<leader>i -- vimwiki diary index generate links
+  wc         -- open calendar (enter on date opens diary)
 x
 y - Yank to system clipboard
 z
@@ -63,11 +69,11 @@ space - visual select current line (why?)
 | - vertical split
 }
 [
-  [b  search buffers
-  [f  search files
-  [h  search history
-  [l  search lines (current file)
-  [[  search lines (current file)
-  [t  search text (all files under vim pwd)
+  [b -- search buffers
+  [f -- search files
+  [h -- search history
+  [l -- search lines (current file)
+  [[ -- search lines (current file)
+  [t -- search text (all files under vim pwd)
 = - indent entire file
 
