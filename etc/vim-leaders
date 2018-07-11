@@ -10,6 +10,11 @@ a - Align (Tabularize) or ALE
   an -- ALE next error
   ap -- ALE previous error
 b
+  bb -- toggle bullet character between * and -
+  b- -- change bullet character to -
+  b* -- change bullet character to * 
+  b> -- change bullet character to >
+  b. -- change bullet character to ..
 c
 d
   dd -- Delete line (cut to system clipboard)
