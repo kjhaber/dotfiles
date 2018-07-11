@@ -231,10 +231,10 @@ autocmd BufWritePost * GitGutter
 
 " Normally <ctrl-L> forces a redraw of the terminal, but I've mapped that to
 " change between vim splits and tmux panes.  <Leader>l alone does a `:set list`
-" to show/hide hidden characters, so I'm setting <Leader>r as my shortcut to
+" to show/hide hidden characters, so I'm setting <Leader>k as my shortcut to
 " redraw the screen (which I end up wanting regularly when I do a command-K to
-" clear the buffer in iTerm).
-nnoremap <Leader>r :redraw!<CR>
+" clear the buffer in iTerm -- ctrl-k is also the tmux redraw shortcut.).
+nnoremap <Leader>k :redraw!<CR>
 
 " stop that window from popping up
 map q: :q
