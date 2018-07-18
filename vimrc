@@ -406,6 +406,12 @@ nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 " -- creates mark t for Todo section
 command! InitDiary execute "normal! ggi## JOURNAL<cr>* <esc>mji<cr><cr><cr>## TODO<esc>mto* [ ] <cr><esc>kA"
 
+" Initialize PlantUml document
+command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><esc>kkkA "
+
+" UML Arrow Swap: change position of arrow in PlantUML doc
+source $DOTFILE_HOME/vim/plantuml-arrow-swap.vim
+
 " calendar.vim
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
 

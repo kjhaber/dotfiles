@@ -52,6 +52,7 @@ s
   ss  strip trailing whitespace
 t - nerdTree
 u
+  uas -- UML arrow swap
 v - vimux
   vv -- prompt command
   vr -- repeat last command
