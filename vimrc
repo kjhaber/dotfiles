@@ -516,31 +516,8 @@ nmap <Leader>lwd :LspWorkspaceSymbol<CR>
 
 
 " change bullet list character
-function ChangeBullet(newChar)
-  call setline(line('.'), substitute(getline('.'), '\v^( *)([^ ]+)(.*)$', '\1'.a:newChar.'\3', ''))
-endfunction
-nmap <Leader>b- :call ChangeBullet('-')<CR>
-nmap <Leader>b* :call ChangeBullet('*')<CR>
-nmap <Leader>b> :call ChangeBullet('>')<CR>
-nmap <Leader>b. :call ChangeBullet('..')<CR>
+source $DOTFILE_HOME/vim/change-bullet.vim
 
-vmap <Leader>b- :'<,'>call ChangeBullet('-')<CR>
-vmap <Leader>b* :'<,'>call ChangeBullet('*')<CR>
-vmap <Leader>b> :'<,'>call ChangeBullet('>')<CR>
-vmap <Leader>b. :'<,'>call ChangeBullet('..')<CR>
-
-function ToggleBullet()
-  " switch between '*' and '-' bullet characters
-  if match(getline('.'), '\v^( *)\*') != -1
-    call ChangeBullet('-')
-  elseif match(getline('.'), '\v^( *)\-') != -1
-    call ChangeBullet('*')
-  else
-    echom "No dash or asterisk bullet found on line"
-  endif
-endfunction
-nmap <Leader>bb :call ToggleBullet()<CR>
-vmap <Leader>bb :'<,'>call ToggleBullet()<CR>
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 if filereadable($DOTFILE_LOCAL_HOME . '/simplenoterc')

@@ -11,9 +11,12 @@ a - Align (Tabularize) or ALE
   ap -- ALE previous error
 b
   bb -- toggle bullet character between * and -
+  bi -- indent and toggle bullet
+  bo -- outdent and toggle bullet
   b- -- change bullet character to -
   b* -- change bullet character to * 
   b> -- change bullet character to >
+  b+ -- change bullet character to +
   b. -- change bullet character to ..
 c
 d
