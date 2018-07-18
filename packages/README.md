@@ -1,10 +1,7 @@
 # Packages lists
 
-* brew-pkg-list
-  Homebrew packages, from `brew leaves`
-
-* brew-cask-list
-  Homebrew cask packages, from `brew cask list`
+* See https://github.com/kjhaber/homebrew-brewfile/blob/master/Brewfile for
+  Homebrew package and cask list.
 
 * npm-g-list.sh
   NPM globally installed packages. (Not too many of these: most dev tools are
