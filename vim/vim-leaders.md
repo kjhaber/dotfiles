@@ -1,4 +1,4 @@
-leader:
+## Vim Leader Mappings
 
 a - Align (Tabularize) or ALE
   a| -- align using bar character
@@ -28,15 +28,16 @@ f - autoFormat
   fi -- indent
 g - fuGitive
   gs -- git status
+  gc -- git commit
 h - Highlight toggle
   hh -- highlight toggle (fast)
   hs -- gitgutter Hunk Stage
   hr -- gitgutter Hunk Revert
 i
-j - LSP Jump...
+j
   jd -- LSP Jump to Definition
   jr -- LSP Jump to References (find references)
-k
+k - redraw buffer/terminal
 l - List toggle (hidden characters)
   lf  -- LSP Format (range format when in visual mode)
   ll  -- LSP Hover
@@ -50,7 +51,7 @@ n
 o - Open (CtrlP search)
 p - Paste from system clipboard
 q
-r - redraw terminal (since ctrl-L is remapped)
+r
 s
   ss  strip trailing whitespace
 t - nerdTree
