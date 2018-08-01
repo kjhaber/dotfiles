@@ -524,6 +524,10 @@ if filereadable($DOTFILE_LOCAL_HOME . '/simplenoterc')
   source $DOTFILE_LOCAL_HOME/simplenoterc
 endif
 
+" abbreviations
+let g:AutoCloseExpandSpace = 0 " Make iabbrev work again with vim-autoclose
+iabbrev Ketih Keith
+
 " Define any local-specific mappings/abbreviations
 if filereadable($DOTFILE_LOCAL_HOME . '/vimrc-local')
   source $DOTFILE_LOCAL_HOME/vimrc-local
