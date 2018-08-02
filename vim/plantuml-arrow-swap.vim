@@ -15,5 +15,5 @@ function! UmlArrowSwap()
 endfunction
 
 nmap <Leader>uas :call UmlArrowSwap()<CR>
-vmap <Leader>uas :call UmlArrowSwap()<CR>
+vmap <Leader>uas :'<,'>call UmlArrowSwap()<CR>
 

@@ -20,16 +20,19 @@ nmap <Leader>b> :call ChangeBullet('>')<CR>
 nmap <Leader>b+ :call ChangeBullet('+')<CR>
 nmap <Leader>b. :call ChangeBullet('..')<CR>
 
-vmap <Leader>b- :call ChangeBullet('-')<CR>
-vmap <Leader>b* :call ChangeBullet('*')<CR>
-vmap <Leader>b> :call ChangeBullet('>')<CR>
-vmap <Leader>b+ :call ChangeBullet('+')<CR>
-vmap <Leader>b. :call ChangeBullet('..')<CR>
+vmap <Leader>b- :'<,'>call ChangeBullet('-')<CR>
+vmap <Leader>b* :'<,'>call ChangeBullet('*')<CR>
+vmap <Leader>b> :'<,'>call ChangeBullet('>')<CR>
+vmap <Leader>b+ :'<,'>call ChangeBullet('+')<CR>
+vmap <Leader>b. :'<,'>call ChangeBullet('..')<CR>
 
 nmap <Leader>bb :call ToggleBullet()<CR>
-vmap <Leader>bb :call ToggleBullet()<CR>
+vmap <Leader>bb :'<,'>call ToggleBullet()<CR>
 
 " Bullet indent/outdent with toggle
 nmap <Leader>bi :><CR>:call ToggleBullet()<CR>
 nmap <Leader>bo :<<CR>:call ToggleBullet()<CR>
+
+vmap <Leader>bi :'<,'>><CR>:'<,'>call ToggleBullet()<CR>
+vmap <Leader>bo :'<,'><<CR>:'<,'>call ToggleBullet()<CR>
 
