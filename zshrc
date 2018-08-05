@@ -106,6 +106,13 @@ export FZF_DEFAULT_COMMAND="rg --files --no-ignore --ignore-case --hidden --foll
 eval "$(fasd --init auto)"
 alias v='f -e vim' # quick opening files with vim
 
+# Change ssh autocomplete to skip /etc/hosts.  I put hosts entries from
+# the blacklist at http://someonewhocares.org/hosts/ into mine, which maps
+# a bunch of spam and ad tracker sites to localhost.  This is great for
+# privacy and internet performance, but it renders almost all the
+# ssh autocomplete values useless.  Values from ~/.ssh/config still work.
+zstyle ':completion:*:ssh:*' hosts off
+
 # todo.txt
 alias t='/usr/local/bin/todo.sh -a -d "~/.todo.cfg"'
 compdef t='todo.sh'
