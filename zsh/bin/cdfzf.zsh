@@ -37,17 +37,18 @@ function cdfzf() {
 
   # find list of subdirectories of ROOT_DIR.
   # the sed command removes ROOT_DIR from the options shown during fuzzy select
-  # the bare 'echo' adds an empty element to allow selecting the root dir itself
   ROOT_SUBDIR_LIST=$( \
       find -L "$ROOT_DIR" -type d -maxdepth "$MAX_SUBDIR_DEPTH" | \
-      { sed -e "s|^$ROOT_DIR/||g" ; echo ; } \
+      sed -e "s|^$ROOT_DIR||g" | \
+      sed -e "s|^/||g" \
     )
 
   # strip out hidden directories.  maybe make this conditional later
   ROOT_SUBDIR_LIST=$( grep -v -E '(^\.)|(\/\.)' <<< "$ROOT_SUBDIR_LIST" )
 
   # fuzzy-seelct from list of subdirectories
-  ROOT_SUBDIR=$( fzf-tmux --no-multi -r <<< "$ROOT_SUBDIR_LIST" )
+  # the bare 'echo' adds an empty element to allow selecting the root dir itself
+  ROOT_SUBDIR=$( {echo "$ROOT_SUBDIR_LIST" ; echo } | fzf-tmux --no-multi -r )
 
   # if fzf did not exit normally, don't change directory
   if [ $? -ne 0 ] ; then
