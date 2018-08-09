@@ -23,6 +23,8 @@
 #
 set -e
 
+NOTESDIR="$HOME/Documents/notes"
+
 while true; do
   case "$1" in
     -v ) DATE_V_ARG="$2"; shift 2 ;;
@@ -40,10 +42,29 @@ DATE=$($DATE_EXPR)
 
 LABEL="$1"
 if [ -z "$LABEL" ]; then
+  # fuzzy-find from existing notes
+  NOTE_NAMES=$( \
+    find "$NOTESDIR" -type f -maxdepth 1 | \
+    sed -e "s|^$NOTESDIR/||g" -e 's/^[0-9]*-[0-9]*-[0-9]*_//g' -e 's/\.[0-9a-zA-Z]*$//g' | \
+    sort | \
+    uniq \
+  )
+
+  LABEL=$( { echo "$NOTE_NAMES" ; echo ; } | fzf-tmux --no-multi -r )
+
+  # if fzf did not exit normally, don't change directory
+  if [ $? -ne 0 ] ; then
+    return 1
+  fi
+
+  # if nothing returned from fuzzy find, default label to 'note'
+  if [ -z "$LABEL" ]; then
+    LABEL="note"
+  fi
   LABEL="note"
 fi
+
 FILENAME="${DATE}_${LABEL}.uml"
-NOTESDIR=~/Documents/notes
 mkdir -p $NOTESDIR
 
 echo "Opening ${NOTESDIR}/${FILENAME}"

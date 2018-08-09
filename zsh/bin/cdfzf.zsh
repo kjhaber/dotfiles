@@ -39,8 +39,7 @@ function cdfzf() {
   # the sed command removes ROOT_DIR from the options shown during fuzzy select
   ROOT_SUBDIR_LIST=$( \
       find -L "$ROOT_DIR" -type d -maxdepth "$MAX_SUBDIR_DEPTH" | \
-      sed -e "s|^$ROOT_DIR||g" | \
-      sed -e "s|^/||g" \
+      sed -e "s|^$ROOT_DIR||g" -e "s|^/||g" \
     )
 
   # strip out hidden directories.  maybe make this conditional later
