@@ -411,7 +411,9 @@ command! InitDiary execute "normal! ggi## JOURNAL<cr>* <esc>mji<cr><cr><cr>## TO
 command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><esc>kkkA "
 
 " UML Arrow Swap: change position of arrow in PlantUML doc
-source $DOTFILE_HOME/vim/plantuml-arrow-swap.vim
+if filereadable($DOTFILE_HOME . '/vim/plantuml-arrow-swap.vim')
+  source $DOTFILE_HOME/vim/plantuml-arrow-swap.vim
+endif
 
 " calendar.vim
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
@@ -517,8 +519,9 @@ nmap <Leader>lwd :LspWorkspaceSymbol<CR>
 
 
 " change bullet list character
-source $DOTFILE_HOME/vim/change-bullet.vim
-
+if filereadable($DOTFILE_HOME . '/vim/change-bullet.vim')
+  source $DOTFILE_HOME/vim/change-bullet.vim
+endif
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 if filereadable($DOTFILE_LOCAL_HOME . '/simplenoterc')
