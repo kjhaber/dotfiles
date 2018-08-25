@@ -170,6 +170,12 @@ vmap <Leader>d "+d
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 
+" turn off paste mode more quickly - doesn't need a full leader mapping, but
+" I get into paste mode by accident regularly.  might as well have an
+" equivalent way to get into paste mode as well.
+command P set paste | echo 'Paste mode enabled'
+command NP set nopaste | echo 'Paste mode disabled'
+
 " make quick macros easier
 " workflow is:
 " 1) `qq` to start macro (register q)
