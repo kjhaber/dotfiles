@@ -1,0 +1,40 @@
+#!/bin/bash
+# Automates the task of running 'ps aux | grep <whatever>',
+# copying the pid of a task you want to kill, then running
+# 'kill -9' on the pid.
+#
+# Works on macOS only:
+# Requires pbpaste (built in) and yank ('brew install yank')
+
+psgrep "$@" | yank
+
+# if previous command did not exit normally, exit
+if [ $? -ne 0 ] ; then
+  echo "exiting"
+  return 1
+fi
+
+PID=$(pbpaste)
+
+echo "Selected PID: $PID"
+# if previous command did not exit normally, exit
+if [ $? -ne 0 ] ; then
+  echo "exiting"
+  exit 1
+fi
+
+# if a pid value wasn't put on the clipboard by yank, exit
+if [[ $PID =~ [^0-9] ]]
+then
+  echo "Numeric PID not selected, exiting"
+  exit 1
+fi
+
+read -p "Running 'kill -9 $PID', continue? [y/N] " -n 1 -r
+echo
+
+if [[ "$REPLY" =~ ^[Yy]$ ]]
+then
+  kill -9 "$PID"
+fi
+
