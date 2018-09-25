@@ -1,6 +1,7 @@
 #!/bin/sh
 
 gem install neovim
+gem install solargraph
 
 # tmuxinator
 gem install tmuxinator

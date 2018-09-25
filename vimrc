@@ -73,6 +73,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/closetag.vim'
 Plug 'vim-scripts/zoomwintab.vim'
 Plug 'w0rp/ale'
@@ -511,6 +512,16 @@ if executable('typescript-language-server')
         \ })
     autocmd FileType typescript setlocal omnifunc=lsp#complete
     autocmd FileType javascript setlocal omnifunc=lsp#complete
+  augroup end
+endif
+if executable('solargraph')
+  augroup lsp_rb
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'whitelist': ['ruby'],
+        \ })
+    autocmd FileType ruby setlocal omnifunc=lsp#complete
   augroup end
 endif
 nmap <Leader>ji :LspImplementation<CR>
