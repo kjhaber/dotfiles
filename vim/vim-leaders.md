@@ -18,7 +18,7 @@ b
   b> -- change bullet character to >
   b+ -- change bullet character to +
   b. -- change bullet character to ..
-c
+c - list hidden Characters
 d
   dd -- Delete line (cut to system clipboard)
   dt -- Insert today's date in YYYY-MM-DD format, leave in insert mode
@@ -38,7 +38,7 @@ j
   jd -- LSP Jump to Definition
   jr -- LSP Jump to References (find references)
 k - redraw buffer/terminal
-l - List toggle (hidden characters)
+l
   lf  -- LSP Format (range format when in visual mode)
   ll  -- LSP Hover
   lr  -- LSP Rename

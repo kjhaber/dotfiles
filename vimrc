@@ -114,8 +114,14 @@ endif
 set mouse=a
 set clipboard=unnamed
 
-nmap <Leader>l :set list!<CR>
+" Use both \ and space as leader
+" I still have some habits for \, and space doesn't show up for showcmd
+let g:mapleader='\\'
+map <Space> <Leader>
+
 set listchars+=tab:»\ ,eol:¶,space:⋅,trail:✗
+nmap <Leader>c :set list!<CR>
+nmap <Space>c :set list!<CR>
 
 set whichwrap+=<,>,h,l,[,]
 
@@ -158,11 +164,6 @@ set splitbelow
 set splitright
 
 syntax enable
-
-" Use both \ and space as leader
-" I still have some habits for \, and space doesn't show up for showcmd
-let g:mapleader='\\'
-map <Space> <Leader>
 
 " from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 nnoremap <Leader>o :CtrlP<CR>
