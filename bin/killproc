@@ -10,8 +10,7 @@ psgrep "$@" | yank
 
 # if previous command did not exit normally, exit
 if [ $? -ne 0 ] ; then
-  echo "exiting"
-  return 1
+  exit 1
 fi
 
 PID=$(pbpaste)
