@@ -22,6 +22,7 @@ Plug 'Olical/vim-enmasse'
 Plug 'airblade/vim-gitgutter'
 Plug 'aklt/plantuml-syntax'
 Plug 'benmills/vimux'
+Plug 'blueyed/vim-diminactive'
 Plug 'cespare/vim-toml'
 Plug 'chikamichi/mediawiki.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -93,6 +94,9 @@ filetype plugin indent on
 runtime macros/matchit.vim
 
 set t_Co=256
+if has("termguicolors")
+  set termguicolors
+endif
 colorscheme molokai
 augroup colors
   autocmd FileType vimwiki colorscheme gruvbox
@@ -160,6 +164,7 @@ set ignorecase
 set smartcase
 set linebreak
 set colorcolumn=81
+highlight ColorColumn guibg=#102535
 set splitbelow
 set splitright
 
