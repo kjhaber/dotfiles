@@ -445,6 +445,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 let g:zoomwintab_remap = 0
 nmap <C-w>z :ZoomWinTabToggle<CR>
 nmap <C-w><C-z> :ZoomWinTabToggle<CR>
+nmap <Leader>z :ZoomWinTabToggle<CR>
 
 " asyncrun.vim
 " Defines :Make to run makeprg async - improves fugitive.vim too

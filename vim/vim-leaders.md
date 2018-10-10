@@ -72,7 +72,7 @@ w
   wc         -- open calendar (enter on date opens diary)
 x
 y - Yank to system clipboard
-z
+z - Zoom (ZoomWinTab)
 / - search (fzf + ripgrep) (same as <leader>[t )
 space - visual select current line (why?)
 - - horizontal split
