@@ -12,6 +12,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
+" Conditionally source a file if it exists and is readable
+function SourceIfReadable(filename)
+  if filereadable(a:filename)
+    exec 'source ' . a:filename
+  endif
+endfunction
+
 " Vim-Plug
 call plug#begin('~/.vim/plugged')
 
@@ -82,9 +89,7 @@ Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 
-if filereadable($DOTFILE_LOCAL_HOME . '/vimrc-plugin-local')
-  source $DOTFILE_LOCAL_HOME/vimrc-plugin-local
-endif
+call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-plugin-local')
 
 call plug#end()
 
@@ -408,17 +413,6 @@ let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands'
 let g:startify_bookmarks = [ {'.': '.'}, {'d': '$TODO_DIR/todo.txt'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'}, {'s': '~/.ssh/config'} ]
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
-" Customize fortune messages that appear in Startify header
-" (Idea is to put work personal goals/areas of improvement into
-" personal-fortune as reminders to keep them front-and-center.)
-if filereadable($DOTFILE_HOME . '/vim/personal-fortune.vim')
-  execute 'source ' . fnameescape($DOTFILE_HOME . '/vim/personal-fortune.vim')
-  if !empty(g:personal_fortune)
-    " let g:startify_custom_header = 'startify#fortune#cowsay()'
-    let g:startify_custom_header_quotes = g:personal_fortune
-  endif
-endif
-
 " vimwiki
 let g:vimwiki_list = [{'path': '$VIMWIKI_DIR', 'syntax': 'markdown', 'ext': '.mdwiki'}]
 let g:vimwiki_global_ext = 0
@@ -439,9 +433,7 @@ command! InitDiary execute "normal! ggi## JOURNAL<cr>* <esc>mji<cr><cr><cr>## TO
 command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><esc>kkkA "
 
 " UML Arrow Swap: change position of arrow in PlantUML doc
-if filereadable($DOTFILE_HOME . '/vim/plantuml-arrow-swap.vim')
-  source $DOTFILE_HOME/vim/plantuml-arrow-swap.vim
-endif
+call SourceIfReadable($DOTFILE_HOME . '/vim/plantuml-arrow-swap.vim')
 
 " calendar.vim
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
@@ -558,21 +550,15 @@ nmap <Leader>lwd :LspWorkspaceSymbol<CR>
 
 
 " change bullet list character
-if filereadable($DOTFILE_HOME . '/vim/change-bullet.vim')
-  source $DOTFILE_HOME/vim/change-bullet.vim
-endif
+call SourceIfReadable($DOTFILE_HOME . '/vim/change-bullet.vim')
 
 " put Simplenote creds into separate file for simplenote.vim plugin
-if filereadable($DOTFILE_LOCAL_HOME . '/simplenoterc')
-  source $DOTFILE_LOCAL_HOME/simplenoterc
-endif
+call SourceIfReadable($DOTFILE_LOCAL_HOME . '/simplenoterc')
 
 " abbreviations
 let g:AutoCloseExpandSpace = 0 " Make iabbrev work again with vim-autoclose
 iabbrev Ketih Keith
 
 " Define any local-specific mappings/abbreviations
-if filereadable($DOTFILE_LOCAL_HOME . '/vimrc-local')
-  source $DOTFILE_LOCAL_HOME/vimrc-local
-endif
+call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-local')
 
