@@ -339,27 +339,41 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 " vim-jsx options
 let g:jsx_ext_required = 0
 
+hi StatusLine gui=bold guifg=#ffffff guibg=#3a3a3a
+hi User1 gui=bold guifg=#ff2b70 guibg=#3a3a3a
+hi User2 gui=none guifg=#ff2b70 guibg=#3a3a3a
+
 " start of default statusline
 set statusline=
 set statusline+=%<\       "cut at start
 set statusline+=%t\       "tail of the filename
-set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=[%{strlen(&fenc)?&fenc:'none'},\  "file encoding
 set statusline+=%{&ff}]\  "file format
-set statusline+=%h        "help file flag
-set statusline+=%m        "modified flag
-set statusline+=%r        "read only flag
 set statusline+=%y\       "filetype
+set statusline+=%r        "read only flag
+
+"modified flag
+set statusline+=%1*%{getbufvar(bufnr('%'),'&mod')?'[+]':''}%*
 
 set statusline+=%#warningmsg#
 set statusline+=%*
 
 set statusline+=%=      "left/right separator
-set statusline+=%{fugitive#statusline()}\  "current git branch
+" set statusline+=%{fugitive#statusline()}\  "current git branch
 set statusline+=%{v:register}\             "currently active register
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L\  "cursor line/total lines
 set statusline+=(%P)    "percent through file
+set statusline+=%2*%{GitBranchStatusline()}%*  "current git branch
 
+function GitBranchStatusline()
+  let w:branch = FugitiveHead()
+  if (w:branch == '')
+    return ''
+  else
+    return ' [' . w:branch . '] '
+  end if
+endfunction
 
 " vim-autoformat
 nmap <Leader>ff :Autoformat<CR>
