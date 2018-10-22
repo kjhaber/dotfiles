@@ -74,16 +74,18 @@ x
 y - Yank to system clipboard
 z - Zoom (ZoomWinTab)
 / - search (fzf + ripgrep) (same as <leader>[t )
+  // -- search text (all files under vim pwd - on enter, uses loclist)
+  /b -- search buffers
+  /f -- search files
+  /h -- search history
+  /l -- search lines (current file)
+  /t -- search text (all files under vim pwd - live fuzzy match)
 space - visual select current line (why?)
-- - horizontal split
-| - vertical split
+- - horizontal split (:Sexplore)
+| - vertical split (:Vexplore)
+{
 }
 [
-  [b -- search buffers
-  [f -- search files
-  [h -- search history
-  [l -- search lines (current file)
-  [[ -- search lines (current file)
-  [t -- search text (all files under vim pwd)
+]
 = - indent entire file
 

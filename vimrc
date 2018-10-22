@@ -484,12 +484,12 @@ command! -bang -nargs=* Rg
 
 nnoremap <C-p> :FZF<CR>
 nmap <Leader>/ :Ag<Space>
-nmap <Leader>[b :Buffers<CR>
-nmap <Leader>[f :Files<CR>
-nmap <Leader>[h :History<CR>
-nmap <Leader>[l :Lines<CR>
-nmap <Leader>[[ :Lines<CR>
-nmap <Leader>[t :Rg<CR>
+nmap <Leader>// :Ag<Space>
+nmap <Leader>/b :Buffers<CR>
+nmap <Leader>/f :Files<CR>
+nmap <Leader>/h :History<CR>
+nmap <Leader>/l :Lines<CR>
+nmap <Leader>/t :Rg<CR>
 
 " Tabularize
 " 'align' mappings
