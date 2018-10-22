@@ -173,6 +173,7 @@ set colorcolumn=81
 highlight ColorColumn guibg=#102535
 set splitbelow
 set splitright
+set scrolloff=6
 
 syntax enable
 
@@ -395,6 +396,11 @@ nmap <Leader>aa :ALEToggle<CR>
 nmap <Leader>af :ALEFix<CR>
 nmap <Leader>an <Plug>(ale_next_wrap)
 nmap <Leader>ap <Plug>(ale_previous_wrap)
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'ruby': ['rubocop']
+\}
 
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
