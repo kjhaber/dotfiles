@@ -28,6 +28,7 @@ vmap <Leader>b. :'<,'>call ChangeBullet('..')<CR>
 
 nmap <Leader>bb :call ToggleBullet()<CR>
 vmap <Leader>bb :'<,'>call ToggleBullet()<CR>
+imap <C-b> <C-o>:call ToggleBullet()<CR>
 
 " Bullet indent/outdent with toggle
 nmap <Leader>bi :><CR>:call ToggleBullet()<CR>
