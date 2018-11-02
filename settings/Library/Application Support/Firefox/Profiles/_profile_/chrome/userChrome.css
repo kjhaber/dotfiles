@@ -1,0 +1,20 @@
+/* Hide Tree Style Tabs menu in sidebar */
+#sidebar-header {
+  display: none;
+}
+
+/* Make only selected tab visible, fill width of title bar */
+#TabsToolbar tab {
+    display: none;
+}
+
+#TabsToolbar tab[selected="true"] {
+  display: -moz-box;
+  max-width: none !important;
+}
+
+/* Hide close button */
+#TabsToolbar .tab-close-button {
+  display: none;
+}
+
