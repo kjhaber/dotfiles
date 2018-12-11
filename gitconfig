@@ -19,7 +19,7 @@
   glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   recommit = commit --amend --no-edit
   s = status
-  stash-all = stash save --include-untracked
+  stash-all = stash push --include-untracked
   tunein = update-index --no-assume-unchanged
   tuneout = update-index --assume-unchanged
   tunelist = !git ls-files -v | grep "^[[:lower:]]"
