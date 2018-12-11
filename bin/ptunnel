@@ -1,0 +1,14 @@
+#!/bin/sh
+# Starts an ssh tunnel to a host from localhost, using
+# the same port on both local and remote.
+HOST=$1
+PORT=$2
+
+if [ -z "$HOST" ] || [ -z "$PORT" ] ; then
+  echo 'Usage: ptunnel <host> <port>'
+  exit
+fi
+
+echo "Forwarding local port $PORT to $HOST:$PORT"
+ssh -L "$PORT:127.0.0.1:$PORT" "$HOST" -N
+
