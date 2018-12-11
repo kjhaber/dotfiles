@@ -21,7 +21,7 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-fpath=($HOME/.zsh/completion $fpath)
+fpath=($DOTFILE_HOME/zsh/completion $DOTFILE_LOCAL_HOME/zsh/completion $fpath)
 compinit
 colors
 
