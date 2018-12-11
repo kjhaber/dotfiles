@@ -122,26 +122,6 @@ if [[ ! -z "$EXT_REPO_DIR" ]]; then
   source "$EXT_REPO_DIR/tmuxinator/completion/tmuxinator.zsh"
 fi
 
-# nvm is a handy thing when I'm actively working with Node on projects, but it
-# slows down shell startup (including new tmux splits/windows) noticeably.  Using
-# lazy init to minimize this drawback.  Using approach from
-# https://www.reddit.com/r/node/comments/4tg5jg/lazy_load_nvm_for_faster_shell_start/d5ib9fs/
-# by way of http://broken-by.me/lazy-load-nvm/
-declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
-
-NODE_GLOBALS+=("node")
-NODE_GLOBALS+=("nvm")
-
-load_nvm () {
-  export NVM_DIR=~/.nvm
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-}
-
-for cmd in "${NODE_GLOBALS[@]}"; do
-  eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
-done
-
-
 # finally, load external configs
 for file in $DOTFILE_HOME/zsh/bin/*.zsh; do
   source "$file"
