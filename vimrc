@@ -433,6 +433,9 @@ nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 
+" vimwiki filetype sometimes changes to 'conf' when splitting window
+nmap <Leader>wf set filetype=vimwiki<CR>
+
 " Initialize my daily diary entry
 " -- creates two sections, 'JOURNAL' and 'TODO'
 " -- creates mark j for Journal section

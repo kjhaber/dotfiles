@@ -72,6 +72,7 @@ w
   wi         -- vimwiki diary index
   w<leader>i -- vimwiki diary index generate links
   wc         -- open calendar (enter on date opens diary)
+  wf         -- set filetype=vimwiki (vimwiki filetype sometimes changes to 'conf' when splitting window)
 x
 y - Yank to system clipboard
 z - Zoom (ZoomWinTab)
