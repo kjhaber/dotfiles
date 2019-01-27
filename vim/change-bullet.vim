@@ -33,6 +33,8 @@ imap <C-b> <C-o>:call ToggleBullet()<CR>
 " Bullet indent/outdent with toggle
 nmap <Leader>bi :><CR>:call ToggleBullet()<CR>
 nmap <Leader>bo :<<CR>:call ToggleBullet()<CR>
+nmap <Leader>bI :><CR>:call ToggleBullet()<CR>A
+nmap <Leader>bO :<<CR>:call ToggleBullet()<CR>A
 
 vmap <Leader>bi :'<,'>><CR>:'<,'>call ToggleBullet()<CR>
 vmap <Leader>bo :'<,'><<CR>:'<,'>call ToggleBullet()<CR>

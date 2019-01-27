@@ -12,7 +12,9 @@ a - Align (Tabularize) or ALE
 b
   bb -- toggle bullet character between * and -
   bi -- indent and toggle bullet
+  bI -- indent and toggle bullet, enter insert mode
   bo -- outdent and toggle bullet
+  bO -- outdent and toggle bullet, enter insert mode
   b- -- change bullet character to -
   b* -- change bullet character to * 
   b> -- change bullet character to >
