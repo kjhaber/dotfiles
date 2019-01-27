@@ -11,9 +11,17 @@ export KEYTIMEOUT=1
 
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH # toying around with Rust a little lately...
+
+# Enable nix package manager if present
+test -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" && source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+
 export PATH=$DOTFILE_HOME/bin:$PATH
+
+# Environment-specific overrides for binaries should come first in PATH
 export PATH=$DOTFILE_LOCAL_HOME/bin:$PATH
+
+# Allow environment-specific PATH overrides in dedicated file
+test -f "${DOTFILE_LOCAL_HOME}/zshrc-local.path" && source "${DOTFILE_LOCAL_HOME}/zshrc-local.path"
 
 bindkey -v
 
