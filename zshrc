@@ -2,6 +2,9 @@
 # Declares variables and settings useful for any interactive usage of zsh, such
 # as prompt, shortcuts, zsh feature settings, etc.
 
+# replace process with nix-env installed zsh version if present
+test -f "${DOTFILE_HOME}/zsh/load-from-nix.zsh" && source "${DOTFILE_HOME}/zsh/load-from-nix.zsh"
+
 # local environment-specific config
 test -f "${DOTFILE_LOCAL_HOME}/zshrc-local.before" && source "${DOTFILE_LOCAL_HOME}/zshrc-local.before"
 
