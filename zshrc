@@ -2,6 +2,9 @@
 # Declares variables and settings useful for any interactive usage of zsh, such
 # as prompt, shortcuts, zsh feature settings, etc.
 
+# local environment-specific config
+test -f "${DOTFILE_LOCAL_HOME}/zshrc-local.before" && source "${DOTFILE_LOCAL_HOME}/zshrc-local.before"
+
 export EDITOR=nvim
 export CLICOLOR=1
 export KEYTIMEOUT=1
@@ -85,10 +88,7 @@ alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 # Source separate file for environment-specific aliases, as these differ between
 # work and home.  I probably still need a better approach for separating my
 # environment-specific settings.
-source $HOME/.zsh_aliases
-if [[ -f "$DOTFILE_LOCAL_HOME/zsh_aliases_local" ]] then
-  source "$DOTFILE_LOCAL_HOME/zsh_aliases_local"
-fi
+test -f "${DOTFILE_LOCAL_HOME}/zshrc-local.aliases" && source "${DOTFILE_LOCAL_HOME}/zshrc-local.aliases"
 
 # Enable various tools
 # thefuck is helpful for autocorrecting typos. I add the 'doh' alias to be a
@@ -134,4 +134,7 @@ fi
 
 # Enable iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# local environment-specific config
+test -f "${DOTFILE_LOCAL_HOME}/zshrc-local.after" && source "${DOTFILE_LOCAL_HOME}/zshrc-local.after"
 

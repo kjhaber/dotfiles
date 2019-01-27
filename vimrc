@@ -1,3 +1,14 @@
+
+" Conditionally source a file if it exists and is readable
+function SourceIfReadable(filename)
+  if filereadable(a:filename)
+    exec 'source ' . a:filename
+  endif
+endfunction
+
+
+call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-local.before')
+
 set encoding=utf-8
 scriptencoding utf-8
 set shell=bash
@@ -11,13 +22,6 @@ let g:python3_host_prog='/usr/local/bin/python3'
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
-
-" Conditionally source a file if it exists and is readable
-function SourceIfReadable(filename)
-  if filereadable(a:filename)
-    exec 'source ' . a:filename
-  endif
-endfunction
 
 " Vim-Plug
 call plug#begin('~/.vim/plugged')
@@ -89,7 +93,7 @@ Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 
-call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-plugin-local')
+call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-local.plugin')
 
 call plug#end()
 
@@ -566,5 +570,5 @@ let g:AutoCloseExpandSpace = 0 " Make iabbrev work again with vim-autoclose
 iabbrev Ketih Keith
 
 " Define any local-specific mappings/abbreviations
-call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-local')
+call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-local.after')
 
