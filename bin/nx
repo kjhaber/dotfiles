@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Script to put easier CLI on top of Nix package manager
+# (https://nixos.org/nix/)
+
+case "$1" in
+  install ) shift;   nix-env --install "$@" ;;
+  uninstall ) shift; nix-env --uninstall "$@" ;;
+  update ) shift;    nix-channel --update nixpkgs && nix-env -u '*' ;;
+  clean ) shift;     nix-collect-garbage -d ;;
+  search ) shift;    nix-env -qa ".*$1.*" ;;
+  list ) shift;
+    PACKAGES=$(nix-env --query)
+    if [ -z "$1" ]; then
+      echo "$PACKAGES"
+    else
+      echo "$PACKAGES" | grep "$@"
+    fi
+    ;;
+  rollback ) shift;  nix-env --rollback ;;
+  testdrive ) shift; nix-shell --packages "$@" ;;
+  * )                echo "Unknown command: '$1'" ;;
+esac
+
