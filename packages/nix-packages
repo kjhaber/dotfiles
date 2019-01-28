@@ -1,0 +1,21 @@
+(installed with Nix)
+calc
+cowsay
+curl
+entr
+git
+jq
+neovim
+reattach-to-user-namespace
+ripgrep
+thefuck
+tmux
+tree
+zsh
+
+
+(does NOT appear to work when installed with Nix on MacOS)
+antibody
+yank [tries to use x windows clipboard, probably needs to be built with special options]
+
+
