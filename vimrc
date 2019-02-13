@@ -26,6 +26,7 @@ endif
 " Vim-Plug
 call plug#begin('~/.vim/plugged')
 
+Plug 'AndrewRadev/linediff.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Julian/vim-textobj-variable-segment'
 Plug 'MarcWeber/vim-addon-mw-utils'
