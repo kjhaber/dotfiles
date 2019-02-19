@@ -424,7 +424,12 @@ vmap _ S_
 
 " vim-racer
 let g:racer_cmd = '~/.cargo/bin/racer'
+let g:racer_experimental_completer = 1
 let $RUST_SRC_PATH='~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+
+" rust.vim
+let g:rustfmt_autosave = 1
+let g:rust_clip_command = 'pbcopy'
 
 " vim-startify
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
