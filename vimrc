@@ -108,6 +108,9 @@ if has("termguicolors")
   set termguicolors
 endif
 colorscheme molokai
+" slight adjustment to relative line number color (too lazy to fork molokai)
+autocmd ColorScheme * highlight LineNr guifg=#758088
+
 augroup colors
   autocmd FileType vimwiki colorscheme gruvbox
 augroup END
