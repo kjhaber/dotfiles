@@ -393,18 +393,26 @@ nmap <Leader>ff :Autoformat<CR>
 nmap <Leader>fi mzgg=G`z
 
 " ALE
-let g:ale_lint_on_enter = 0
-nnoremap [l :lprevious<CR>
-nnoremap ]l :lnext<CR>
-nmap <Leader>aa :ALEToggle<CR>
-nmap <Leader>af :ALEFix<CR>
-nmap <Leader>an <Plug>(ale_next_wrap)
-nmap <Leader>ap <Plug>(ale_previous_wrap)
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'ruby': ['rubocop']
+\   'css': ['prettier'],
+\   'html': ['tidy'],
+\   'javascript': ['eslint', 'prettier'],
+\   'ruby': ['rubocop'],
+\   'rust': ['rustfmt'],
+\   'typescript': ['eslint', 'prettier']
 \}
+let g:ale_linters = {
+\   'rust': ['cargo']
+\}
+let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
+let g:ale_rust_rls_toolchain = 'stable'
+
+nmap <Leader>aa :ALEToggle<CR>
+nmap <Leader>af :ALEFix<CR>
 
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
