@@ -580,6 +580,7 @@ call SourceIfReadable($DOTFILE_HOME . '/vim/change-bullet.vim')
 
 " put Simplenote creds into separate file for simplenote.vim plugin
 call SourceIfReadable($DOTFILE_LOCAL_HOME . '/simplenoterc')
+let g:SimplenoteVertical=1
 
 " abbreviations
 let g:AutoCloseExpandSpace = 0 " Make iabbrev work again with vim-autoclose
