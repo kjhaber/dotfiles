@@ -38,7 +38,9 @@ h - Highlight toggle
 i
 j
   jd -- LSP Jump to Definition
+  ji -- LSP Jump to Implementation
   jr -- LSP Jump to References (find references)
+  jt -- LSP Jump to Type Definition
 k - redraw buffer/terminal
 l
   lf  -- LSP Format (range format when in visual mode)
@@ -46,6 +48,8 @@ l
   lr  -- LSP Rename
   lsd -- LSP Symbols: Document
   lwd -- LSP Symbols: Workspace
+  l?  -- LSP Status
+  l<space> -- LSP Code Action (Quick Fix)
 m - :Make
 n
   nn -- toggle line numbers

@@ -548,10 +548,21 @@ if executable('typescript-language-server')
         \ 'name': 'typescript-language-server',
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-        \ 'whitelist': ['typescript', 'javascript'],
+        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx'],
         \ })
     autocmd FileType typescript setlocal omnifunc=lsp#complete
     autocmd FileType javascript setlocal omnifunc=lsp#complete
+    autocmd FileType javascript.jsx setlocal omnifunc=lsp#complete
+  augroup end
+endif
+if executable('rls')
+  augroup lsp_rs
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+    autocmd FileType rust setlocal omnifunc=lsp#complete
   augroup end
 endif
 if executable('solargraph')
@@ -564,16 +575,22 @@ if executable('solargraph')
     autocmd FileType ruby setlocal omnifunc=lsp#complete
   augroup end
 endif
-nmap <Leader>ji :LspImplementation<CR>
-nmap <Leader>jd :LspDefinition<CR>
-nmap <Leader>jr :LspReferences<CR>
-nmap <Leader>lf :LspDocumentFormat<CR>
-vmap <Leader>lf :LspDocumentRangeFormat<CR>
-nmap <Leader>ll :LspHover<CR>
-nmap <Leader>lr :LspRename<CR>
-nmap <Leader>lsd :LspDocumentSymbol<CR>
-nmap <Leader>lwd :LspWorkspaceSymbol<CR>
 
+nnoremap <Leader>jd :LspDefinition<CR>
+nnoremap <Leader>ji :LspImplementation<CR>
+nnoremap <Leader>jr :LspReferences<CR>
+nnoremap <Leader>jt :LspTypeDefinition<CR>
+nnoremap <Leader>l<Space> :LspCodeAction<CR>
+nnoremap <Leader>l? :LspStatus<CR>
+nnoremap <Leader>lf :LspDocumentFormat<CR>
+vnoremap <Leader>lf :LspDocumentRangeFormat<CR>
+nnoremap <Leader>ll :LspHover<CR>
+nnoremap <Leader>lr :LspRename<CR>
+nnoremap <Leader>lsd :LspDocumentSymbol<CR>
+nnoremap <Leader>lsw :LspWorkspaceSymbol<CR>
+
+nmap <silent> <Leader>jp <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>jn <Plug>(ale_next_wrap)
 
 " change bullet list character
 call SourceIfReadable($DOTFILE_HOME . '/vim/change-bullet.vim')
