@@ -68,7 +68,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'racer-rust/vim-racer'
 Plug 'rking/ag.vim'
-Plug 'mckinnsb/rust.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sirver/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
