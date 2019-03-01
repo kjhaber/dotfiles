@@ -117,7 +117,6 @@ augroup END
 
 set background=dark
 set guifont=Inconsolata:h12
-let g:airline_powerline_fonts = 1
 
 set laststatus=2
 if $TERM_PROGRAM =~# 'iTerm'
@@ -471,15 +470,23 @@ nmap <Leader>wc :Calendar<CR><C-w>5>0t
 map y <Plug>(highlightedyank)
 let g:highlightedyank_highlight_duration = 300
 
-" omnicomplete and vim-mucomplete
+" omnicomplete
 set omnifunc=syntaxcomplete#Complete
+set completeopt+=menu
 set completeopt+=menuone
 set completeopt+=noinsert
 set completeopt+=preview
-inoremap <C-Space> <C-x><C-o>
-inoremap <C-@> <C-x><C-o>
-" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" toggle completion with ctrl-space (even in normal mode)
+inoremap <expr> <silent> <C-Space> (pumvisible() ? "\<Esc>" : "\<C-\>\<C-O>:ALEComplete\<CR>")
+nnoremap <silent> <C-Space> a<C-\><C-o>:ALEComplete<CR>
+
+" make Enter, right arrow, and tab work more like an IDE
+inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
+inoremap <expr> <Right> (pumvisible() ? "\<C-y>" : "\<CR>")
+inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
+inoremap <expr> <S-Tab> (pumvisible() ? "\<C-p>" : "\<S-Tab>")
+
 
 " Change mapping of zoomwintab plugin (default is <C-w>o, but I want that to
 " still have its default behavior of making current window the only open one)
