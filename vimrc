@@ -481,9 +481,8 @@ set completeopt+=preview
 inoremap <expr> <silent> <C-Space> (pumvisible() ? "\<Esc>" : "\<C-\>\<C-O>:ALEComplete\<CR>")
 nnoremap <silent> <C-Space> a<C-\><C-o>:ALEComplete<CR>
 
-" make Enter, right arrow, and tab work more like an IDE
+" make Enter and tab work more like I'm used to from IDEs
 inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
-inoremap <expr> <Right> (pumvisible() ? "\<C-y>" : "\<CR>")
 inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
 inoremap <expr> <S-Tab> (pumvisible() ? "\<C-p>" : "\<S-Tab>")
 
