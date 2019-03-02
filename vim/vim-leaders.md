@@ -95,4 +95,5 @@ space - visual select current line (why?)
 [
 ]
 = - indent entire file
+\ - toggle paste mode
 
