@@ -1,13 +1,10 @@
 
-" Conditionally source a file if it exists and is readable
-function SourceIfReadable(filename)
-  if filereadable(a:filename)
-    exec 'source ' . a:filename
-  endif
-endfunction
+" Load files conditionally.  This allows separating the core configuration
+" that is the same on all machines from environment-specific config (like
+" OS-specific, work vs home config, etc.).
+exec 'source ' . $DOTFILE_HOME . '/vim/source-if-readable.vim'
 
-
-call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-local.before')
+call SourceLocalDotfile('/vimrc-local.before')
 
 set encoding=utf-8
 scriptencoding utf-8
@@ -93,7 +90,7 @@ Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 
-call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-local.plugin')
+call SourceLocalDotfile('/vimrc-local.plugin')
 
 call plug#end()
 
@@ -461,7 +458,7 @@ command! InitDiary execute "normal! ggi## JOURNAL<cr>* <esc>mji<cr><cr><cr>## TO
 command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><esc>kkkA "
 
 " UML Arrow Swap: change position of arrow in PlantUML doc
-call SourceIfReadable($DOTFILE_HOME . '/vim/plantuml-arrow-swap.vim')
+call SourceDotfile('/vim/plantuml-arrow-swap.vim')
 
 " calendar.vim
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
@@ -602,10 +599,10 @@ nmap <silent> <Leader>jp <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>jn <Plug>(ale_next_wrap)
 
 " change bullet list character
-call SourceIfReadable($DOTFILE_HOME . '/vim/change-bullet.vim')
+call SourceDotfile('/vim/change-bullet.vim')
 
 " put Simplenote creds into separate file for simplenote.vim plugin
-call SourceIfReadable($DOTFILE_LOCAL_HOME . '/simplenoterc')
+call SourceLocalDotfile('/simplenoterc')
 let g:SimplenoteVertical=1
 
 " abbreviations
@@ -613,5 +610,5 @@ let g:AutoCloseExpandSpace = 0 " Make iabbrev work again with vim-autoclose
 iabbrev Ketih Keith
 
 " Define any local-specific mappings/abbreviations
-call SourceIfReadable($DOTFILE_LOCAL_HOME . '/vimrc-local.after')
+call SourceLocalDotfile('/vimrc-local.after')
 
