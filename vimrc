@@ -142,8 +142,8 @@ set title
 let &titleold=$USER . '@' . hostname() . ' | ' . fnamemodify(getcwd(), ':t')
 set ruler
 
-" set autochdir
-command CDC cd %:p:h
+" Instead of `set autochdir`, shortcut to 'cd currentdir'
+command! CDC cd %:p:h
 
 set number
 set relativenumber
@@ -289,7 +289,7 @@ function! ToggleNumber()
         set number
         set relativenumber
     endif
-endfunc
+endfunction
 nmap <Leader>nn :call ToggleNumber()<CR>
 
 " toggle between absolute number and relativenumber
@@ -300,7 +300,7 @@ function! ToggleNumberRel()
     else
         set relativenumber
     endif
-endfunc
+endfunction
 nmap <Leader>nr :call ToggleNumberRel()<CR>
 
 " strips trailing whitespace at the end of files
@@ -376,7 +376,7 @@ set statusline+=%l/%L\  "cursor line/total lines
 set statusline+=(%P)    "percent through file
 set statusline+=%2*%{GitBranchStatusline()}%*  "current git branch
 
-function GitBranchStatusline()
+function! GitBranchStatusline()
   let w:branch = FugitiveHead()
   if (w:branch == '')
     return ''

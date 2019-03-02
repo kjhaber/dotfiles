@@ -1,9 +1,9 @@
 " change bullet list character
-function ChangeBullet(newChar)
+function! ChangeBullet(newChar)
   call setline(line('.'), substitute(getline('.'), '\v^( *)([^ ]+)(.*)$', '\1'.a:newChar.'\3', ''))
 endfunction
 
-function ToggleBullet()
+function! ToggleBullet()
   " switch between '*' and '-' bullet characters
   if match(getline('.'), '\v^( *)\*') != -1
     call ChangeBullet('-')
