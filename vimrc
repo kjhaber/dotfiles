@@ -550,6 +550,8 @@ nmap <Leader>vq :VimuxCloseRunner<CR>
 let g:vim_json_syntax_conceal = 0
 
 " vim-lsp
+let g:lsp_virtual_text_enabled = 0
+
 if executable('typescript-language-server')
   augroup lsp_ts
     autocmd User lsp_setup call lsp#register_server({
