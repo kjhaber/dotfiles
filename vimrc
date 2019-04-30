@@ -418,6 +418,7 @@ nmap <Leader>af :ALEFix<CR>
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
+let g:indentLine_fileTypeExclude = ['markdown']
 nnoremap ** :exe "normal ysiW*"<cr>
 vmap * S*
 nnoremap __ :exe "normal ysiW_"<cr>
