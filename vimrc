@@ -185,6 +185,12 @@ set splitbelow
 set splitright
 set scrolloff=6
 
+" Neovim-specific options
+if has("nvim")
+  " Show result of :s command while typing
+  set inccommand=nosplit
+endif
+
 syntax enable
 
 " from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
