@@ -104,6 +104,13 @@ set t_Co=256
 if has("termguicolors")
   set termguicolors
 endif
+
+" Set Vim-specific sequences for RGB colors
+" (This seems to be needed for vim to display colors in my setup, neovim is
+" fine without it)
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 colorscheme molokai
 " slight adjustment to relative line number color (too lazy to fork molokai)
 autocmd ColorScheme * highlight LineNr guifg=#758088
@@ -116,7 +123,7 @@ set background=dark
 set guifont=Inconsolata:h12
 
 set laststatus=2
-if $TERM_PROGRAM =~# 'iTerm'
+if $TERM_PROGRAM =~# 'iTerm' && has("nvim")
   let &t_SI = '\<Esc>]50;CursorShape=1\x7' " Vertical bar in insert mode
   let &t_EI = '\<Esc>]50;CursorShape=0\x7' " Block in normal mode
 endif
