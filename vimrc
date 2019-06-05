@@ -8,6 +8,7 @@ call SourceLocalDotfile('/vimrc-local.before')
 
 set encoding=utf-8
 scriptencoding utf-8
+set nomodeline
 set shell=bash
 
 " Setting to allow use with 'TerminalVim.app', a Mac AppleScript app that opens
