@@ -33,9 +33,11 @@ g - fuGitive
   gs -- git status
   gc -- git commit
 h - Highlight toggle
-  hh -- highlight toggle (fast)
-  hs -- gitgutter Hunk Stage
+  hb -- gitgutter Hunk Back (previous)
+  hf -- gitgutter Hunk Forward (next)
+  hh -- highlight toggle (faster)
   hr -- gitgutter Hunk Revert
+  hs -- gitgutter Hunk Stage
 i
 j
   jd -- LSP Jump to Definition

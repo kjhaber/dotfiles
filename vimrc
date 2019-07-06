@@ -272,10 +272,10 @@ nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
 
 " gitgutter
-" (Could swear these mappings used to work. Maybe conflicting with my other
-" <Leader>h mappings, or a recent gitgutter change.)
 nnoremap <Leader>hr :GitGutterUndoHunk<CR>
 nnoremap <Leader>hs :GitGutterStageHunk<CR>
+nnoremap <Leader>hb :GitGutterPrevHunk<CR>
+nnoremap <Leader>hf :GitGutterNextHunk<CR>
 
 " update Gitgutter signs on file save
 autocmd BufWritePost * GitGutter
