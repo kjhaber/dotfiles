@@ -485,6 +485,10 @@ command! InitDiary execute "normal! ggi## JOURNAL<cr>* <esc>mji<cr><cr><cr>## TO
 " Initialize PlantUml document
 command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><esc>kkkA "
 
+" Init a markdown code block
+nnoremap <Leader>` i```<CR><CR>```<ESC>ki
+vnoremap <Leader>` "zc```<CR>```<ESC>k"zp
+
 " UML Arrow Swap: change position of arrow in PlantUML doc
 call SourceDotfile('vim/plantuml-arrow-swap.vim')
 

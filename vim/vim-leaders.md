@@ -1,5 +1,6 @@
 ## Vim Leader Mappings
 
+```
 a - Align (Tabularize) or ALE
   a| -- align using bar character
   a: -- align using colon character
@@ -96,4 +97,6 @@ space - visual select current line (why?)
 ]
 = - indent entire file
 \ - toggle paste mode
+` - insert markdown code block
+```
 
