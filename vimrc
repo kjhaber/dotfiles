@@ -1,8 +1,19 @@
 
+" Set dotfile_home and dotfile_local_home as Vim variables in case vim is
+" launched outside normal shell (e.g. TerminalVim.app helper)
+let g:dotfile_home = $DOTFILE_HOME
+if empty(g:dotfile_home)
+  let g:dotfile_home = $HOME . '/.config/dotfiles'
+endif
+let g:dotfile_local_home = $DOTFILE_LOCAL_HOME
+if empty(g:dotfile_local_home)
+  let g:dotfile_local_home = $HOME . '/.config/dotfiles-local'
+endif
+
 " Load files conditionally.  This allows separating the core configuration
 " that is the same on all machines from environment-specific config (like
 " OS-specific, work vs home config, etc.).
-exec 'source ' . $DOTFILE_HOME . '/vim/source-if-readable.vim'
+exec 'source ' . g:dotfile_home . '/vim/source-if-readable.vim'
 
 call SourceLocalDotfile('vimrc-local.before')
 

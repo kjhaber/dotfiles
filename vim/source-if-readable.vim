@@ -6,10 +6,10 @@ function! SourceIfReadable(filename)
 endfunction
 
 function! SourceDotfile(filename)
-  call SourceIfReadable($DOTFILE_HOME . '/' . a:filename)
+  call SourceIfReadable(g:dotfile_home . '/' . a:filename)
 endfunction
 
 function! SourceLocalDotfile(filename)
-  call SourceIfReadable($DOTFILE_LOCAL_HOME . '/' . a:filename)
+  call SourceIfReadable(g:dotfile_local_home . '/' . a:filename)
 endfunction
 
