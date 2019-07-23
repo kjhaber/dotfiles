@@ -10,6 +10,7 @@ gen
 .gwt
 gwt-unitCache
 *.GwtDefinition
+.metadata
 
 *.class
 *.o
@@ -35,4 +36,8 @@ ehthumbs.db
 
 Thumbs.db
 .sw*
+
+.tmdir
+/.apt_generated/
+/.apt_generated_tests/
 
