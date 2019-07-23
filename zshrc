@@ -86,6 +86,11 @@ alias cddiary="cd $VIMWIKI_DIARY_DIR"
 alias cdnotes="cd $DOC_DIR/notes"
 alias cdtodo="cd $TODO_DIR"
 
+alias mci="mvn clean install"
+alias mcp="mvn clean package"
+alias mcsr="mvn clean spring-boot:run"
+alias mvn-clean-all='find . -name "pom.xml" -execdir mvn clean \;'
+
 # cd to git root
 alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
