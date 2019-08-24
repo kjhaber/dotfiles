@@ -1,4 +1,5 @@
 #!/bin/bash
-# Modified from the script installed from `brew install plantuml` but with the `-spash:no` argument added
-PLANTUML_JAR_PATH=`find /usr/local/Cellar/plantuml -name plantuml.jar | tail -n 1`
-GRAPHVIZ_DOT="/usr/local/opt/graphviz/bin/dot" exec java -splash:no -jar $PLANTUML_JAR_PATH "$@"
+# Modified from the script installed from `brew install plantuml` but with `-spash:no` and `java.awt.headless` arguments added
+PLANTUML_JAR_PATH=$(find /usr/local/Cellar/plantuml -name plantuml.jar | tail -n 1)
+GRAPHVIZ_DOT="/usr/local/opt/graphviz/bin/dot" exec java -Djava.awt.headless=true -splash:no -jar "$PLANTUML_JAR_PATH" "$@"
+
