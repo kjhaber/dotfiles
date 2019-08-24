@@ -1,0 +1,28 @@
+#!/bin/sh
+# watch-plantuml <.uml filename>
+
+# Dependencies:
+# - realpath (brew install coreutils)
+# - entr (brew install entr)
+# - reload-browser script (also from entr project)
+# - Firefox browser
+
+# macOS Mojave needs extra permission granted to allow reload-browser to use
+# AppleScript events too.
+
+UML_FILE="$1"
+PNG_FILE=$(echo "$UML_FILE" | sed -E 's/(.+)\.uml$/\1.png/')
+PNG_FILE=$(realpath "$PNG_FILE")
+PNG_URL="file://$PNG_FILE"
+
+if [ "$UML_FILE" = "$PNG_FILE" ]; then
+  echo "Input filename must end with '.uml'"
+  exit 1
+fi
+
+echo "Watching UML file: $UML_FILE -> $PNG_FILE"
+touch "$UML_FILE"
+plantuml "$UML_FILE"
+open -a /Applications/Firefox.app "$PNG_URL" &
+echo "$UML_FILE" | entr -s "echo \"Updating $UML_FILE\" && plantuml \"$UML_FILE\" && $DOTFILE_HOME/bin/reload-browser Firefox && echo 'Done'"
+
