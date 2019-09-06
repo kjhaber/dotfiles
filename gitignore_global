@@ -40,4 +40,5 @@ Thumbs.db
 .tmdir
 /.apt_generated/
 /.apt_generated_tests/
+.java_version
 
