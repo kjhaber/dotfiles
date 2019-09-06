@@ -39,6 +39,8 @@
 
 [rebase]
 	autostash = true
+[rerere]
+  enabled = true
 [pull]
 	ff = only
 [include]
