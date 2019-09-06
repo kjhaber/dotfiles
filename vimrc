@@ -471,6 +471,7 @@ let g:vimwiki_global_ext = 0
 let g:vimwiki_url_maxsave = 0
 let g:vimwiki_use_mouse = 1
 let g:vimwiki_auto_chdir = 1
+let g:vimwiki_hl_cb_checked = 2
 nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
