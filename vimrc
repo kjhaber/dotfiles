@@ -235,8 +235,10 @@ nmap Q @q
 vmap <Leader>p "_d"+P
 vmap <Leader>P "_d"+P
 
-nmap <Leader><Leader> V
-nmap <Leader><Space> V
+" Reset on 'space-space'.  nopaste, turn off highlight.  Inspired by clipboard
+" paste sometimes leaving vim in paste mode.
+nmap <Leader><Leader> :nohlsearch<CR>:set nopaste<CR>:echo ''<CR>
+nmap <Leader><Space> :nohlsearch<CR>:set nopaste<CR>:echo ''<CR>
 
 " used with vim-expand-region plugin
 vmap v <Plug>(expand_region_expand)
