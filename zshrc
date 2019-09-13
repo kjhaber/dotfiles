@@ -151,6 +151,10 @@ if [[ ! -z "$EXT_REPO_DIR" ]]; then
   source "$EXT_REPO_DIR/tmuxinator/completion/tmuxinator.zsh"
 fi
 
+# bat
+export BAT_THEME="OneHalfDark"
+export BAT_STYLE=numbers,header,changes
+
 # finally, load external configs
 for file in $DOTFILE_HOME/zsh/bin/*.zsh; do
   source "$file"
