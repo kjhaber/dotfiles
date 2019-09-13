@@ -76,7 +76,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'racer-rust/vim-racer'
-Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sirver/ultisnips'
@@ -359,22 +358,6 @@ let g:netrw_altv=1  " open files on right
 let g:NERDTreeHijackNetrw = 0
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
-" The Silver Searcher
-" (transitioning to fzf + ripgrep, commenting for now)
-" let g:ctrlp_use_caching = 0
-" if executable('ag')
-"   " Use ag over grep
-"   set grepprg=ag\ --nogroup\ --nocolor
-
-"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-"   " ag is fast enough that CtrlP doesn't need to cache
-" endif
-
-"nmap <Leader>/ :Ag<Space>
-
-
 " vim-jsx options
 let g:jsx_ext_required = 0
 
@@ -546,14 +529,14 @@ let g:UltiSnipsJumpBackwardTrigger='˙'
 " Search file contents with <leader>/
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=never '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
 nnoremap <C-p> :FZF<CR>
-nmap <Leader>/ :Ag<Space>
-nmap <Leader>// :Ag<Space>
+nmap <Leader>/ :Rg<CR>
+nmap <Leader>// :Rg<CR>
 nmap <Leader>/b :Buffers<CR>
 nmap <Leader>/f :Files<CR>
 nmap <Leader>/h :History<CR>
