@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Live preview of shell command pipeline
+# Example: `cat myfile | shellrepl`
+# Type e.g. `grep "find" | sed 's/find/replace/g' in fzf prompt.  See the result
+# of the commands applied against 'myfile' while you type.
+
+# Inspired by https://paweldu.dev/posts/fzf-live-repl/ (https://news.ycombinator.com/item?id=20455857)
+
+# BE CAREFUL not to enter destructive commands like 'rm'!
+
+# Create temp file for stdin content, make sure it's deleted when script closes
+rm -f /tmp/shellrepl-stdin-tmp
+tmpfile=$(mktemp /tmp/shellrepl-stdin-tmp)
+trap 'rm -f -- "$tmpfile"' INT TERM HUP EXIT
+
+# Read stdin to temp file
+while read -r LINE
+do
+  printf '%s\n' "$LINE" >> "$tmpfile"
+done < "${1:-/dev/stdin}"
+
+# Run FZF preview with runpipe, which evaluates {q} expression against file content
+# The awk expression is to escape any '\n' typed into expression
+RESULT="$(echo '' | fzf --print-query --preview-window=down:99% --preview "runpipe '$tmpfile' {q}" | awk '{if (NR>1) {print line "\\\\n"} line=$0} END{print line}')"
+printf '%s\n' "$RESULT"
+
+if [ -f /usr/bin/pbcopy ] && [ -x /usr/bin/pbcopy ]; then
+  printf '%s' "$RESULT" | /usr/bin/pbcopy
+  echo "Expression copied to clipboard"
+fi
+

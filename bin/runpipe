@@ -1,0 +1,17 @@
+#!/bin/sh
+# For use with shellrepl
+
+TMPFILE="$1"
+PIPE_EXPR="$2"
+RESULT=$(/bin/sh -c "cat '$TMPFILE' | $PIPE_EXPR")
+
+if [ $? -eq 0 ]; then
+  echo "$RESULT"
+else
+  echo "(Error)"
+  echo
+  echo "Top 20 lines of input:"
+  echo "----"
+  head -n 20 "$1"
+fi
+
