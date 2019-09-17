@@ -26,11 +26,6 @@ export EXT_REPO_DIR="$CONFIG_DIR/repos"
 # On home machine $REMOTE_SYNC_DIR is a symlink to ~/Dropbox
 # At work it's a directory configured to sync with network drive
 export REMOTE_SYNC_DIR="$DOC_DIR/RemoteSync"
-export TODO_DIR="$REMOTE_SYNC_DIR/todo"
-if [[ ! -d "$REMOTE_SYNC_DIR" ]] then
-  echo "Warning: REMOTE_SYNC_DIR does not exist ($REMOTE_SYNC_DIR)"
-  export TODO_DIR="$HOME/.config/todo"
-fi
 
 export HOMEBREW_NO_ANALYTICS=1
 
