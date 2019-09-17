@@ -146,11 +146,6 @@ zstyle ':completion:*:ssh:*' hosts off
 alias t='/usr/local/bin/todo.sh -a -d "~/.todo.cfg"'
 compdef t='todo.sh'
 
-# tmuxinator
-if [[ ! -z "$EXT_REPO_DIR" ]]; then
-  source "$EXT_REPO_DIR/tmuxinator/completion/tmuxinator.zsh"
-fi
-
 # bat
 export BAT_THEME="OneHalfDark"
 export BAT_STYLE=numbers,header,changes
