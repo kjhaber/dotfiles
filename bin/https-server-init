@@ -1,0 +1,13 @@
+#!/bin/sh
+HTTPS_SERVER_CONF_DIR="$HOME/.config/https-server"
+HTTPS_SERVER_KEY="$HTTPS_SERVER_CONF_DIR/host.key"
+HTTPS_SERVER_CERT="$HTTPS_SERVER_CONF_DIR/host.cert"
+
+npm install -g http-server
+
+# create cert files
+mkdir -p "$HTTPS_SERVER_CONF_DIR"
+openssl genrsa 2048 > "$HTTPS_SERVER_KEY"
+chmod 400 "$HTTPS_SERVER_KEY"
+openssl req -new -x509 -nodes -sha256 -days 365 -key "$HTTPS_SERVER_KEY" -out "$HTTPS_SERVER_CERT"
+
