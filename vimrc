@@ -527,13 +527,6 @@ let g:UltiSnipsJumpBackwardTrigger='˙'
 " fzf
 " Search filenames with Ctrl-p
 " Search file contents with <leader>/
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=never '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
 nnoremap <C-p> :FZF<CR>
 nmap <Leader>/ :Rg<CR>
 nmap <Leader>// :Rg<CR>
