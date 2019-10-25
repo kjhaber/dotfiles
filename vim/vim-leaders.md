@@ -100,5 +100,7 @@ space - visual select current line (why?)
 = - indent entire file
 \ - toggle paste mode
 ` - insert markdown code block
+  `<space> -- insert markdown code block, set into insert mode (normal or visual mode)
+  `p -- insert current clipboard content inside markdown code block
 ```
 

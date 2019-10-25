@@ -475,6 +475,8 @@ command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><e
 
 " Init a markdown code block
 nnoremap <Leader>` i```<CR><CR>```<ESC>ki
+nnoremap <Leader>`<Space> i```<CR><CR>```<ESC>ki
+nnoremap <Leader>`p i```<CR><CR>```<ESC>k"+p
 vnoremap <Leader>` "zc```<CR>```<ESC>k"zp
 
 " UML Arrow Swap: change position of arrow in PlantUML doc
