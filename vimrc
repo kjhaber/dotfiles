@@ -37,6 +37,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'AndrewRadev/linediff.vim'
 Plug 'Chiel92/vim-autoformat'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Julian/vim-textobj-variable-segment'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Olical/vim-enmasse'
@@ -63,20 +64,19 @@ Plug 'kana/vim-textobj-underscore'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-user'
 Plug 'vimwiki/vimwiki'
-Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mattn/calendar-vim'
 Plug 'mhinz/vim-startify'
 Plug 'moll/vim-node'
 Plug 'morhetz/gruvbox'
 Plug 'mrtazz/simplenote.vim'
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sirver/ultisnips'
@@ -497,7 +497,8 @@ set completeopt+=noinsert
 set completeopt+=preview
 
 " toggle completion with ctrl-space (even in normal mode)
-inoremap <expr> <silent> <C-Space> (pumvisible() ? "\<Esc>" : "\<C-\>\<C-O>:ALEComplete\<CR>")
+" inoremap <expr> <silent> <C-Space> (pumvisible() ? "\<Esc>" : "\<C-\>\<C-O>:ALEComplete\<CR>")
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nnoremap <silent> <C-Space> a<C-\><C-o>:ALEComplete<CR>
 
 " make Enter and tab work more like I'm used to from IDEs
@@ -562,55 +563,29 @@ nmap <Leader>vq :VimuxCloseRunner<CR>
 " vim-json
 let g:vim_json_syntax_conceal = 0
 
-" vim-lsp
-let g:lsp_virtual_text_enabled = 0
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-if executable('typescript-language-server')
-  augroup lsp_ts
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx'],
-        \ })
-    autocmd FileType typescript setlocal omnifunc=lsp#complete
-    autocmd FileType javascript setlocal omnifunc=lsp#complete
-    autocmd FileType javascript.jsx setlocal omnifunc=lsp#complete
-  augroup end
-endif
-if executable('rls')
-  augroup lsp_rs
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-        \ 'whitelist': ['rust'],
-        \ })
-    autocmd FileType rust setlocal omnifunc=lsp#complete
-  augroup end
-endif
-if executable('solargraph')
-  augroup lsp_rb
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'whitelist': ['ruby'],
-        \ })
-    autocmd FileType ruby setlocal omnifunc=lsp#complete
-  augroup end
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
 
-nnoremap <Leader>jd :LspDefinition<CR>
-nnoremap <Leader>ji :LspImplementation<CR>
-nnoremap <Leader>jr :LspReferences<CR>
-nnoremap <Leader>jt :LspTypeDefinition<CR>
-nnoremap <Leader>l<Space> :LspCodeAction<CR>
-nnoremap <Leader>l? :LspStatus<CR>
-nnoremap <Leader>lf :LspDocumentFormat<CR>
-vnoremap <Leader>lf :LspDocumentRangeFormat<CR>
-nnoremap <Leader>ll :LspHover<CR>
-nnoremap <Leader>lr :LspRename<CR>
-nnoremap <Leader>lsd :LspDocumentSymbol<CR>
-nnoremap <Leader>lsw :LspWorkspaceSymbol<CR>
+nmap <silent> <Leader>jd <Plug>(coc-definition)
+nmap <silent> <Leader>jt <Plug>(coc-type-definition)
+nmap <silent> <Leader>ji <Plug>(coc-implementation)
+nmap <silent> <Leader>jr <Plug>(coc-references)
+nmap <silent> <Leader>lr <Plug>(coc-rename)
+nmap <silent> <leader>lx <Plug>(coc-fix-current)
+nmap <silent> <Leader>l<Space> <Plug>(coc-codeaction)
+vmap <silent> <Leader>l<Space> <Plug>(coc-codeaction-selected)
+nnoremap <silent> <Leader>ll :call <SID>show_documentation()<CR>
+nnoremap <silent> <Leader>lsd :<C-u>CocList outline<cr>
+nnoremap <silent> <Leader>lsw :<C-u>CocList -I symbols<cr>
+
+nnoremap <Leader>loi :call CocAction('runCommand', 'editor.action.organizeImport')<CR>
 
 nmap <silent> <Leader>jp <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>jn <Plug>(ale_next_wrap)

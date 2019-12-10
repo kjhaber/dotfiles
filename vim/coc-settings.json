@@ -1,0 +1,6 @@
+{
+    "coc.preferences.extensionUpdateCheck": "never",
+    "diagnostic.displayByAle": true,
+    "suggest.autoTrigger": "none",
+    "suggest.noselect": false
+}
