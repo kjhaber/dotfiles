@@ -195,6 +195,7 @@ highlight ColorColumn guibg=#102535
 set splitbelow
 set splitright
 set scrolloff=6
+set updatetime=250
 
 " Neovim-specific options
 if has("nvim")
