@@ -84,7 +84,6 @@ alias cddotfiles="cd $DOTFILE_HOME"
 alias cddotfiles-local="cd $DOTFILE_LOCAL_HOME"
 alias cddiary="cd $VIMWIKI_DIARY_DIR"
 alias cdnotes="cd $DOC_DIR/notes"
-alias cdtodo="cd $TODO_DIR"
 
 alias mci="mvn clean install"
 alias mcp="mvn clean package"
@@ -94,23 +93,12 @@ alias mvn-clean-all='find . -name "pom.xml" -execdir mvn clean \;'
 # cd to git root
 alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
-# quick calculator function
-# usage
-# http://www.commandlinefu.com/commands/view/2520/define-a-quick-calculator-function#comment
-= () {
-  echo $(($*))
-}
-
 # Source separate file for environment-specific aliases, as these differ between
 # work and home.  I probably still need a better approach for separating my
 # environment-specific settings.
 test -f "${DOTFILE_LOCAL_HOME}/zshrc-local.aliases" && source "${DOTFILE_LOCAL_HOME}/zshrc-local.aliases"
 
 # Enable various tools
-# thefuck is helpful for autocorrecting typos. I add the 'doh' alias to be a
-# shade more polite at my shell; YMMV.
-eval "$(thefuck --alias)"
-alias doh=fuck
 
 # fzf: fuzzy finder, locate files quickly
 # - ctrl-t to insert filename in current command,
@@ -119,22 +107,6 @@ export FZF_DEFAULT_COMMAND="rg --files --no-ignore --ignore-case --hidden --foll
 export FZF_DEFAULT_OPTS='--color hl:#75a6d6,hl+:#70d4f5'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# If current selection is a text file shows its content,
-# if it's a directory shows its content, the rest is ignored
-FZF_CTRL_T_OPTS="--preview-window wrap --preview '
-if [[ -f {} ]]; then
-    file --mime {} | grep -q \"text\/.*;\" && bat --color \"always\" {} || (tput setaf 1; file --mime {})
-elif [[ -d {} ]]; then
-    tree -L 1 {}
-else;
-    tput setaf 1; echo "Unexpected"
-fi'"
-
-
-# fasd is meant to make switching between directories more convenient.
-eval "$(fasd --init auto)"
-alias v='f -e vim' # quick opening files with vim
-
 # Change ssh autocomplete to skip /etc/hosts.  I put hosts entries from
 # the blacklist at http://someonewhocares.org/hosts/ into mine, which maps
 # a bunch of spam and ad tracker sites to localhost.  This is great for
@@ -142,15 +114,7 @@ alias v='f -e vim' # quick opening files with vim
 # ssh autocomplete values useless.  Values from ~/.ssh/config still work.
 zstyle ':completion:*:ssh:*' hosts off
 
-# todo.txt
-alias t='/usr/local/bin/todo.sh -a -d "~/.todo.cfg"'
-compdef t='todo.sh'
-
-# bat
-export BAT_THEME="OneHalfDark"
-export BAT_STYLE=numbers,header,changes
-
-# finally, load external configs
+# load external configs and plugins
 for file in $DOTFILE_HOME/zsh/bin/*.zsh; do
   source "$file"
 done
