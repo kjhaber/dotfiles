@@ -124,6 +124,12 @@ if [[ -f "/usr/local/bin/antibody" ]]; then
   antibody bundle < $DOTFILE_HOME/zsh/plugin-list
 fi
 
+if [[ -d "$DOTFILE_HOME/zsh/bin/after-plugins" ]]; then
+  for file in $DOTFILE_HOME/zsh/bin/after-plugins/*.zsh; do
+    source "$file"
+  done
+fi
+
 # Enable iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
