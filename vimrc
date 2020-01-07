@@ -395,7 +395,7 @@ function! GitBranchStatusline()
     return ''
   else
     return ' [' . w:branch . '] '
-  end if
+  endif
 endfunction
 
 " vim-autoformat
