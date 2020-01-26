@@ -93,6 +93,8 @@ alias mvn-clean-all='find . -name "pom.xml" -execdir mvn clean \;'
 # cd to git root
 alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
+alias tmi='tmuxinator'
+
 # Source separate file for environment-specific aliases, as these differ between
 # work and home.  I probably still need a better approach for separating my
 # environment-specific settings.
