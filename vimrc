@@ -196,6 +196,7 @@ set splitbelow
 set splitright
 set scrolloff=6
 set updatetime=250
+set foldlevelstart=20
 
 " Neovim-specific options
 if has("nvim")
