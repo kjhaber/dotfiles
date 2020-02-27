@@ -598,6 +598,7 @@ call SourceDotfile('vim/change-bullet.vim')
 " put Simplenote creds into separate file for simplenote.vim plugin
 call SourceLocalDotfile('simplenoterc')
 let g:SimplenoteVertical=1
+let g:SimplenoteFiletype='markdown'
 
 " abbreviations
 let g:AutoCloseExpandSpace = 0 " Make iabbrev work again with vim-autoclose
