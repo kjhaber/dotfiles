@@ -198,6 +198,9 @@ set scrolloff=6
 set updatetime=250
 set foldlevelstart=20
 
+" make macros run faster by disabling redraw during execution
+set lazyredraw
+
 " Neovim-specific options
 if has("nvim")
   " Show result of :s command while typing
