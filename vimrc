@@ -257,6 +257,7 @@ nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
 " shortcuts for splits similar to my bindings for tmux
 nnoremap <Leader>- :Sexplore<CR>
 nnoremap <Leader>\| :Vexplore<CR>
+nnoremap <Leader>. :Explore<CR>
 
 " indent the entire file
 nnoremap <Leader>=  gg=G

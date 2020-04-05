@@ -93,8 +93,9 @@ z - Zoom (ZoomWinTab)
   /l -- search lines (current file)
   /t -- search text (all files under vim pwd - live fuzzy match)
 space - visual select current line (why?)
-- - horizontal split (:Sexplore)
-| - vertical split (:Vexplore)
+. - open file explorer (:Explore)
+- - open file explorer in horizontal split (:Sexplore)
+| - open file explorer in vertical split (:Vexplore)
 {
 }
 [
