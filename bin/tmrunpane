@@ -1,0 +1,12 @@
+#!/bin/sh
+# Runs command in a separate tmux pane
+# e.g. `tmrunpane top` will open a new pane with top command
+
+if [ -z "$TMUX" ]; then
+  echo "tmrunpane must run in a tmux session, exiting"
+  exit 1
+fi
+
+tmux split-window -dI "$@"
+
+
