@@ -468,6 +468,10 @@ nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 
+" Mappings to quickly access todo wiki and write it into daily diary
+nmap <Leader>wt :edit $VIMWIKI_DIR/diary/TODO.mdwiki<CR>
+nmap <Leader>w<Space>t :read $VIMWIKI_DIR/diary/TODO.mdwiki<CR>
+
 " vimwiki filetype sometimes changes to 'conf' when splitting window
 nmap <Leader>wf set filetype=vimwiki<CR>
 

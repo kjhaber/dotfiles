@@ -82,6 +82,8 @@ w
   w<leader>i -- vimwiki diary index generate links
   wc         -- open calendar (enter on date opens diary)
   wf         -- set filetype=vimwiki (vimwiki filetype sometimes changes to 'conf' when splitting window)
+  wt         -- open vimwiki diary to-do page
+  w<leader>t -- write vimwiki diary to-do page
 x
 y - Yank to system clipboard
 z - Zoom (ZoomWinTab)
