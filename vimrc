@@ -453,6 +453,7 @@ let g:rust_clip_command = 'pbcopy'
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
 let g:startify_bookmarks = [ {'.': '.'}, {'d': '$TODO_DIR/todo.txt'}, {'v': '~/.vimrc'}, {'z': '~/.zshrc'}, {'t': '~/.tmux.conf'}, {'s': '~/.ssh/config'} ]
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
+nmap <Leader>; :Startify<CR>
 
 " vimwiki
 let g:vimwiki_list = [{'path': '$VIMWIKI_DIR', 'syntax': 'markdown', 'ext': '.mdwiki'}]

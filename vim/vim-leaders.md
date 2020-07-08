@@ -105,5 +105,6 @@ space - visual select current line (why?)
 ` - insert markdown code block
   `<space> -- insert markdown code block, set into insert mode (normal or visual mode)
   `p -- insert current clipboard content inside markdown code block
+; -- Startify
 ```
 
