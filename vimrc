@@ -468,6 +468,10 @@ nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 
+" Copy todo item to journal item (relies on mark t to indicate top of Todo
+" section)
+nnoremap <Leader>wj :execute "normal! yy`tkkp" <bar> :s/\v\[.\] // <bar> :nohlsearch<CR>
+
 " Mappings to quickly access todo wiki and write it into daily diary
 nmap <Leader>wt :edit $VIMWIKI_DIR/diary/TODO.mdwiki<CR>
 nmap <Leader>w<Space>t :read $VIMWIKI_DIR/diary/TODO.mdwiki<CR>
