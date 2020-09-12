@@ -363,6 +363,7 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 let g:netrw_altv=1  " open files on right
 let g:NERDTreeHijackNetrw = 0
 nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>tt :NERDTreeToggle<CR>
 
 " vim-jsx options
 let g:jsx_ext_required = 0

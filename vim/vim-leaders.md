@@ -65,7 +65,8 @@ q
 r
 s
   ss  strip trailing whitespace
-t - nerdTree
+t
+  tt -- NERDTree
 u
   uas -- UML arrow swap
 v - vimux
