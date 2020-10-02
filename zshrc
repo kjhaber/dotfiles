@@ -79,6 +79,7 @@ alias -- -='cd ..'
 alias cdpwd='cd "$(pwd)"; pwd'
 
 alias cddesktop="cd $HOME/Desktop"
+alias cddownloads="cd $HOME/Downloads"
 alias cddocuments="cd $DOC_DIR"
 alias cddotfiles="cd $DOTFILE_HOME"
 alias cddotfiles-local="cd $DOTFILE_LOCAL_HOME"
