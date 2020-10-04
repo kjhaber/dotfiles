@@ -598,6 +598,8 @@ function! s:show_documentation()
   endif
 endfunction
 
+let g:coc_node_path = '/usr/local/bin/node'
+
 inoremap <silent><expr> <c-space> coc#refresh()
 
 nmap <silent> <Leader>jd <Plug>(coc-definition)
