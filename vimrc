@@ -79,7 +79,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'prabirshrestha/async.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'sirver/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'timonv/vim-cargo'
@@ -534,15 +533,6 @@ nmap <Leader>z :ZoomWinTabToggle<CR>
 " Defines :Make to run makeprg async - improves fugitive.vim too
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
-" Ultisnips
-" Ctrl-S for 'snippet'
-" Alt-L for forward
-" Alt-H for backward
-" On a Mac you have to use a trick: <ALT+L> ==> ¬, <ALT+H> ==> ˙
-let g:UltiSnipsExpandTrigger='<c-s>'
-let g:UltiSnipsJumpForwardTrigger='¬'
-let g:UltiSnipsJumpBackwardTrigger='˙'
-
 " fzf
 " Search filenames with Ctrl-p
 " Search file contents with <leader>/
@@ -620,6 +610,13 @@ nnoremap <Leader>loi :call CocAction('runCommand', 'editor.action.organizeImport
 
 nmap <silent> <Leader>jp <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>jn <Plug>(ale_next_wrap)
+
+
+" Snippets
+imap <C-s> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = '<C-k>'
 
 " change bullet list character
 call SourceDotfile('vim/change-bullet.vim')

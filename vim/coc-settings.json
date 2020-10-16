@@ -1,6 +1,20 @@
 {
     "coc.preferences.extensionUpdateCheck": "never",
     "diagnostic.displayByAle": true,
+    "snippets.ultisnips.directories": [
+        "UltiSnips"
+    ],
+    "snippets.extends": {
+        "javascriptreact": [
+            "javascript"
+        ],
+        "typescriptreact": [
+            "javascript"
+        ],
+        "typescript": [
+            "javascript"
+        ]
+    },
     "suggest.autoTrigger": "none",
     "suggest.noselect": false
 }
