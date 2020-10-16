@@ -55,7 +55,15 @@ l
   l?  -- LSP Status
   lx  -- LSP Fix
   l<space> -- LSP Code Action (Quick Fix)
-m - :Make
+m
+  mm  -- bookmark toggle
+  ma  -- bookmark annotated
+  mf  -- bookmark next (forward)
+  mb  -- bookmark prev (back)
+  ml  -- bookmark list
+  mx  -- bookmark clear (current file)
+  mX  -- bookmark clear (all files)
+
 n
   nn -- toggle line numbers
   nr -- toggle between relative and absolute line numbers

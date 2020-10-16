@@ -643,6 +643,15 @@ vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = '<C-k>'
 
+" Bookmarks
+nmap <silent> <Leader>mm <Plug>(coc-bookmark-toggle)
+nmap <silent> <Leader>ma <Plug>(coc-bookmark-annotate)
+nmap <silent> <Leader>mf <Plug>(coc-bookmark-next)
+nmap <silent> <Leader>mb <Plug>(coc-bookmark-prev)
+nmap <silent> <Leader>ml :CocList bookmark<CR>
+nmap <silent> <Leader>mx :CocCommand bookmark.clearForCurrentFile<CR>
+nmap <silent> <Leader>mX :CocCommand bookmark.clearForAllFiles<CR>
+
 " change bullet list character
 call SourceDotfile('vim/change-bullet.vim')
 

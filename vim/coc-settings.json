@@ -1,5 +1,7 @@
 {
     "coc.preferences.extensionUpdateCheck": "never",
+    "bookmark.sign": "‣",
+    "bookmark.signHl": "Todo",
     "diagnostic.displayByAle": true,
     "snippets.ultisnips.directories": [
         "UltiSnips"
