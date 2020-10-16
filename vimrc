@@ -588,10 +588,35 @@ function! s:show_documentation()
   endif
 endfunction
 
+" coc.nvim
 let g:coc_node_path = '/usr/local/bin/node'
+let g:coc_global_extensions = [
+\  'coc-bookmark',
+\  'coc-css',
+\  'coc-eslint',
+\  'coc-eslint',
+\  'coc-css',
+\  'coc-eslint',
+\  'coc-git',
+\  'coc-html',
+\  'coc-java',
+\  'coc-json',
+\  'coc-markdownlint',
+\  'coc-python',
+\  'coc-rls',
+\  'coc-snippets',
+\  'coc-solargraph',
+\  'coc-sh',
+\  'coc-tsserver',
+\  'coc-vimlsp',
+\  'coc-xml',
+\  'coc-yaml',
+\  'coc-yank'
+\ ]
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
+" LSP key bindings (mostly coc.nvim-based)
 nmap <silent> <Leader>jd <Plug>(coc-definition)
 nmap <silent> <Leader>jt <Plug>(coc-type-definition)
 nmap <silent> <Leader>ji <Plug>(coc-implementation)
