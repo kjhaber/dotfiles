@@ -42,6 +42,7 @@ Plug 'Julian/vim-textobj-variable-segment'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Olical/vim-enmasse'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'aklt/plantuml-syntax'
 Plug 'benmills/vimux'
 Plug 'blueyed/vim-diminactive'
@@ -285,6 +286,9 @@ nnoremap <Leader>hf :GitGutterNextHunk<CR>
 
 " update Gitgutter signs on file save
 autocmd BufWritePost * GitGutter
+
+" rooter
+let g:rooter_patterns = ['pom.xml', 'build.xml', 'package.json', '.git']
 
 " Normally <ctrl-L> forces a redraw of the terminal, but I've mapped that to
 " change between vim splits and tmux panes.  <Leader>l alone does a `:set list`
