@@ -56,7 +56,7 @@ Plug 'freitass/todo.txt-vim'
 Plug 'fvictorio/vim-textobj-backticks'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-entire'
