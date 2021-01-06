@@ -550,8 +550,13 @@ nmap <Leader>/l :Lines<CR>
 nmap <Leader>/t :Rg<CR>
 
 " https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
+" Sort vimwiki diary by reverse path to make entries appear in chronological
+" order (prefer recent results to random results in previous years)
+let g:ripgrep_fzf_sort = ''
+autocmd FileType vimwiki let g:ripgrep_fzf_sort = '--sortr path'
+
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case ' . g:ripgrep_fzf_sort . ' -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
