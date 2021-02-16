@@ -1,3 +1,3 @@
 #!/bin/sh
-find -L `pwd` -type d -name .git -maxdepth 2 -exec sh -c "cd \"{}\"; cd ..; pwd; git $@; echo" \;
+find -L $(pwd) -maxdepth 2 -type d -name .git -exec sh -c "cd \"{}\"; cd ..; pwd; git $@; echo" \;
 
