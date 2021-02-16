@@ -29,11 +29,5 @@ export REMOTE_SYNC_DIR="$DOC_DIR/RemoteSync"
 
 export HOMEBREW_NO_ANALYTICS=1
 
-# JAVA_HOME is set mostly for Eclipse.  This is macOS-specific.
-# (Set it in zshenv-local.after if needed on other OSes.)
-if [[ -e "/usr/libexec/java_home" ]] then
-  export JAVA_HOME=`/usr/libexec/java_home`
-fi
-
 # local environment-specific config
 test -f "${DOTFILE_LOCAL_HOME}/zshenv-local.after" && source "${DOTFILE_LOCAL_HOME}/zshenv-local.after"
