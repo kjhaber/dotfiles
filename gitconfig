@@ -13,6 +13,7 @@
   dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
   dag-all = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order --all
   dc = diff --cached
+  dh = diff HEAD^
   diffw = diff --word-diff
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
   lone = log --oneline
@@ -20,6 +21,7 @@
     git branch -f $1 HEAD && git checkout $1 ; \
   }; f"
   glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  pr = pull --rebase
   recommit = commit --amend --no-edit
   s = status
   stash-all = stash push --include-untracked
