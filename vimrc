@@ -268,7 +268,7 @@ nnoremap <Leader>m :Make<CR>
 " fugitive shortcuts
 " inspired by https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/
 nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gc :Git commit<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
