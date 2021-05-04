@@ -432,12 +432,14 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'css': ['prettier'],
 \   'html': ['tidy'],
+\   'java': [],
 \   'javascript': ['eslint', 'prettier'],
 \   'ruby': ['rubocop'],
 \   'rust': ['rustfmt'],
 \   'typescript': ['eslint', 'prettier']
 \}
 let g:ale_linters = {
+\   'java': [],
 \   'rust': ['cargo']
 \}
 let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
