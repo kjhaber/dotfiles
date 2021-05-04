@@ -276,7 +276,7 @@ nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
 nnoremap <Leader>gm :Gmove<Space>
 nnoremap <Leader>gp :Ggrep<Space>
 nnoremap <Leader>gr :Gread<CR>
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
 
 " gitgutter
