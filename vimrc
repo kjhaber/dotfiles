@@ -253,6 +253,7 @@ nnoremap <Leader>h :nohlsearch<CR>
 nnoremap <Leader>hh :nohlsearch<CR>
 
 nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
+nnoremap <Leader>sq :call StripSmartQuotes()<CR>
 
 " shortcuts for splits similar to my bindings for tmux
 nnoremap <Leader>- :Sexplore<CR>
@@ -345,6 +346,16 @@ function! StripTrailingWhitespaces()
     " save last search & cursor position
     let l:save=winsaveview()
     silent! %substitute/\s\+$//e
+    call winrestview(l:save)
+endfunction
+
+function! StripSmartQuotes()
+    " save last search & cursor position
+    let l:save=winsaveview()
+    silent! %substitute/‘/'/ge
+    silent! %substitute/’/'/ge
+    silent! %substitute/“/"/ge
+    silent! %substitute/”/"/ge
     call winrestview(l:save)
 endfunction
 

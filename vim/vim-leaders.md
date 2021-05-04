@@ -73,6 +73,7 @@ q
 r
 s
   ss  strip trailing whitespace
+  sq  strip smart quotes
 t
   tt -- NERDTree
 u
