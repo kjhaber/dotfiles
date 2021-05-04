@@ -7,8 +7,13 @@
 function tm() {
     [[ -z "$1" ]] && {
       echo "Usage: tm <session>"
-      echo "Active tmux sessions:"
-      tmux ls -F "* #{session_name}"
+      SESSIONS=$(tmux ls -F "* #{session_name}" 2>/dev/null)
+      if [[ -n $SESSIONS ]]; then
+        echo "Active tmux sessions:"
+        echo "$SESSIONS"
+      else
+        echo "No tmux server running"
+      fi
       return
     }
     [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
