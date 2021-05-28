@@ -131,7 +131,6 @@ augroup colors
 augroup END
 
 set background=dark
-set guifont=Inconsolata:h12
 
 set laststatus=2
 if $TERM_PROGRAM =~# 'iTerm' && has("nvim")
