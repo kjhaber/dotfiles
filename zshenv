@@ -29,5 +29,8 @@ export REMOTE_SYNC_DIR="$DOC_DIR/RemoteSync"
 
 export HOMEBREW_NO_ANALYTICS=1
 
+# Rust/Cargo
+test -f "$HOME/.cargo/env" && source "$HOME/.cargo/env"
+
 # local environment-specific config
 test -f "${DOTFILE_LOCAL_HOME}/zshenv-local.after" && source "${DOTFILE_LOCAL_HOME}/zshenv-local.after"
