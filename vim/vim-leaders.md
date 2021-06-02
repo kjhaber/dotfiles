@@ -8,8 +8,6 @@ a - Align (Tabularize) or ALE
 
   aa -- toggle ALE lint
   af -- ALE fix
-  an -- ALE next error
-  ap -- ALE previous error
 b
   bb -- toggle bullet character between * and -
   bi -- indent and toggle bullet
@@ -44,7 +42,7 @@ j
   ji -- LSP Jump to Implementation
   jr -- LSP Jump to References (find references)
   jt -- LSP Jump to Type Definition
-k - redraw buffer/terminal
+k
 l
   lf  -- LSP Format (range format when in visual mode)
   ll  -- LSP Hover
@@ -67,7 +65,7 @@ m
 n
   nn -- toggle line numbers
   nr -- toggle between relative and absolute line numbers
-o - Open (CtrlP search)
+o
 p - Paste from system clipboard
 q
 r
@@ -78,12 +76,7 @@ t
   tt -- NERDTree
 u
   uas -- UML arrow swap
-v - vimux
-  vv -- prompt command
-  vr -- repeat last command
-  vi -- inspect runner pane
-  vz -- zoom runner pane
-  vq -- quit runner pane
+v 
 w
   ww         -- vimwiki main
   w<leader>w -- vimwiki diary today
@@ -92,10 +85,11 @@ w
   w<leader>i -- vimwiki diary index generate links
   wc         -- open calendar (enter on date opens diary)
   wf         -- set filetype=vimwiki (vimwiki filetype sometimes changes to 'conf' when splitting window)
+  wj         -- copy diary todo item to journal
   wt         -- open vimwiki diary to-do page
   w<leader>t -- write vimwiki diary to-do page
 x
-y - Yank to system clipboard
+y 
 z - Zoom (ZoomWinTab)
 / - search (fzf + ripgrep) (same as <leader>[t )
   // -- search text (all files under vim pwd - on enter, uses loclist)
@@ -104,7 +98,7 @@ z - Zoom (ZoomWinTab)
   /h -- search history
   /l -- search lines (current file)
   /t -- search text (all files under vim pwd - live fuzzy match)
-space - visual select current line (why?)
+space - reset default states (paste mode, search highlight, etc) and refresh terminal/tmux
 . - open file explorer (:Explore)
 - - open file explorer in horizontal split (:Sexplore)
 | - open file explorer in vertical split (:Vexplore)
@@ -112,7 +106,7 @@ space - visual select current line (why?)
 }
 [
 ]
-= - indent entire file
+=
 \ - toggle paste mode
 ` - insert markdown code block
   `<space> -- insert markdown code block, set into insert mode (normal or visual mode)
