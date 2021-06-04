@@ -515,13 +515,6 @@ command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><e
 " Make updating plugins more convenient
 command! PU PlugUpdate | PlugUpgrade
 
-" UML Arrow Swap: change position of arrow in PlantUML doc
-call SourceDotfile('vim/plantuml-arrow-swap.vim')
-
-" change bullet list character
-call SourceDotfile('vim/change-bullet.vim')
-
-
 " --------------------------------------------------------------
 " Leader/User-Defined Mappings
 " --------------------------------------------------------------
@@ -705,6 +698,13 @@ nmap Q @q
 
 " stop that window from popping up
 map q: :q
+
+
+" UML Arrow Swap: change position of arrow in PlantUML doc
+call SourceDotfile('vim/plantuml-arrow-swap.vim')
+
+" change bullet list character
+call SourceDotfile('vim/change-bullet.vim')
 
 
 " --------------------------------------------------------------
