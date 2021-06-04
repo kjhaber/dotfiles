@@ -60,6 +60,11 @@ endif
 set title
 let &titleold=$USER . '@' . hostname() . ' | ' . fnamemodify(getcwd(), ':t')
 
+" Use both \ and space as leader
+" I've broken my habit for \ as leader, but space doesn't show up in showcmd
+let g:mapleader='\\'
+map <Space> <Leader>
+
 " Neovim-specific options
 if has("nvim")
   " Show result of :s command while typing
@@ -515,14 +520,16 @@ command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><e
 " Make updating plugins more convenient
 command! PU PlugUpdate | PlugUpgrade
 
+" UML Arrow Swap: change position of arrow in PlantUML doc
+call SourceDotfile('vim/plantuml-arrow-swap.vim')
+
+" change bullet list character
+call SourceDotfile('vim/change-bullet.vim')
+
+
 " --------------------------------------------------------------
 " Leader/User-Defined Mappings
 " --------------------------------------------------------------
-
-" Use both \ and space as leader
-" I've broken my habit for \ as leader, but space doesn't show up in showcmd
-let g:mapleader='\\'
-map <Space> <Leader>
 
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
@@ -698,14 +705,6 @@ nmap Q @q
 
 " stop that window from popping up
 map q: :q
-
-
-" UML Arrow Swap: change position of arrow in PlantUML doc
-call SourceDotfile('vim/plantuml-arrow-swap.vim')
-
-" change bullet list character
-call SourceDotfile('vim/change-bullet.vim')
-
 
 " --------------------------------------------------------------
 " Color Settings
