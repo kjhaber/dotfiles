@@ -1,5 +1,6 @@
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
+kjhaber/cdfzf.zsh
 kjhaber/tm.zsh
 mafredri/zsh-async
 
