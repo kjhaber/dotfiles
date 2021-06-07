@@ -115,6 +115,10 @@ export FZF_DEFAULT_COMMAND="rg --files --no-ignore --ignore-case --hidden --foll
 export FZF_DEFAULT_OPTS='--color hl:#75a6d6,hl+:#70d4f5'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Taskwarrior
+export TASKRC="$DOTFILE_HOME/taskrc"
+export TASKDATA="$REMOTE_SYNC_DIR/task"
+
 # Change ssh autocomplete to skip /etc/hosts.  I put hosts entries from
 # the blacklist at http://someonewhocares.org/hosts/ into mine, which maps
 # a bunch of spam and ad tracker sites to localhost.  This is great for
