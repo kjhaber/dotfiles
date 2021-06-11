@@ -348,12 +348,20 @@ Plug 'tpope/vim-surround'
 " (e.g. ]q == :cnext, [q == :cprevious, ]a == :next, [b == :bprevious 
 Plug 'tpope/vim-unimpaired'
 
+" Open file in browser (dependency of plantuml-previewer.vim)
+Plug 'tyru/open-browser.vim'
+
 " Ruby syntax highlighting and formatting
 Plug 'vim-ruby/vim-ruby'
 
 " Toggle expanding current split to full window 
 Plug 'vim-scripts/zoomwintab.vim'
 let g:zoomwintab_remap = 0
+
+" Display plantuml image output in browser with live updating
+Plug 'weirongxu/plantuml-previewer.vim'
+au FileType plantuml let g:plantuml_previewer#plantuml_jar_path =
+      \ trim(system('plantuml --jarpath'))
 
 " Show git status flags in NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
