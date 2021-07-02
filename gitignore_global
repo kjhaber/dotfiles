@@ -3,6 +3,7 @@ build
 .project
 .classpath
 .factorypath
+.idea
 eclipse-bin
 *.iml
 target
