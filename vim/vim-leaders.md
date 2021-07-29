@@ -47,7 +47,7 @@ l
   lf  -- LSP Format (range format when in visual mode)
   ll  -- LSP Hover
   lr  -- LSP Rename
-  loi -- LSP Organize Imports
+  lo -- LSP Organize Imports
   lsd -- LSP Symbols: Document
   lwd -- LSP Symbols: Workspace
   l?  -- LSP Status

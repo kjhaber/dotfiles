@@ -41,7 +41,7 @@ nnoremap <leader>jt :action GotoTypeDeclaration<CR>
 nnoremap <leader>l<space> :action QuickFixes<CR>
 nnoremap <leader>lf :action ReformatCode<CR>
 nnoremap <leader>ll :action QuickJavaDoc<CR>
-nnoremap <leader>loi :action OptimizeImports<CR>
+nnoremap <leader>lo :action OptimizeImports<CR>
 nnoremap <leader>lr :action RenameElement<CR>
 nnoremap <leader>p :action $Paste<CR>
 
