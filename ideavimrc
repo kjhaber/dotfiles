@@ -24,6 +24,7 @@ sethandler <C-h> n:vim i-v:ide
 sethandler <C-j> n:vim i-v:ide
 sethandler <C-k> n:vim i-v:ide
 sethandler <C-l> n:vim i-v:ide
+sethandler <C-v> n-v:vim i:ide
 
 " Mappings
 nnoremap <C-h> <C-w>h
