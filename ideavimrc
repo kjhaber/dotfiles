@@ -45,3 +45,12 @@ nnoremap <leader>loi :action OptimizeImports<CR>
 nnoremap <leader>lr :action RenameElement<CR>
 nnoremap <leader>p :action $Paste<CR>
 
+nnoremap <leader><space> :nohlsearch<CR>
+
+" ∆ = alt-j (down)
+" ˚ = alt-k (up)
+nnoremap ∆ :action MoveLineDown<CR>
+nnoremap ˚ :action MoveLineUp<CR>
+vnoremap ∆ :'<,'>action MoveLineDown<CR>
+vnoremap ˚ :'<,'>action MoveLineUp<CR>
+
