@@ -131,15 +131,19 @@ for file in $DOTFILE_HOME/zsh/bin/*.zsh; do
   source "$file"
 done
 
-if [[ -f "/usr/local/bin/antibody" ]]; then
+# Run antibody to load zsh plugins if it exists on PATH (brew install antibody)
+if type antibody >/dev/null 2>/dev/null ; then
   source <(antibody init)
   antibody bundle < $DOTFILE_HOME/zsh/plugin-list
-fi
 
-if [[ -d "$DOTFILE_HOME/zsh/bin/after-plugins" ]]; then
-  for file in $DOTFILE_HOME/zsh/bin/after-plugins/*.zsh; do
-    source "$file"
-  done
+  if [[ -d "$DOTFILE_HOME/zsh/bin/after-plugins" ]]; then
+    for file in $DOTFILE_HOME/zsh/bin/after-plugins/*.zsh; do
+      source "$file"
+    done
+  fi
+
+else
+  echo 'Note: antibody not found, zsh plugins not loaded'
 fi
 
 # Enable iTerm2 integration
