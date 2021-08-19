@@ -46,12 +46,12 @@ k
 l
   lf  -- LSP Format (range format when in visual mode)
   ll  -- LSP Hover
+  lo  -- LSP Organize Imports
   lr  -- LSP Rename
-  lo -- LSP Organize Imports
   lsd -- LSP Symbols: Document
   lwd -- LSP Symbols: Workspace
-  l?  -- LSP Status
   lx  -- LSP Fix
+  l?  -- LSP Status
   l<space> -- LSP Code Action (Quick Fix)
 m
   mm  -- bookmark toggle

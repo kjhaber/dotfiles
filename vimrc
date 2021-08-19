@@ -591,7 +591,7 @@ nmap <silent> <Leader>l<Space> <Plug>(coc-codeaction)
 vmap <silent> <Leader>l<Space> <Plug>(coc-codeaction-selected)
 nmap <silent> <Leader>lf <Plug>(coc-format)
 vmap <silent> <Leader>lf <Plug>(coc-format-selected)
-nnoremap <silent> <Leader>loi :call CocAction('runCommand', 'editor.action.organizeImport')<CR>
+nnoremap <silent> <Leader>lo :call CocAction('runCommand', 'editor.action.organizeImport')<CR>
 nnoremap <silent> <Leader>lsd :<C-u>CocList outline<cr>
 nnoremap <silent> <Leader>lsw :<C-u>CocList -I symbols<cr>
 nmap <silent> <Leader>lr <Plug>(coc-rename)
