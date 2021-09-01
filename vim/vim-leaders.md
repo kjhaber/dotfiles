@@ -75,7 +75,9 @@ s
 t
   tt -- NERDTree
 u
-  uas -- UML arrow swap
+  ura -- UML reverse arrow
+  ure -- UML reverse entity
+  urr -- UML reverse both entity + arrow
 v 
 w
   ww         -- vimwiki main
