@@ -685,11 +685,18 @@ vmap <C-j> <Plug>(coc-snippets-select)
 " Adjusting my mapping to use alt instead of ctrl so I can use
 " <C-j> and <C-k> for split navigation.
 " On a Mac you have to use a trick: <ALT+j> ==> ∆, <ALT+k> ==> ˚
+" Also add <alt-h> and <alt-l> to move lines left and right (indent/outdent)
+" <Alt-h> ==> ˙
+" <Alt-l> ==> ¬
 " http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
 nnoremap ∆ :m .+1<CR>==
 nnoremap ˚ :m .-2<CR>==
+nnoremap ˙ <<
+nnoremap ¬ >>
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=gv
+vnoremap ˙ <<
+vnoremap ¬ >>
 
 
 " Toggle completion with ctrl-space (even in normal mode)

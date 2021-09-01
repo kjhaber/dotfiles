@@ -50,8 +50,14 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 " ∆ = alt-j (down)
 " ˚ = alt-k (up)
+" ˙ = alt-h (left)
+" ¬ = alt-l (right)
 nnoremap ∆ :action MoveLineDown<CR>
 nnoremap ˚ :action MoveLineUp<CR>
+nnoremap ˙ <<
+nnoremap ¬ >>
 vnoremap ∆ :'<,'>action MoveLineDown<CR>
 vnoremap ˚ :'<,'>action MoveLineUp<CR>
+vnoremap ˙ <<
+vnoremap ¬ >>
 
