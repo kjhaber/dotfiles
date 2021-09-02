@@ -219,6 +219,9 @@ Plug 'kana/vim-textobj-line'
 " Prerequisite for textobj plugins
 Plug 'kana/vim-textobj-user'
 
+" Shortcuts for plantuml files
+Plug 'kjhaber/vim-plantuml-shortcuts'
+
 " Personal wiki/diary
 Plug 'vimwiki/vimwiki'
 let g:vimwiki_list = [{'path': '$VIMWIKI_DIR', 'syntax': 'markdown', 'ext': '.mdwiki'}]
