@@ -456,12 +456,14 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:fugitive_expanded")) | q | e
 
 " Reset editor mode state and refresh terminal/tmux
 function! LeaderReset()
-  set nohlsearch
   set nopaste
   redraw!
   if !empty($TMUX)
     silent execute '!tmux refresh-client'
   endif
+  " :nohlsearch and :echo don't work within a function, feedkeys hacks around
+  " this limitation
+  call feedkeys( ":nohlsearch\<CR>:echo \"\"\<CR>" )
 endfunction
 
 function! s:show_documentation()
@@ -673,8 +675,8 @@ vnoremap <Leader>` "zc```<CR>```<ESC>k"zp
 nmap <Leader>; :Startify<CR>
 
 " Reset editor mode state and refresh terminal/tmux
-nmap <leader><leader> :call LeaderReset()<cr>:echo ''<cr>
-nmap <leader><space> :call LeaderReset()<cr>:echo ''<cr>
+nmap <leader><leader> :call LeaderReset()<cr>
+nmap <leader><space> :call LeaderReset()<cr>
 
 " Search filenames with Ctrl-p
 nnoremap <C-p> :FZF<CR>
