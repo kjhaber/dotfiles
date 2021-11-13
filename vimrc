@@ -353,6 +353,8 @@ Plug 'tpope/vim-unimpaired'
 
 " Open file in browser (dependency of plantuml-previewer.vim)
 Plug 'tyru/open-browser.vim'
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
 
 " Ruby syntax highlighting and formatting
 Plug 'vim-ruby/vim-ruby'
@@ -376,7 +378,8 @@ Plug 'Yggdroot/indentLine'
 runtime macros/matchit.vim
 
 " netrw options
-let g:netrw_altv=1  " open files on right
+let g:netrw_altv=1    " open files on right
+let g:netrw_nogx = 1  " disable netrw's gx mapping in favor of open-browser.vim
 
 " Load plugins from dotfiles-local
 call SourceLocalDotfile('vimrc-local.plugin')
