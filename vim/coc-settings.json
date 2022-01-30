@@ -1,22 +1,13 @@
 {
-    "coc.preferences.extensionUpdateCheck": "never",
-    "bookmark.sign": "‣",
-    "bookmark.signHl": "Todo",
-    "diagnostic.displayByAle": true,
-    "snippets.ultisnips.directories": [
-        "UltiSnips"
-    ],
-    "snippets.extends": {
-        "javascriptreact": [
-            "javascript"
-        ],
-        "typescriptreact": [
-            "javascript"
-        ],
-        "typescript": [
-            "javascript"
-        ]
-    },
-    "suggest.autoTrigger": "none",
-    "suggest.noselect": false
+  "coc.preferences.extensionUpdateCheck": "never",
+  "diagnostic.displayByAle": true,
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "snippets.ultisnips.directories": ["UltiSnips"],
+  "snippets.extends": {
+    "javascriptreact": ["javascript"],
+    "typescriptreact": ["javascript"],
+    "typescript": ["javascript"]
+  },
+  "suggest.autoTrigger": "none",
+  "suggest.noselect": false
 }
