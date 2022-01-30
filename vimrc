@@ -103,9 +103,6 @@ call plug#begin('~/.vim/plugged')
 " Diff ranges of lines in same file (rarely used)
 Plug 'AndrewRadev/linediff.vim'
 
-" Format source code
-Plug 'Chiel92/vim-autoformat'
-
 " TypeScript syntax highlighting
 Plug 'HerringtonDarkholme/yats.vim'
 
@@ -565,7 +562,7 @@ nmap <Leader>af :ALEFix<CR>
 nmap <Leader>c :set list!<CR>
 nmap <Space>c :set list!<CR>
 
-nmap <Leader>ff :Autoformat<CR>
+nmap <Leader>ff :call CocActionAsync('format')<CR>
 nmap <Leader>fi mzgg=G`z
 
 nnoremap <Leader>gb :Gblame<CR>
