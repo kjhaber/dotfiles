@@ -641,8 +641,28 @@ nmap <Leader>wc :Calendar<CR><C-w>5>0t
 nmap <Leader>wf set filetype=vimwiki<CR>
 
 " Copy todo item to journal item (relies on mark t to indicate top of Todo
-" section)
-nnoremap <Leader>wj :execute "normal! yy`tkkp" <bar> :s/\v\[.\] // <bar> :nohlsearch<CR>
+" section, see InitDiary command)
+" nnoremap <Leader>wj :execute "normal! yy`tkkp" <bar> :s/\v\[.\] // <bar> :nohlsearch<CR>
+nnoremap <Leader>wj :call WikiJournal()<CR>
+
+function! WikiJournal()
+  " yank current line into the 'j' register
+  execute "normal! \"jyy"
+
+  " set 't' register to current time (in square brackets)
+  let @t = system("date +'[\%H:\%M]'")
+
+  " jump to the 't' mark, go up two lines, paste 'j' and 't' registers, then
+  " join lines together
+  execute "normal! `tkk\"jp\"tpkJ"
+
+  " replace everything up to the first occurrence of single char in square
+  " brackets (checklist state) with top-level asterisk bullet
+  silent! substitute/\v.*\[.\] /* /
+
+  " clear search highlight
+  call feedkeys(":nohlsearch\<CR>")
+endfunction
 
 " Mappings to quickly access todo wiki and write it into daily diary
 nmap <Leader>wt :edit $VIMWIKI_DIR/diary/TODO.mdwiki<CR>
