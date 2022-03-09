@@ -88,6 +88,7 @@ w
   wc         -- open calendar (enter on date opens diary)
   wf         -- set filetype=vimwiki (vimwiki filetype sometimes changes to 'conf' when splitting window)
   wj         -- copy diary todo item to journal
+  wm         -- append or update HH:MM timestamp to current line ('wiki Minute')
   wt         -- open vimwiki diary to-do page
   w<leader>t -- write vimwiki diary to-do page
 x

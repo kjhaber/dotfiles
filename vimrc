@@ -649,19 +649,35 @@ function! WikiJournal()
   " yank current line into the 'j' register
   execute "normal! \"jyy"
 
-  " set 't' register to current time (in square brackets)
-  let @t = system("date +'[\%H:\%M]'")
-
-  " jump to the 't' mark, go up two lines, paste 'j' and 't' registers, then
-  " join lines together
-  execute "normal! `tkk\"jp\"tpkJ"
+  " jump to the 't' mark, go up two lines, paste 'j' register
+  execute "normal! `tkk\"jp"
 
   " replace everything up to the first occurrence of single char in square
   " brackets (checklist state) with top-level asterisk bullet
   silent! substitute/\v.*\[.\] /* /
 
+  " append timestamp to current line
+  call WikiTimestamp()
+
   " clear search highlight
   call feedkeys(":nohlsearch\<CR>")
+endfunction
+
+" Append the current time (hour and minute) in square brackets to the end of
+" the current line.  Replace existing if already present.
+nnoremap <Leader>wm :call WikiTimestamp()<CR>
+function! WikiTimestamp()
+  " set 't' register to current time (in square brackets)
+  let @t = system("date +'[\%H:\%M]'")
+
+  " remove trailing newline from 't' register
+  call setreg('t', substitute(@t, "\n$", "", ""), 'v')
+
+  " remove timestamp from end of line if present
+  silent! substitute/\v *\[..:..\]$//
+
+  " append 't' register to end of current line
+  execute "normal! A " . @t
 endfunction
 
 " Mappings to quickly access todo wiki and write it into daily diary
