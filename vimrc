@@ -769,9 +769,11 @@ map q: :q
 " --------------------------------------------------------------
 
 " Apply color settings
-" (with slight adjustment to relative line number color)
+" (with slight adjustment to relative line number and hidden char colors)
 colorscheme molokai
 autocmd ColorScheme * highlight LineNr guifg=#758088
+autocmd ColorScheme * highlight NonText guifg=#303030
+autocmd ColorScheme * highlight SpecialKey guifg=#303030
 set background=dark
 
 " Separate colorscheme for vimwiki
