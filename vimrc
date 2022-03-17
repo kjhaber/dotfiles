@@ -254,13 +254,6 @@ Plug 'moll/vim-node'
 " Color scheme (used with vimwiki)
 Plug 'morhetz/gruvbox'
 
-" List, view, create and edit notes on Simplenote service
-" Keep Simplenote creds in separate file
-Plug 'mrtazz/simplenote.vim'
-call SourceLocalDotfile('simplenoterc')
-let g:SimplenoteVertical=1
-let g:SimplenoteFiletype='markdown'
-
 " Mustache template syntax highlighting, motions (rarely used)
 Plug 'mustache/vim-mustache-handlebars'
 
@@ -314,6 +307,20 @@ let g:rust_clip_command = 'pbcopy'
 " Open project tree view buffer on left
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 let g:NERDTreeHijackNetrw = 0
+
+" List, view, create and edit notes on Simplenote service
+" Keep Simplenote creds in separate file
+
+Plug 'simplenote-vim/simplenote.vim'
+call SourceLocalDotfile('simplenoterc')
+let g:SimplenoteVertical=1
+let g:SimplenoteFiletype='markdown'
+
+" Note: If plugin fails with "Login Failed. Check token?" message after changing
+" Simplenote password, update the 'token' value in ~/.snvim.  Easiest way to get
+" a token may be to write a quick Python script with simplenote.py
+" (https://github.com/simplenote-vim/simplenote.py).
+
 
 " Repeat 'v' key to grow visual selection (<ctrl-v> to shrink)
 Plug 'terryma/vim-expand-region'
