@@ -14,28 +14,50 @@ function! ToggleBullet()
   endif
 endfunction
 
-nmap <Leader>b- :call ChangeBullet('-')<CR>
-nmap <Leader>b* :call ChangeBullet('*')<CR>
-nmap <Leader>b> :call ChangeBullet('>')<CR>
-nmap <Leader>b+ :call ChangeBullet('+')<CR>
-nmap <Leader>b. :call ChangeBullet('..')<CR>
+" ChangeBullet - Fixed Char (normal mode mappings use repeat.vim)
+nmap <silent> <Plug>ChangeBulletDash :call ChangeBullet('-')<CR>
+\:call repeat#set("\<Plug>ChangeBulletDash")<CR>
+nmap <Leader>b- <Plug>ChangeBulletDash
 
-vmap <Leader>b- :'<,'>call ChangeBullet('-')<CR>
-vmap <Leader>b* :'<,'>call ChangeBullet('*')<CR>
-vmap <Leader>b> :'<,'>call ChangeBullet('>')<CR>
-vmap <Leader>b+ :'<,'>call ChangeBullet('+')<CR>
-vmap <Leader>b. :'<,'>call ChangeBullet('..')<CR>
+nmap <silent> <Plug>ChangeBulletStar :call ChangeBullet('*')<CR>
+\:call repeat#set("\<Plug>ChangeBulletStar")<CR>
+nmap <Leader>b* <Plug>ChangeBulletStar
 
-nmap <Leader>bb :call ToggleBullet()<CR>
-vmap <Leader>bb :'<,'>call ToggleBullet()<CR>
+nmap <silent> <Plug>ChangeBulletGt :call ChangeBullet('>')<CR>
+\:call repeat#set("\<Plug>ChangeBulletGt")<CR>
+nmap <Leader>b> <Plug>ChangeBulletGt
+
+nmap <silent> <Plug>ChangeBulletPlus :call ChangeBullet('+')<CR>
+\:call repeat#set("\<Plug>ChangeBulletPlus")<CR>
+nmap <Leader>b+ <Plug>ChangeBulletPlus
+
+nmap <silent> <Plug>ChangeBulletDot :call ChangeBullet('..')<CR>
+\:call repeat#set("\<Plug>ChangeBulletDot")<CR>
+nmap <Leader>b. <Plug>ChangeBulletDot
+
+vmap <silent> <Leader>b- :'<,'>call ChangeBullet('-')<CR>
+vmap <silent> <Leader>b* :'<,'>call ChangeBullet('*')<CR>
+vmap <silent> <Leader>b> :'<,'>call ChangeBullet('>')<CR>
+vmap <silent> <Leader>b+ :'<,'>call ChangeBullet('+')<CR>
+vmap <silent> <Leader>b. :'<,'>call ChangeBullet('..')<CR>
+
+" ToggleBullet (normal mode mappings use repeat.vim)
+nmap <silent> <Plug>ToggleBulletN :call ToggleBullet()<CR>
+\:call repeat#set("\<Plug>ToggleBulletN")<CR>
+nmap <Leader>bb <Plug>ToggleBulletN
+
+vmap <silent> <Leader>bb :'<,'>call ToggleBullet()<CR>
 imap <C-b> <C-o>:call ToggleBullet()<CR>
 
 " Bullet indent/outdent with toggle
-nmap <Leader>bi :><CR>:call ToggleBullet()<CR>
-nmap <Leader>bo :<<CR>:call ToggleBullet()<CR>
-nmap <Leader>bI :><CR>:call ToggleBullet()<CR>A
-nmap <Leader>bO :<<CR>:call ToggleBullet()<CR>A
+nmap <silent> <Plug>ChangeBulletIndent :><CR>:call ToggleBullet()<CR>
+\:call repeat#set("\<Plug>ChangeBulletIndent")<CR>
+nmap <Leader>bi <Plug>ChangeBulletIndent
 
-vmap <Leader>bi :'<,'>><CR>:'<,'>call ToggleBullet()<CR>
-vmap <Leader>bo :'<,'><<CR>:'<,'>call ToggleBullet()<CR>
+nmap <silent> <Plug>ChangeBulletOutdent :<<CR>:call ToggleBullet()<CR>
+\:call repeat#set("\<Plug>ChangeBulletOutdent")<CR>
+nmap <Leader>bo <Plug>ChangeBulletOutdent
+
+vmap <silent> <Leader>bi :'<,'>><CR>:'<,'>call ToggleBullet()<CR>
+vmap <silent> <Leader>bo :'<,'><<CR>:'<,'>call ToggleBullet()<CR>
 
