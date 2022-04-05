@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Converts input timestamp to UTC and local time.  Requires GNU coreutils (gdate)
+# although it will try to fall back to regular 'date'.
+# Examples:
+#
+# % tz
+# 2022-04-04 22:38:35-0700 (PDT)
+# 2022-04-05 05:38:35+0000 (UTC)
+#
+# % tz '2022-03-14 22:55:05 PDT'
+# 2022-03-14 22:55:05-0700 (PDT)
+# 2022-03-15 05:55:05+0000 (UTC)
+
+
+set -e
+DATE="$1"
+DATE_CMD=$(which gdate || :)
+if [ ! -x "$DATE_CMD" ]; then
+  DATE_CMD=$(which date || :)
+  if [ ! -x "$DATE_CMD" ]; then
+    echo "date command not found"
+    exit -1
+  else
+    echo "Using date command: $DATE_CMD"
+    # echo "(NOTE: If illegal option error occurs, install GNU coreutils for 'gdate' command.)"
+    echo
+  fi
+fi
+
+if [ -z "$DATE" ]; then
+  DATE=$($DATE_CMD --iso-8601="second")
+fi
+
+$DATE_CMD --date="$DATE" +'%Y-%m-%d %H:%M:%S%z (%Z)'
+$DATE_CMD --date="$DATE" +'%Y-%m-%d %H:%M:%S%z (%Z)' --utc
+
