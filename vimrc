@@ -644,6 +644,20 @@ nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
+nmap <silent> <Leader>w- :call ToggleDashCheckbox()<CR>
+
+" In vimwiki, I sometimes mark a 'checkbox' task with [-]` instead of `[X]` to
+" indicate the item as 'not applicable' instead of complete (such as for a
+" meeting being canceled).  This mapping toggles between 'n/a' and 'not done',
+" while vimwiki's <ctrl-space> mapping toggles between 'done' and 'not done'.
+function! ToggleDashCheckbox()
+  if getline('.') =~ '\[-\]'
+    substitute/\v\[-\]/[ ]/
+  else
+    substitute/\v\[.\]/[-]/
+  endif
+  normal! ``<CR>
+endfunction
 
 " Copy todo item to journal item (relies on mark t to indicate top of Todo
 " section, see InitDiary command)

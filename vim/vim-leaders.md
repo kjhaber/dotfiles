@@ -91,6 +91,7 @@ w
   wm         -- append or update HH:MM timestamp to current line ('wiki Minute')
   wt         -- open vimwiki diary to-do page
   w<leader>t -- write vimwiki diary to-do page
+  w-         -- toggle checkbox with dash instead of X (to mark as N/A)
 x
 y 
 z - Zoom (ZoomWinTab)
