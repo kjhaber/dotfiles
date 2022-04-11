@@ -644,8 +644,6 @@ nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
-" vimwiki filetype sometimes changes to 'conf' when splitting window
-nmap <Leader>wf set filetype=vimwiki<CR>
 
 " Copy todo item to journal item (relies on mark t to indicate top of Todo
 " section, see InitDiary command)
