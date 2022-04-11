@@ -628,9 +628,8 @@ nmap <Leader>P "+P
 
 " <Leader>P during a visual selection will replace the selection with
 " current clipboard without changing current clipboard like 'd' or 'c' usually
-" does.  In this case <Leader>p and <Leader>P do the same thing, unlike in
-" other modes.
-vmap <Leader>p "_d"+P
+" does.
+vmap <Leader>p "_d"+p
 vmap <Leader>P "_d"+P
 
 nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
