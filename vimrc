@@ -307,6 +307,7 @@ let g:rust_clip_command = 'pbcopy'
 " Open project tree view buffer on left
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 let g:NERDTreeHijackNetrw = 0
+let g:NERDTreeShowHidden = 1
 
 " List, view, create and edit notes on Simplenote service
 " Keep Simplenote creds in separate file
