@@ -33,6 +33,9 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-p> :action GotoFile<CR>
 
+" Use :A to resemble vim-projectionist for jumping between impl and test
+command! A action GotoTest
+
 nnoremap <leader>// :action SearchEverywhere<CR>
 nnoremap <leader>ff :action ReformatCode<CR>
 nnoremap <leader>jd :action GotoDeclaration<CR>

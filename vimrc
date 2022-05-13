@@ -353,6 +353,10 @@ Plug 'tpope/vim-repeat'
 " Mappings to add/remove parens, brackets, etc around text objects
 Plug 'tpope/vim-surround'
 
+" Jump to/from 'alternate files' e.g. implemenation/test source files
+Plug 'tpope/vim-projectionist'
+call SourceDotfile('vim/projectionist-settings.vim')
+
 " Shortcuts for common Ex commands
 " (e.g. ]q == :cnext, [q == :cprevious, ]a == :next, [b == :bprevious 
 Plug 'tpope/vim-unimpaired'
