@@ -50,6 +50,7 @@ setopt share_history
 setopt extended_history
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt transient_rprompt
 
 source $DOTFILE_HOME/zsh/kjhaber.zsh-theme
 
