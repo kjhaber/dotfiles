@@ -264,6 +264,7 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_node_path = '/usr/local/bin/node'
 let g:coc_global_extensions = [
+\  'coc-calc',
 \  'coc-css',
 \  'coc-eslint',
 \  'coc-git',
@@ -571,8 +572,7 @@ vmap <Leader>a<Space> :Tabularize /<Space><CR>
 nmap <Leader>aa :ALEToggle<CR>
 nmap <Leader>af :ALEFix<CR>
 
-nmap <Leader>c :set list!<CR>
-nmap <Space>c :set list!<CR>
+nmap <Leader>cc :set list!<CR>
 
 nmap <Leader>ff :call CocActionAsync('format')<CR>
 nmap <Leader>fi mzgg=G`z
@@ -748,6 +748,9 @@ nnoremap <C-p> :FZF<CR>
 imap <C-s> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
 
+" Coc-calc
+nnoremap <Leader>ca <Plug>(coc-calc-result-append)
+nnoremap <Leader>cr <Plug>(coc-calc-result-replace)
 
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
 " Adjusting my mapping to use alt instead of ctrl so I can use

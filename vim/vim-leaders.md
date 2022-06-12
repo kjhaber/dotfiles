@@ -20,6 +20,9 @@ b
   b+ -- change bullet character to +
   b. -- change bullet character to ..
 c - list hidden Characters
+  ca -- coc-Calc Append
+  cc -- list hidden Characters
+  cr -- coc-Calc Replace
 d
   dd -- Delete line (cut to system clipboard)
   dt -- Insert today's date in YYYY-MM-DD format, leave in insert mode
