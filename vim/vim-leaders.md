@@ -24,6 +24,9 @@ d
   dd -- Delete line (cut to system clipboard)
   dt -- Insert today's date in YYYY-MM-DD format, leave in insert mode
 e
+  eb -- error back (previous)
+  ef -- error forward (next)
+  el -- error list
 f - autoFormat
   ff -- format (uses format external prog if available)
   fi -- indent

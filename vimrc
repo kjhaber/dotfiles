@@ -598,6 +598,9 @@ nnoremap <Leader>hb :GitGutterPrevHunk<CR>
 nnoremap <Leader>hf :GitGutterNextHunk<CR>
 
 " LSP key bindings
+nmap <silent> <Leader>eb <Plug>(coc-diagnostic-prev)
+nmap <silent> <Leader>ef <Plug>(coc-diagnostic-next)
+nmap <silent> <Leader>el :CocDiagnostics<CR>
 nmap <silent> <Leader>jd <Plug>(coc-definition)
 nmap <silent> <Leader>ji <Plug>(coc-implementation)
 nmap <silent> <Leader>jr <Plug>(coc-references)
