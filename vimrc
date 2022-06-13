@@ -139,27 +139,6 @@ Plug 'chikamichi/mediawiki.vim'
 " Allows ctrl-h/j/k/l to work for both vim splits and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
-" Async syntax checker, also LSP support
-Plug 'dense-analysis/ale'
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'css': ['prettier'],
-\   'html': ['tidy'],
-\   'java': [],
-\   'javascript': ['eslint', 'prettier'],
-\   'ruby': ['rubocop'],
-\   'rust': ['rustfmt'],
-\   'typescript': ['eslint', 'prettier']
-\}
-let g:ale_linters = {
-\   'java': [],
-\   'rust': ['cargo']
-\}
-let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
-let g:ale_rust_rls_toolchain = 'stable'
-
 " Applies project-specific editor-agnostic settings
 Plug 'editorconfig/editorconfig-vim'
 
@@ -569,8 +548,6 @@ nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Space> :Tabularize /<Space><CR>
 vmap <Leader>a<Space> :Tabularize /<Space><CR>
-nmap <Leader>aa :ALEToggle<CR>
-nmap <Leader>af :ALEFix<CR>
 
 nmap <Leader>cc :set list!<CR>
 
@@ -605,8 +582,6 @@ nmap <silent> <Leader>jd <Plug>(coc-definition)
 nmap <silent> <Leader>ji <Plug>(coc-implementation)
 nmap <silent> <Leader>jr <Plug>(coc-references)
 nmap <silent> <Leader>jt <Plug>(coc-type-definition)
-nmap <silent> <Leader>jp <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>jn <Plug>(ale_next_wrap)
 
 nmap <silent> <Leader>l<Space> <Plug>(coc-codeaction)
 vmap <silent> <Leader>l<Space> <Plug>(coc-codeaction-selected)
@@ -771,9 +746,7 @@ vnoremap ¬ >>
 
 
 " Toggle completion with ctrl-space (even in normal mode)
-" inoremap <expr> <silent> <C-Space> (pumvisible() ? "\<Esc>" : "\<C-\>\<C-O>:ALEComplete\<CR>")
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-nnoremap <silent> <C-Space> a<C-\><C-o>:ALEComplete<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " make Enter and tab work more like I'm used to from IDEs

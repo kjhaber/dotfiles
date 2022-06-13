@@ -1,13 +1,10 @@
 ## Vim Leader Mappings
 
 ```
-a - Align (Tabularize) or ALE
+a - Align (Tabularize)
   a| -- align using bar character
   a: -- align using colon character
   a= -- align using equal character
-
-  aa -- toggle ALE lint
-  af -- ALE fix
 b
   bb -- toggle bullet character between * and -
   bi -- indent and toggle bullet

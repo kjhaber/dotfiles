@@ -1,6 +1,9 @@
 {
   "coc.preferences.extensionUpdateCheck": "never",
-  "diagnostic.displayByAle": true,
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "‼",
+  "diagnostic.infoSign": "𝙄",
+  "diagnostic.hintSign": "▸",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "snippets.ultisnips.directories": ["UltiSnips"],
   "snippets.extends": {
