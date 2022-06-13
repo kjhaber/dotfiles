@@ -813,6 +813,10 @@ augroup END
 set colorcolumn=81
 highlight ColorColumn guibg=#102535
 
+" Show hidden characters by default (except in quickfix and vimwiki)
+set list
+autocmd FileType qf set nolist
+autocmd FileType vimwiki set nolist
 
 " --------------------------------------------------------------
 " Source local-specific mappings/abbreviations
