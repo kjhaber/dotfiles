@@ -4,6 +4,8 @@
   "diagnostic.warningSign": "‼",
   "diagnostic.infoSign": "𝙄",
   "diagnostic.hintSign": "▸",
+  "diagnostic.enableHighlightLineNumber": false,
+  "diagnostic.enableMessage": "jump",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "snippets.ultisnips.directories": ["UltiSnips"],
   "snippets.extends": {
