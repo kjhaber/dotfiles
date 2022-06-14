@@ -460,10 +460,10 @@ function! LeaderReset()
 endfunction
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  elseif (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
   endif
 endfunction
 
