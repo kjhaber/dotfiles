@@ -64,3 +64,6 @@ vnoremap ˚ :'<,'>action MoveLineUp<CR>
 vnoremap ˙ <<
 vnoremap ¬ >>
 
+" Allow machine-specific config under dotfiles-local
+source ~/.config/dotfiles-local/ideavimrc-local
+
