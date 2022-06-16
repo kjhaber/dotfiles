@@ -13,10 +13,11 @@ set scrolloff=4
 set smartcase
 
 " Plugins
-set surround
-set commentary
 set argtextobj
+set commentary
 set highlightedyank
+set matchit
+set surround
 
 " Resolve IDE keybinding conflicts
 " https://github.com/JetBrains/ideavim/wiki/sethandler
