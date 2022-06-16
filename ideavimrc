@@ -13,6 +13,7 @@ set scrolloff=4
 set smartcase
 
 " Plugins
+set NERDTree
 set argtextobj
 set commentary
 set highlightedyank
@@ -49,6 +50,7 @@ nnoremap <leader>ll :action QuickJavaDoc<CR>
 nnoremap <leader>lo :action OptimizeImports<CR>
 nnoremap <leader>lr :action RenameElement<CR>
 nnoremap <leader>p :action $Paste<CR>
+nnoremap <leader>tt :NERDTreeToggle<CR>
 
 nnoremap <leader><space> :nohlsearch<CR>
 
