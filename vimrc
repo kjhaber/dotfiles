@@ -399,20 +399,17 @@ set statusline+=%#warningmsg#
 set statusline+=%*
 
 set statusline+=%=      "left/right separator
-" set statusline+=%{fugitive#statusline()}\  "current git branch
-set statusline+=%{v:register}\             "currently active register
-set statusline+=%c,     "cursor column
+set statusline+=%{SelectedWordCount()}%*\  "count of selected words
+set statusline+=%c,    "cursor column
 set statusline+=%l/%L\  "cursor line/total lines
 set statusline+=(%P)    "percent through file
-set statusline+=%2*%{GitBranchStatusline()}%*  "current git branch
 
-function! GitBranchStatusline()
-  let w:branch = FugitiveHead()
-  if (w:branch == '')
-    return ''
-  else
-    return ' [' . w:branch . '] '
-  endif
+function SelectedWordCount()
+    let l:word_count=" "
+    if has_key(wordcount(),'visual_words')
+        let l:word_count="[".wordcount().visual_words." words selected]"
+    endif
+    return l:word_count
 endfunction
 
 " --------------------------------------------------------------
