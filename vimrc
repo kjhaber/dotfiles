@@ -621,9 +621,9 @@ nnoremap <Leader>tt :NERDTreeToggle<CR>
 
 " Vimwiki mappings
 nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
-nmap <Leader>w<Space>y <Plug>VimwikiMakeYesterdayDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 nmap <Leader>wc :Calendar<CR><C-w>5>0t
+nmap <Leader>wy <Plug>VimwikiDiaryPrevDay
 nmap <silent> <Leader>w- :call ToggleDashCheckbox()<CR>
 
 " In vimwiki, I sometimes mark a 'checkbox' task with [-]` instead of `[X]` to
