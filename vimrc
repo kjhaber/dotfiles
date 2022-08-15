@@ -33,6 +33,8 @@ set updatetime=250
 set wildmenu
 set listchars+=tab:»\ ,eol:¶,space:⋅,trail:✗
 set whichwrap+=<,>,h,l,[,]
+set nobackup
+set nowritebackup
 
 syntax enable
 filetype plugin indent on
