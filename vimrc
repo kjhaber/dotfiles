@@ -157,6 +157,9 @@ Plug 'godlygeek/tabular'
 " Snippet contents - used by coc.nvim
 Plug 'honza/vim-snippets'
 
+" Smart inserts closing parentheses
+Plug 'itmammoth/doorboy.vim'
+
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -317,10 +320,6 @@ Plug 'tomasr/molokai'
 
 " Prerequisite for something...
 Plug 'tomtom/tlib_vim'
-
-" Smart inserts closing parentheses 
-Plug 'townk/vim-autoclose'
-let g:AutoCloseExpandSpace = 0 " Make iabbrev work with vim-autoclose
 
 " Filetype-aware comment toggling (gcc)
 Plug 'tpope/vim-commentary'
