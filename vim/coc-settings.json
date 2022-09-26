@@ -8,6 +8,7 @@
   "diagnostic.enableMessage": "jump",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "snippets.ultisnips.directories": ["UltiSnips"],
+  "snippets.userSnippetsDirectory": "~/.config/dotfiles-local/snippets",
   "snippets.extends": {
     "javascriptreact": ["javascript"],
     "typescriptreact": ["javascript"],
