@@ -27,6 +27,8 @@ sethandler <C-j> n:vim i-v:ide
 sethandler <C-k> n:vim i-v:ide
 sethandler <C-l> n:vim i-v:ide
 sethandler <C-v> n-v:vim i:ide
+sethandler <C-o> n:vim i-v:ide
+sethandler <C-i> n:vim i-v:ide
 
 " Mappings
 nnoremap <C-h> <C-w>h
@@ -34,6 +36,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-p> :action GotoFile<CR>
+nnoremap <C-o> :action Back<CR>
+nnoremap <C-i> :action Forward<CR>
 
 " Use :A to resemble vim-projectionist for jumping between impl and test
 command! A action GotoTest
