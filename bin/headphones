@@ -1,0 +1,55 @@
+#!/bin/sh
+# Modified from https://manojkarthick.com/posts/2022/01/disconnect-bluetooth-lid-close/
+# Requires blueutil (`brew install blueutil` https://github.com/toy/blueutil )
+
+# Set HEADPHONES_MAC from local config
+source "$DOTFILE_LOCAL_HOME/headphonesrc"
+
+if [[ -z "$HEADPHONES_MAC" ]]; then
+  echo "HEADPHONES_MAC is not set, exiting (export this variable in $DOTFILE_LOCAL_HOME/headphonesrc)"
+  exit 1
+fi
+
+if [[ ("$1" != "toggle" && "$1" != "status" && "$1" != "connect" && "$1" != "disconnect") ]]; then
+  echo "Usage: headphones [connect|disconnect|toggle|status]"
+  exit 1
+fi
+
+OUTPUT="$(blueutil --is-connected "$HEADPHONES_MAC")"
+
+case $1 in
+status)
+  if [[ "$OUTPUT" =~ "0" ]]; then
+    echo "Headphones not connected"
+  else
+    echo "Headphones connected"
+  fi
+  ;;
+toggle)
+  if [[ "$OUTPUT" =~ "0" ]]; then
+    echo "Connecting headphones with mac address $HEADPHONES_MAC"
+    blueutil --connect "$HEADPHONES_MAC" >/dev/null 2>&1 &
+
+  else
+    echo "Disconnecting headphones with mac address $HEADPHONES_MAC"
+    blueutil --disconnect "$HEADPHONES_MAC" --wait-disconnect "$HEADPHONES_MAC" >/dev/null 2>&1 &
+  fi
+  ;;
+disconnect)
+  if [[ "$OUTPUT" =~ "0" ]]; then
+    echo "Nothing to do"
+  else
+    echo "Disconnecting headphones with mac address $HEADPHONES_MAC"
+    blueutil --disconnect "$HEADPHONES_MAC" --wait-disconnect "$HEADPHONES_MAC" >/dev/null 2>&1 &
+  fi
+  ;;
+connect)
+  if [[ "$OUTPUT" =~ "0" ]]; then
+    echo "Connecting headphones with mac address $HEADPHONES_MAC"
+    blueutil --connect "$HEADPHONES_MAC" >/dev/null 2>&1 &
+  else
+    echo "Nothing to do"
+  fi
+  ;;
+esac
+
