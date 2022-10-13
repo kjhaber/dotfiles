@@ -516,7 +516,7 @@ endfunction
 " -- creates two sections, 'JOURNAL' and 'TODO'
 " -- creates mark j for Journal section
 " -- creates mark t for Todo section
-command! InitDiary execute "normal! ggi## JOURNAL<cr>* <esc>mji<cr><cr><cr>## TODO<esc>mto* [ ] <cr><esc>kA"
+command! InitDiary execute "normal! ggi## JOURNAL<cr>(login)<esc>:call WikiTimestamp()<cr>o* <esc>mji<cr><cr><cr>## TODO<esc>mto* [ ] <cr><esc>kA"
 
 " Initialize PlantUml document
 command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><esc>kkkA "
