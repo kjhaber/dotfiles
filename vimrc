@@ -619,9 +619,13 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>tt :NERDTreeToggle<CR>
 
 " Vimwiki mappings
+" (Replace 'VimwikiColorize' buffer-level mapping of `<leader>wc`: cannot disable
+" mapping with g:vimwiki_key_mappings without disabling all global mappings:
+" https://github.com/vimwiki/vimwiki/blob/fea8bee382b2051b0137fd2cacf0862823ee69b3/ftplugin/vimwiki.vim#L463)
+autocmd FileType vimwiki nmap <buffer> <Leader>wc :Calendar<CR>
+nmap <Leader>wc :Calendar<CR>
 nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
-nmap <Leader>wc :Calendar<CR><C-w>5>0t
 nmap <Leader>wy <Plug>VimwikiDiaryPrevDay
 nmap <silent> <Leader>w- :call ToggleDashCheckbox()<CR>
 
