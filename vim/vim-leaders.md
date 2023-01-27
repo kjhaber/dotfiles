@@ -94,6 +94,7 @@ w
   wt         -- open vimwiki diary to-do page
   w<leader>t -- write vimwiki diary to-do page
   wy         -- vimwiki diary yesterday
+  wY         -- vimwiki diary tomorrow
   w-         -- toggle checkbox with dash instead of X (to mark as N/A)
 x
 y 

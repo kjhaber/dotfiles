@@ -627,6 +627,7 @@ nmap <Leader>wc :Calendar<CR>
 nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 nmap <Leader>wy <Plug>VimwikiDiaryPrevDay
+nmap <Leader>wY <Plug>VimwikiDiaryNextDay
 nmap <silent> <Leader>w- :call ToggleDashCheckbox()<CR>
 
 " In vimwiki, I sometimes mark a 'checkbox' task with [-]` instead of `[X]` to
