@@ -41,6 +41,7 @@ h - Highlight toggle
   hs -- gitgutter Hunk Stage
 i
 j
+  ja -- Jump to Alternate File (test file/source file)
   jd -- LSP Jump to Definition
   ji -- LSP Jump to Implementation
   jr -- LSP Jump to References (find references)

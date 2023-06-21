@@ -342,6 +342,7 @@ Plug 'tpope/vim-surround'
 " Jump to/from 'alternate files' e.g. implemenation/test source files
 Plug 'tpope/vim-projectionist'
 call SourceDotfile('vim/projectionist-settings.vim')
+nmap <silent> <Leader>ja :A<CR>
 
 " Shortcuts for common Ex commands
 " (e.g. ]q == :cnext, [q == :cprevious, ]a == :next, [b == :bprevious 
