@@ -160,6 +160,9 @@ Plug 'honza/vim-snippets'
 " Smart inserts closing parentheses
 Plug 'itmammoth/doorboy.vim'
 
+" Smithy syntax highlighting
+Plug 'jasdel/vim-smithy'
+
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
