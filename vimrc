@@ -200,6 +200,9 @@ Plug 'kana/vim-textobj-line'
 " Prerequisite for textobj plugins
 Plug 'kana/vim-textobj-user'
 
+" Shortcuts for bullet lists
+Plug 'kjhaber/vim-bullet-shortcuts'
+
 " Shortcuts for plantuml files
 Plug 'kjhaber/vim-plantuml-shortcuts'
 
@@ -526,9 +529,6 @@ command! PU PlugUpdate | PlugUpgrade
 
 " UML Arrow Swap: change position of arrow in PlantUML doc
 call SourceDotfile('vim/plantuml-arrow-swap.vim')
-
-" change bullet list character
-call SourceDotfile('vim/change-bullet.vim')
 
 
 " --------------------------------------------------------------
