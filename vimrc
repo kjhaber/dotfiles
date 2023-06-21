@@ -527,9 +527,6 @@ command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><e
 " Make updating plugins more convenient
 command! PU PlugUpdate | PlugUpgrade
 
-" UML Arrow Swap: change position of arrow in PlantUML doc
-call SourceDotfile('vim/plantuml-arrow-swap.vim')
-
 
 " --------------------------------------------------------------
 " Leader/User-Defined Mappings
