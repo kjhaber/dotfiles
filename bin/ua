@@ -6,6 +6,6 @@ set -x
 brew update && brew upgrade
 npm update -g
 vim  -es -u "${DOTFILE_HOME}/vimrc" -i NONE -c "PlugUpdate" -c "PlugUpgrade" -c "CocUpdateSync" -c "qa" || true
-test -f "/usr/sbin/softwareupdate" && "/usr/sbin/softwareupdate" --all --install --force
+
 test -f "${DOTFILE_LOCAL_HOME}/ua.local" && . "${DOTFILE_LOCAL_HOME}/ua.local"
 
