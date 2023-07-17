@@ -488,6 +488,8 @@ function! StripTrailingWhitespaces()
     " save last search & cursor position
     let l:save=winsaveview()
     silent! %substitute/\s\+$//e
+    " Remove carriage return characters (^M) if present too
+    silent! %substitute/\r//e
     call winrestview(l:save)
 endfunction
 
