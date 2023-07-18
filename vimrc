@@ -286,6 +286,8 @@ let g:vim_markdown_conceal = 0
 let g:indentLine_fileTypeExclude = ['markdown']
 vnoremap * S*
 vnoremap _ S_
+" disable vim-markdown open-url feature in favor of open-browser plugin
+map <Plug> <Plug>Markdown_OpenUrlUnderCursor
 
 " Prerequisite for certain async plugins
 Plug 'prabirshrestha/async.vim'
