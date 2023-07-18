@@ -690,8 +690,8 @@ function! WikiTimestamp()
 endfunction
 
 " Mappings to quickly access todo wiki and write it into daily diary
-nmap <Leader>wt :edit $VIMWIKI_DIR/diary/TODO.mdwiki<CR>
-nmap <Leader>w<Space>t :read $VIMWIKI_DIR/diary/TODO.mdwiki<CR>
+nmap <Leader>wt :edit $VIMWIKI_DIR/diary/TODO.md<CR>
+nmap <Leader>w<Space>t :read $VIMWIKI_DIR/diary/TODO.md<CR>
 
 nmap <Leader>z :ZoomWinTabToggle<CR>
 
