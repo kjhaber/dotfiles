@@ -232,7 +232,7 @@ Plug 'mattn/calendar-vim'
 " Customized and functional default starting screen
 Plug 'mhinz/vim-startify'
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
-let g:startify_bookmarks = [ {'.': '.'}, {'t': '$VIMWIKI_DIARY_DIR/TODO.md'}, {'w': '$VIMWIKI_DIR/index.md'}, {'d': '$DOTFILE_HOME'}, {'v': '~/.vimrc'} ]
+let g:startify_bookmarks = [ {'.': '.'}, {'t': '$VIMWIKI_DIR/TODO.md'}, {'w': '$VIMWIKI_DIR/index.md'}, {'d': '$DOTFILE_HOME'}, {'v': '~/.vimrc'} ]
 let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
 
 " JSX syntax highlighting and indenting
@@ -690,8 +690,8 @@ function! WikiTimestamp()
 endfunction
 
 " Mappings to quickly access todo wiki and write it into daily diary
-nmap <Leader>wt :edit $VIMWIKI_DIR/diary/TODO.md<CR>
-nmap <Leader>w<Space>t :read $VIMWIKI_DIR/diary/TODO.md<CR>
+nmap <Leader>wt :edit $VIMWIKI_DIR/TODO.md<CR>
+nmap <Leader>w<Space>t :read $VIMWIKI_DIR/TODO.md<CR>
 
 nmap <Leader>z :ZoomWinTabToggle<CR>
 
