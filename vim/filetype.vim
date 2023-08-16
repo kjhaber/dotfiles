@@ -5,10 +5,14 @@ if exists("did_load_filetypes")
   finish
 endif
 
-" Ensures mdwiki files are set to 'vimwiki' filetype.  When opening
-" explorer-splits from vimwiki (:Vexplore, :Sexplore), the filetype is
-" sometimes changed to 'conf'.  This block prevents that behavior.
 augroup filetypedetect
-  au! BufRead,BufNewFile *.mdwiki setfiletype vimwiki
+  " Set .md files in vimwiki dir to use filetype=vimwiki.
+  " This keeps 'filetype detect' from changing filetype of .md files in
+  " vimwiki directory to markdown. (netrw calls `filetype detect` when it
+  " is opened, e.g. when using `:Vexplore`.)  Can't use $VIMWIKI_DIR
+  " in this autocmd pattern because vim resolves symlinks in
+  " the file path before matching against the filename pattern
+  " (see `:h autocmd`).
+  autocmd BufRead,BufNewFile */vimwiki/*.md set filetype=vimwiki
 augroup END
 

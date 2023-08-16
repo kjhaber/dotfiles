@@ -211,7 +211,6 @@ Plug 'kjhaber/vim-plantuml-shortcuts'
 
 " Personal wiki/diary
 Plug 'vimwiki/vimwiki'
-autocmd BufRead,BufNewFile $VIMWIKI_DIR . '/**/*.md set filetype=vimwiki
 let g:vimwiki_list = [{'path': '$VIMWIKI_DIR', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_url_maxsave = 0
