@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# qnotes
+#
+# Short for "quick notes". Efficiently capture short timestamped messages (e.g.
+# for vimwiki diary) interactively.
+
+set -e
+
+DRYRUN=0
+while true; do
+  case "$1" in
+    -d) QNOTES_BASE_DIR="$1"; shift ;;
+    --dryrun) DRYRUN=1; shift ;;
+    *) break ;;
+  esac
+done
+
+if [ -z "$QNOTES_BASE_DIR" ]; then
+  QNOTES_BASE_DIR="$HOME/.qnotes"
+fi
+
+if [ "$DRYRUN" == 1 ]; then
+  echo "Dryrun mode enabled - not really writing files or creating directories"
+fi
+
+updateTimestamp() {
+  TIMESTAMP_FILENAME=$(/bin/date +%Y-%m-%d_%H%M%S)
+  TIMESTAMP_CONTENT=$(/bin/date +%H:%M)
+}
+
+updateTimestamp
+QNOTES_DIR="$QNOTES_BASE_DIR/session_$TIMESTAMP_FILENAME"
+echo "quicknotes directory: $QNOTES_DIR"
+if [ "$DRYRUN" != 1 ]; then
+  mkdir -p "$QNOTES_DIR"
+  rm "$QNOTES_BASE_DIR/latest_session"
+  ln -s "$QNOTES_DIR" "$QNOTES_BASE_DIR/latest_session"
+fi
+
+while true; do
+  printf '> '
+  read line
+  LINE_LEN="${#line}"
+  if [ $LINE_LEN -gt 0 ]; then
+    updateTimestamp
+    # printf '  ... writing %s chars to %s' "${#line}" "$QNOTES_DIR/$TIMESTAMP_FILENAME"
+    printf '  ... writing %s (%s chars)' "$QNOTES_DIR/$TIMESTAMP_FILENAME" "${#line}" 
+    if [ "$DRYRUN" != 1 ]; then
+      printf '[%s] %s\n' "$TIMESTAMP_CONTENT" "$line"  > "$QNOTES_DIR/$TIMESTAMP_FILENAME"
+    else
+      printf ' [not really]'
+    fi
+    printf '\n'
+  fi
+done
+
