@@ -10,18 +10,18 @@ set -e
 DRYRUN=0
 while true; do
   case "$1" in
-    -d) QNOTES_BASE_DIR="$1"; shift ;;
     --dryrun) DRYRUN=1; shift ;;
     *) break ;;
   esac
 done
 
-if [ -z "$QNOTES_BASE_DIR" ]; then
-  QNOTES_BASE_DIR="$HOME/.qnotes"
+if [ -z "$QNOTES_DIR" ]; then
+  echo "QNOTES_DIR is not set.  Set the QNOTES_DIR env variable to the path where session events will be written."
+  exit 1
 fi
 
 if [ "$DRYRUN" == 1 ]; then
-  echo "Dryrun mode enabled - not really writing files or creating directories"
+  echo "(Dryrun mode enabled - not really writing files or creating directories)"
 fi
 
 updateTimestamp() {
@@ -30,12 +30,14 @@ updateTimestamp() {
 }
 
 updateTimestamp
-QNOTES_DIR="$QNOTES_BASE_DIR/session_$TIMESTAMP_FILENAME"
-echo "quicknotes directory: $QNOTES_DIR"
+QNOTES_SESSION_DIR="$QNOTES_DIR/session_$TIMESTAMP_FILENAME"
+echo "qnotes session directory: $QNOTES_SESSION_DIR"
 if [ "$DRYRUN" != 1 ]; then
-  mkdir -p "$QNOTES_DIR"
-  rm "$QNOTES_BASE_DIR/latest_session"
-  ln -s "$QNOTES_DIR" "$QNOTES_BASE_DIR/latest_session"
+  mkdir -p "$QNOTES_SESSION_DIR"
+  if [ -e "$QNOTES_DIR/latest_session" ]; then
+    rm "$QNOTES_DIR/latest_session"
+  fi
+  ln -s "$QNOTES_SESSION_DIR" "$QNOTES_DIR/latest_session"
 fi
 
 while true; do
@@ -44,10 +46,9 @@ while true; do
   LINE_LEN="${#line}"
   if [ $LINE_LEN -gt 0 ]; then
     updateTimestamp
-    # printf '  ... writing %s chars to %s' "${#line}" "$QNOTES_DIR/$TIMESTAMP_FILENAME"
-    printf '  ... writing %s (%s chars)' "$QNOTES_DIR/$TIMESTAMP_FILENAME" "${#line}" 
+    printf '  ... writing %s (%s chars)' "$QNOTES_SESSION_DIR/$TIMESTAMP_FILENAME" "${#line}" 
     if [ "$DRYRUN" != 1 ]; then
-      printf '[%s] %s\n' "$TIMESTAMP_CONTENT" "$line"  > "$QNOTES_DIR/$TIMESTAMP_FILENAME"
+      printf '[%s] %s\n' "$TIMESTAMP_CONTENT" "$line"  > "$QNOTES_SESSION_DIR/$TIMESTAMP_FILENAME"
     else
       printf ' [not really]'
     fi

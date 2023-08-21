@@ -86,6 +86,8 @@ alias cddotfiles="cd $DOTFILE_HOME"
 alias cddotfiles-local="cd $DOTFILE_LOCAL_HOME"
 alias cddiary="cd $VIMWIKI_DIARY_DIR"
 alias cdvimwiki="cd $VIMWIKI_DIR"
+alias cdqnotes="cd $QNOTES_DIR"
+alias cdqnotes-latest="cd $QNOTES_LATEST_DIR"
 
 # Maven
 alias mci="mvn clean install"
