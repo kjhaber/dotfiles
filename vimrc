@@ -651,7 +651,7 @@ endfunction
 " Copy todo item to journal item (relies on mark t to indicate top of Todo
 " section, see InitDiary command)
 " nnoremap <Leader>wj :execute "normal! yy`tkkp" <bar> :s/\v\[.\] // <bar> :nohlsearch<CR>
-nnoremap <Leader>wj :call WikiJournal()<CR>
+nnoremap <Leader>wj :call WikiJournal()<CR>:w<CR>
 
 function! WikiJournal()
   " yank current line into the 'j' register
@@ -673,7 +673,7 @@ endfunction
 
 " Append the current time (hour and minute) in square brackets to the end of
 " the current line.  Replace existing if already present.
-nnoremap <Leader>wm :call WikiTimestamp()<CR>
+nnoremap <Leader>wm :call WikiTimestamp()<CR>:w<CR>
 function! WikiTimestamp()
   " set 't' register to current time (in square brackets)
   let @t = system("date +'[\%H:\%M]'")
