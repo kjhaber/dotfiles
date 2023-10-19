@@ -134,19 +134,43 @@ for file in $DOTFILE_HOME/zsh/bin/*.zsh; do
   source "$file"
 done
 
-# Run antibody to load zsh plugins if it exists on PATH (brew install antibody)
-if type antibody >/dev/null 2>/dev/null ; then
-  source <(antibody init)
-  antibody bundle < $DOTFILE_HOME/zsh/plugin-list
+# Load zsh plugins with zplug (brew install zplug)
+# Allow ZPLUG_HOME override in $DOTFILE_LOCAL_HOME/zshrc-local.before
+if [ -z $ZPLUG_HOME ] ; then
+  zplug_home="/usr/local/opt/zplug"
+  test -r "$zplug_home" && export ZPLUG_HOME="$zplug_home"
+  unset zplug_home
+fi
 
-  if [[ -d "$DOTFILE_HOME/zsh/bin/after-plugins" ]]; then
-    for file in $DOTFILE_HOME/zsh/bin/after-plugins/*.zsh; do
-      source "$file"
-    done
+if [ -d "$ZPLUG_HOME" ] ; then
+  source "$ZPLUG_HOME/init.zsh"
+
+  zplug "zsh-users/zsh-autosuggestions"
+  zplug "zsh-users/zsh-syntax-highlighting"
+  zplug "kjhaber/cdfzf.zsh"
+  zplug "kjhaber/tm.zsh"
+  # zplug "mafredri/zsh-async"
+
+  if ! zplug check --verbose; then
+      printf "Install? [y/N]: "
+      if read -q; then
+          echo; zplug install
+      fi
   fi
 
+  # Then, source plugins and add commands to $PATH
+  zplug load
+
+  ## Probably will clean this up with zsh-async plugin above
+  ## This was used to lazy-load things like 
+  # if [[ -d "$DOTFILE_HOME/zsh/bin/after-plugins" ]]; then
+  #   for file in $DOTFILE_HOME/zsh/bin/after-plugins/*.zsh; do
+  #     source "$file"
+  #   done
+  # fi
+
 else
-  echo 'Note: antibody not found, zsh plugins not loaded'
+  echo 'Note: zplug not found, zsh plugins not loaded'
 fi
 
 # Enable iTerm2 integration
