@@ -1,0 +1,34 @@
+{
+  "src/main/java/*.java": {
+    "alternate": "src/test/java/{}Test.java",
+    "type": "source"
+  },
+  "src/test/java/*Test.java": {
+    "alternate": "src/main/java/{}.java",
+    "type": "test"
+  },
+  "*.ts": {
+    "alternate": "{dirname}/__tests__/{basename}.test.ts",
+    "type": "source"
+  },
+  "**/__tests__/*.test.ts": {
+    "alternate": "{}.ts",
+    "type": "test"
+  },
+  "*.tsx": {
+    "alternate": "{dirname}/__tests__/{basename}.test.tsx",
+    "type": "source"
+  },
+  "**/__tests__/*.test.tsx": {
+    "alternate": "{}.tsx",
+    "type": "test"
+  },
+  "*.js": {
+    "alternate": "{dirname}/__tests__/{basename}.test.js",
+    "type": "source"
+  },
+  "**/__tests__/*.test.js": {
+    "alternate": "{}.js",
+    "type": "test"
+  }
+}
