@@ -95,7 +95,7 @@ endif
 exec 'source ' . $HOME . '/.config/nvim/source-if-readable.vim'
 
 " Source local vim config before plugins load (unused but here for completeness)
-call SourceNvimDotfile('vimrc-local.before')
+call SourceLocalNvimDotfile('vimrc-local.before')
 
 
 " --------------------------------------------------------------
@@ -369,7 +369,7 @@ let g:netrw_altv=1    " open files on right
 let g:netrw_nogx = 1  " disable netrw's gx mapping in favor of open-browser.vim
 
 " Load plugins from dotfiles-local
-call SourceNvimDotfile('vimrc-local.plugin')
+call SourceLocalNvimDotfile('vimrc-local.plugin')
 
 
 call plug#end()
@@ -800,5 +800,5 @@ autocmd FileType vimwiki set nolist
 " --------------------------------------------------------------
 " Source local-specific mappings/abbreviations
 " --------------------------------------------------------------
-call SourceNvimDotfile('vimrc-local.after')
+call SourceLocalNvimDotfile('vimrc-local.after')
 

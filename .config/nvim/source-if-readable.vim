@@ -9,3 +9,7 @@ function! SourceNvimDotfile(filename)
   call SourceIfReadable($HOME . '/.config/nvim/' . a:filename)
 endfunction
 
+function! SourceLocalNvimDotfile(filename)
+  call SourceIfReadable($HOME . '/.config-local/nvim/' . a:filename)
+endfunction
+
