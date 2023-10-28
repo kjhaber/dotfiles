@@ -1,0 +1,76 @@
+" Settings
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+let g:highlightedyank_highlight_duration = 300
+
+set clipboard=unnamedplus,unnamed,ideaput
+set hlsearch
+set ignorecase
+set incsearch
+set number
+set relativenumber
+set scrolloff=4
+set smartcase
+
+" Plugins
+set NERDTree
+set argtextobj
+set commentary
+set highlightedyank
+set matchit
+set surround
+
+" Resolve IDE keybinding conflicts
+" https://github.com/JetBrains/ideavim/wiki/sethandler
+sethandler <C-h> n:vim i-v:ide
+sethandler <C-j> n:vim i-v:ide
+sethandler <C-k> n:vim i-v:ide
+sethandler <C-l> n:vim i-v:ide
+sethandler <C-v> n-v:vim i:ide
+sethandler <C-o> n:vim i-v:ide
+sethandler <C-i> n:vim i-v:ide
+
+" Mappings
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-p> :action GotoFile<CR>
+nnoremap <C-o> :action Back<CR>
+nnoremap <C-i> :action Forward<CR>
+
+" Use :A to resemble vim-projectionist for jumping between impl and test
+command! A action GotoTest
+
+nnoremap <leader>// :action SearchEverywhere<CR>
+nnoremap <leader>ff :action ReformatCode<CR>
+nnoremap <leader>jd :action GotoDeclaration<CR>
+nnoremap <leader>ji :action GotoImplementation<CR>
+nnoremap <leader>jr :action FindUsages<CR>
+nnoremap <leader>jt :action GotoTypeDeclaration<CR>
+nnoremap <leader>l<space> :action QuickFixes<CR>
+nnoremap <leader>lf :action ReformatCode<CR>
+nnoremap <leader>ll :action QuickJavaDoc<CR>
+nnoremap <leader>lo :action OptimizeImports<CR>
+nnoremap <leader>lr :action RenameElement<CR>
+nnoremap <leader>p :action $Paste<CR>
+nnoremap <leader>tt :NERDTreeToggle<CR>
+
+nnoremap <leader><space> :nohlsearch<CR>
+
+" ∆ = alt-j (down)
+" ˚ = alt-k (up)
+" ˙ = alt-h (left)
+" ¬ = alt-l (right)
+nnoremap ∆ :action MoveLineDown<CR>
+nnoremap ˚ :action MoveLineUp<CR>
+nnoremap ˙ <<
+nnoremap ¬ >>
+vnoremap ∆ :'<,'>action MoveLineDown<CR>
+vnoremap ˚ :'<,'>action MoveLineUp<CR>
+vnoremap ˙ <<
+vnoremap ¬ >>
+
+" Allow machine-specific config under dotfiles-local
+source ~/.config/dotfiles-local/ideavimrc-local
+
