@@ -1,0 +1,20 @@
+{
+  "coc.preferences.extensionUpdateCheck": "never",
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "‼",
+  "diagnostic.infoSign": "𝙄",
+  "diagnostic.hintSign": "▸",
+  "diagnostic.enableHighlightLineNumber": false,
+  "diagnostic.enableMessage": "jump",
+  "inlayHint.enable": false,
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "snippets.ultisnips.directories": ["UltiSnips"],
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
+  "snippets.extends": {
+    "javascriptreact": ["javascript"],
+    "typescriptreact": ["javascript"],
+    "typescript": ["javascript"]
+  },
+  "suggest.autoTrigger": "none",
+  "suggest.noselect": false
+}
