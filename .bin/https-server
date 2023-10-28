@@ -1,0 +1,6 @@
+#!/bin/sh
+HTTPS_SERVER_CONF_DIR="$HOME/.config/https-server"
+HTTPS_SERVER_KEY="$HTTPS_SERVER_CONF_DIR/host.key"
+HTTPS_SERVER_CERT="$HTTPS_SERVER_CONF_DIR/host.cert"
+http-server --ssl --key "$HTTPS_SERVER_KEY" --cert "$HTTPS_SERVER_CERT" "$@"
+

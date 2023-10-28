@@ -1,0 +1,17 @@
+#!/bin/bash
+# Modified from the script installed from `brew install plantuml` but with `-spash:no` and `java.awt.headless` arguments added
+HEADLESS=false
+if [ -n "$1" ]; then
+  HEADLESS=true
+fi
+
+PLANTUML_JAR_PATH=$(find /usr/local/Cellar/plantuml -name plantuml.jar | tail -n 1)
+
+while true; do
+  case "$1" in
+    --jarpath) echo "$PLANTUML_JAR_PATH"; exit ;;
+    *) break ;;
+  esac
+done
+GRAPHVIZ_DOT="/usr/local/opt/graphviz/bin/dot" exec java -Djava.awt.headless=$HEADLESS -splash:no -jar "$PLANTUML_JAR_PATH" "$@"
+
