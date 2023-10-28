@@ -1,0 +1,19 @@
+;.editorconfig
+
+charset = utf-8
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+root = true
+trim_trailing_whitespace = true
+
+[**.{js,ts}]
+quote_type = single
+
+[**.html]
+brace_style = expand
+max_char = 80
+
+[**.xml]
+indent_size = 4
+
