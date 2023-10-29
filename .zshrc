@@ -82,8 +82,7 @@ alias cddocuments="cd $DOC_DIR"
 alias cddiary="cd $VIMWIKI_DIARY_DIR"
 alias cdvimwiki="cd $VIMWIKI_DIR"
 
-alias gitdotfile='/usr/local/bin/git --git-dir ~/.config/dotfiles-repo/ --work-tree=$HOME'
-alias gitdotfile-local='/usr/local/bin/git --git-dir ~/.config/dotfiles-local-repo/ --work-tree=$HOME'
+alias gitdotfile='/usr/local/bin/git --git-dir=$HOME/.config/dotfiles-repo/ --work-tree=$HOME'
 
 # Maven
 alias mci="mvn clean install"
