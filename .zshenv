@@ -16,7 +16,7 @@ export CONFIG_DIR="$HOME/.config"
 export CONFIG_LOCAL_DIR="$HOME/.config-local"
 
 # local environment-specific config
-test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.before" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.before"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-before.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-before.zsh"
 
 export DOC_DIR="$HOME/Documents"
 export VIMWIKI_DIR="$DOC_DIR/vimwiki"
@@ -27,5 +27,5 @@ export VIMWIKI_DIARY_DIR="$VIMWIKI_DIR/diary"
 export REMOTE_SYNC_DIR="$DOC_DIR/RemoteSync"
 
 # local environment-specific config
-test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.after" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.after"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-after.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-after.zsh"
 

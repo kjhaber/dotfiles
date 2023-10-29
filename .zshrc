@@ -3,32 +3,25 @@
 # as prompt, shortcuts, zsh feature settings, etc.
 
 # local environment-specific config
-test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.before" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.before"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh"
 
 export EDITOR=nvim
 export CLICOLOR=1
 export KEYTIMEOUT=1
 
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-
-export PATH=$DOTFILE_HOME/bin:$PATH
-
-# Environment-specific overrides for binaries should come first in PATH
-export PATH=$DOTFILE_LOCAL_HOME/bin:$PATH
-
+# Set PATH
 # Allow environment-specific PATH overrides in dedicated file
-test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.path" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.path"
+source "$CONFIG_DIR/zsh/path.zsh"
+test -f "$CONFIG_LOCAL_DIR/zsh/path.zsh" && source "$CONFIG_LOCAL_DIR/zsh/path.zsh"
 
 bindkey -v
-
-autoload -U compinit colors
 
 # Use `<ESC>v` to edit current command line in editor
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
+autoload -U compinit colors
 fpath=($CONFIG_DIR/zsh/completion $CONFIG_LOCAL_DIR/zsh/completion $fpath)
 compinit
 colors
@@ -59,46 +52,10 @@ precmd () {
 # (https://superuser.com/questions/928846/what-is-execute-on-the-command-line-and-how-to-i-avoid-it)
 bindkey -a -r ':'
 
-alias vi=nvim
-alias vim=nvim
-alias vimdiff='nvim -d'
+# import aliases
+source $CONFIG_DIR/zsh/aliases.zsh
+test -f "$CONFIG_LOCAL_DIR/zsh/aliases.zsh" && source "$CONFIG_LOCAL_DIR/zsh/aliases.zsh"
 
-# aliases for common typos and jump to favorite directories
-alias xeit=exit
-alias :q=exit
-
-# using dash to go up a directory is same as netrw in vim
-alias -- -='cd ..'
-
-# cd to pwd - handy when pwd is log or test dir that is reset by clean/rebuild or deployment
-alias cdpwd='cd "$(pwd)"; pwd'
-
-alias cddesktop="cd $HOME/Desktop"
-alias cddownloads="cd $HOME/Downloads"
-alias cddocuments="cd $DOC_DIR"
-alias cddiary="cd $VIMWIKI_DIARY_DIR"
-alias cdvimwiki="cd $VIMWIKI_DIR"
-
-alias gitdotfile='/usr/local/bin/git --git-dir=$HOME/.config/dotfiles-repo/ --work-tree=$HOME'
-
-# Maven
-alias mci="mvn clean install"
-alias mcp="mvn clean package"
-alias mcsr="mvn clean spring-boot:run"
-alias mvn-clean-all='find . -name "pom.xml" -execdir mvn clean \;'
-
-# GraalVM + Maven
-alias gmci="gmvn clean install"
-alias gmcp="gmvn clean package"
-
-# cd to git root
-alias cdgr='git rev-parse && cd "$(git rev-parse --show-cdup)"'
-
-alias tmi='tmuxinator'
-
-# Source separate file for environment-specific aliases, as these differ between
-# work and home machines
-test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-local.aliases" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-local.aliases"
 
 # Enable various tools
 
@@ -131,11 +88,9 @@ if [[ ! -f $HOME/.zcomet/bin/zcomet.zsh ]]; then
   git clone https://github.com/agkozak/zcomet.git $HOME/.zcomet/bin
 fi
 source $HOME/.zcomet/bin/zcomet.zsh
-zcomet load zsh-users/zsh-autosuggestions
-zcomet load zsh-users/zsh-syntax-highlighting
-zcomet load kjhaber/cdfzf.zsh
-zcomet load kjhaber/tm.zsh
+source $CONFIG_DIR/zsh/plugins.zsh
+test -f "$CONFIG_LOCAL_DIR/zsh/plugins.zsh" && source "$CONFIG_LOCAL_DIR/zsh/plugins.zsh"
 
 # local environment-specific config
-test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.after" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.after"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh"
 
