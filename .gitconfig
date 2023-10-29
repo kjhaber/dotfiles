@@ -1,5 +1,5 @@
 [include]
-  path = ~/.config/dotfiles-local/gitconfig-local
+  path = ~/.config-local/git/gitconfig-local
 [color]
   ui = true
 [alias]
@@ -46,6 +46,3 @@
 [pull]
 	ff = only
 
-[user]
-	email = kjhaber@gmail.com
-	name = Keith Haber
