@@ -3,7 +3,7 @@
 # as prompt, shortcuts, zsh feature settings, etc.
 
 # local environment-specific config
-test -f "$HOME/zsh/zshrc-local.before" && source "$HOME/zsh/zshrc-local.before"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.before" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.before"
 
 export EDITOR=nvim
 export CLICOLOR=1
@@ -12,16 +12,13 @@ export KEYTIMEOUT=1
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
-# Enable nix package manager if present
-test -f "$HOME/.nix-profile/etc/profile.d/nix.sh" && source "$HOME/.nix-profile/etc/profile.d/nix.sh"
-
 export PATH=$DOTFILE_HOME/bin:$PATH
 
 # Environment-specific overrides for binaries should come first in PATH
 export PATH=$DOTFILE_LOCAL_HOME/bin:$PATH
 
 # Allow environment-specific PATH overrides in dedicated file
-test -f "$CONFIG_DIR/zsh/zshrc-local.path" && source "$CONFIG_DIR/zsh/zshrc-local.path"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.path" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.path"
 
 bindkey -v
 
@@ -32,7 +29,7 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-fpath=($CONFIG_DIR/zsh/completion $DOTFILE_LOCAL_HOME/zsh/completion $fpath)
+fpath=($CONFIG_DIR/zsh/completion $CONFIG_LOCAL_DIR/zsh/completion $fpath)
 compinit
 colors
 
@@ -101,7 +98,7 @@ alias tmi='tmuxinator'
 
 # Source separate file for environment-specific aliases, as these differ between
 # work and home machines
-test -f "$CONFIG_DIR/zsh/zshrc-local.aliases" && source "$CONFIG_DIR/zsh/zshrc-local.aliases"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-local.aliases" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-local.aliases"
 
 # Enable various tools
 
@@ -123,6 +120,11 @@ zstyle ':completion:*:ssh:*' hosts off
 for file in $CONFIG_DIR/zsh/bin/*.zsh; do
   source "$file"
 done
+if [[ -d $CONFIG_LOCAL_DIR/zsh/bin ]]; then
+  for file in $CONFIG_LOCAL_DIR/zsh/bin/*.zsh; do
+    source "$file"
+  done
+fi
 
 # load zsh plugins
 if [[ ! -f $HOME/.zcomet/bin/zcomet.zsh ]]; then
@@ -134,9 +136,6 @@ zcomet load zsh-users/zsh-syntax-highlighting
 zcomet load kjhaber/cdfzf.zsh
 zcomet load kjhaber/tm.zsh
 
-# Enable iTerm2 integration
-test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
-
 # local environment-specific config
-test -f "$DOTFILE_LOCAL_HOME/zshrc-local.after" && source "$DOTFILE_LOCAL_HOME/zshrc-local.after"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.after" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.after"
 

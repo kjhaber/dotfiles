@@ -10,10 +10,13 @@
 # runs  "set -g default-command 'reattach-to-user-namespace -l zsh'".  Slow code
 # in shell init is bad, but that literally goes double for zshenv. :)
 
+export HOMEBREW_NO_ANALYTICS=1
+
 export CONFIG_DIR="$HOME/.config"
+export CONFIG_LOCAL_DIR="$HOME/.config-local"
 
 # local environment-specific config
-test -f "$HOME/.zshenv-local.before" && source "$HOME/.zshenv-local.before"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.before" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.before"
 
 export DOC_DIR="$HOME/Documents"
 export VIMWIKI_DIR="$DOC_DIR/vimwiki"
@@ -23,10 +26,6 @@ export VIMWIKI_DIARY_DIR="$VIMWIKI_DIR/diary"
 # At work it's a directory configured to sync with network drive
 export REMOTE_SYNC_DIR="$DOC_DIR/RemoteSync"
 
-export HOMEBREW_NO_ANALYTICS=1
-
-# Rust/Cargo
-test -f "$HOME/.cargo/env" && source "$HOME/.cargo/env"
-
 # local environment-specific config
-test -f "$HOME/.zshenv-local.after" && source "$HOME/.zshenv-local.after"
+test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-local.after" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-local.after"
+
