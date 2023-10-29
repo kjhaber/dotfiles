@@ -77,25 +77,14 @@ endif
 " --------------------------------------------------------------
 " Source local configurations
 " --------------------------------------------------------------
-" Set dotfile_home and dotfile_local_home as Vim variables in case vim is
-" launched outside normal shell and not picking up variables from zsh config.
-let g:dotfile_home = $DOTFILE_HOME
-if empty(g:dotfile_home)
-  let g:dotfile_home = $HOME . '/.config/dotfiles'
-endif
-let g:dotfile_local_home = $DOTFILE_LOCAL_HOME
-if empty(g:dotfile_local_home)
-  let g:dotfile_local_home = $HOME . '/.config/dotfiles-local'
-endif
 
 " Load files conditionally.  This allows separating the core configuration
 " that is the same on all machines from environment-specific config (like
 " OS-specific, work vs home config, etc.).
-"exec 'source ' . g:dotfile_home . '/vim/source-if-readable.vim'
 exec 'source ' . $HOME . '/.config/nvim/source-if-readable.vim'
 
 " Source local vim config before plugins load (unused but here for completeness)
-call SourceLocalNvimDotfile('vimrc-local.before')
+call SourceLocalNvimDotfile('init-before.vim')
 
 
 " --------------------------------------------------------------
@@ -532,5 +521,5 @@ autocmd FileType vimwiki set nolist
 " --------------------------------------------------------------
 " Source local-specific mappings/abbreviations
 " --------------------------------------------------------------
-call SourceLocalNvimDotfile('vimrc-local.after')
+call SourceLocalNvimDotfile('init-after.vim')
 
