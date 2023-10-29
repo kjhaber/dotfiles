@@ -74,11 +74,11 @@ export FZF_DEFAULT_OPTS='--color hl:#75a6d6,hl+:#70d4f5'
 zstyle ':completion:*:ssh:*' hosts off
 
 # load external configs and plugins
-for file in $CONFIG_DIR/zsh/bin/*.zsh; do
+for file in $CONFIG_DIR/zsh/autoload/*.zsh; do
   source "$file"
 done
-if [[ -d $CONFIG_LOCAL_DIR/zsh/bin ]]; then
-  for file in $CONFIG_LOCAL_DIR/zsh/bin/*.zsh; do
+if [[ -d $CONFIG_LOCAL_DIR/zsh/autoload ]]; then
+  for file in $CONFIG_LOCAL_DIR/zsh/autoload/*.zsh; do
     source "$file"
   done
 fi
