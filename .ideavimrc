@@ -72,5 +72,5 @@ vnoremap ˙ <<
 vnoremap ¬ >>
 
 " Allow machine-specific config under dotfiles-local
-source ~/.config/dotfiles-local/ideavimrc-local
+source ~/.config-local/ideavim/ideavimrc-local
 
