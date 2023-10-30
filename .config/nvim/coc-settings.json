@@ -9,7 +9,7 @@
   "inlayHint.enable": false,
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "snippets.ultisnips.directories": ["UltiSnips"],
-  "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
+  "snippets.userSnippetsDirectory": "~/.config-local/nvim/snippets",
   "snippets.extends": {
     "javascriptreact": ["javascript"],
     "typescriptreact": ["javascript"],
