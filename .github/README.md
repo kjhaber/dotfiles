@@ -11,7 +11,7 @@ One thing that's important to me in my dotfile setup is to allow machine-specifi
 (Work in progress)
 ```
 git clone --bare https://github.com/kjhaber/config $HOME/.config/dotfiles-repo
-alias gitdotfile='/usr/local/bin/git --git-dir=$HOME/.config/dotfiles-repo/ --work-tree=$HOME'
+alias gitdotfile='git --git-dir=$HOME/.config/dotfiles-repo/ --work-tree=$HOME'
 cd ~
 gitdotfile checkout
 gitdotfile config --local status.showUntrackedFiles no

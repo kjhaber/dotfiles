@@ -5,7 +5,7 @@ alias :q=exit
 # using dash to go up a directory is same as netrw in vim
 alias -- -='cd ..'
 
-alias gitdotfile='/usr/local/bin/git --git-dir=$HOME/.config/dotfiles-repo/ --work-tree=$HOME'
+alias gitdotfile='git --git-dir=$HOME/.config/dotfiles-repo/ --work-tree=$HOME'
 
 # cd to pwd - handy when pwd is log or test dir that is reset by clean/rebuild or deployment
 alias cdpwd='cd "$(pwd)"; pwd'
