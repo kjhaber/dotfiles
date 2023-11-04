@@ -1,6 +1,7 @@
 if [[ ! -d  "$HOME/.asdf" ]]; then
   echo "Installing asdf"
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+  source "$HOME/.asdf/asdf.sh"
 
   echo "Installing nodejs plugin for asdf"
   asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
