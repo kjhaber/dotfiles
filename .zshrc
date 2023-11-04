@@ -21,9 +21,7 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-autoload -U compinit colors
-fpath=($CONFIG_DIR/zsh/completion $CONFIG_LOCAL_DIR/zsh/completion $fpath)
-compinit
+autoload -U colors
 colors
 
 setopt complete_in_word
@@ -90,6 +88,11 @@ fi
 source $HOME/.zcomet/bin/zcomet.zsh
 source $CONFIG_DIR/zsh/plugins.zsh
 test -f "$CONFIG_LOCAL_DIR/zsh/plugins.zsh" && source "$CONFIG_LOCAL_DIR/zsh/plugins.zsh"
+
+# load completions (after plugins)
+fpath=($CONFIG_DIR/zsh/completion $CONFIG_LOCAL_DIR/zsh/completion $fpath)
+autoload -U compinit
+compinit
 
 # local environment-specific config
 test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh"
