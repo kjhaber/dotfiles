@@ -149,7 +149,6 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 
 " LSP and auto-completion tool
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_node_path = '/usr/local/bin/node'
 let g:coc_global_extensions = [
 \  'coc-calc',
 \  'coc-css',
