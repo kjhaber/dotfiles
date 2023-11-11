@@ -1,0 +1,12 @@
+FROM debian
+RUN apt update
+RUN apt -y install git
+RUN apt -y install zsh
+RUN apt -y install sudo 
+RUN apt -y install curl 
+RUN adduser --home /home/tester --shell /usr/bin/zsh tester
+RUN echo 'tester:xx' | chpasswd
+RUN usermod -aG sudo tester
+USER tester
+CMD zsh
+
