@@ -85,6 +85,24 @@ Additional zsh init code for the beginning/end of ZSH's regular `.zshenv` and `.
 `autoload/*.zsh`
 Additional zsh scripts that should be executed.  This one's more for completeness and consistency with the main `.config/zsh/autoload` scripts, which is where I keep zsh scripts that I don't think are ready to be made into full-blown zsh plugins (or worth the work to do so).
 
+### ~/.config-local/tmux
+tmux settings.
+
+`tmux-before.conf`
+`tmux-plugins.conf`
+`tmux-after.conf`
+Additional tmux init code specific to the machine.  I don't use the -before or -plugins configs often, but I find tmux-after.conf very useful to set environment-specific colors, for example, to set a reddish "theme" on my remote development server at work.  This makes my remote machine's sessions visually distinct from the blue/green "theme" of my local tmux windows.  The reddish tmux theme config in my `tmux-after.conf` looks like this:
+
+```
+set -g status-bg '#7f0100'
+set -g status-fg '#efefef'
+set -g window-style 'fg=#b5b5b5 bg=#020102'
+set -g window-active-style 'fg=#feffff bg=#120102'
+set -g pane-border-style fg='#017f00',bg='#020102'
+set -g pane-active-border-style fg='#feffff',bg='#120102'
+```
+
+
 ## License
 MIT license
 
