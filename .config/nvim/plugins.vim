@@ -128,8 +128,7 @@ Plug 'mattn/calendar-vim'
 " Customized and functional default starting screen
 Plug 'mhinz/vim-startify'
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
-let g:startify_bookmarks = [ {'.': '.'}, {'t': '$VIMWIKI_DIR/TODO.md'}, {'w': '$VIMWIKI_DIR/index.md'}, {'d': '$DOTFILE_HOME'}, {'v': '~/.vimrc'} ]
-let g:startify_commands = [ {'S': 'enew | SimplenoteList'} ]
+let g:startify_bookmarks = [ {'.': '.'}, {'t': '$VIMWIKI_DIR/TODO.md'}, {'w': '$VIMWIKI_DIR/index.md'}, {'c': '$CONFIG_DIR'}, {'l': '$CONFIG_LOCAL_DIR'} ]
 
 " JSX syntax highlighting and indenting
 Plug 'MaxMEllon/vim-jsx-pretty'
