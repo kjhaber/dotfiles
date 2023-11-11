@@ -19,6 +19,8 @@ alias vimdiff='nvim -d'
 
 alias tmi='tmuxinator'
 
+alias cdconfig="cd $HOME/.config"
+alias cdconfig-local="cd $HOME/.config-local"
 alias cddesktop="cd $HOME/Desktop"
 alias cddownloads="cd $HOME/Downloads"
 alias cddocuments="cd $DOC_DIR"
