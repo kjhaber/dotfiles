@@ -4,29 +4,44 @@ My dotfiles and config files for zsh, nvim, git, tmux, etc.
 
 This repo uses the bare git repository approach from https://www.atlassian.com/git/tutorials/dotfiles (also https://news.ycombinator.com/item?id=11070797 ) to avoid symlinking dotfiles all over my home directory.  My older dotfile repo at https://github.com/kjhaber/dotfiles did it that way and worked well for years, but setup on a new machine has always been a pain point.
 
-One thing that's important to me in my dotfile setup is to allow machine-specific extension points: the core configs need to be easy to reuse on my home machines and work machines, but it needs to allow for machine-specific differences: different aliases and paths, shortcuts and scripts, different git username/email, and so on.
+One thing that's important to me in my dotfile setup is to allow machine-specific extension points.  The core configs need to be easy to reuse on my home machines and work machines, but they need to allow for machine-specific differences: different aliases and paths, shortcuts and scripts, different git username/email, and so on.
 
 
 ## Setup on new machine
-(Work in progress)
+
+Install:
 ```
-git clone --bare https://github.com/kjhaber/config $HOME/.config/meta/repo
-alias gitdotfile='git --git-dir=$HOME/.config/meta/repo/ --work-tree=$HOME'
+curl -fsSL https://github.com/kjhaber/config/raw/master/.config/meta/install/install.sh | zsh
+```
+
+More manually:
+
+1. Clone bare git repository with work tree set to $HOME directory, and set up aliases to work with this git repo.
+```
 cd ~
+git clone --bare https://github.com/kjhaber/config "$HOME/.config/meta/repo"
+alias gitdotfile='git --git-dir=$HOME/.config/meta/repo/ --work-tree=$HOME'
 gitdotfile checkout
 gitdotfile config --local status.showUntrackedFiles no
 ```
 
-## Making changes
+2. Restart zsh, or start a new zsh sub-shell.  This will load the zsh configs in this repo, which includes some install scripts for asdf, node, vim-plug, tpm (tmux plugin manager), etc. which are used by other areas of the config.
 
-Idea is to use `gitdotfile` alias in the place of just `git` in git commands to add, commit, and push changes.  The `gitdotfile` alias still works like regular git, but copes with the repo not being in the regular .git directory in the root directory (which is the home directory in this case).
+3. Open `nvim`.  (You will probably see a "theme not found" error during startup.)  Run `:PU` (alias for `PlugUpdate | PlugUpgrade`) to install all vim-plug plugins, which will in turn install all coc.nvim plugins.  Exit from nvim (how to do that is an exercise left to the reader, ha).
 
-First time:
-```
-gitdotfile push --set-upstream origin master
-```
+4. Install tmux plugins by running `.tmux/plugins/tpm/bin/install_plugins`.  Alternatively, start a tmux session and type `<tmux-action-key>I` to update plugins.  (In this config, <tmux-action-key> is set to the backtick character.  I find this more comfortable than using a chorded ctrl character. To type a backtick within a tmux session, type the backtick character twice.)
 
-Subsequent commits can be pushed with just `gitdotfile push`.
+
+## Pulling and pushing updates
+The idea is to use `gitdotfile` alias in the place of just `git` in git commands to add, commit, and push changes.  The `gitdotfile` alias still works like regular git, but copes with the repo not being in the regular .git directory in the root directory (which is the home directory in this case).
+
+
+`gitdotfile pull`
+
+`gitdotfile push`
+
+(first time, using `gitdotfile push --set-upstream origin master` works)
+
 
 ## Dependencies
 (This needs a lot more detail.)
@@ -41,10 +56,10 @@ Homebrew: https://brew.sh/
 Machine-specific settings are defined in `~/.config-local`.  Everything here is optional.
 
 ### ~/.config-local/bin
-This directory in included in $PATH, so add any machine-specific scripts or executables here.
+This directory in included in $PATH.  Add any machine-specific scripts or executables here.
 
 ### ~/.config-local/git
-Git settings.  
+Git settings.
 
 `gitconfig-local`
 Sourced by `~/.gitconfig`.  This is a good place to put user.name and user.email settings (e.g. work vs. personal).
