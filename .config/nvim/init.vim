@@ -158,6 +158,19 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:Calendar")) | q | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:fugitive_expanded")) | q | endif
 
 
+" In netrw, override ctrl-hjkl mappings so ctrl-w doesn't need to be typed first
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+
+function! NetrwMapping()
+    noremap <buffer> <c-h> <c-w>h
+    noremap <buffer> <c-j> <c-w>j
+    noremap <buffer> <c-k> <c-w>k
+    noremap <buffer> <c-l> <c-w>l
+endfunction
+
 " --------------------------------------------------------------
 " User-Defined Functions and Commands
 " --------------------------------------------------------------
