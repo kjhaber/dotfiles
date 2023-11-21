@@ -16,5 +16,6 @@
     "typescript": ["javascript"]
   },
   "suggest.autoTrigger": "none",
-  "suggest.noselect": false
+  "suggest.noselect": false,
+  "snippets.ultisnips.pythonPrompt": false
 }
