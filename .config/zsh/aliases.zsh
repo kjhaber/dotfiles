@@ -21,6 +21,8 @@ alias tmi='tmuxinator'
 
 alias cdconfig="cd $HOME/.config"
 alias cdconfig-local="cd $HOME/.config-local"
+alias cddotfiles="cdfzf $HOME/.config 2"
+alias cddotfiles-local="cdfzf $HOME/.config-local 2"
 alias cddesktop="cd $HOME/Desktop"
 alias cddownloads="cd $HOME/Downloads"
 alias cddocuments="cd $DOC_DIR"
