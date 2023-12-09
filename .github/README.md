@@ -42,6 +42,7 @@ The idea is to use `gitdotfile` alias in the place of just `git` in git commands
 
 (first time, using `gitdotfile push --set-upstream origin master` works)
 
+To test changes before committing and pushing, see `.config/meta/testing`.
 
 ## Dependencies
 (This needs a lot more detail.)
