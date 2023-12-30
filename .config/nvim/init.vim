@@ -410,7 +410,9 @@ function! WikiTimestamp()
   execute "normal! A " . @t
 endfunction
 
-" Mappings to quickly access todo wiki and write it into daily diary
+" Mappings to quickly access todo and quicknote wikis and write them (into daily diary)
+nmap <Leader>wn :edit $VIMWIKI_DIR/QuickNote.md<CR>
+nmap <Leader>w<Space>n :read $VIMWIKI_DIR/QuickNote.md<CR>
 nmap <Leader>wt :edit $VIMWIKI_DIR/TODO.md<CR>
 nmap <Leader>w<Space>t :read $VIMWIKI_DIR/TODO.md<CR>
 

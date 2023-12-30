@@ -22,6 +22,7 @@ c - list hidden Characters
   cr -- coc-Calc Replace
 d
   dd -- Delete line (cut to system clipboard)
+  dn -- Date Normalize: change date under cursor to YYYY-MM-DD format
   dt -- Insert today's date in YYYY-MM-DD format, leave in insert mode
 e
   eb -- error back (previous)
@@ -92,8 +93,10 @@ w
   wf         -- set filetype=vimwiki (vimwiki filetype sometimes changes to 'conf' when splitting window)
   wj         -- copy diary todo item to journal
   wm         -- append or update HH:MM timestamp to current line ('wiki Minute')
-  wt         -- open vimwiki diary to-do page
-  w<leader>t -- write vimwiki diary to-do page
+  wn         -- open vimwiki quickNote page
+  w<leader>n -- write vimwiki quickNote page at current location
+  wt         -- open vimwiki to-do page
+  w<leader>t -- write vimwiki to-do page at current location
   wy         -- vimwiki diary yesterday
   wY         -- vimwiki diary tomorrow
   w-         -- toggle checkbox with dash instead of X (to mark as N/A)
