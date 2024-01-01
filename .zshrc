@@ -64,6 +64,12 @@ export FZF_DEFAULT_COMMAND="rg --files --no-ignore --ignore-case --hidden --foll
 export FZF_DEFAULT_OPTS='--color hl:#75a6d6,hl+:#70d4f5'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# https://stackoverflow.com/questions/68786631/how-do-i-configure-zsh-for-completion-of-partial-words-but-case-insensitive
+zstyle ':completion:*' matcher-list \
+    'm:{[:lower:]}={[:upper:]}' \
+    '+r:|[._-]=* r:|=*' \
+    '+l:|=*'
+
 # Change ssh autocomplete to skip /etc/hosts.  I put hosts entries from
 # the blacklist at http://someonewhocares.org/hosts/ into mine, which maps
 # a bunch of spam and ad tracker sites to localhost.  This is great for
