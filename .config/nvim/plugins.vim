@@ -115,6 +115,7 @@ let g:vimwiki_use_mouse = 1
 let g:vimwiki_auto_chdir = 1
 let g:vimwiki_hl_cb_checked = 2
 let g:vimwiki_conceallevel = 0
+let g:vimwiki_listsyms = ' .x'
 autocmd FileType vimwiki let g:indentLine_enabled = 0
 
 
