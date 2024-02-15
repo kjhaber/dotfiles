@@ -30,14 +30,12 @@ e
   el -- error list
 f - autoFormat
   ff -- format (uses format external prog if available)
-  fi -- indent
 g - fuGitive
   gs -- git status
   gc -- git commit
-h - Highlight toggle
+h
   hb -- gitgutter Hunk Back (previous)
   hf -- gitgutter Hunk Forward (next)
-  hh -- highlight toggle (faster)
   hr -- gitgutter Hunk Revert
   hs -- gitgutter Hunk Stage
 i
@@ -59,14 +57,6 @@ l
   l?  -- LSP Status
   l<space> -- LSP Code Action (Quick Fix)
 m
-  mm  -- bookmark toggle
-  ma  -- bookmark annotated
-  mf  -- bookmark next (forward)
-  mb  -- bookmark prev (back)
-  ml  -- bookmark list
-  mx  -- bookmark clear (current file)
-  mX  -- bookmark clear (all files)
-
 n
   nn -- toggle line numbers
   nr -- toggle between relative and absolute line numbers
@@ -78,7 +68,7 @@ s
   ss  strip trailing whitespace
   sq  strip smart quotes
 t
-  tt -- NERDTree
+  tt -- NERDTree toggle
 u
   ura -- UML reverse arrow
   ure -- UML reverse entity

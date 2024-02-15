@@ -18,6 +18,10 @@ Plug 'Olical/vim-enmasse'
 Plug 'airblade/vim-gitgutter'
 " update signs on file save
 autocmd BufWritePost * GitGutter
+nnoremap <Leader>hr :GitGutterUndoHunk<CR>
+nnoremap <Leader>hs :GitGutterStageHunk<CR>
+nnoremap <Leader>hb :GitGutterPrevHunk<CR>
+nnoremap <Leader>hf :GitGutterNextHunk<CR>
 
 " Changes vim working directory to project root
 Plug 'airblade/vim-rooter'
@@ -50,6 +54,16 @@ Plug 'fvictorio/vim-textobj-backticks'
 
 " Format delimited text as table (rarely used)
 Plug 'godlygeek/tabular'
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a<Space> :Tabularize /<Space><CR>
+vmap <Leader>a<Space> :Tabularize /<Space><CR>
 
 " Snippet contents - used by coc.nvim
 Plug 'honza/vim-snippets'
@@ -63,6 +77,8 @@ Plug 'jasdel/vim-smithy'
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" Search filenames with Ctrl-p
+nnoremap <C-p> :FZF<CR>
 
 " https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
 " Sort vimwiki diary by reverse path to make entries appear in chronological
@@ -79,6 +95,15 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 
 command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+
+" Search file contents with <leader>/
+nmap <Leader>/ :Rg<CR>
+nmap <Leader>// :Rg<CR>
+nmap <Leader>/b :Buffers<CR>
+nmap <Leader>/f :Files<CR>
+nmap <Leader>/h :History<CR>
+nmap <Leader>/l :Lines<CR>
+nmap <Leader>/t :Rg<CR>
 
 " Jump to text with `s` plus two letters
 " Use ; and , to find next/prev match
@@ -108,16 +133,7 @@ Plug 'kjhaber/vim-plantuml-shortcuts'
 
 " Personal wiki/diary
 Plug 'vimwiki/vimwiki'
-let g:vimwiki_list = [{'path': '$VIMWIKI_DIR', 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_global_ext = 0
-let g:vimwiki_url_maxsave = 0
-let g:vimwiki_use_mouse = 1
-let g:vimwiki_auto_chdir = 1
-let g:vimwiki_hl_cb_checked = 2
-let g:vimwiki_conceallevel = 0
-let g:vimwiki_listsyms = ' .x'
-autocmd FileType vimwiki let g:indentLine_enabled = 0
-
+call SourceNvimDotfile('vimwiki-settings.vim')
 
 " When yanking text, makes yanked region blink
 Plug 'machakann/vim-highlightedyank'
@@ -130,6 +146,7 @@ Plug 'mattn/calendar-vim'
 Plug 'mhinz/vim-startify'
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
 let g:startify_bookmarks = [ {'.': '.'}, {'t': '$VIMWIKI_DIR/TODO.md'}, {'w': '$VIMWIKI_DIR/index.md'}, {'c': '$CONFIG_DIR'}, {'l': '$CONFIG_LOCAL_DIR'} ]
+nmap <Leader>; :Startify<CR>
 
 " JSX syntax highlighting and indenting
 Plug 'MaxMEllon/vim-jsx-pretty'
@@ -149,27 +166,7 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 
 " LSP and auto-completion tool
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [
-\  'coc-calc',
-\  'coc-css',
-\  'coc-eslint',
-\  'coc-html',
-\  'coc-java',
-\  'coc-json',
-\  'coc-prettier',
-\  'coc-python',
-\  'coc-rls',
-\  'coc-sh',
-\  'coc-snippets',
-\  'coc-solargraph',
-\  'coc-tsserver',
-\  'coc-vimlsp',
-\  'coc-xml',
-\  'coc-yaml',
-\  'coc-yank'
-\ ]
-let g:coc_snippet_next = '<C-j>'
-let g:coc_snippet_prev = '<C-k>'
+call SourceNvimDotfile('coc-settings.vim')
 
 " JavaScript syntax highlighting and indenting
 Plug 'pangloss/vim-javascript'
@@ -196,6 +193,8 @@ let g:rust_clip_command = 'pbcopy'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 let g:NERDTreeHijackNetrw = 0
 let g:NERDTreeShowHidden = 1
+nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>tt :NERDTreeToggle<CR>
 
 
 " Repeat 'v' key to grow visual selection (<ctrl-v> to shrink)
@@ -244,6 +243,7 @@ Plug 'vim-ruby/vim-ruby'
 " Toggle expanding current split to full window 
 Plug 'vim-scripts/zoomwintab.vim'
 let g:zoomwintab_remap = 0
+nmap <Leader>z :ZoomWinTabToggle<CR>
 
 " Display plantuml image output in browser with live updating
 Plug 'weirongxu/plantuml-previewer.vim'

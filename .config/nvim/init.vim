@@ -48,7 +48,7 @@ set completeopt+=preview
 
 " Enable mouse
 if has('mouse_sgr')
-    set ttymouse=sgr
+  set ttymouse=sgr
 endif
 set mouse=a
 
@@ -186,16 +186,11 @@ function! LeaderReset()
   " this limitation
   call feedkeys( ":nohlsearch\<CR>:echo \"\"\<CR>" )
 endfunction
+nmap <leader><leader> :call LeaderReset()<cr>
+nmap <leader><space> :call LeaderReset()<cr>
 
-function! s:show_documentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  elseif (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  endif
-endfunction
 
-" replace smart quotes with plain quotes
+" Replace smart quotes with plain quotes
 function! StripSmartQuotes()
     " save last search & cursor position
     let l:save=winsaveview()
@@ -205,8 +200,10 @@ function! StripSmartQuotes()
     silent! %substitute/”/"/ge
     call winrestview(l:save)
 endfunction
+nnoremap <Leader>sq :call StripSmartQuotes()<CR>
 
-" strips trailing whitespace at the end of lines
+
+" Strips trailing whitespace at the end of lines
 function! StripTrailingWhitespaces()
     " save last search & cursor position
     let l:save=winsaveview()
@@ -215,8 +212,10 @@ function! StripTrailingWhitespaces()
     silent! %substitute/\r//e
     call winrestview(l:save)
 endfunction
+nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
 
-" toggle between number and nonumber (show always enables relative number,
+
+" Toggle between number and nonumber (show always enables relative number,
 " my preferred default)
 function! ToggleNumber()
     if(&number == 1)
@@ -227,8 +226,10 @@ function! ToggleNumber()
         set relativenumber
     endif
 endfunction
+nmap <Leader>nn :call ToggleNumber()<CR>
 
-" toggle between absolute number and relativenumber
+
+" Toggle between absolute number and relativenumber
 function! ToggleNumberRel()
     if(&relativenumber == 1)
         set norelativenumber
@@ -237,12 +238,16 @@ function! ToggleNumberRel()
         set relativenumber
     endif
 endfunction
+nmap <Leader>nr :call ToggleNumberRel()<CR>
+
 
 " Toggle paste mode quickly
 function! TogglePaste()
   set paste!
   echo 'Paste mode ' . (&paste ? 'enabled' : 'disabled')
 endfunction
+nnoremap <Leader>\ :call TogglePaste()<CR>
+nnoremap <Space>\ :call TogglePaste()<CR>
 
 
 " Initialize my daily diary entry
@@ -262,74 +267,10 @@ command! PU PlugUpdate | PlugUpgrade
 " Leader/User-Defined Mappings
 " --------------------------------------------------------------
 
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a<Space> :Tabularize /<Space><CR>
-vmap <Leader>a<Space> :Tabularize /<Space><CR>
-
+" Toggle listing hidden characters
 nmap <Leader>cc :set list!<CR>
 
-nmap <Leader>ff :call CocActionAsync('format')<CR>
-nmap <Leader>fi mzgg=G`z
-
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gc :Git commit<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>ge :Gedit<CR>
-nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
-nnoremap <Leader>gm :Gmove<Space>
-nnoremap <Leader>gp :Ggrep<Space>
-nnoremap <Leader>gr :Gread<CR>
-nnoremap <Leader>gs :Git<CR>
-nnoremap <Leader>gw :Gwrite<CR><CR>
-
-" turn off search highlight (two-h mapping is to avoid wait for timeout)
-nnoremap <Leader>h :nohlsearch<CR>
-nnoremap <Leader>hh :nohlsearch<CR>
-
-nnoremap <Leader>hr :GitGutterUndoHunk<CR>
-nnoremap <Leader>hs :GitGutterStageHunk<CR>
-nnoremap <Leader>hb :GitGutterPrevHunk<CR>
-nnoremap <Leader>hf :GitGutterNextHunk<CR>
-
-" LSP key bindings
-nmap <silent> <Leader>eb <Plug>(coc-diagnostic-prev)
-nmap <silent> <Leader>ef <Plug>(coc-diagnostic-next)
-nmap <silent> <Leader>el :CocDiagnostics<CR>
-nmap <silent> <Leader>jd <Plug>(coc-definition)
-nmap <silent> <Leader>ji <Plug>(coc-implementation)
-nmap <silent> <Leader>jr <Plug>(coc-references)
-nmap <silent> <Leader>jt <Plug>(coc-type-definition)
-
-nmap <silent> <Leader>l<Space> <Plug>(coc-codeaction)
-vmap <silent> <Leader>l<Space> <Plug>(coc-codeaction-selected)
-nmap <silent> <Leader>lf <Plug>(coc-format)
-vmap <silent> <Leader>lf <Plug>(coc-format-selected)
-nnoremap <silent> <Leader>lo :call CocAction('runCommand', 'editor.action.organizeImport')<CR>
-nnoremap <silent> <Leader>lsd :<C-u>CocList outline<cr>
-nnoremap <silent> <Leader>lsw :<C-u>CocList -I symbols<cr>
-nmap <silent> <Leader>lr <Plug>(coc-rename)
-nmap <silent> <leader>lx <Plug>(coc-fix-current)
-nnoremap <silent> <Leader>ll :call <SID>show_documentation()<CR>
-
-" Bookmarks
-nmap <silent> <Leader>mm <Plug>(coc-bookmark-toggle)
-nmap <silent> <Leader>ma <Plug>(coc-bookmark-annotate)
-nmap <silent> <Leader>mf <Plug>(coc-bookmark-next)
-nmap <silent> <Leader>mb <Plug>(coc-bookmark-prev)
-nmap <silent> <Leader>ml :CocList bookmark<CR>
-nmap <silent> <Leader>mx :CocCommand bookmark.clearForCurrentFile<CR>
-nmap <silent> <Leader>mX :CocCommand bookmark.clearForAllFiles<CR>
-
-nmap <Leader>nn :call ToggleNumber()<CR>
-nmap <Leader>nr :call ToggleNumberRel()<CR>
-
+" Paste from clipboard
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 
@@ -339,101 +280,12 @@ nmap <Leader>P "+P
 vmap <Leader>p "_d"+p
 vmap <Leader>P "_d"+P
 
-nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
-nnoremap <Leader>sq :call StripSmartQuotes()<CR>
-
-nnoremap <Leader>t :NERDTreeToggle<CR>
-nnoremap <Leader>tt :NERDTreeToggle<CR>
-
-" Vimwiki mappings
-" (Replace 'VimwikiColorize' buffer-level mapping of `<leader>wc`: cannot disable
-" mapping with g:vimwiki_key_mappings without disabling all global mappings:
-" https://github.com/vimwiki/vimwiki/blob/fea8bee382b2051b0137fd2cacf0862823ee69b3/ftplugin/vimwiki.vim#L463)
-autocmd FileType vimwiki nmap <buffer> <Leader>wc :Calendar<CR>
-nmap <Leader>wc :Calendar<CR>
-nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
-nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
-nmap <Leader>wy <Plug>VimwikiDiaryPrevDay
-nmap <Leader>wY <Plug>VimwikiDiaryNextDay
-nmap <silent> <Leader>w- :call ToggleDashCheckbox()<CR>
-
-" In vimwiki, I sometimes mark a 'checkbox' task with [-]` instead of `[X]` to
-" indicate the item as 'not applicable' instead of complete (such as for a
-" meeting being canceled).  This mapping toggles between 'n/a' and 'not done',
-" while vimwiki's <ctrl-space> mapping toggles between 'done' and 'not done'.
-function! ToggleDashCheckbox()
-  if getline('.') =~ '\[-\]'
-    substitute/\v\[-\]/[ ]/
-  else
-    substitute/\v\[.\]/[-]/
-  endif
-  normal! ``<CR>
-endfunction
-
-" Copy todo item to journal item (relies on mark t to indicate top of Todo
-" section, see InitDiary command)
-" nnoremap <Leader>wj :execute "normal! yy`tkkp" <bar> :s/\v\[.\] // <bar> :nohlsearch<CR>
-nnoremap <Leader>wj :call WikiJournal()<CR>:w<CR>
-
-function! WikiJournal()
-  " yank current line into the 'j' register
-  execute "normal! \"jyy"
-
-  " jump to the 't' mark, go up two lines, paste 'j' register
-  execute "normal! `tkk\"jp"
-
-  " replace everything up to the first occurrence of single char in square
-  " brackets (checklist state) with top-level asterisk bullet
-  silent! substitute/\v.*\[.\] /* /
-
-  " append timestamp to current line
-  call WikiTimestamp()
-
-  " clear search highlight
-  call feedkeys(":nohlsearch\<CR>")
-endfunction
-
-" Append the current time (hour and minute) in square brackets to the end of
-" the current line.  Replace existing if already present.
-nnoremap <Leader>wm :call WikiTimestamp()<CR>:w<CR>
-function! WikiTimestamp()
-  " set 't' register to current time (in square brackets)
-  let @t = system("date +'[\%H:\%M]'")
-
-  " remove trailing newline from 't' register
-  call setreg('t', substitute(@t, "\n$", "", ""), 'v')
-
-  " remove timestamp from end of line if present
-  silent! substitute/\v *\[..:..\]$//
-
-  " append 't' register to end of current line
-  execute "normal! A " . @t
-endfunction
-
-" Mappings to quickly access todo and quicknote wikis and write them (into daily diary)
-nmap <Leader>wn :edit $VIMWIKI_DIR/QuickNote.md<CR>
-nmap <Leader>w<Space>n :read $VIMWIKI_DIR/QuickNote.md<CR>
-nmap <Leader>wt :edit $VIMWIKI_DIR/TODO.md<CR>
-nmap <Leader>w<Space>t :read $VIMWIKI_DIR/TODO.md<CR>
-
-nmap <Leader>z :ZoomWinTabToggle<CR>
-
-" Search file contents with <leader>/
-nmap <Leader>/ :Rg<CR>
-nmap <Leader>// :Rg<CR>
-nmap <Leader>/b :Buffers<CR>
-nmap <Leader>/f :Files<CR>
-nmap <Leader>/h :History<CR>
-nmap <Leader>/l :Lines<CR>
-nmap <Leader>/t :Rg<CR>
 
 " shortcuts for splits similar to my bindings for tmux
 nnoremap <Leader>- :Sexplore<CR>
 nnoremap <Leader>\| :Vexplore<CR>
 nnoremap <Leader>. :Explore<CR>
 
-nnoremap <Leader>\ :call TogglePaste()<CR>
-nnoremap <Space>\ :call TogglePaste()<CR>
 
 " Init a markdown code block
 nnoremap <Leader>` i```<CR><CR>```<ESC>ki
@@ -441,22 +293,7 @@ nnoremap <Leader>`<Space> i```<CR><CR>```<ESC>ki
 nnoremap <Leader>`p i```<CR><CR>```<ESC>k"+p
 vnoremap <Leader>` "zc```<CR>```<ESC>k"zp
 
-nmap <Leader>; :Startify<CR>
 
-" Reset editor mode state and refresh terminal/tmux
-nmap <leader><leader> :call LeaderReset()<cr>
-nmap <leader><space> :call LeaderReset()<cr>
-
-" Search filenames with Ctrl-p
-nnoremap <C-p> :FZF<CR>
-
-" Snippets
-imap <C-s> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Coc-calc
-nnoremap <Leader>ca <Plug>(coc-calc-result-append)
-nnoremap <Leader>cr <Plug>(coc-calc-result-replace)
 
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
 " Adjusting my mapping to use alt instead of ctrl so I can use
@@ -475,27 +312,6 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 vnoremap ˙ <<
 vnoremap ¬ >>
 
-
-" Toggle completion with ctrl-space (even in normal mode)
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" make Enter and tab work more like I'm used to from IDEs
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 " Make quick macros easier
 " Workflow is:
