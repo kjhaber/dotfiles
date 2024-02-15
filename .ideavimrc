@@ -44,6 +44,9 @@ command! A action GotoTest
 
 nnoremap <leader>// :action SearchEverywhere<CR>
 nnoremap <leader>ff :action ReformatCode<CR>
+nnoremap <leader>hf :action VcsShowNextChangeMarker<CR>
+nnoremap <leader>hb :action VcsShowPrevChangeMarker<CR>
+nnoremap <leader>hr :action Vcs.RollbackChangedLines<CR>
 nnoremap <leader>jd :action GotoDeclaration<CR>
 nnoremap <leader>ji :action GotoImplementation<CR>
 nnoremap <leader>jr :action FindUsages<CR>
@@ -53,7 +56,8 @@ nnoremap <leader>lf :action ReformatCode<CR>
 nnoremap <leader>ll :action QuickJavaDoc<CR>
 nnoremap <leader>lo :action OptimizeImports<CR>
 nnoremap <leader>lr :action RenameElement<CR>
-nnoremap <leader>p :action $Paste<CR>
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 nnoremap <leader>tt :NERDTreeToggle<CR>
 
 nnoremap <leader><space> :nohlsearch<CR>
