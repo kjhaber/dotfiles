@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
-echo 'Fetching kjhaber/config from github'
-git clone --bare https://github.com/kjhaber/config "$HOME/.config/meta/repo"
+echo 'Fetching kjhaber/dotfiles from github'
+git clone --bare https://github.com/kjhaber/dotfiles "$HOME/.config/meta/repo"
 alias gitdotfile='git --git-dir=$HOME/.config/meta/repo/ --work-tree=$HOME'
 cd "$HOME"
 gitdotfile checkout
