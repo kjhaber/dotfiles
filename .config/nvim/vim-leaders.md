@@ -90,6 +90,7 @@ w
   wy         -- vimwiki diary yesterday
   wY         -- vimwiki diary tomorrow
   w-         -- toggle checkbox with dash instead of X (to mark as N/A)
+  w<         -- open yesterday's wiki journal in new vsplit
 x
 y 
 z - Zoom (ZoomWinTab)

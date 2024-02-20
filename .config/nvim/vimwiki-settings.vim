@@ -80,3 +80,12 @@ nmap <Leader>w<Space>n :read $VIMWIKI_DIR/QuickNote.md<CR>
 nmap <Leader>wt :edit $VIMWIKI_DIR/TODO.md<CR>
 nmap <Leader>w<Space>t :read $VIMWIKI_DIR/TODO.md<CR>
 
+
+" Open yesterday's journal entry in a new vsplit
+function! OpenYesterdayWikiSplit()
+  vsplit
+  execute "normal \<c-w>h"
+  execute "normal \<Plug>VimwikiDiaryPrevDay"
+endfunction
+nmap <Leader>w< :call OpenYesterdayWikiSplit()<CR>
+
