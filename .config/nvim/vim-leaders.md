@@ -31,8 +31,11 @@ e
 f - autoFormat
   ff -- format (uses format external prog if available)
 g - fuGitive
-  gs -- git status
+  gb -- git blame
   gc -- git commit
+  gd -- git diff
+  gp -- git grep
+  gs -- git status
 h
   hb -- gitgutter Hunk Back (previous)
   hf -- gitgutter Hunk Forward (next)

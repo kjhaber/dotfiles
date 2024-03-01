@@ -216,6 +216,11 @@ Plug 'tpope/vim-commentary'
 
 " Git interface within vim
 Plug 'tpope/vim-fugitive'
+nnoremap <Leader>gb :Git blame<CR>
+nnoremap <Leader>gc :Git commit<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gp :Ggrep<Space>
+nnoremap <Leader>gs :Git<CR>
 
 " Allows repeating plugin commands with . 
 Plug 'tpope/vim-repeat'
