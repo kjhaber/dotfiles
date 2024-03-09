@@ -11,6 +11,7 @@ set number
 set relativenumber
 set scrolloff=4
 set smartcase
+set whichwrap+=<,>,h,l,[,]
 
 " Plugins
 set NERDTree
@@ -23,12 +24,13 @@ set surround
 " Resolve IDE keybinding conflicts
 " https://github.com/JetBrains/ideavim/wiki/sethandler
 sethandler <C-h> n:vim i-v:ide
+sethandler <C-i> n:vim i-v:ide
 sethandler <C-j> n:vim i-v:ide
 sethandler <C-k> n:vim i-v:ide
 sethandler <C-l> n:vim i-v:ide
-sethandler <C-v> n-v:vim i:ide
 sethandler <C-o> n:vim i-v:ide
-sethandler <C-i> n:vim i-v:ide
+sethandler <C-p> n:vim i-v:ide
+sethandler <C-v> n-v:vim i:ide
 
 " Mappings
 nnoremap <C-h> <C-w>h
@@ -43,24 +45,34 @@ nnoremap <C-i> :action Forward<CR>
 command! A action GotoTest
 
 nnoremap <leader>// :action SearchEverywhere<CR>
+nnoremap <leader>eb :action GotoPreviousError<CR>
+nnoremap <leader>ee :action ShowErrorDescription<CR>
+nnoremap <leader>ef :action GotoNextError<CR>
+nnoremap <leader>el :action ActivateProblemsViewToolWindow<CR>
 nnoremap <leader>ff :action ReformatCode<CR>
 nnoremap <leader>hf :action VcsShowNextChangeMarker<CR>
 nnoremap <leader>hb :action VcsShowPrevChangeMarker<CR>
 nnoremap <leader>hr :action Vcs.RollbackChangedLines<CR>
+nnoremap <leader>ja :action GotoTest<CR>
 nnoremap <leader>jd :action GotoDeclaration<CR>
 nnoremap <leader>ji :action GotoImplementation<CR>
 nnoremap <leader>jr :action FindUsages<CR>
 nnoremap <leader>jt :action GotoTypeDeclaration<CR>
 nnoremap <leader>l<space> :action QuickFixes<CR>
 nnoremap <leader>lf :action ReformatCode<CR>
-nnoremap <leader>ll :action QuickJavaDoc<CR>
+nnoremap <leader>ll :action ShowHoverInfo<CR>
 nnoremap <leader>lo :action OptimizeImports<CR>
 nnoremap <leader>lr :action RenameElement<CR>
+nnoremap <leader>nn :action EditorToggleShowLineNumbers<CR>
+nnoremap <leader>nr :set relativenumber!<CR>
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap <leader>tt :NERDTreeToggle<CR>
 
 nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader>| :vsplit<CR>
+nnoremap <leader><S-\> :vsplit<CR>
+nnoremap <leader>- :split<CR>
 
 " ∆ = alt-j (down)
 " ˚ = alt-k (up)
