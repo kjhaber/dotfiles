@@ -8,7 +8,6 @@ let g:vimwiki_conceallevel = 0
 let g:vimwiki_listsyms = ' .x'
 autocmd FileType vimwiki let g:indentLine_enabled = 0
 
-
 " Vimwiki mappings
 " (Replace 'VimwikiColorize' buffer-level mapping of `<leader>wc`: cannot disable
 " mapping with g:vimwiki_key_mappings without disabling all global mappings:
@@ -88,4 +87,9 @@ function! OpenYesterdayWikiSplit()
   execute "normal \<Plug>VimwikiDiaryPrevDay"
 endfunction
 nmap <Leader>w< :call OpenYesterdayWikiSplit()<CR>
+
+
+" Sometimes I use my LSP 'jump to definition' shortcut to follow urls out of
+" habit - map same shortcut for urls in vimwiki
+autocmd FileType vimwiki nmap <buffer> <Leader>jd gx
 
