@@ -93,3 +93,13 @@ nmap <Leader>w< :call OpenYesterdayWikiSplit()<CR>
 " habit - map same shortcut for urls in vimwiki
 autocmd FileType vimwiki nmap <buffer> <Leader>jd gx
 
+
+" Make Enter and tab work more like I'm used to from IDEs (handle vimwiki mappings)
+autocmd Filetype vimwiki inoremap <silent><expr><buffer> <cr> coc#pum#visible() ? coc#pum#confirm()
+                           \: "<C-]><Esc>:VimwikiReturn 1 5<CR>"
+autocmd Filetype vimwiki inoremap <silent><expr><buffer> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+autocmd Filetype vimwiki inoremap <silent><expr><buffer> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
