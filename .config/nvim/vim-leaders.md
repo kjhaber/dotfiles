@@ -21,7 +21,6 @@ c - list hidden Characters
   cc -- list hidden Characters
   cr -- coc-Calc Replace
 d
-  dd -- Delete line (cut to system clipboard)
   dn -- Date Normalize: change date under cursor to YYYY-MM-DD format
   dt -- Insert today's date in YYYY-MM-DD format, leave in insert mode
 e
@@ -64,7 +63,7 @@ n
   nn -- toggle line numbers
   nr -- toggle between relative and absolute line numbers
 o
-p - Paste from system clipboard
+p - Paste without clobbering system clipboard
 q
 r
 s
@@ -106,8 +105,8 @@ z - Zoom (ZoomWinTab)
   /t -- search text (all files under vim pwd - live fuzzy match)
 space - reset default states (paste mode, search highlight, etc) and refresh terminal/tmux
 . - open file explorer (:Explore)
-- - open file explorer in horizontal split (:Sexplore)
-| - open file explorer in vertical split (:Vexplore)
+- - open horizontal split (:split)
+| - open vertical split (:vsplit)
 {
 }
 [

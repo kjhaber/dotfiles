@@ -274,16 +274,13 @@ nmap <Leader>cc :set list!<CR>
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 
-" <Leader>P during a visual selection will replace the selection with
-" current clipboard without changing current clipboard like 'd' or 'c' usually
-" does.
-vmap <Leader>p "_d"+p
-vmap <Leader>P "_d"+P
+" Paste over visual selection without clobbering clipboard
+vmap <Leader>p "_dP
 
 
 " shortcuts for splits similar to my bindings for tmux
-nnoremap <Leader>- :Sexplore<CR>
-nnoremap <Leader>\| :Vexplore<CR>
+nnoremap <Leader>- :split<CR>
+nnoremap <Leader>\| :vsplit<CR>
 nnoremap <Leader>. :Explore<CR>
 
 
