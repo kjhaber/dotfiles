@@ -348,6 +348,9 @@ set list
 autocmd FileType qf set nolist
 autocmd FileType vimwiki set nolist
 
+" Set up oil.nvim (can't keep it with plugin def due to Lua init, fixme)
+call SourceNvimDotfile('oil-settings.vim')
+
 " --------------------------------------------------------------
 " Source local-specific mappings/abbreviations
 " --------------------------------------------------------------

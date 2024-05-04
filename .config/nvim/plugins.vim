@@ -196,6 +196,8 @@ let g:NERDTreeShowHidden = 1
 nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>tt :NERDTreeToggle<CR>
 
+" Replace netrw for file browser (see oil-settings.vim)
+Plug 'stevearc/oil.nvim'
 
 " Repeat 'v' key to grow visual selection (<ctrl-v> to shrink)
 Plug 'terryma/vim-expand-region'
