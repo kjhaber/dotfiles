@@ -104,7 +104,12 @@ z - Zoom (ZoomWinTab)
   /l -- search lines (current file)
   /t -- search text (all files under vim pwd - live fuzzy match)
 space - reset default states (paste mode, search highlight, etc) and refresh terminal/tmux
-. - open file explorer (:Explore)
+
+. - open file explorer
+  ..  -- open file explorer (:Explore)
+  .-  -- open file explorer in horizontal split (:Sexplore)
+  .|  -- open file explorer in vertical split (:Vexplore)
+
 - - open horizontal split (:split)
 | - open vertical split (:vsplit)
 {

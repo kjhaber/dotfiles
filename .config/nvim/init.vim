@@ -281,7 +281,9 @@ vmap <Leader>p "_dP
 " shortcuts for splits similar to my bindings for tmux
 nnoremap <Leader>- :split<CR>
 nnoremap <Leader>\| :vsplit<CR>
-nnoremap <Leader>. :Explore<CR>
+nnoremap <Leader>.. :Explore<CR>
+nnoremap <Leader>.- :Sexplore<CR>
+nnoremap <Leader>.\| :Vexplore<CR>
 
 
 " Init a markdown code block
