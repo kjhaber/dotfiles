@@ -67,6 +67,7 @@ nnoremap <leader>nn :action EditorToggleShowLineNumbers<CR>
 nnoremap <leader>nr :set relativenumber!<CR>
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
+vnoremap <leader>p "_dP
 nnoremap <leader>tt :NERDTreeToggle<CR>
 
 nnoremap <leader><space> :nohlsearch<CR>
