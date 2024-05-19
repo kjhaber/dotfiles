@@ -8,6 +8,7 @@ test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh" && source "$CONFIG_LOCAL_DIR/zs
 export EDITOR=nvim
 export CLICOLOR=1
 export KEYTIMEOUT=1
+export LESS="--ignore-case --use-color"
 
 # Set PATH
 # Allow environment-specific PATH overrides in dedicated file
