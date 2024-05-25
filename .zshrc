@@ -6,6 +6,7 @@
 test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh"
 
 export EDITOR=nvim
+export PAGER=less
 export CLICOLOR=1
 export KEYTIMEOUT=1
 export LESS="--ignore-case --use-color"
@@ -77,7 +78,7 @@ zstyle ':completion:*:ssh:*' hosts off
 for file in $CONFIG_DIR/zsh/autoload/*.zsh; do
   source "$file"
 done
-if [[ -d $CONFIG_LOCAL_DIR/zsh/autoload ]]; then
+if [[ -f $CONFIG_LOCAL_DIR/zsh/autoload/*.zsh ]]; then
   for file in $CONFIG_LOCAL_DIR/zsh/autoload/*.zsh; do
     source "$file"
   done
@@ -96,12 +97,9 @@ fpath=($CONFIG_DIR/zsh/completion $CONFIG_LOCAL_DIR/zsh/completion $fpath)
 autoload -U compinit
 compinit
 
+# Set PATH
+source "$CONFIG_DIR/zsh/path.zsh"
+
 # local environment-specific config
 test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh"
-
-
-# Set PATH (even after zshrc-after.zsh)
-# Allow environment-specific PATH overrides in dedicated file
-source "$CONFIG_DIR/zsh/path.zsh"
-test -f "$CONFIG_LOCAL_DIR/zsh/path.zsh" && source "$CONFIG_LOCAL_DIR/zsh/path.zsh"
 
