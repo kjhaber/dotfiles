@@ -10,11 +10,6 @@ export CLICOLOR=1
 export KEYTIMEOUT=1
 export LESS="--ignore-case --use-color"
 
-# Set PATH
-# Allow environment-specific PATH overrides in dedicated file
-source "$CONFIG_DIR/zsh/path.zsh"
-test -f "$CONFIG_LOCAL_DIR/zsh/path.zsh" && source "$CONFIG_LOCAL_DIR/zsh/path.zsh"
-
 bindkey -v
 
 # Use `<ESC>v` to edit current command line in editor
@@ -103,4 +98,10 @@ compinit
 
 # local environment-specific config
 test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh"
+
+
+# Set PATH (even after zshrc-after.zsh)
+# Allow environment-specific PATH overrides in dedicated file
+source "$CONFIG_DIR/zsh/path.zsh"
+test -f "$CONFIG_LOCAL_DIR/zsh/path.zsh" && source "$CONFIG_LOCAL_DIR/zsh/path.zsh"
 
