@@ -15,7 +15,7 @@ if [[ ! -d  "$ASDF_DATA_DIR" ]]; then
   echo "Installing java plugin for asdf"
   asdf plugin add java https://github.com/halcyon/asdf-java.git
 
-  echo "Installing java latest (Corretto) in asdf"
+  echo "Installing java latest (OpenJDK) in asdf"
   asdf install java latest:adoptopenjdk
 
   echo "Setting asdf node version to latest"
