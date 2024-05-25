@@ -11,17 +11,17 @@ fi
 
 if [[ ! -d "$MISE_DATA_DIR/installs/java" ]]; then
   echo "Installing java latest in mise"
-  mise use -g java@latest
+  "$MISE_INSTALL_PATH" use -g java@latest
 fi
 
 if [[ ! -d "$MISE_DATA_DIR/installs/node" ]]; then
   echo "Installing node latest in mise"
-  mise use -g node@latest
+  "$MISE_INSTALL_PATH" use -g node@latest
 fi
 
 if [[ ! -d "$MISE_DATA_DIR/installs/python" ]]; then
   echo "Installing python latest in mise"
-  mise use -g python@latest
+  "$MISE_INSTALL_PATH" use -g python@latest
 fi
 
 # see .config/zsh/path.zsh for `mise activate`
