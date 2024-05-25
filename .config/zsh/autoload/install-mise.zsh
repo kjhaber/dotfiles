@@ -1,6 +1,6 @@
 export MISE_INSTALL_PATH="$HOME/.local/bin/mise"
-export MISE_DATA_DIR="$CONFIG_LOCAL_DIR/mise"
-export MISE_GLOBAL_CONFIG_FILE="$MISE_DATA_DIR/config.toml"
+export MISE_DATA_DIR="$HOME/.local/share/mise"
+export MISE_GLOBAL_CONFIG_FILE="$CONFIG_LOCAL_DIR/mise/config.toml"
 
 mkdir -p "$MISE_DATA_DIR"
 

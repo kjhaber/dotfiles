@@ -6,7 +6,7 @@ test -f "$CONFIG_LOCAL_DIR/zsh/path.zsh" && source "$CONFIG_LOCAL_DIR/zsh/path.z
 
 # Add mise (dev tool version manager) shims to PATH
 # In general these tools should come before homebrew in PATH
-eval "$($HOME/.local/bin/mise activate --shims zsh)"
+eval "$($MISE_INSTALL_PATH activate --shims zsh)"
 
 # Add personal scripts/executables to front of PATH
 export PATH="$CONFIG_DIR/bin:$PATH"
