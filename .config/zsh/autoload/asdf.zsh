@@ -1,7 +1,7 @@
-if [[ ! -d  "$HOME/.asdf" ]]; then
+if [[ ! -d  "$ASDF_DATA_DIR" ]]; then
   echo "Installing asdf"
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-  source "$HOME/.asdf/asdf.sh"
+  git clone https://github.com/asdf-vm/asdf.git "$ASDF_DATA_DIR"
+  source "$ASDF_DATA_DIR/asdf.sh"
 
   echo "Installing nodejs plugin for asdf"
   asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
@@ -11,8 +11,17 @@ if [[ ! -d  "$HOME/.asdf" ]]; then
 
   echo "Setting asdf node version to latest"
   asdf global nodejs latest
+
+  echo "Installing java plugin for asdf"
+  asdf plugin add java https://github.com/halcyon/asdf-java.git
+
+  echo "Installing java latest (Corretto) in asdf"
+  asdf install java latest:corretto
+
+  echo "Setting asdf node version to latest"
+  asdf global java latest:corretto
 fi
 
-source "$HOME/.asdf/asdf.sh"
-fpath=($ASDF_DIR/completions $fpath)
+source "$ASDF_DATA_DIR/asdf.sh"
+fpath=($ASDF_DATA_DIR/completions $fpath)
 
