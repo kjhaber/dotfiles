@@ -16,10 +16,10 @@ if [[ ! -d  "$ASDF_DATA_DIR" ]]; then
   asdf plugin add java https://github.com/halcyon/asdf-java.git
 
   echo "Installing java latest (Corretto) in asdf"
-  asdf install java latest:corretto
+  asdf install java latest:adoptopenjdk
 
   echo "Setting asdf node version to latest"
-  asdf global java latest:corretto
+  asdf global java latest:adoptopenjdk
 fi
 
 source "$ASDF_DATA_DIR/asdf.sh"
