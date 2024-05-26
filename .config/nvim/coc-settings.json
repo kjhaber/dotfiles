@@ -8,6 +8,8 @@
   "diagnostic.enableMessage": "jump",
   "inlayHint.enable": false,
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.jdt.ls.java.home": "~/.local/share/mise/installs/java/latest",
+  "python.pythonPath": "~/.local/share/mise/installs/python/latest/bin/python3",
   "snippets.ultisnips.directories": ["UltiSnips"],
   "snippets.userSnippetsDirectory": "~/.config-local/nvim/snippets",
   "snippets.extends": {
@@ -17,5 +19,6 @@
   },
   "suggest.autoTrigger": "none",
   "suggest.noselect": false,
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "xml.java.home": "~/.local/share/mise/installs/java/latest"
 }
