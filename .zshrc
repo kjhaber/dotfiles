@@ -2,7 +2,7 @@
 # Declares variables and settings useful for any interactive usage of zsh, such
 # as prompt, shortcuts, zsh feature settings, etc.
 
-# local environment-specific config
+# Apply local environment-specific config
 test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh"
 
 export EDITOR=nvim
@@ -34,9 +34,10 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt transient_rprompt
 
+# Set up prompt
 source $CONFIG_DIR/zsh/kjhaber.zsh-theme
 
-# title bar prompt
+# Set title bar prompt
 precmd () {
   print -Pn "\e]2;%n@%M | ${PWD##*/}\a" # iterm2 window title
   print -Pn "\e]1;${PWD##*/}\a"         # iterm2 tab title
@@ -47,14 +48,12 @@ precmd () {
 # (https://superuser.com/questions/928846/what-is-execute-on-the-command-line-and-how-to-i-avoid-it)
 bindkey -a -r ':'
 
-# import aliases
+# Import aliases
 source $CONFIG_DIR/zsh/aliases.zsh
 test -f "$CONFIG_LOCAL_DIR/zsh/aliases.zsh" && source "$CONFIG_LOCAL_DIR/zsh/aliases.zsh"
 
 
-# Enable various tools
-
-# fzf: fuzzy finder, locate files quickly
+# Enable fzf: fuzzy finder, locate files quickly
 # - ctrl-t to insert filename in current command,
 # - ctrl-r for recent command history)
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore --ignore-case --hidden --follow --glob '!{.git,node_modules,vendor,build,dist}/*'"
@@ -74,7 +73,7 @@ zstyle ':completion:*' matcher-list \
 # ssh autocomplete values useless.  Values from ~/.ssh/config still work.
 zstyle ':completion:*:ssh:*' hosts off
 
-# load external configs and plugins
+# Load external configs and plugins
 for file in $CONFIG_DIR/zsh/autoload/*.zsh; do
   source "$file"
 done
@@ -84,7 +83,7 @@ if [[ -f $CONFIG_LOCAL_DIR/zsh/autoload/*.zsh ]]; then
   done
 fi
 
-# load zsh plugins
+# Load zsh plugins
 if [[ ! -f $HOME/.zcomet/bin/zcomet.zsh ]]; then
   git clone https://github.com/agkozak/zcomet.git $HOME/.zcomet/bin
 fi
@@ -92,14 +91,14 @@ source $HOME/.zcomet/bin/zcomet.zsh
 source $CONFIG_DIR/zsh/plugins.zsh
 test -f "$CONFIG_LOCAL_DIR/zsh/plugins.zsh" && source "$CONFIG_LOCAL_DIR/zsh/plugins.zsh"
 
-# load completions (after plugins)
-fpath=($CONFIG_DIR/zsh/completion $CONFIG_LOCAL_DIR/zsh/completion $fpath)
-autoload -U compinit
-compinit
-
 # Set PATH
 source "$CONFIG_DIR/zsh/path.zsh"
 
-# local environment-specific config
+# Apply local environment-specific config
+# (if fpath is changed in zshrc-after.zsh, compinit might need to be re-run or moved..)
 test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh"
+
+# Enable completions (after zshrc-after.zsh in case `fpath` is changed in local overrides)
+autoload -U compinit
+compinit
 
