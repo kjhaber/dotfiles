@@ -11,6 +11,7 @@
 # in shell init is bad, but that literally goes double for zshenv. :)
 
 export HOMEBREW_NO_ANALYTICS=1
+export AWS_PAGER=""
 
 export CONFIG_DIR="$HOME/.config"
 export CONFIG_LOCAL_DIR="$HOME/.config-local"
