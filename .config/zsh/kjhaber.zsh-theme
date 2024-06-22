@@ -12,6 +12,9 @@ VIMODE_INSERT_COLOR='cyan'
 VIMODE_NORMAL_COLOR='magenta'
 VIMODE_COLOR=$VIMODE_INSERT_COLOR
 
+# This function/zle config makes the vim mode indicator in the prompt update
+# based on whether prompt is in normal mode (when 'ESC' is pressed from insert
+# mode) or insert mode (e.g. on pressing 'i' from normal mode).
 function zle-line-init zle-keymap-select {
     VIMODE_TXT="${${KEYMAP/vicmd/${VIMODE_NORMAL_TXT}}/(main|viins)/${VIMODE_INSERT_TXT}}"
     VIMODE_COLOR="${${KEYMAP/vicmd/${VIMODE_NORMAL_COLOR}}/(main|viins)/${VIMODE_INSERT_COLOR}}"
