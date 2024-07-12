@@ -7,6 +7,7 @@
   "diagnostic.enableHighlightLineNumber": false,
   "diagnostic.enableMessage": "jump",
   "inlayHint.enable": false,
+  "java.compile.nullAnalysis.mode": "disabled",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "java.jdt.ls.java.home": "~/.local/share/mise/installs/java/latest",
   "python.formatting.provider": "black",
