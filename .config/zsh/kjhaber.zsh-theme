@@ -34,6 +34,8 @@ git_rprompt() {
 }
 
 
-PROMPT='%{$fg[${VIMODE_COLOR}]%}${VIMODE_TXT}%{$fg[white]%}%n@%m%#%{$reset_color%} '
+LPROMPT_BASE='%{$fg[${VIMODE_COLOR}]%}${VIMODE_TXT}%{$fg[white]%}%n@%m%#%{$reset_color%}'
+PROMPT="${LPROMPT_BASE} "
+
 RPROMPT='%{$fg[red]%}[%1~]%{$reset_color%}$(git_rprompt)'
 
