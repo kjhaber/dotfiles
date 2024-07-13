@@ -232,7 +232,7 @@ Plug 'tpope/vim-surround'
 
 " Jump to/from 'alternate files' e.g. implemenation/test source files
 Plug 'tpope/vim-projectionist'
-call SourceNvimDotfile('vim/projectionist-settings.vim')
+call SourceNvimDotfile('projectionist-settings.vim')
 nmap <silent> <Leader>ja :A<CR>
 
 " Shortcuts for common Ex commands

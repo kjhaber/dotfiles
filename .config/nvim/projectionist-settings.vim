@@ -7,7 +7,7 @@
 "
 " See `:help projectionist` and vim-projectionist plugin.
 
-let g:global_projections_file = g:dotfile_home . '/vim/global-projections.json'
+let g:global_projections_file = $HOME . '/.config/nvim/global-projections.json'
 
 function! s:setProjections()
   let l:json = readfile(g:global_projections_file)
