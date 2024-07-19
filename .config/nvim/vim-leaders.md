@@ -79,7 +79,7 @@ u
   urr -- UML reverse both entity + arrow
 v 
 w
-  ww         -- vimwiki main
+  ww         -- open vimwiki directory (instead of vimwiki index.md)
   w<leader>w -- vimwiki diary today
   wi         -- vimwiki diary index
   w<leader>i -- vimwiki diary index generate links

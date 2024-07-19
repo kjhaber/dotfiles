@@ -14,6 +14,7 @@ autocmd FileType vimwiki let g:indentLine_enabled = 0
 " https://github.com/vimwiki/vimwiki/blob/fea8bee382b2051b0137fd2cacf0862823ee69b3/ftplugin/vimwiki.vim#L463)
 autocmd FileType vimwiki nmap <buffer> <Leader>wc :Calendar<CR>
 nmap <Leader>wc :Calendar<CR>
+nmap <Leader>ww :edit $VIMWIKI_DIR<CR>
 nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
 nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
 nmap <Leader>wy <Plug>VimwikiDiaryPrevDay

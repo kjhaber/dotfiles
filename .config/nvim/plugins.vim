@@ -145,7 +145,13 @@ Plug 'mattn/calendar-vim'
 " Customized and functional default starting screen
 Plug 'mhinz/vim-startify'
 let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
-let g:startify_bookmarks = [ {'.': '.'}, {'t': '$VIMWIKI_DIR/TODO.md'}, {'w': '$VIMWIKI_DIR/index.md'}, {'c': '$CONFIG_DIR'}, {'l': '$CONFIG_LOCAL_DIR'} ]
+let g:startify_bookmarks = [
+      \ {'.': '.'},
+      \ {'w': '$VIMWIKI_DIR'},
+      \ {'t': '$VIMWIKI_DIR/TODO.md'},
+      \ {'n': '$VIMWIKI_DIR/QuickNote.md'},
+      \ {'c': '$CONFIG_DIR'},
+      \ {'l': '$CONFIG_LOCAL_DIR'} ]
 nmap <Leader>; :Startify<CR>
 
 " JSX syntax highlighting and indenting
@@ -224,7 +230,7 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gp :Ggrep<Space>
 nnoremap <Leader>gs :Git<CR>
 
-" Allows repeating plugin commands with . 
+" Allows repeating plugin commands with .
 Plug 'tpope/vim-repeat'
 
 " Mappings to add/remove parens, brackets, etc around text objects
@@ -236,7 +242,7 @@ call SourceNvimDotfile('projectionist-settings.vim')
 nmap <silent> <Leader>ja :A<CR>
 
 " Shortcuts for common Ex commands
-" (e.g. ]q == :cnext, [q == :cprevious, ]a == :next, [b == :bprevious 
+" (e.g. ]q == :cnext, [q == :cprevious, ]a == :next, [b == :bprevious
 Plug 'tpope/vim-unimpaired'
 
 " Open file in browser (dependency of plantuml-previewer.vim)
@@ -247,7 +253,7 @@ vmap gx <Plug>(openbrowser-smart-search)
 " Ruby syntax highlighting and formatting
 Plug 'vim-ruby/vim-ruby'
 
-" Toggle expanding current split to full window 
+" Toggle expanding current split to full window
 Plug 'vim-scripts/zoomwintab.vim'
 let g:zoomwintab_remap = 0
 nmap <Leader>z :ZoomWinTabToggle<CR>
