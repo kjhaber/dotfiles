@@ -144,7 +144,14 @@ Plug 'mattn/calendar-vim'
 
 " Customized and functional default starting screen
 Plug 'mhinz/vim-startify'
-let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions', 'commands']
+let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
+let g:startify_fortune_use_unicode = 1
+let g:startify_lists = [
+      \ {'type': 'files'},
+      \ {'type': 'bookmarks'},
+      \ {'type': 'commands'}
+      \ ]
+
 let g:startify_bookmarks = [
       \ {'.': '.'},
       \ {'w': '$VIMWIKI_DIR'},
@@ -152,6 +159,7 @@ let g:startify_bookmarks = [
       \ {'n': '$VIMWIKI_DIR/QuickNote.md'},
       \ {'c': '$CONFIG_DIR'},
       \ {'l': '$CONFIG_LOCAL_DIR'} ]
+
 nmap <Leader>; :Startify<CR>
 
 " JSX syntax highlighting and indenting
