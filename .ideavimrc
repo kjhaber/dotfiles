@@ -71,8 +71,7 @@ vnoremap <leader>p "_dP
 nnoremap <leader>tt :NERDTreeToggle<CR>
 
 nnoremap <leader><space> :nohlsearch<CR>
-nnoremap <leader>| :vsplit<CR>
-nnoremap <leader><S-\> :vsplit<CR>
+nnoremap <leader><bar> :vsplit<CR>
 nnoremap <leader>- :split<CR>
 
 " ∆ = alt-j (down)
