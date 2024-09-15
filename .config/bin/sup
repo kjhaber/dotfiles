@@ -1,0 +1,56 @@
+#!/bin/sh
+# sup
+# Software UPdate command
+# Intended to be a single command to walk through applying a variety of software
+# updates (e.g. Homebrew, vim plugins, tmux plugins, )
+
+
+# Prompt user for each command, execute command when user responds with 'y'
+eval_sup_command ()
+{
+  sup_command_name="$1"
+  sup_command="$2"
+  while true; do
+    read -n 1 -p "Run '$sup_command_name' update command '$sup_command'? (y/n) " prompt
+    case $prompt in
+      [Yy]* )
+        printf "\nRunning update command '$sup_command'...\n"
+        eval "$sup_command"
+        break
+        ;;
+      [Nn]* )
+        printf "\nSkipping...\n"
+        break
+        ;;
+      * )
+        printf "\n"
+        ;;
+    esac
+  done
+}
+
+# Iterate through set of commands in config file
+# Expects each line to be two colon-separated values -- name:command
+eval_sup_command_file ()
+{
+  sup_command_file="$1"
+  if [ -f "$sup_command_file" ]; then
+    while IFS="" read -r line <&3 || [ -n "$line" ]
+    do
+      if [[ -n "$line" ]]; then
+        name="$(echo "$line" | cut -d':' -f1)"
+        command="$(echo "$line" | cut -d':' -f2)"
+        eval_sup_command "$name" "$command"
+      fi
+    done 3<"$sup_command_file"
+  fi
+}
+
+# Run config that is applicable to all environments
+eval_sup_command_file "$HOME/.config/sup/sup-commands"
+
+# Allow machine-specific config (e.g. work laptop will have company-internal commands)
+eval_sup_command_file "$HOME/.config-local/sup/sup-commands"
+
+echo "Done"
+
