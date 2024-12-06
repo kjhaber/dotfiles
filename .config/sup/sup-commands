@@ -1,6 +1,7 @@
 Homebrew:brew update && brew upgrade
 Neovim plugins:nvim -e -c "PU" -c "qa"
 Neovim coc.nvim plugins:nvim -e -c 'CocUpdateSync|q'
+mise tools:mise upgrade --bump
 tmux plugins:~/.tmux/plugins/tpm/bin/update_plugins all
 zsh plugins:~/.config/bin/zcomet-update
 
