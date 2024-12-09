@@ -1,0 +1,93 @@
+#!/bin/sh
+# Creates or decrypts an existing encrypted file as a temp file within editor.
+# Encrypts and saves the temp file result over the existing encrypted file when
+# the editor exits.
+
+TARGET_FILE="$1"
+if [ -z "$TARGET_FILE" ]; then
+  echo "Usage: vicrypt <filename>"
+  exit 0
+fi
+
+# Dependency check: vipe, openssl
+check_dependency() {
+  DEP_COMMAND="$1"
+  INSTALL_HINT="$2"
+  which -s "$DEP_COMMAND"
+  RESULT="$?"
+  # echo "which $DEP_COMMAND -> $RESULT"
+  if [ "$RESULT" -ne "0" ]; then
+    echo "$DEP_COMMAND not found ($INSTALL_HINT)"
+    exit 1
+  fi
+}
+
+check_dependency "openssl" '`brew install openssl`'
+check_dependency "vipe" '`brew install moreutils`'
+check_dependency "basename" '`brew install coreutils`'
+
+# Get input filename fragments
+filename=$(basename -- "$TARGET_FILE")
+extension="${filename##*.}"
+base_filename="${filename%.*}"
+if [ "$base_filename" == "$filename" ]; then
+  extension="txt"
+fi
+
+# Get password from user for encrypt and decrypt
+read -s -p "Password: " PASSWORD
+echo
+
+# Create tmp file for unencrypted file content
+# https://stackoverflow.com/questions/687014/removing-created-temp-files-in-unexpected-bash-exit#687052
+TMPFILE="$(mktemp /tmp/${filename}.XXXXXX).${extension}"
+# echo "tmpfile: $TMPFILE"
+trap '{ rm -f -- "$TMPFILE"; }' EXIT
+
+BASETMPFILE="$(mktemp /tmp/${filename}.XXXXXX).${extension}"
+# echo "tmpfile: $BASETMPFILE"
+trap '{ rm -f -- "$BASETMPFILE"; }' EXIT
+
+# Decrypt target file if it exists, write to temp file
+# https://superuser.com/questions/370388/simple-built-in-way-to-encrypt-and-decrypt-a-file-on-a-mac-via-command-line
+# https://unix.stackexchange.com/questions/507131/openssl-1-1-1b-warning-using-iter-or-pbkdf2-would-be-better-while-decrypting
+if [ -f "$TARGET_FILE" ]; then
+  cat "$TARGET_FILE" | vicrypt-decrypt "$PASSWORD" > "$BASETMPFILE"
+  DECRESULT="$?"
+  if [ "$DECRESULT" -ne "0" ]; then
+    echo "Error occurred when decrypting, exiting"
+    exit 1
+  fi
+
+  cp "$BASETMPFILE" "$TMPFILE"
+fi
+
+# Edit decrypted file in editor
+"$EDITOR" "$TMPFILE"
+
+# Check for change in file - exit immediately if no change detected
+# https://stackoverflow.com/questions/12900538/fastest-way-to-tell-if-two-files-have-the-same-contents-in-unix-linux
+if cmp --silent -- "$TMPFILE" "$BASETMPFILE"; then
+  # echo "No changes made in file, exiting"
+  exit 0
+fi
+rm -f "$BASETMPFILE"
+
+# Encrypt tmpfile contents and write to new temp file
+ENCTMPFILE="$(mktemp /tmp/${filename}.enc.XXXXXX)"
+# echo "encrypted tmpfile: $ENCTMPFILE"
+trap '{ rm -f -- "$ENCTMPFILE"; }' EXIT
+cat "$TMPFILE" | vicrypt-encrypt "$PASSWORD" > "$ENCTMPFILE"
+rm -f "$TMPFILE"
+
+# If no errors in encrypting tmpfile, overwrite target file
+ENCRESULT="$?"
+if [ "$ENCRESULT" -eq "0" ]; then
+  cp "$ENCTMPFILE" "$TARGET_FILE"
+  rm -f "$ENCTMPFILE"
+else
+  rm -f "$ENCTMPFILE"
+  echo "Error occurred when encrypting result, not modifying target file $TARGET_FILE"
+  exit 1
+fi
+

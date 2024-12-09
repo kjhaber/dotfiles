@@ -1,0 +1,8 @@
+#!/bin/sh
+# See vicrypt and vicrypt-decrypt scripts.  Expects unencrypted content on stdin,
+# password as sole command line arg.
+
+PASSWORD="$1"
+input=$(cat)
+printf '%s' "$input" | openssl enc -aes-256-cbc -a -salt -pbkdf2 -iter 100000 -pass "pass:${PASSWORD}"
+
