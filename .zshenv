@@ -20,8 +20,10 @@ export CONFIG_LOCAL_DIR="$HOME/.config-local"
 test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-before.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-before.zsh"
 
 export DOC_DIR="$HOME/Documents"
+export DESKTOP_DIR="$HOME/Desktop"
 export VIMWIKI_DIR="$DOC_DIR/vimwiki"
 export VIMWIKI_DIARY_DIR="$VIMWIKI_DIR/diary"
+export PROJECTS_DIR="$HOME/Projects"
 
 # On home machine $REMOTE_SYNC_DIR is a symlink to ~/Dropbox
 # At work it's a directory configured to sync with network drive

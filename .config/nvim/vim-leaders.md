@@ -14,7 +14,7 @@ b
   bo -- outdent and toggle bullet
   bO -- outdent and toggle bullet, enter insert mode
   b- -- change bullet character to -
-  b* -- change bullet character to * 
+  b* -- change bullet character to *
   b> -- change bullet character to >
   b+ -- change bullet character to +
   b. -- change bullet character to ..
@@ -77,9 +77,8 @@ u
   ura -- UML reverse arrow
   ure -- UML reverse entity
   urr -- UML reverse both entity + arrow
-v 
+v
 w
-  ww         -- open vimwiki directory (instead of vimwiki index.md)
   w<leader>w -- vimwiki diary today
   wi         -- vimwiki diary index
   w<leader>i -- vimwiki diary index generate links
@@ -96,7 +95,7 @@ w
   w-         -- toggle checkbox with dash instead of X (to mark as N/A)
   w<         -- open yesterday's wiki journal in new vsplit
 x
-y 
+y
 z - Zoom (ZoomWinTab)
 / - search (fzf + ripgrep) (same as <leader>[t )
   // -- search text (all files under vim pwd - on enter, uses loclist)
@@ -113,8 +112,13 @@ z - Zoom (ZoomWinTab)
   ..  -- open file explorer (:Explore)
   .-  -- open file explorer in horizontal split (:Sexplore)
   .|  -- open file explorer in vertical split (:Vexplore)
-
-~  -- open file explorer in home directory (only if file explorer already open)
+  .~  -- open file explorer in home directory
+  .c  -- open file explorer in .config directory
+  .d  -- open file explorer in documents directory
+  .k  -- open file explorer in desktop directory
+  .l  -- open file explorer in .config-local directory
+  .p  -- open file explorer in projects directory
+  .w  -- open file explorer in vimwiki directory
 
 \ - toggle paste mode
 ` - insert markdown code block

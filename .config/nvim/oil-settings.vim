@@ -34,11 +34,21 @@ if has('nvim')
     call OilCur()
   endfunction
 
-  " shortcut to show current buffer dir since it's not onscreen like netrw
-  autocmd FileType oil nmap <buffer> _ :lua print(require("oil").get_current_dir())<CR>
+  function! OilPwd()
+    lua print(require("oil").get_current_dir())
+  endfunction
 
-  " go to home dir quickly
-  autocmd FileType oil nmap <buffer> <silent> <leader>~ :Oil ~<CR>
+  " shortcuts to open key directories in file explorer (more leader-dot mappings)
+  nmap <silent> <leader>.~ :exec "edit " . $HOME<CR>:call OilPwd()<CR>
+  nmap <silent> <Leader>.w :exec "edit " . $VIMWIKI_DIR<CR>:call OilPwd()<CR>
+  nmap <silent> <Leader>.d :exec "edit " . $DOC_DIR<CR>:call OilPwd()<CR>
+  nmap <silent> <Leader>.k :exec "edit " . $DESKTOP_DIR<CR>:call OilPwd()<CR>
+  nmap <silent> <Leader>.p :exec "edit " . $PROJECTS_DIR<CR>:call OilPwd()<CR>
+  nmap <silent> <Leader>.c :exec "edit " . $CONFIG_DIR<CR>:call OilPwd()<CR>
+  nmap <silent> <Leader>.l :exec "edit " . $CONFIG_LOCAL_DIR<CR>:call OilPwd()<CR>
+
+  " shortcut to show current buffer dir since it's not onscreen like netrw
+  autocmd FileType oil nmap <buffer> _ :call OilPwd()<CR>
 
   " integrate dir refresh into my usual reset shortcut
   autocmd FileType oil nmap <buffer> <silent> <leader><leader> :call OilLeaderReset()<cr>
