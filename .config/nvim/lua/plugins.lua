@@ -121,26 +121,39 @@ require("lazy").setup({
 
     -- fzf
     {
-      -- "junegunn/fzf', { 'do": { -> fzf#install() } }
       "junegunn/fzf.vim",
-      -- -- Search filenames with Ctrl-p
+      name = "fzf.vim",
+      dependencies = {
+        {
+          "junegunn/fzf",
+          lazy = false,
+          build = "~/.fzf/install --all",
+        },
+      },
+      lazy = false,
+
       init = function()
-        vim.keymap.set("n", "<C-p>", ":FZF<CR>")
         -- -- https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
         -- -- Sort vimwiki diary by reverse path to make entries appear in chronological
         -- -- order (prefer recent results to random results in previous years)
-        vim.g.ripgrep_fzf_sort = ''
-        -- autocmd FileType vimwiki let g:ripgrep_fzf_sort = '--sortr path'
+        vim.cmd [[
+          set rtp+=~/.fzf
+          let g:ripgrep_fzf_sort = ''
+          autocmd FileType vimwiki let g:ripgrep_fzf_sort = '--sortr path'
 
-        -- function! RipgrepFzf(query, fullscreen)
-        --   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case ' . g:ripgrep_fzf_sort . ' -- %s || true'
-        --   let initial_command = printf(command_fmt, shellescape(a:query))
-        --   let reload_command = printf(command_fmt, '{q}')
-        --   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-        --   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-        -- endfunction
+          function! RipgrepFzf(query, fullscreen)
+            let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case ' . g:ripgrep_fzf_sort . ' -- %s || true'
+            let initial_command = printf(command_fmt, shellescape(a:query))
+            let reload_command = printf(command_fmt, '{q}')
+            let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+            call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+          endfunction
 
-        -- command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+          command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+        ]]
+
+        -- Search filenames with Ctrl-p
+        vim.keymap.set("n", "<C-p>", ":FZF<CR>")
 
         -- -- Search file contents with <leader>/
         vim.keymap.set("n", "<Leader>/", ":Rg<CR>")
