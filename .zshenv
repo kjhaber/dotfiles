@@ -15,6 +15,7 @@ export AWS_PAGER=""
 
 export CONFIG_DIR="$HOME/.config"
 export CONFIG_LOCAL_DIR="$HOME/.config-local"
+export LUA_PATH=";;$CONFIG_DIR/nvim/lua/?.lua;$CONFIG_LOCAL_DIR/nvim/lua/?.lua"
 
 # local environment-specific config
 test -f "$CONFIG_LOCAL_DIR/zsh/zshenv-before.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshenv-before.zsh"
