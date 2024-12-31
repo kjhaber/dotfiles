@@ -5,6 +5,7 @@ let g:coc_global_extensions = [
 \  'coc-html',
 \  'coc-java',
 \  'coc-json',
+\  'coc-lua',
 \  'coc-prettier',
 \  'coc-pyright',
 \  'coc-rls',
