@@ -1,5 +1,5 @@
 Homebrew:brew update && brew upgrade
-Neovim plugins:nvim -e -c "PU" -c "qa"
+Neovim (lazy.nvim) plugins:nvim --headless "+Lazy! sync" +qa
 Neovim coc.nvim plugins:nvim -e -c 'CocUpdateSync|q'
 mise tools:mise upgrade
 tmux plugins:~/.tmux/plugins/tpm/bin/update_plugins all
