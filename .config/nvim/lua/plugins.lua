@@ -44,4 +44,25 @@ require("lazy").setup({
   install = { colorscheme = { "molokai" } },
   -- automatically check for plugin updates
   checker = { enabled = false },
+  change_detection = { enabled = false },
+  ui = {
+    icons = {
+      cmd = "> ",
+      config = "> ",
+      event = "> ",
+      favorite = "+ ",
+      ft = "> ",
+      init = "* ",
+      import = "+ ",
+      keys = "> ",
+      lazy = "~ ",
+      loaded = "●",
+      not_loaded = "○",
+      plugin = "> ",
+      runtime = "> ",
+      require = "> ",
+      source = "> ",
+      start = ".. ",
+    }
+  }
 })
