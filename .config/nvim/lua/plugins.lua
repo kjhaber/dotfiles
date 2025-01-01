@@ -18,17 +18,26 @@ vim.opt.rtp:prepend(lazypath)
 
 
 -- Setup lazy.nvim
+-- Include hook for local-specific plugins in CONFIG_LOCAL_DIR/nvim/lua/plugins/local.lua
+-- (CONFIG_LOCAL_DIR/nvim/lua must be on LUA_PATH)
+local pluginSpecs = {
+  {import = "plugins.appearance"},
+  {import = "plugins.filetypes"},
+  {import = "plugins.git"},
+  {import = "plugins.lsp"},
+  {import = "plugins.navigation"},
+  {import = "plugins.shortcuts"},
+  {import = "plugins.textobjects"},
+  {import = "plugins.vimwiki"},
+}
+local localLuaModulePath = vim.env.CONFIG_LOCAL_DIR .. "/nvim/lua"
+local localPluginConfig = localLuaModulePath .. "/plugins/local.lua"
+if vim.fn.filereadable(localPluginConfig) ~= 0 then
+  table.insert(pluginSpecs, require("plugins.local"))
+end
+
 require("lazy").setup({
-  spec = {
-    {import = "plugins.appearance"},
-    {import = "plugins.filetypes"},
-    {import = "plugins.git"},
-    {import = "plugins.lsp"},
-    {import = "plugins.navigation"},
-    {import = "plugins.shortcuts"},
-    {import = "plugins.textobjects"},
-    {import = "plugins.vimwiki"},
-  },
+  spec = pluginSpecs,
 
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
