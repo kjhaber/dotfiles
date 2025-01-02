@@ -6,12 +6,8 @@ return {
   {
     "godlygeek/tabular",
     init = function()
-      vim.keymap.set("n", "<Leader>a=", ":Tabularize /=<CR>")
-      vim.keymap.set("v", "<Leader>a=", ":Tabularize /=<CR>")
-      vim.keymap.set("n", "<Leader>a,", ":Tabularize /,<CR>")
-      vim.keymap.set("v", "<Leader>a,", ":Tabularize /,<CR>")
-      vim.keymap.set("n", "<Leader>a<Space>", ":Tabularize /<Space><CR>")
-      vim.keymap.set("v", "<Leader>a<Space>", ":Tabularize /<Space><CR>")
+      vim.keymap.set("v", "<Leader>>,", ":Tabularize /,<CR>")
+      vim.keymap.set("v", "<Leader>><Bar>", ":Tabularize /<Bar><CR>")
     end
   },
 

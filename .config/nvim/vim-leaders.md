@@ -3,10 +3,7 @@
 ```
 space -- reset default states (paste mode, search highlight, etc) and refresh terminal/tmux
 
-a - Align (Tabularize)
-  a| -- align using bar character
-  a: -- align using colon character
-  a= -- align using equal character
+a
 b
   bb -- toggle bullet character between * and -
   bi -- indent and toggle bullet
@@ -123,6 +120,10 @@ z - Zoom (ZoomWinTab)
   `<space> -- insert markdown code block, set into insert mode (normal or visual mode)
   `p -- insert current clipboard content inside markdown code block
 ; -- Startify
+
+> - Align (Tabularize)
+  >, -- align selected text using comma character
+  >| -- align selected text using bar character
 
 = - evaluate math expression
   =a -- coc-Calc Append
