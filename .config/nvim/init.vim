@@ -272,7 +272,7 @@ command! PU PlugUpdate | PlugUpgrade
 " --------------------------------------------------------------
 
 " Toggle listing hidden characters
-nmap <Leader>cc :set list!<CR>
+nmap <Leader>? :set list!<CR>
 
 " Paste from clipboard
 nmap <Leader>p "+p

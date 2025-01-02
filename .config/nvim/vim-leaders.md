@@ -20,7 +20,6 @@ b
   b. -- change bullet character to ..
 c - list hidden Characters
   ca -- coc-Calc Append
-  cc -- list hidden Characters
   cr -- coc-Calc Replace
 d
   dn -- Date Normalize: change date under cursor to YYYY-MM-DD format
@@ -120,6 +119,7 @@ z - Zoom (ZoomWinTab)
   .p  -- open file explorer in projects directory
   .w  -- open file explorer in vimwiki directory
 
+? - toggle list hidden characters
 \ - toggle paste mode
 ` - insert markdown code block
   `<space> -- insert markdown code block, set into insert mode (normal or visual mode)
