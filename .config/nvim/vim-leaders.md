@@ -18,9 +18,7 @@ b
   b> -- change bullet character to >
   b+ -- change bullet character to +
   b. -- change bullet character to ..
-c - list hidden Characters
-  ca -- coc-Calc Append
-  cr -- coc-Calc Replace
+c
 d
   dn -- Date Normalize: change date under cursor to YYYY-MM-DD format
   dt -- Insert today's date in YYYY-MM-DD format, leave in insert mode
@@ -126,5 +124,8 @@ z - Zoom (ZoomWinTab)
   `p -- insert current clipboard content inside markdown code block
 ; -- Startify
 
+= - evaluate math expression
+  =a -- coc-Calc Append
+  =r -- coc-Calc Replace
 ```
 

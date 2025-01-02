@@ -57,8 +57,8 @@ imap <C-s> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
 
 " Coc-calc
-nnoremap <Leader>ca <Plug>(coc-calc-result-append)
-nnoremap <Leader>cr <Plug>(coc-calc-result-replace)
+nnoremap <Leader>=a <Plug>(coc-calc-result-append)
+nnoremap <Leader>=r <Plug>(coc-calc-result-replace)
 
 " Toggle completion with ctrl-space (even in normal mode)
 if has('nvim')
