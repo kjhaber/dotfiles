@@ -4,6 +4,18 @@
 space -- reset default states (paste mode, search highlight, etc) and refresh terminal/tmux
 
 a
+  aa -- toggle llm chat window (split)
+  an -- start new chat without context from buffer/selection
+  a> -- start new chat in split, send current buffer or selection as context
+  a<cr> -- send chat for response
+  ax -- stop llm command
+  a. -- open chat finder
+  ad -- delete current chat
+
+  a+ -- prompt for command, append response at cursor/after selection
+  ar -- prompt for command, replace selection with response
+  a| -- prompt for command, output response in vertical split
+
 b
   bb -- toggle bullet character between * and -
   bi -- indent and toggle bullet

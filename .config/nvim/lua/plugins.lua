@@ -24,6 +24,7 @@ local pluginSpecs = {
   {import = "plugins.appearance"},
   {import = "plugins.filetypes"},
   {import = "plugins.git"},
+  {import = "plugins.llm"},
   {import = "plugins.lsp"},
   {import = "plugins.navigation"},
   {import = "plugins.shortcuts"},
