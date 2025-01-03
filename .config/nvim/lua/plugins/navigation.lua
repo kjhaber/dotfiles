@@ -99,7 +99,76 @@ return {
   {
     "stevearc/oil.nvim",
     init = function()
-      vim.cmd("source " .. vim.env.HOME .. "/.config/nvim/oil-settings.vim")
+      vim.cmd([[
+        command! Explore silent call OilCur()
+        function! OilCur()
+          if expand("%:p:h") == ''
+            Oil .
+          else
+            Oil %:p:h
+          endif
+        endfunction
+
+        command! Sexplore silent call OilSplit()
+        function! OilSplit()
+          split
+          call OilCur()
+        endfunction
+
+        command! Vexplore silent call OilVsplit()
+        function! OilVsplit()
+          vsplit
+          call OilCur()
+        endfunction
+
+        function! OilPwd()
+          lua print(require("oil").get_current_dir())
+        endfunction
+
+        " shortcuts to open key directories in file explorer (more leader-dot mappings)
+        nmap <silent> <leader>.~ :exec "edit " . $HOME<CR>:call OilPwd()<CR>
+        nmap <silent> <Leader>.w :exec "edit " . $VIMWIKI_DIR<CR>:call OilPwd()<CR>
+        nmap <silent> <Leader>.d :exec "edit " . $DOC_DIR<CR>:call OilPwd()<CR>
+        nmap <silent> <Leader>.k :exec "edit " . $DESKTOP_DIR<CR>:call OilPwd()<CR>
+        nmap <silent> <Leader>.p :exec "edit " . $PROJECTS_DIR<CR>:call OilPwd()<CR>
+        nmap <silent> <Leader>.c :exec "edit " . $CONFIG_DIR<CR>:call OilPwd()<CR>
+        nmap <silent> <Leader>.l :exec "edit " . $CONFIG_LOCAL_DIR<CR>:call OilPwd()<CR>
+
+        " shortcut to show current buffer dir since it's not onscreen like netrw
+        autocmd FileType oil nmap <buffer> _ :call OilPwd()<CR>
+
+        " integrate dir refresh into my usual reset shortcut
+        autocmd FileType oil nmap <buffer> <silent> <leader><leader> :call OilLeaderReset()<cr>
+        autocmd FileType oil nmap <buffer> <silent> <leader><space> :call OilLeaderReset()<cr>
+
+        function! OilLeaderReset()
+          let p = getpos('.')
+          call LeaderReset()
+          lua require("oil.actions").refresh.callback()
+
+          " restore cursor position after oil refresh, which runs async -
+          " this is best-effort but hopefully better than always resetting to 0,0
+          let restore_pos_exec = "call setpos('.', [" . join(p, ',') . "])"
+          call timer_start(100, {-> execute(restore_pos_exec)})
+        endfunction
+      ]])
+
+      require("oil").setup({
+        default_file_explorer = true,
+        use_default_keymaps = false,
+        keymaps = {
+          ["g?"] = "actions.show_help",
+          ["<CR>"] = "actions.select",
+          ["-"] = "actions.parent",
+          ["g|"] = "actions.select_vsplit",
+          ["g-"] = "actions.select_split",
+          ["gp"] = "actions.preview",
+          ["gs"] = "actions.change_sort",
+          ["gx"] = "actions.open_external",
+          ["g."] = "actions.toggle_hidden",
+          ["g\\"] = "actions.toggle_trash",
+        },
+      })
     end
   },
 
