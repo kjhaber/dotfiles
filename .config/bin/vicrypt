@@ -25,6 +25,7 @@ check_dependency() {
 check_dependency "openssl" '`brew install openssl`'
 check_dependency "vipe" '`brew install moreutils`'
 check_dependency "basename" '`brew install coreutils`'
+check_dependency "sha256sum" '`brew install coreutils`'
 
 # Get input filename fragments
 filename=$(basename -- "$TARGET_FILE")
@@ -40,38 +41,48 @@ echo
 
 # Create tmp file for unencrypted file content
 # https://stackoverflow.com/questions/687014/removing-created-temp-files-in-unexpected-bash-exit#687052
-TMPFILE="$(mktemp /tmp/${filename}.XXXXXX).${extension}"
+INITTMPFILE="$(mktemp /tmp/${filename}.XXXXXX)"
+rm "$INITTMPFILE"
+TMPFILE="$INITTMPFILE.${extension}"
 # echo "tmpfile: $TMPFILE"
 trap '{ rm -f -- "$TMPFILE"; }' EXIT
 
-BASETMPFILE="$(mktemp /tmp/${filename}.XXXXXX).${extension}"
-# echo "tmpfile: $BASETMPFILE"
-trap '{ rm -f -- "$BASETMPFILE"; }' EXIT
+INIT_CHECKSUM=
 
 # Decrypt target file if it exists, write to temp file
 # https://superuser.com/questions/370388/simple-built-in-way-to-encrypt-and-decrypt-a-file-on-a-mac-via-command-line
 # https://unix.stackexchange.com/questions/507131/openssl-1-1-1b-warning-using-iter-or-pbkdf2-would-be-better-while-decrypting
 if [ -f "$TARGET_FILE" ]; then
-  cat "$TARGET_FILE" | vicrypt-decrypt "$PASSWORD" > "$BASETMPFILE"
+  cat "$TARGET_FILE" | vicrypt-decrypt "$PASSWORD" > "$TMPFILE"
   DECRESULT="$?"
   if [ "$DECRESULT" -ne "0" ]; then
     echo "Error occurred when decrypting, exiting"
     exit 1
   fi
 
-  cp "$BASETMPFILE" "$TMPFILE"
+  INIT_CHECKSUM="$(sha256sum "$TMPFILE")"
 fi
+echo "initial checksum for $TMPFILE: $INIT_CHECKSUM"
 
 # Edit decrypted file in editor
 "$EDITOR" "$TMPFILE"
+if [ ! -f "$TMPFILE" ]; then
+  # echo "No file written, exiting"
+  exit 0
+fi
+
+FINAL_CHECKSUM="$(sha256sum "$TMPFILE")"
+# echo "final checksum: $FINAL_CHECKSUM"
 
 # Check for change in file - exit immediately if no change detected
 # https://stackoverflow.com/questions/12900538/fastest-way-to-tell-if-two-files-have-the-same-contents-in-unix-linux
-if cmp --silent -- "$TMPFILE" "$BASETMPFILE"; then
-  # echo "No changes made in file, exiting"
+if [ "$INIT_CHECKSUM" == "$FINAL_CHECKSUM" ]; then
+  # echo "No changes made in file (checksum), exiting"
+  rm -f "$TMPFILE"
   exit 0
 fi
-rm -f "$BASETMPFILE"
+
+# echo "checksums didn't match, proceed"
 
 # Encrypt tmpfile contents and write to new temp file
 ENCTMPFILE="$(mktemp /tmp/${filename}.enc.XXXXXX)"
@@ -79,6 +90,7 @@ ENCTMPFILE="$(mktemp /tmp/${filename}.enc.XXXXXX)"
 trap '{ rm -f -- "$ENCTMPFILE"; }' EXIT
 cat "$TMPFILE" | vicrypt-encrypt "$PASSWORD" > "$ENCTMPFILE"
 rm -f "$TMPFILE"
+# echo "encrypt tmp file: $ENCTMPFILE"
 
 # If no errors in encrypting tmpfile, overwrite target file
 ENCRESULT="$?"
