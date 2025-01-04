@@ -72,7 +72,7 @@ local config = {
         default_chat_agent = "ChatOllamaMistral",
         default_command_agent = "CommandOllamaMistral",
         chat_template = require("gp.defaults").short_chat_template,
-        -- toggle_target = "popup",
+        chat_conceal_model_params = false,
         toggle_target = "vsplit",
         chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<leader>a<cr>" },
         chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<leader>ad" },
