@@ -12,7 +12,7 @@ a
   a. -- open chat finder
   ad -- delete current chat
 
-  a+ -- prompt for command, append response at cursor/after selection
+  a<space> -- prompt for command, append response at cursor/after selection
   ar -- prompt for command, replace selection with response
   a| -- prompt for command, output response in vertical split
 

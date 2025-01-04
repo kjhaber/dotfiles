@@ -69,15 +69,18 @@ local config = {
         image = {
           disable = true,
         },
+        chat_finder_mappings = {
+          delete = { modes = { "n" }, shortcut = "<leader>ad" },
+        },
         default_chat_agent = "ChatOllamaMistral",
         default_command_agent = "CommandOllamaMistral",
         chat_template = require("gp.defaults").short_chat_template,
         chat_conceal_model_params = false,
         toggle_target = "vsplit",
-        chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<leader>a<cr>" },
-        chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<leader>ad" },
-        chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<leader>ax" },
-        chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<leader>an" },
+        chat_shortcut_respond = { modes = { "n" }, shortcut = "<leader>a<cr>" },
+        chat_shortcut_delete = { modes = { "n" }, shortcut = "<leader>ad" },
+        chat_shortcut_stop = { modes = { "n" }, shortcut = "<leader>ax" },
+        chat_shortcut_new = { modes = { "n" }, shortcut = "<leader>an" },
       })
 
       -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
@@ -109,8 +112,8 @@ vim.keymap.set("n", "<leader>ax", "<cmd>GpStop<cr>", keymapOptions("Stop"))
 vim.keymap.set("n", "<leader>a.", "<cmd>GpChatFinder<cr>", keymapOptions("Chat Finder"))
 vim.keymap.set("n", "<leader>ad", "<cmd>GpChatDelete<cr>", keymapOptions("Delete Chat"))
 
-vim.keymap.set("n", "<leader>a+", "<cmd>GpAppend<cr>", keymapOptions("Append (after)"))
-vim.keymap.set("v", "<leader>a+", ":<C-u>'<,'>GpAppend<cr>", keymapOptions("Visual Append (after)"))
+vim.keymap.set("n", "<leader>a ", "<cmd>GpAppend<cr>", keymapOptions("Append (after)"))
+vim.keymap.set("v", "<leader>a ", ":<C-u>'<,'>GpAppend<cr>", keymapOptions("Visual Append (after)"))
 
 vim.keymap.set("n", "<leader>ar", ":%GpRewrite<cr>", keymapOptions("Inline Rewrite"))
 vim.keymap.set("v", "<leader>ar", ":<C-u>'<,'>GpRewrite<cr>", keymapOptions("Visual Rewrite"))
