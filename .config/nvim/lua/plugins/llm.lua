@@ -17,7 +17,7 @@ local config = {
 
     config = function()
       local start_local_llm_server = function()
-        pcall(io.popen, "tmuxinator start ollama")
+        pcall(io.popen, "tmserve ollama")
       end
 
       -- start ollama in tmux session when plugin is lazy-loaded
