@@ -1,0 +1,159 @@
+#!/bin/sh
+# tmserve
+# Runs local servers in a tmux session.  Uses a simple profile config to assign
+# a name to a server launch command and port number.  Using the profile name,
+# tmserve will check whether a server is running on the profile's port, and if
+# not it will run the profile's launch command in a window of a tmux session
+# named "server" (starting it if necessary).
+
+# (I created this to simplify running ollama locally for use with a vim LLM
+# plugin.  I don't want ollama running all the time, but I don't want to
+# manually start it when I trigger my vim LLM shortcuts.  I also don't want to
+# dig around for log files or running server processes when I'm done using it.
+# Realized my quick script for running ollama in a tmux session could be
+# generalized for multiple local servers.)
+
+# Usage:
+# tmserve <profile-name>
+#   Starts a server launch command in a tmux window
+# tmserve --edit
+#   Opens the tmserve profile config json in editor
+# tmserve --list
+#   Lists the window names in the "server" tmux session
+
+
+# Dependency check: tmux, jq
+check_dependency() {
+  DEP_COMMAND="$1"
+  INSTALL_HINT="$2"
+  which -s "$DEP_COMMAND"
+  RESULT="$?"
+  if [ "$RESULT" -ne "0" ]; then
+    echo "$DEP_COMMAND not found ($INSTALL_HINT)"
+    exit 1
+  fi
+}
+check_dependency "tmux" "\`brew install tmux\`"
+check_dependency "jq" "\`brew install jq\`"
+
+# Config check
+usage() {
+  echo "Usage: tmserve <profile-name>"
+  echo "       tmserve --edit"
+  echo "       tmserve --list"
+  echo "       tmserve --help"
+  echo
+}
+help() {
+  echo "tmserve is a tool for running local servers within a tmux session."
+  echo
+  echo "Usage:"
+  echo "  tmserve <profile-name>"
+  echo "  Runs a server launch command in tmux window"
+  echo
+  echo "  tmserve --edit"
+  echo "  Opens the tmserve profile config json in editor"
+  echo
+  echo "  tmserve --list"
+  echo "  Lists the window names in the \"server\" tmux session"
+  echo
+  echo "  tmserve --help"
+  echo "  Show this help message"
+  echo
+  echo "Profile Config:"
+  echo "  Config json is located at $TMSERVE_CONFIG_JSON_PATH"
+  echo "  and should be in the following format:"
+  echo
+  echo "  \`\`\`"
+  echo "  {"
+  echo "    \"profiles\": {"
+  echo "      \"PROFILE_NAME\": {"
+  echo "        \"port\": 12345,"
+  echo "        \"launch\": \"myservice start\","
+  echo "      }"
+  echo "    }"
+  echo "  }"
+  echo "  \`\`\`"
+  echo "  The 'launch' value is the command to start the server."
+  echo "  The 'port' number is used to test whether server is already running."
+  echo
+}
+TMSERVE_CONFIG_JSON_PATH="$CONFIG_LOCAL_DIR/tmserve/tmserve-config.json"
+if [ ! -f "$TMSERVE_CONFIG_JSON_PATH" ]; then
+  usage
+  echo "Profile config file not found"
+  exit 1
+fi
+
+# Evaluate first arg
+if [ -z "$1" ]; then
+  usage
+  exit 0
+fi
+
+# If first arg is `--help`, display help options and exit
+if [ "$1" = "--help" ]; then
+  help
+  exit 0
+fi
+
+# If first arg is `--edit`, open config json file in editor, then exit
+if [ "$1" = "--edit" ]; then
+  "$EDITOR" "$TMSERVE_CONFIG_JSON_PATH"
+  exit 0
+fi
+
+# If first arg is `--list`, list window names running in server session, then exit
+if [ "$1" = "--list" ]; then
+  if tmux has-session -t "server" 2> /dev/null; then
+    tmux list-windows -t "server" -F '#W'
+  else
+    echo "tmux server session is not running"
+  fi
+  exit 0
+fi
+
+# Otherwise first arg is profile name
+SERVER_PROFILE_NAME="$1"
+# echo "tmserve profile: $SERVER_PROFILE_NAME"
+
+# get profile info
+SERVER_PROFILE="$(jq -c ".profiles.\"$SERVER_PROFILE_NAME\" // empty" -- "$TMSERVE_CONFIG_JSON_PATH")"
+# echo "server profile $SERVER_PROFILE_NAME = $SERVER_PROFILE"
+if [ -z "$SERVER_PROFILE" ]; then
+  echo "Server profile not found for name '$SERVER_PROFILE_NAME'"
+  exit 1
+fi
+SERVER_PORT="$(echo "$SERVER_PROFILE" | jq -r '.port // empty')"
+# echo "port = $SERVER_PORT"
+if [ -z "$SERVER_PORT" ]; then
+  echo "Server profile '$SERVER_PROFILE_NAME' does not contain 'port' value"
+  exit 1
+fi
+SERVER_LAUNCH="$(echo "$SERVER_PROFILE" | jq -r '.launch // empty')"
+# echo "launch command = '$SERVER_LAUNCH'"
+if [ -z "$SERVER_LAUNCH" ]; then
+  echo "Server profile '$SERVER_PROFILE_NAME' does not contain 'launch' value"
+  exit 1
+fi
+
+# test whether service is already running on port
+HOST="localhost"
+nc "$HOST" "$SERVER_PORT" -w1
+SERVER_RUNNING="$?"
+if [ "$SERVER_RUNNING" = 0 ]; then
+  echo "Server already running at $HOST:$SERVER_PORT, exiting"
+  exit 0
+fi
+
+# Run profile launch command in new window under tmux session "server", start session if needed
+if ! tmux has-session -t "server" 2> /dev/null; then
+  echo "Starting server profile '$SERVER_PROFILE_NAME' in new tmux 'server' session with command: '$SERVER_LAUNCH'"
+  tmux new-session -d -s "server" -n "$SERVER_PROFILE_NAME" "$SERVER_LAUNCH"
+else
+  echo "Starting server profile '$SERVER_PROFILE_NAME' in existing tmux 'server' session with command: '$SERVER_LAUNCH'"
+  tmux new-window -t "server" -n "$SERVER_PROFILE_NAME" "$SERVER_LAUNCH"
+fi
+
+echo "Done"
+
