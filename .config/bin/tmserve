@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # tmserve
 # Runs local servers in a tmux session.  Uses a simple profile config to assign
 # a name to a server launch command and port number.  Using the profile name,
@@ -21,6 +22,11 @@
 # tmserve --list
 #   Lists the window names in the "server" tmux session
 
+debug() {
+  true;
+  # echo "$(date) - $1" >> ~/tmserve.debug
+}
+debug "start ($1)"
 
 # Dependency check: tmux, jq
 check_dependency() {
@@ -115,29 +121,30 @@ fi
 
 # Otherwise first arg is profile name
 SERVER_PROFILE_NAME="$1"
-# echo "tmserve profile: $SERVER_PROFILE_NAME"
+debug "tmserve profile: $SERVER_PROFILE_NAME"
 
 # get profile info
 SERVER_PROFILE="$(jq -c ".profiles.\"$SERVER_PROFILE_NAME\" // empty" -- "$TMSERVE_CONFIG_JSON_PATH")"
-# echo "server profile $SERVER_PROFILE_NAME = $SERVER_PROFILE"
+debug "server profile $SERVER_PROFILE_NAME = $SERVER_PROFILE"
 if [ -z "$SERVER_PROFILE" ]; then
   echo "Server profile not found for name '$SERVER_PROFILE_NAME'"
   exit 1
 fi
 SERVER_PORT="$(echo "$SERVER_PROFILE" | jq -r '.port // empty')"
-# echo "port = $SERVER_PORT"
+debug "port = $SERVER_PORT"
 if [ -z "$SERVER_PORT" ]; then
   echo "Server profile '$SERVER_PROFILE_NAME' does not contain 'port' value"
   exit 1
 fi
 SERVER_LAUNCH="$(echo "$SERVER_PROFILE" | jq -r '.launch // empty')"
-# echo "launch command = '$SERVER_LAUNCH'"
+debug "launch command = '$SERVER_LAUNCH'"
 if [ -z "$SERVER_LAUNCH" ]; then
   echo "Server profile '$SERVER_PROFILE_NAME' does not contain 'launch' value"
   exit 1
 fi
 
 # test whether service is already running on port
+debug "port check"
 HOST="localhost"
 nc "$HOST" "$SERVER_PORT" -w1
 SERVER_RUNNING="$?"
@@ -147,13 +154,17 @@ if [ "$SERVER_RUNNING" = 0 ]; then
 fi
 
 # Run profile launch command in new window under tmux session "server", start session if needed
+debug "server start"
 if ! tmux has-session -t "server" 2> /dev/null; then
-  echo "Starting server profile '$SERVER_PROFILE_NAME' in new tmux 'server' session with command: '$SERVER_LAUNCH'"
-  tmux new-session -d -s "server" -n "$SERVER_PROFILE_NAME" "$SERVER_LAUNCH"
+  debug "new session ($SERVER_LAUNCH)"
+  debug "Starting server profile '$SERVER_PROFILE_NAME' in new tmux 'server' session with command: '$SERVER_LAUNCH'"
+  debug ".. $(tmux new-session -d -s "server" -n "$SERVER_PROFILE_NAME" "$SERVER_LAUNCH")"
 else
-  echo "Starting server profile '$SERVER_PROFILE_NAME' in existing tmux 'server' session with command: '$SERVER_LAUNCH'"
-  tmux new-window -t "server" -n "$SERVER_PROFILE_NAME" "$SERVER_LAUNCH"
+  debug "existing session ($SERVER_LAUNCH)"
+  debug "Starting server profile '$SERVER_PROFILE_NAME' in existing tmux 'server' session with command: '$SERVER_LAUNCH'"
+  debug ".. $(tmux new-window -t "server" -n "$SERVER_PROFILE_NAME" "$SERVER_LAUNCH")"
 fi
 
+debug "Done ($?)"
 echo "Done"
 
