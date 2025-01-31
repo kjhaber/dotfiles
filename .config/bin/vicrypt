@@ -62,7 +62,7 @@ if [ -f "$TARGET_FILE" ]; then
 
   INIT_CHECKSUM="$(sha256sum "$TMPFILE")"
 fi
-echo "initial checksum for $TMPFILE: $INIT_CHECKSUM"
+# echo "initial checksum for $TMPFILE: $INIT_CHECKSUM"
 
 # Edit decrypted file in editor
 "$EDITOR" "$TMPFILE"
