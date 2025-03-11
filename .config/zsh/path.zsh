@@ -13,3 +13,6 @@ export PATH="$MISE_DATA_DIR/shims:$PATH"
 export PATH="$CONFIG_DIR/bin:$PATH"
 export PATH="$CONFIG_LOCAL_DIR/bin:$PATH"
 
+# Add local completion definitions to fpath
+fpath=("$CONFIG_LOCAL_DIR/zsh/completions" $fpath)
+
