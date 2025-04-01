@@ -102,6 +102,9 @@ return {
         " habit - map same shortcut for urls in vimwiki
         autocmd FileType vimwiki nmap <buffer> <Leader>jd gx
 
+        " make iabbrev work on pressing space within vimwiki pages
+        " (inspired by https://github.com/vimwiki/vimwiki/issues/415 )
+        autocmd Filetype vimwiki inoremap <silent><buffer> <space> <C-]><space>
 
         " Make Enter and tab work more like I'm used to from IDEs (handle vimwiki mappings)
         autocmd Filetype vimwiki inoremap <silent><expr><buffer> <cr> coc#pum#visible() ? coc#pum#confirm()
