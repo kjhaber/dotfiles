@@ -36,6 +36,12 @@ return {
       dependencies = { "kana/vim-textobj-user" }
     },
 
+    -- Text object for closest pair of quotes (single quote, double quote, backtick)
+    {
+      "beloglazov/vim-textobj-quotes",
+      dependencies = { "kana/vim-textobj-user" }
+    },
+
     -- Text object for Ruby blocks (ar, ir) (rarely used)
     {
       "nelstrom/vim-textobj-rubyblock",
