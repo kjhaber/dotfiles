@@ -627,6 +627,10 @@
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_404EC41E-5EE6-4861-8409-EA70C3CD4F8C_selection</key>
 	<integer>0</integer>
+	<key>NeverWarnAboutShortLivedSessions_CA5AD158-3190-4603-8828-BE2C32FAEA95</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_CA5AD158-3190-4603-8828-BE2C32FAEA95_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -635,6 +639,8 @@
 			<key>Allow Title Reporting</key>
 			<true/>
 			<key>Ambiguous Double Width</key>
+			<false/>
+			<key>Animate Movement</key>
 			<false/>
 			<key>Ansi 0 Color</key>
 			<dict>
@@ -882,7 +888,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<integer>1</integer>
+			<real>1</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -1250,7 +1256,7 @@
 			<key>Show Mark Indicators</key>
 			<false/>
 			<key>Silence Bell</key>
-			<true/>
+			<false/>
 			<key>Smart Cursor Color</key>
 			<true/>
 			<key>Smart Selection Rules</key>
@@ -1365,7 +1371,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<integer>1</integer>
+			<real>1</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -1379,6 +1385,8 @@
 			<key>Allow Title Reporting</key>
 			<true/>
 			<key>Ambiguous Double Width</key>
+			<false/>
+			<key>Animate Movement</key>
 			<false/>
 			<key>Ansi 0 Color</key>
 			<dict>
