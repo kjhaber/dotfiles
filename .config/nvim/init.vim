@@ -263,6 +263,9 @@ command! InitDiary execute "normal! ggi## JOURNAL<cr>(login)<esc>:call WikiTimes
 " Initialize PlantUml document
 command! InitUml execute "normal! ggi@startuml<cr><cr>title<cr><cr>@enduml<cr><esc>kkkA "
 
+" Initialize Lua class
+command! InitLuaClass execute "normal! ggilocal M = {}<cr><cr>function M:new()<cr>local instance = setmetatable({}, self)<cr>self.__index = self<cr>return instance<cr>end<cr><cr>return M<esc>"
+
 " Make updating plugins more convenient
 command! PU PlugUpdate | PlugUpgrade
 
