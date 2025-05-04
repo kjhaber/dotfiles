@@ -66,6 +66,12 @@ zstyle ':completion:*' matcher-list \
     '+r:|[._-]=* r:|=*' \
     '+l:|=*'
 
+# mise default packages
+export MISE_PYTHON_DEFAULT_PACKAGES_FILE="$CONFIG_LOCAL_DIR/mise/default-python-packages"
+export MISE_NODE_DEFAULT_PACKAGES_FILE="$CONFIG_LOCAL_DIR/mise/default-node-packages"
+export MISE_GO_DEFAULT_PACKAGES_FILE="$CONFIG_LOCAL_DIR/mise/default-go-packages"
+export MISE_RUBY_DEFAULT_PACKAGES_FILE="$CONFIG_LOCAL_DIR/mise/default-ruby-packages"
+
 # Load external configs and plugins
 for file in $CONFIG_DIR/zsh/autoload/*.zsh; do
   source "$file"
