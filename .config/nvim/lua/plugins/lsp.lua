@@ -9,6 +9,7 @@ return {
         \  'coc-calc',
         \  'coc-css',
         \  'coc-eslint',
+        \  'coc-go',
         \  'coc-html',
         \  'coc-java',
         \  'coc-json',
