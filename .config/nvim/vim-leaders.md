@@ -28,6 +28,7 @@ b
   b+ -- change bullet character to +
   b. -- change bullet character to ..
 c
+  cu -- open code url window
 d
   dn -- Date Normalize: change date under cursor to YYYY-MM-DD format
   dt -- Insert today's date in YYYY-MM-DD format, leave in insert mode

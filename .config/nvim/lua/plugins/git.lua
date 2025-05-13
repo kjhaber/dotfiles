@@ -26,7 +26,20 @@ return {
       vim.keymap.set("n", "<Leader>gc", ":Git commit<CR>")
       vim.keymap.set("n", "<Leader>gd", ":Gdiff<CR>")
       vim.keymap.set("n", "<Leader>gp", ":Ggrep<Space>")
-      vim.keymap.set("n", "<Leader>gs", ":Git<CR>")
+      vim.keymap.set("n", "<Leader>gs", ":Git<CR>") -- "Git Status"
+    end
+  },
+
+  -- Shortcut to display urls of current/selected lines in Git repo website
+  {
+    "kjhaber/vim-codeurl",
+    lazy = true,
+    cmd = {
+      "CodeUrl",
+    },
+    init = function()
+      vim.keymap.set("n", "<leader>cu", ":CodeUrl<CR>", { noremap = true })
+      vim.keymap.set("v", "<leader>cu", ":'<,'>CodeUrl<CR>", { noremap = true })
     end
   },
 
