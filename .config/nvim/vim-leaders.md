@@ -69,8 +69,6 @@ l
   l<space> -- LSP Code Action (Quick Fix)
 m
 n
-  nn -- toggle line numbers
-  nr -- toggle between relative and absolute line numbers
 o
 p - Paste without clobbering system clipboard
 q
@@ -138,6 +136,7 @@ z - Zoom (ZoomWinTab)
   >, -- align selected text using comma character
   >| -- align selected text using bar character
 
+# - cycle through line number modes (rel+current -> none -> absolute -> rel+current)
 = - evaluate math expression
   =a -- coc-Calc Append
   =r -- coc-Calc Replace

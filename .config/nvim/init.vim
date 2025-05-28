@@ -219,30 +219,30 @@ endfunction
 nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
 
 
-" Toggle between number and nonumber (show always enables relative number,
-" my preferred default)
-function! ToggleNumber()
-    if(&number == 1)
+" Toggle line number display modes
+" States: relative+current -> none -> absolute -> relative+current
+function! ToggleLineNumbers()
+    if &relativenumber && &number
+        " Current state: relative with current line number
+        " Switch to: no line numbers
+        set norelativenumber
         set nonumber
-        set norelativenumber
-    else
+        echo "Line numbers: hidden"
+    elseif !&relativenumber && !&number
+        " Current state: no line numbers
+        " Switch to: absolute line numbers
         set number
+        set norelativenumber
+        echo "Line numbers: absolute"
+    else
+        " Current state: absolute line numbers (or any other state)
+        " Switch to: relative with current line number
         set relativenumber
+        set number
+        echo "Line numbers: relative with current"
     endif
 endfunction
-nmap <Leader>nn :call ToggleNumber()<CR>
-
-
-" Toggle between absolute number and relativenumber
-function! ToggleNumberRel()
-    if(&relativenumber == 1)
-        set norelativenumber
-        set number
-    else
-        set relativenumber
-    endif
-endfunction
-nmap <Leader>nr :call ToggleNumberRel()<CR>
+nnoremap <leader># :call ToggleLineNumbers()<CR>
 
 
 " Toggle paste mode quickly
