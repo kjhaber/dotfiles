@@ -274,8 +274,25 @@ command! PU PlugUpdate | PlugUpgrade
 " Leader/User-Defined Mappings
 " --------------------------------------------------------------
 
-" Toggle listing hidden characters
-nmap <Leader>? :set list!<CR>
+" Toggle listing hidden/whitespace characters
+function! ToggleDisplayHiddenChars()
+    " Toggle whitespace characters
+    set list!
+
+    if &list
+      if exists(':IndentLinesEnable')
+        IndentLinesEnable
+      endif
+      echo "Whitespace characters: shown"
+    else
+      if exists(':IndentLinesDisable')
+        IndentLinesDisable
+      endif
+      echo "Whitespace characters: hidden"
+    endif
+endfunction
+nnoremap <leader>? :call ToggleDisplayHiddenChars()<CR>
+
 
 " Paste from clipboard
 nmap <Leader>p "+p
