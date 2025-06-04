@@ -115,6 +115,13 @@ return {
               \ coc#refresh()
         autocmd Filetype vimwiki inoremap <silent><expr><buffer> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
+        " Disable concealing for vimwiki inline code (backticks)
+        augroup VimwikiConceal
+            autocmd!
+            autocmd FileType vimwiki setlocal conceallevel=1
+            autocmd FileType vimwiki syntax match VimwikiCode /`[^`]\+`/ contains=@NoSpell
+            autocmd FileType vimwiki hi! link VimwikiCode String
+        augroup END
       ]])
     end
   },
