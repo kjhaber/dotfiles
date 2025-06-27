@@ -1,4 +1,6 @@
-" kjhaber vimrc
+-- kjhaber vim config
+
+vim.cmd([[
 
 " --------------------------------------------------------------
 " General Settings
@@ -377,4 +379,6 @@ autocmd FileType vimwiki set nolist
 " Source local-specific mappings/abbreviations
 " --------------------------------------------------------------
 call SourceLocalNvimDotfile('init-after.vim')
+
+]])
 
