@@ -1,5 +1,4 @@
 -- kjhaber vim config
-
 vim.cmd([[
 
 " --------------------------------------------------------------
@@ -88,19 +87,14 @@ exec 'source ' . $HOME . '/.config/nvim/source-if-readable.vim'
 " Source local vim config before plugins load (unused but here for completeness)
 call SourceLocalNvimDotfile('init-before.vim')
 
+]])
 
-" --------------------------------------------------------------
-" Plugins
-" --------------------------------------------------------------
-" call plug#begin('~/.vim/plugged')
-" call SourceNvimDotfile('plugins.vim')
-" call SourceLocalNvimDotfile('plugins.vim')
-" call plug#end()
-
-" See LUA_PATH in ~/.zshenv (:h package.path)
-lua require("plugins")
+-- Load plugins
+-- See LUA_PATH in ~/.zshenv (:h package.path)
+require("plugins")
 
 
+vim.cmd([[
 " --------------------------------------------------------------
 " Statusline
 " --------------------------------------------------------------
