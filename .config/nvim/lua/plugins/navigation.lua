@@ -1,4 +1,4 @@
-return {
+local M = {
   -- Changes vim working directory to project root
   {
     "airblade/vim-rooter",
@@ -87,6 +87,7 @@ return {
   -- Open project tree view buffer on left
   {
     "scrooloose/nerdtree",
+    cond = not vim.g.vscode, -- Use built-in file explorer instead of NERDTree
     init = function()
       vim.g.NERDTreeHijackNetrw = 0
       vim.g.NERDTreeShowHidden = 1
@@ -98,6 +99,7 @@ return {
   -- Replace netrw for file browser (see oil-settings.vim)
   {
     "stevearc/oil.nvim",
+    cond = not vim.g.vscode, -- see oil.code settings for VSCode below
     init = function()
       vim.cmd([[
         command! Explore silent call OilCur()
@@ -226,3 +228,38 @@ return {
     end
   },
 }
+
+-- VS Code-specific Navigation mappings (outside of plugin specs)
+if vim.g.vscode then
+    local vscode = require('vscode')
+    local map = vim.keymap.set
+    local openOilCode = function() vscode.action('oil-code.open') end
+
+    -- Use built-in file explorer instead of NERDTree
+    map("n", "<leader>tt", function() vscode.action('workbench.action.toggleSidebarVisibility') end)
+
+    -- oil.code plugin (substitute for oil.nvim)
+    vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+        pattern = {"*"},
+        callback = function()
+            map("n", "-", openOilCode)
+            vim.api.nvim_create_user_command('Explore', openOilCode, {})
+        end,
+    })
+
+    vim.api.nvim_create_autocmd({'FileType'}, {
+        pattern = {"oil"},
+        callback = function()
+            map("n", "<leader>..", function() vscode.action('oil-code.openParent') end)
+            map("n", "-", function() vscode.action('oil-code.openParent') end)
+            map("n", "_", function() vscode.action('oil-code.openCwd') end)
+            map("n", "<CR>", function() vscode.action('oil-code.select') end)
+            map("n", "<C-t>", function() vscode.action('oil-code.selectTab') end)
+            map("n", "<C-l>", function() vscode.action('oil-code.refresh') end)
+            map("n", "`", function() vscode.action('oil-code.cd') end)
+        end,
+    })
+end
+
+
+return M
