@@ -1,3 +1,5 @@
+vim.g.vimwiki_list = {}
+
 return {
   -- Displays calendar in left pane, integrates with vimwiki diary
   "mattn/calendar-vim",
@@ -5,6 +7,7 @@ return {
   -- Personal wiki/diary
   {
     "vimwiki/vimwiki",
+    cond = not vim.g.vscode,
     init = function()
       vim.cmd([[
         let g:vimwiki_list = [{'path': '$VIMWIKI_DIR', 'syntax': 'markdown', 'ext': '.md'}]
