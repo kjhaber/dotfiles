@@ -1,7 +1,8 @@
-return {
+local M = {
   -- LSP and auto-completion tool
   {
     "neoclide/coc.nvim",
+    cond = not vim.g.vscode, -- don't load in VS Code since it has built-in LSP
     branch = "release",
     init = function()
       vim.cmd( [[
@@ -90,3 +91,31 @@ return {
     end
   },
 }
+
+-- VS Code-specific LSP mappings (outside of plugin specs)
+if vim.g.vscode then
+    local vscode = require('vscode')
+    local map = vim.keymap.set
+
+        map("n", "<leader>eb", function() vscode.action("") end) -- <Plug>(coc-diagnostic-prev)
+        map("n", "<leader>ef", function() vscode.action("") end) -- <Plug>(coc-diagnostic-next)
+        map("n", "<leader>el", function() vscode.action("") end) -- :CocDiagnostics<CR>
+        map("n", "<leader>ff", function() vscode.action("editor.action.format") end)
+        map("n", "<leader>jd", function() vscode.action("editor.action.revealDefinition") end)
+        map("n", "<leader>ji", function() vscode.action("editor.action.goToImplementation") end)
+        map("n", "<leader>jr", function() vscode.action("editor.action.goToReferences") end)
+        map("n", "<leader>jt", function() vscode.action("editor.action.goToTypeDefinition") end)
+
+        map("n", "<leader>l<Space>", function() vscode.action("") end) -- <Plug>(coc-codeaction)
+        map("v", "<leader>l<Space>", function() vscode.action("") end) -- <Plug>(coc-codeaction-selected)
+        map("n", "<leader>lf", function() vscode.action("editor.action.format") end)
+        map("v", "<leader>lf", function() vscode.action("editor.action.formatSelection") end)
+        map("n", "<leader>lo", function() vscode.action("editor.action.organizeImports") end)
+        map("n", "<leader>lsd", function() vscode.action("") end) -- :<C-u>CocList outline<cr>
+        map("n", "<leader>lsw", function() vscode.action("") end) -- :<C-u>CocList -I symbols<cr>
+        map("n", "<leader>lr", function() vscode.action("editor.action.rename") end)
+        map("n", "<leader>lx", function() vscode.action("editor.action.quickFix") end)
+        map("n", "<leader>ll", function() vscode.action("editor.action.showHover") end)
+end
+
+return M
