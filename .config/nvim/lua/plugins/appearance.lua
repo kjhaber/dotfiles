@@ -17,5 +17,8 @@ return {
   "tomasr/molokai",
 
   -- Shows vertical lines at indent levels
-  "Yggdroot/indentLine",
+  {
+    "Yggdroot/indentLine",
+    cond = not vim.g.vscode,
+  },
 }
