@@ -97,17 +97,17 @@ if vim.g.vscode then
     local vscode = require('vscode')
     local map = vim.keymap.set
 
-        map("n", "<leader>eb", function() vscode.action("") end) -- <Plug>(coc-diagnostic-prev)
-        map("n", "<leader>ef", function() vscode.action("") end) -- <Plug>(coc-diagnostic-next)
-        map("n", "<leader>el", function() vscode.action("") end) -- :CocDiagnostics<CR>
+        map("n", "<leader>eb", function() vscode.action("editor.action.marker.prev") end)
+        map("n", "<leader>ef", function() vscode.action("editor.action.marker.next") end)
+        map("n", "<leader>el", function() vscode.action("workbench.actions.view.problems") end)
         map("n", "<leader>ff", function() vscode.action("editor.action.format") end)
         map("n", "<leader>jd", function() vscode.action("editor.action.revealDefinition") end)
         map("n", "<leader>ji", function() vscode.action("editor.action.goToImplementation") end)
         map("n", "<leader>jr", function() vscode.action("editor.action.goToReferences") end)
         map("n", "<leader>jt", function() vscode.action("editor.action.goToTypeDefinition") end)
 
-        map("n", "<leader>l<Space>", function() vscode.action("") end) -- <Plug>(coc-codeaction)
-        map("v", "<leader>l<Space>", function() vscode.action("") end) -- <Plug>(coc-codeaction-selected)
+        map("n", "<leader>l<Space>", function() vscode.action("editor.action.quickFix") end) -- <Plug>(coc-codeaction)
+        map("v", "<leader>l<Space>", function() vscode.action("editor.action.quickFix") end) -- <Plug>(coc-codeaction-selected)
         map("n", "<leader>lf", function() vscode.action("editor.action.format") end)
         map("v", "<leader>lf", function() vscode.action("editor.action.formatSelection") end)
         map("n", "<leader>lo", function() vscode.action("editor.action.organizeImports") end)
