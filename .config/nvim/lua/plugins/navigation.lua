@@ -14,6 +14,7 @@ local M = {
   {
     "junegunn/fzf.vim",
     name = "fzf.vim",
+    cond = not vim.g.vscode, -- use built-in search when in VS Code
     dependencies = {
       {
         "junegunn/fzf",
@@ -259,7 +260,10 @@ if vim.g.vscode then
             map("n", "`", function() vscode.action('oil-code.cd') end)
         end,
     })
-end
 
+    -- Search file contents with `<leader>//` (requires "fzf fuzzy quick open" VS Code extension)
+    -- (Leaving "ctrl-p" mapping as VS Code default behavior for now)
+    vim.keymap.set("n", "<leader>//", function() vscode.action("fzf-quick-open.runFzfSearchProjectRoot") end)
+end
 
 return M
