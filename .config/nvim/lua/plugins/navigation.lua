@@ -264,6 +264,10 @@ if vim.g.vscode then
     -- Search file contents with `<leader>//` (requires "fzf fuzzy quick open" VS Code extension)
     -- (Leaving "ctrl-p" mapping as VS Code default behavior for now)
     vim.keymap.set("n", "<leader>//", function() vscode.action("fzf-quick-open.runFzfSearchProjectRoot") end)
+
+    -- Trying to map <C-h/j/k/l> to move between buffers doesn't seem to work, but "<C-w>h/j/k/l" does.
+    -- https://github.com/vscode-neovim/vscode-neovim/blob/284df247b4ff9843c12b57ea517495b0d83c2b18/runtime/vscode/overrides/vscode-window-commands.vim#L90-L98
+    -- Annoying, but will adapt to using these for now.
 end
 
 return M
