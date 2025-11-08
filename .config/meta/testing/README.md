@@ -16,5 +16,20 @@ To use:
 
 You're now ready to test config installation, or whatever else you like, within a fresh Debian Linux container.
 
+The 'tester' user password is "xx" (e.g. for sudo commands) - this can be found in the Containerfile.
+
 When done, run `exit` to close the container shell process and return to your initial shell session.
+
+---
+
+As of July 2025, the version of Neovim in Debian's apt repository is too old to work with my config (now based on lazy.nvim).  Recommend downloading the nvim-linux-x86_64.appimage AppImage version from https://github.com/neovim/neovim/releases and using the --appimage-extract approach since this podman/docker image approach doesn't have FUSE support.
+
+```
+curl -LO https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-arm64.appimage
+chmod u+x ./nvim-linux-arm64.appimage # unneeded?
+./nvim-linux-arm64.appimage --appimage-extract
+mv ./squashfs-root ~/.config/bin
+cd ~/.config/bin
+ln -s ./squashfs-root/AppRun nvim
+```
 
