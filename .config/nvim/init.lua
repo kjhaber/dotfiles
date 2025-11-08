@@ -212,33 +212,52 @@ function! StripTrailingWhitespaces()
     silent! %substitute/\r//e
     call winrestview(l:save)
 endfunction
-nnoremap <Leader>ss :call StripTrailingWhitespaces()<CR>
+nnoremap <Leader>st :call StripTrailingWhitespaces()<CR>
 
 
-" Toggle line number display modes
-" States: relative+current -> none -> absolute -> relative+current
-function! ToggleLineNumbers()
-    if &relativenumber && &number
-        " Current state: relative with current line number
-        " Switch to: no line numbers
-        set norelativenumber
-        set nonumber
-        echo "Line numbers: hidden"
-    elseif !&relativenumber && !&number
-        " Current state: no line numbers
-        " Switch to: absolute line numbers
-        set number
-        set norelativenumber
-        echo "Line numbers: absolute"
-    else
-        " Current state: absolute line numbers (or any other state)
-        " Switch to: relative with current line number
-        set relativenumber
-        set number
-        echo "Line numbers: relative with current"
-    endif
+" Strips punctuation characters
+function! StripPunctuation()
+    " save last search & cursor position
+    let l:save=winsaveview()
+    silent! %substitute/¶//ge
+    silent! %substitute/⋅/ /ge
+    silent! %substitute/✗//ge
+    call winrestview(l:save)
 endfunction
-nnoremap <leader># :call ToggleLineNumbers()<CR>
+nnoremap <Leader>sp :call StripPunctuation()<CR>
+
+
+" Strip all (trailing whitespace, smart quotes, punctuation)
+function! StripAll()
+  call StripPunctuation()
+  call StripSmartQuotes()
+  call StripTrailingWhitespaces()
+endfunction
+nnoremap <Leader>ss :call StripAll()<CR>
+
+
+" Set line number display modes
+function! SetLineNumbersRelativeWithCurrent()
+  set relativenumber
+  set number
+  echo "Line numbers: relative with current"
+endfunction
+nnoremap <leader>## :call SetLineNumbersRelativeWithCurrent()<CR>
+
+function! SetLineNumbersHidden()
+  set norelativenumber
+  set nonumber
+  echo "Line numbers: hidden"
+endfunction
+nnoremap <leader>#x :call SetLineNumbersHidden()<CR>
+
+function! SetLineNumbersAbsolute()
+  set number
+  set norelativenumber
+  echo "Line numbers: absolute"
+endfunction
+nnoremap <leader># :call SetLineNumbersAbsolute()<CR>
+
 
 
 " Toggle paste mode quickly

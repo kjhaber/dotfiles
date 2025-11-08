@@ -74,8 +74,10 @@ p - Paste without clobbering system clipboard
 q
 r
 s
-  ss  strip trailing whitespace
+  sp  strip punctuation
   sq  strip smart quotes
+  ss  strip all (trailing whitespace, smart quotes, punctuation)
+  st  strip trailing whitespace
 t
   tt -- NERDTree toggle
 u
@@ -136,7 +138,10 @@ z - Zoom (ZoomWinTab)
   >, -- align selected text using comma character
   >| -- align selected text using bar character
 
-# - cycle through line number modes (rel+current -> none -> absolute -> rel+current)
+#
+  ## set line numbers relative with current
+  #a set line numbers absolute
+  #x set line numbers hidden
 = - evaluate math expression
   =a -- coc-Calc Append
   =r -- coc-Calc Replace
