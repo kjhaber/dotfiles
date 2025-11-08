@@ -44,3 +44,5 @@ Thumbs.db
 /.apt_generated_tests/
 .java_version
 
+.venv-autoswitch
+.virtualenv

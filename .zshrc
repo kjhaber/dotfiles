@@ -72,6 +72,11 @@ export MISE_NODE_DEFAULT_PACKAGES_FILE="$CONFIG_LOCAL_DIR/mise/default-node-pack
 export MISE_GO_DEFAULT_PACKAGES_FILE="$CONFIG_LOCAL_DIR/mise/default-go-packages"
 export MISE_RUBY_DEFAULT_PACKAGES_FILE="$CONFIG_LOCAL_DIR/mise/default-ruby-packages"
 
+# zsh-autoswitch-virtualenv options
+export AUTOSWITCH_DEFAULT_PYTHON="$HOME/.local/share/mise/shims/python"
+export AUTOSWITCH_VIRTUAL_ENV_DIR=".virtualenv"
+export AUTOSWITCH_FILE=".venv-autoswitch"
+
 # Load external configs and plugins
 for file in $CONFIG_DIR/zsh/autoload/*.zsh; do
   source "$file"
