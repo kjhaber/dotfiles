@@ -29,7 +29,8 @@
   tunelist = !git ls-files -v | grep "^[[:lower:]]"
   undo = reset HEAD~1
   unstage = reset HEAD --
-	cm = "!f(){ \\\n   if git show-ref --verify --quiet refs/heads/master; then \\\n     git checkout master; \\\n   elif git show-ref --verify --quiet refs/heads/main; then \\\n     git checkout main; \\\n   elif git show-ref --verify --quiet refs/remotes/origin/master; then \\\n     git checkout -b master origin/master; \\\n   elif git show-ref --verify --quiet refs/remotes/origin/main; then \\\n     git checkout -b main origin/main; \\\n   else \\\n     echo \"Neither master nor main branch found.\"; \\\n   fi; \\\n }; f"
+  cmb = "!f(){ \\\n   if git show-ref --verify --quiet refs/heads/master; then \\\n     git checkout master; \\\n   elif git show-ref --verify --quiet refs/heads/main; then \\\n     git checkout main; \\\n   else \\\n     echo \"Neither master nor main branch found.\"; \\\n   fi; \\\n }; f"
+  mb = "!f(){ \\\n   if git show-ref --verify --quiet refs/heads/master; then \\\n     echo "master"; \\\n   elif git show-ref --verify --quiet refs/heads/main; then \\\n     echo "main"; \\\n   else \\\n     echo \"Neither master nor main branch found.\"; \\\n   fi; \\\n }; f"
 [core]
   autocrlf = false
   excludesfile = ~/.gitignore_global
