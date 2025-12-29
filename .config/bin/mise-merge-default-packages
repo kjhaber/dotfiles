@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# Combines list of packages from `~/.config/mise/default-*-packages` and
+# `~/.config-local/mise/default-*-packages` into merged files under
+# `~/.cache/mise` directory.  This allows default packages to be set in
+# both public/global .config and machine-specific .config-local.
+#
+# This script is run by shell init at ~/.config/zsh/autoload/init-mise.zsh
+
+set -euo pipefail
+
+# Directories
+CONFIG_DIR="${HOME}/.config/mise"
+LOCAL_CONFIG_DIR="${HOME}/.config-local/mise"
+CACHE_DIR="${HOME}/.cache/mise"
+
+# Create cache directory if it doesn't exist
+mkdir -p "${CACHE_DIR}"
+
+# Find all default-*-packages files and merge them
+merged_any=false
+
+# Get unique tool names from both directories
+tools=()
+shopt -s nullglob
+for file in "${CONFIG_DIR}"/default-*-packages "${LOCAL_CONFIG_DIR}"/default-*-packages; do
+    if [[ -f "${file}" ]]; then
+        basename=$(basename "${file}")
+        pattern=" $basename "
+        if [[ ${#tools[@]} -eq 0 || ! " ${tools[*]} " =~ $pattern ]]; then
+            tools+=("${basename}")
+        fi
+    fi
+done
+shopt -u nullglob
+
+# Process each tool's package files
+for tool_file in "${tools[@]}"; do
+    config_file="${CONFIG_DIR}/${tool_file}"
+    local_file="${LOCAL_CONFIG_DIR}/${tool_file}"
+    cache_file="${CACHE_DIR}/${tool_file}-merged"
+
+    # Skip if neither file exists
+    [[ ! -f "${config_file}" ]] && [[ ! -f "${local_file}" ]] && continue
+
+    # echo "Merging ${tool_file}..."
+
+    # Start with an empty cache file
+    : > "${cache_file}"
+
+    # Concatenate config file if it exists
+    if [[ -f "${config_file}" ]]; then
+        grep -v -E '^\s*$' "${config_file}" >> "${cache_file}" || true
+    fi
+
+    # Concatenate local file if it exists
+    if [[ -f "${local_file}" ]]; then
+        grep -v -E '^\s*$' "${local_file}" >> "${cache_file}" || true
+    fi
+
+    sort "${cache_file}" | uniq > "${cache_file}".tmp
+    mv "${cache_file}.tmp" "${cache_file}"
+    # echo "Wrote ${cache_file}"
+
+    merged_any=true
+done
+
+if [[ "${merged_any}" == false ]]; then
+    # echo "No default package files found to merge."
+    exit 0
+fi
+
+# echo "Package files merged successfully to ${CACHE_DIR}"
