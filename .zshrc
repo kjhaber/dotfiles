@@ -52,14 +52,6 @@ bindkey -a -r ':'
 source $CONFIG_DIR/zsh/aliases.zsh
 test -f "$CONFIG_LOCAL_DIR/zsh/aliases.zsh" && source "$CONFIG_LOCAL_DIR/zsh/aliases.zsh"
 
-
-# Enable fzf: fuzzy finder, locate files quickly
-# - ctrl-t to insert filename in current command,
-# - ctrl-r for recent command history)
-export FZF_DEFAULT_COMMAND="rg --files --no-ignore --ignore-case --hidden --follow --glob '!{.git,node_modules,vendor,build,dist}/*'"
-export FZF_DEFAULT_OPTS='--color hl:#75a6d6,hl+:#70d4f5'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # https://stackoverflow.com/questions/68786631/how-do-i-configure-zsh-for-completion-of-partial-words-but-case-insensitive
 zstyle ':completion:*' matcher-list \
     'm:{[:lower:]}={[:upper:]}' \
