@@ -9,12 +9,8 @@ if [[ ! -f "$MISE_INSTALL_PATH" ]]; then
   curl https://mise.run | sh
 fi
 
-if [[ ! -d "$MISE_DATA_DIR/installs/java" ]]; then
-  echo "Installing java latest in mise"
-  "$MISE_INSTALL_PATH" use -g java@latest
-fi
-
 if [[ ! -d "$MISE_DATA_DIR/installs/node" ]]; then
+  # Installing node because neovim/coc.nvim requires it
   echo "Installing node latest in mise"
   "$MISE_INSTALL_PATH" use -g node@latest
 fi
