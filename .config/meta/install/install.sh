@@ -13,8 +13,10 @@ source "$HOME/.zshrc"
 echo 'Installing neovim plugins'
 nvim --headless -u "$HOME/.config/nvim/init.vim" -i NONE +PlugInstall +qa\! -- &>/dev/null
 
-echo 'Installing tmux plugins'
-$HOME/.tmux/plugins/tpm/bin/install_plugins
+if [[ -x "$(which tmux)" && ! -x "$HOME/.tmux/plugins/tpm/bin/install_plugins" ]]; then
+  echo 'Installing tmux plugins'
+  "$HOME/.tmux/plugins/tpm/bin/install_plugins"
+fi
 
 echo 'kjhaber/config setup complete.  Restarting zsh is recommended.'
 
