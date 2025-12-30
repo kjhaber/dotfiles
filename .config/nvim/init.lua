@@ -153,9 +153,11 @@ augroup QFClose
 augroup END
 
 " Also quit vim when NERDTree, Fugitive git status, or Calendar is last open window/tab
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:Calendar")) | q | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:fugitive_expanded")) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && (
+  \ &filetype == 'calendar' ||
+  \ &filetype == 'fugitive' ||
+  \ &filetype == 'nerdtree')
+  \ ) | q | endif
 
 
 " In netrw, override ctrl-hjkl mappings so ctrl-w doesn't need to be typed first
