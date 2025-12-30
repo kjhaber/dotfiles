@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # sup
 # Software UPdate command
 # Intended to be a single command to walk through applying a variety of software
