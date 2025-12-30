@@ -1,14 +1,17 @@
-FROM debian
+FROM debian:stable
+
 RUN apt update
-RUN apt -y install git
-RUN apt -y install zsh
 RUN apt -y install sudo
 RUN apt -y install curl
-RUN apt -y install neovim
+RUN apt -y install libatomic1 # required for node 25+
+RUN apt -y install procps # adds /bin/ps
+RUN apt -y install zsh
+RUN apt -y install git
 RUN apt -y install tmux
-RUN adduser --home /home/tester --shell /usr/bin/zsh tester
-RUN echo 'tester:xx' | chpasswd
-RUN usermod -aG sudo tester
+
+RUN /usr/sbin/useradd --home /home/tester --create-home --shell /usr/bin/zsh --password "" tester
+RUN echo 'tester:xx' | /usr/sbin/chpasswd
+RUN /usr/sbin/usermod -aG sudo tester
 USER tester
 CMD zsh
 
