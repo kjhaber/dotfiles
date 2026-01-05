@@ -1,0 +1,86 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "space / /",
+    "command": "fzf-quick-open.runFzfSearchProjectRoot",
+    "when": "editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "fzf-quick-open.runFzfFileProjectRoot"
+  },
+  {
+    "key": "ctrl-k",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.terminal.focus",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space t t",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space . .",
+    "command": "oil-code.open",
+    "when": "editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space e l",
+    "command": "workbench.action.problems.focus",
+    "when": "editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space j d",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space j r",
+    "command": "editor.action.goToReferences",
+    "when": "editorHasReferenceProvider && editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space l l",
+    "command": "editor.action.showHover",
+    "when": "! editorHoverVisible && editorTextFocus && neovim.init && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space l o",
+    "command": "editor.action.organizeImports",
+    "when": "textInputFocus && editorTextFocus && neovim.init && neovim.mode == 'normal' && supportedCodeAction =~ /(\\s|^)source\\.organizeImports\\b/"
+  },
+  {
+    "key": "space l r",
+    "command": "editor.action.rename",
+    "when": "editorHasRenameProvider && editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space l f",
+    "command": "editor.action.formatDocument",
+    "when": "editorHasDocumentFormattingProvider && editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space l space",
+    "command": "editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space shift+\\",
+    "command": "workbench.action.splitEditor",
+    "when": "editorTextFocus && neovim.mode == 'normal'"
+  },
+  {
+    "key": "space -",
+    "command": "workbench.action.splitEditorDown",
+    "when": "editorTextFocus && neovim.mode == 'normal'"
+  }
+]
