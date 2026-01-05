@@ -19,7 +19,7 @@ local M = {
       {
         "junegunn/fzf",
         lazy = false,
-        build = "~/.fzf/install --all",
+        build = "~/.fzf/install --all --no-update-rc",
       },
     },
     lazy = false,
