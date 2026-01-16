@@ -4,16 +4,18 @@
   ui = true
 [alias]
   abort = reset --hard HEAD
+  branch-current = branch --show-current
   c = commit
   ca = commit --amend
   co = checkout
   cob = checkout -b
   d = diff
+  do = !git diff \"origin/$(git branch --show-current)\"
   dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
   dag-all = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order --all
   dc = diff --cached
   dh = diff HEAD^
-  diffw = diff --word-diff
+  dw = diff --word-diff
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
   lone = log --oneline
   mvbranch = "!f() { \
