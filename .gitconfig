@@ -10,6 +10,7 @@
   can = commit --amend --no-edit
   co = checkout
   cob = checkout -b
+  cof = "!f() { local b; b=$(git branch --format='%(refname:short)' | fzf --height=~50% --reverse --select-1); [ -n \"$b\" ] && git checkout \"$b\"; }; f"
   d = diff
   do = !git diff \"origin/$(git branch --show-current)\"
   dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
