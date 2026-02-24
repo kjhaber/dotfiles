@@ -23,5 +23,7 @@ cdworktree() {
 rmworktree() {
   local dir
   dir=$(pick_worktree_dir)
-  [[ -n "$dir" ]] && git worktree remove "$dir"
+  if [[ -n "$dir" ]]; then
+    git worktree remove "$dir" && echo "Removed worktree dir ${dir}"
+  fi
 }
