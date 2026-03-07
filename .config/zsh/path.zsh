@@ -6,7 +6,7 @@ if [[ -f "/opt/homebrew/bin/brew" ]] then;
   fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 elif [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then;
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+  fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
 fi
 
 # Allow environment-specific PATH overrides
@@ -23,5 +23,6 @@ export PATH="$CONFIG_DIR/bin:$PATH"
 export PATH="$CONFIG_LOCAL_DIR/bin:$PATH"
 
 # Add local completion definitions to fpath
+fpath=("$CONFIG_DIR/zsh/completions" $fpath)
 fpath=("$CONFIG_LOCAL_DIR/zsh/completions" $fpath)
 

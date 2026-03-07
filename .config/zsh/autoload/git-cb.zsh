@@ -2,7 +2,7 @@
 # Usage: cb [branch]
 #   No args: fzf picker over git branches; selection checkouts or cds to worktree.
 #   With branch: if branch has a worktree, cd to it; else git checkout branch.
-# Source this file and use _cb for zsh completion: compdef _cb cb
+# See ~/.config/zsh/completions/_cb for tab completion
 
 _cb_worktree_path() {
   local branch="$1"
@@ -31,13 +31,3 @@ cb() {
   fi
 }
 
-# Zsh completion: complete cb with branch names
-_cb() {
-  local -a branches
-  branches=("${(@f)$(git branch --format='%(refname:short)' 2>/dev/null)}")
-  _describe 'branch' branches
-}
-
-if type compdef &>/dev/null; then
-  compdef _cb cb
-fi

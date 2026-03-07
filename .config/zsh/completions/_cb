@@ -1,0 +1,10 @@
+#compdef cb
+compdef _cb cb
+
+# See ~/.config/zsh/autoload/git-cb.zsh
+
+_cb() {
+  local -a branches
+  branches=("${(@f)$(git branch --format='%(refname:short)' 2>/dev/null)}")
+  _describe 'branch' branches
+}
