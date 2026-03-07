@@ -21,9 +21,15 @@ cdworktree() {
 
 # Use fzf to pick an item from 'git worktree list', then remove it
 rmworktree() {
-  local dir
+  local dir branch
   dir=$(pick_worktree_dir)
-  if [[ -n "$dir" ]]; then
-    git worktree remove "$dir" && echo "Removed worktree dir ${dir}"
+  if [[ -z "$dir" ]]; then
+    return
   fi
+  branch=$(git -C "$dir" branch --show-current 2>/dev/null)
+  if [[ "$branch" == "main" || "$branch" == "master" ]]; then
+    echo "Refusing to remove worktree for branch '${branch}': ${dir}" >&2
+    return 1
+  fi
+  git worktree remove "$dir" && echo "Removed worktree dir ${dir}"
 }
