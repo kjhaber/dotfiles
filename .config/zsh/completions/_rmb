@@ -1,0 +1,10 @@
+#compdef rmb
+compdef _rmb rmb
+
+# See ~/.config/zsh/autoload/git-rmb.zsh
+
+_rmb() {
+  local -a branches
+  branches=("${(@f)$(git branch --format='%(refname:short)' 2>/dev/null | grep -v -E '^(main|master)$')}")
+  _describe 'branch' branches
+}
