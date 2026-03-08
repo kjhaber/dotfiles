@@ -26,24 +26,20 @@ _rmb_worktree_path() {
 }
 
 _rmb_primary_worktree_path() {
-  local path
-  path=$(_rmb_worktree_path "main")
-  [[ -n "$path" ]] && { echo "$path"; return 0 }
-  path=$(_rmb_worktree_path "master")
-  [[ -n "$path" ]] && echo "$path"
+  # When in a linked worktree, git-dir is /path/to/main/.git/worktrees/<name>
+  local git_dir primary
+  git_dir=$(git rev-parse --git-dir 2>/dev/null) || return 1
+  if [[ "$git_dir" == *"/.git/worktrees/"* ]]; then
+    primary="${git_dir%/.git/worktrees/*}"
+    [[ -d "$primary" ]] && echo "$primary"
+  fi
 }
 
 _rmb_is_worktree_root() {
-  local lines line path i
-  lines=("${(@f)$(git worktree list --porcelain 2>/dev/null)}")
-  for i in {1..$#lines}; do
-    line="$lines[$i]"
-    if [[ "$line" == worktree\ * ]]; then
-      path="${line#worktree }"
-      [[ "$PWD" == "$path" ]] && return 0
-    fi
-  done
-  return 1
+  # In a worktree, git-dir is under .git/worktrees/<name>; in main repo it's .git
+  local git_dir
+  git_dir=$(git rev-parse --git-dir 2>/dev/null) || return 1
+  [[ "$git_dir" == *"/.git/worktrees/"* ]]
 }
 
 rmb() {
