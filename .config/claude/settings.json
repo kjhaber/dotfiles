@@ -1,0 +1,42 @@
+{
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "lsp": {
+    "go": {
+      "command": "gopls",
+      "args": []
+    },
+    "python": {
+      "command": "pyright",
+      "args": ["--stdio"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"]
+    },
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "javascript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "html": {
+      "command": "vscode-html-language-server",
+      "args": ["--stdio"]
+    },
+    "css": {
+      "command": "vscode-css-language-server",
+      "args": ["--stdio"]
+    }
+  },
+  "permissions": {
+    "allow": ["Bash(go test:*)", "Bash(go build:*)", "Bash(make:*)"]
+  }
+}
