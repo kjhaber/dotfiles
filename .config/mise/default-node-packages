@@ -1,2 +1,5 @@
 http-server
 neovim
+bash-language-server
+typescript-language-server
+vscode-langservers-extracted
