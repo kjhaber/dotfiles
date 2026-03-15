@@ -37,6 +37,14 @@
     }
   },
   "permissions": {
-    "allow": ["Bash(go test:*)", "Bash(go build:*)", "Bash(make:*)"]
+    "allow": [
+      "Bash(go build:*)",
+      "Bash(go test:*)",
+      "Bash(gofmt:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(make:*)",
+      "Bash(wc:*)"
+    ]
   }
 }
