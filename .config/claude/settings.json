@@ -46,5 +46,9 @@
       "Bash(make:*)",
       "Bash(wc:*)"
     ]
+  },
+  "attribution": {
+    "commits": false,
+    "pullRequests": false
   }
 }
