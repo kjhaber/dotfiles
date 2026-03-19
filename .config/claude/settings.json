@@ -44,7 +44,8 @@
       "Bash(grep:*)",
       "Bash(ls:*)",
       "Bash(make:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "mcp__wn__*"
     ]
   },
   "attribution": {
