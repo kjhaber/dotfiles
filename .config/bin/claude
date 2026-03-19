@@ -28,16 +28,16 @@ merge_json() {
         then .value = $a[$k] + $b[$k]
         else . end
       )
-    ' "$src_global" "$src_local" | jq . > "$merged"
+    ' "$src_global" "$src_local" | jq -S . > "$merged"
   else
-    jq . "$src_global" > "$merged"
+    jq -S . "$src_global" > "$merged"
   fi
 
   if [[ -f "$dest" ]]; then
-    jq . "$dest" > "$dest_fmt"
+    jq -S . "$dest" > "$dest_fmt"
     if ! diff -q "$merged" "$dest_fmt" > /dev/null 2>&1; then
       echo "⚠️  $label has drifted from merged config:"
-      diff --color=always "$merged" "$dest_fmt"
+      diff --color=always "$merged" "$dest_fmt" || true
       echo
       printf "  [o] Overwrite  [k] Keep  [e] Exit: "
       read -r choice
