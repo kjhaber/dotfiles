@@ -29,3 +29,5 @@ alias cddocuments="cd $DOC_DIR"
 alias cddiary="cd $VIMWIKI_DIARY_DIR"
 alias cdvimwiki="cd $VIMWIKI_DIR"
 
+alias wnv="wn verify"
+
