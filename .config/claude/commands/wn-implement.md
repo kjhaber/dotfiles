@@ -5,18 +5,9 @@ argument-hint: [item-id]
 
 Implement a `wn` work item in the current worktree. The item is already claimed and the worktree is already set up — focus entirely on implementation.
 
-## Step 1: Establish the wn root
+## Step 1: Load the work item
 
-Run:
-```bash
-echo $WN_ROOT
-```
-
-Use the result as the `root` parameter for every `wn_*` MCP call in this skill. The worktree directory does not contain `.wn/` — all wn tools require this root to locate the work item store.
-
-## Step 2: Load the work item
-
-Call `wn_show` with the item ID from `$ARGUMENTS` and `root` from Step 1. Show the user the item ID and description before continuing.
+Call `wn_show` with the item ID from `$ARGUMENTS`. Show the user the item ID and description before continuing.
 
 ## Step 2: Implement with red/green TDD
 
@@ -47,7 +38,7 @@ Write the message based on what you actually built — don't just restate the wo
 
 ## Step 4: Mark review-ready
 
-Call `wn_release` with `root` from Step 1 to clear the in-progress claim and mark the item review-ready.
+Call `wn_release` to clear the in-progress claim and mark the item review-ready.
 
 Report to the user:
 - What was implemented (brief summary)
