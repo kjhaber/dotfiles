@@ -23,19 +23,48 @@ git rev-parse --git-common-dir
 
 Use this as the `root` parameter for all `wn_*` MCP calls.
 
-## Step 3: Verify
+## Step 3: Sync main into the worktree branch
 
-Run `wn verify` to confirm the branch is still green. If it fails, stop and report — do not merge.
+Before merging into main, bring the worktree branch up to date with main so any conflicts are resolved here rather than on main.
 
-## Step 4: Merge into main
-
+From within the worktree (current directory):
 ```bash
-git -C <main_root> merge <branch>
+git fetch origin
+git merge <main_branch>   # e.g. git merge main
 ```
 
-If the merge fails (e.g. conflict with another worktree's changes merged first), stop and report.
+If there are merge conflicts, resolve them, stage the fixes, and complete the merge (`git merge --continue`). Once the merge is done, report what was merged and any conflicts that were resolved.
 
-## Step 5: Mark done
+## Step 4: Verify the worktree branch
+
+Run `wn verify` to confirm the branch is still green after syncing with main. If it fails, stop and report — do not proceed with the merge into main.
+
+## Step 5: Squash-merge into main
+
+Combine all worktree commits into a single commit on main. Perform the squash merge from the main worktree:
+```bash
+git -C <main_root> merge --squash <branch>
+```
+
+Compose a single unified commit message that accurately summarizes the actual change. The wn item title is a useful starting point, but the implementation may have evolved during development — write a message that reflects what was actually done, not just what was originally planned.
+
+Commit with this message:
+```bash
+git -C <main_root> commit -m "<unified message>"
+```
+
+If the merge or commit fails (e.g. conflict, nothing to commit), stop and report.
+
+## Step 6: Verify main after merge
+
+Run `wn verify` from the main worktree root as a sanity check:
+```bash
+wn verify   # run from <main_root>
+```
+
+If it fails, report the failure. Do not mark the item done until main is green.
+
+## Step 7: Mark done
 
 Call `wn_done` with the item ID and `root` from Step 2.
 
