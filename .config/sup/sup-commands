@@ -1,5 +1,4 @@
 Homebrew:brew update && brew upgrade
-Homebrew (Claude Code):brew upgrade claude-code
 Neovim (lazy.nvim) plugins:nvim --headless "+Lazy! sync" +qa
 Neovim coc.nvim plugins:nvim -e -c 'CocUpdateSync|q'
 mise tools:mise upgrade
