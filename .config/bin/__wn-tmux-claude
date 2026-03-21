@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+# __wn-tmux-claude
+# Opens Claude Code in a new tmux window using prompt
+# of provided 'wn' work item id.
+#
+# Intended for use with 'wn' work item manager as a
+# runner script for 'wn launch' or 'wn do'.  Leading
+# underscores are present in script name because I
+# don't normally want to run this script directly.
+#
+# In 'wn settings' in the "runners" block:
+# ```
+#     "tmux-claude": {
+#       "cmd": "wn-tmux-claude {{.Worktree}} {{.ItemID}}",
+#       "leave_worktree": true
+#     }
+# ```
+#
+# Then run `wn launch tmux-claude` to set Claude Code to
+# work on the current wn work item in a new tmux window.
+
+worktree="$1"
+item_id="$2"
+# WN_ROOT is set in the environment by wn launch
+mkdir -p "${worktree}/.claude"
+cp ~/.config/claude/wn-worktree-settings.local.json "${worktree}/.claude/settings.local.json"
+tmux new-window -n "wn-${item_id}" -c "$worktree" \
+  "claude '/wn-implement ${item_id}' ; zsh"
