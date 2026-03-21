@@ -45,6 +45,7 @@
       "Bash(ls:*)",
       "Bash(make:*)",
       "Bash(wc:*)",
+      "Bash(wn verify:*)",
       "mcp__wn__*"
     ]
   },
