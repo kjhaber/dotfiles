@@ -5,4 +5,4 @@
 #
 # Safe to call outside tmux — silently does nothing.
 
-tmux set-window-option @attention_needed 0 2>/dev/null || true
+tmux set-window-option -t "$TMUX_PANE" @attention_needed 0 2>/dev/null || true

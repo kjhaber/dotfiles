@@ -16,4 +16,4 @@ if [[ -z "$FORCE_ATTENTION" ]]; then
   [[ "$active" == "1" ]] && exit 0
 fi
 
-tmux set-window-option @attention_needed 1 2>/dev/null || true
+tmux set-window-option -t "$TMUX_PANE" @attention_needed 1 2>/dev/null || true
