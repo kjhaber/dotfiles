@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+# __tmux-clear-attention
+# Clears the @attention_needed flag on the current tmux window.
+# Run manually to clear a stale indicator (e.g. after killing an agent).
+#
+# Safe to call outside tmux — silently does nothing.
+
+tmux set-window-option @attention_needed 0 2>/dev/null || true

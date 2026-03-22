@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+# __tmux-set-attention
+# Sets the @attention_needed flag on the current tmux window.
+# Use to signal that a window needs the user's attention
+# (e.g. a coding agent is waiting for input).
+#
+# Safe to call outside tmux — silently does nothing.
+
+tmux set-window-option @attention_needed 1 2>/dev/null || true
