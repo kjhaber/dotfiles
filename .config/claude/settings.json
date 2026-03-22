@@ -50,7 +50,7 @@
     ]
   },
   "attribution": {
-    "commits": false,
-    "pullRequests": false
+    "commit": "",
+    "pullRequest": ""
   }
 }
