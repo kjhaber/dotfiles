@@ -75,8 +75,19 @@ cd <main_root> && wn verify
 
 If it fails, report the failure. Do not mark the item done until main is green.
 
-## Step 7: Mark done
+## Step 7: Capture the merge commit
+
+Record the squash commit hash so that `wn cleanup worktrees` can later detect the branch as merged (squash merges are not detected by ancestry checks alone):
+
+```bash
+git -C <main_root> rev-parse HEAD
+```
+
+Store it as a note on the item using `wn_note_add` with name `commit` and the full commit hash as the body.
+
+## Step 8: Mark done
 
 Call `wn_done` with the item ID (no `root` needed — MCP auto-detects).
 
-Report: item ID, branch merged, item marked done. The feature branch remains and can be deleted with `git branch -d <branch>` once no longer needed.
+Report: item ID, branch merged, squash commit recorded, item marked done. The feature branch remains and can be deleted with `git branch -d <branch>` once no longer needed.
+
