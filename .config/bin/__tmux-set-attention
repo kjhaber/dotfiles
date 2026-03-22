@@ -4,6 +4,16 @@
 # Use to signal that a window needs the user's attention
 # (e.g. a coding agent is waiting for input).
 #
+# Skips if the window is already active — no need to flag what you're watching.
+# Set FORCE_ATTENTION=1 to bypass that check (useful for testing).
+#
 # Safe to call outside tmux — silently does nothing.
+
+[[ -z "$TMUX" ]] && exit 0
+
+if [[ -z "$FORCE_ATTENTION" ]]; then
+  active=$(tmux display-message -p -t "$TMUX_PANE" '#{window_active}' 2>/dev/null)
+  [[ "$active" == "1" ]] && exit 0
+fi
 
 tmux set-window-option @attention_needed 1 2>/dev/null || true
