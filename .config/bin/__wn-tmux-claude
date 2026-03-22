@@ -21,8 +21,16 @@
 
 worktree="$1"
 item_id="$2"
+window_name="wn-${item_id}"
+
+# If a window for this item already exists, switch to it
+if tmux list-windows -F "#{window_name}" 2>/dev/null | grep -qx "$window_name"; then
+  tmux select-window -t "$window_name"
+  exit 0
+fi
+
 # WN_ROOT is set in the environment by wn launch
 mkdir -p "${worktree}/.claude"
 cp ~/.config/claude/wn-worktree-settings.local.json "${worktree}/.claude/settings.local.json"
-tmux new-window -n "wn-${item_id}" -c "$worktree" \
+tmux new-window -n "$window_name" -c "$worktree" \
   "claude '/wn-implement ${item_id}' ; zsh"
