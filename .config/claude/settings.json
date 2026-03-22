@@ -1,40 +1,78 @@
 {
+  "attribution": {
+    "commit": "",
+    "pullRequest": ""
+  },
   "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true
   },
   "lsp": {
-    "go": {
-      "command": "gopls",
-      "args": []
-    },
-    "python": {
-      "command": "pyright",
-      "args": ["--stdio"]
-    },
     "bash": {
-      "command": "bash-language-server",
-      "args": ["start"]
-    },
-    "typescript": {
-      "command": "typescript-language-server",
-      "args": ["--stdio"]
-    },
-    "javascript": {
-      "command": "typescript-language-server",
-      "args": ["--stdio"]
-    },
-    "html": {
-      "command": "vscode-html-language-server",
-      "args": ["--stdio"]
+      "args": [
+        "start"
+      ],
+      "command": "bash-language-server"
     },
     "css": {
-      "command": "vscode-css-language-server",
-      "args": ["--stdio"]
+      "args": [
+        "--stdio"
+      ],
+      "command": "vscode-css-language-server"
+    },
+    "go": {
+      "args": [],
+      "command": "gopls"
+    },
+    "html": {
+      "args": [
+        "--stdio"
+      ],
+      "command": "vscode-html-language-server"
+    },
+    "javascript": {
+      "args": [
+        "--stdio"
+      ],
+      "command": "typescript-language-server"
+    },
+    "python": {
+      "args": [
+        "--stdio"
+      ],
+      "command": "pyright"
+    },
+    "typescript": {
+      "args": [
+        "--stdio"
+      ],
+      "command": "typescript-language-server"
     }
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/bin/__tmux-set-attention"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/bin/__tmux-clear-attention"
+          }
+        ]
+      }
+    ]
   },
   "permissions": {
     "allow": [
@@ -48,9 +86,5 @@
       "Bash(wn verify:*)",
       "mcp__wn__*"
     ]
-  },
-  "attribution": {
-    "commit": "",
-    "pullRequest": ""
   }
 }
