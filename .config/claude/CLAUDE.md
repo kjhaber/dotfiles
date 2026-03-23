@@ -1,5 +1,7 @@
 Begin all responses with a 🔹 emoji.
 
+Do not append `; echo "exit: $?"` or similar to commands — Claude Code already reports exit codes.
+
 ## Prefer Red/Green Test-Driven Development when making code changes.
 Code projects should have some kind of "compile, lint, and run all tests" command, e.g. "make all" or "npm test all".  If one isn't clear from the project's prompt setup or README, please ask.  Prefer the command from project prompts such as CLAUDE.md rather than README.
 
