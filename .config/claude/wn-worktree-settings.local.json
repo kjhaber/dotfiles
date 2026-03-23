@@ -1,11 +1,28 @@
 {
   "permissions": {
     "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git merge:*)",
+      "Bash(git fetch:*)",
       "Edit",
       "Read"
     ],
     "ask": [
       "Edit(.claude/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude/hooks/wn-git-guard.sh"
+          }
+        ]
+      }
     ]
   }
 }
