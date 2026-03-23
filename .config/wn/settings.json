@@ -1,0 +1,34 @@
+{
+  "sort": "tags,priority,updated,alpha",
+  "worktree": {
+    "claim": "1h"
+  },
+  "runners": {
+    "cursor": {
+      "cmd": "cursor agent --print --output-format stream-json --trust --approve-mcps \"{{.Prompt}}\""
+    },
+    "claude": {
+      "cmd": "claude --print --verbose --output-format stream-json --dangerously-skip-permissions \"{{.Prompt}}\""
+    },
+    "cursor-verbose": {
+      "cmd": "cursor agent --print --output-format stream-json --stream-partial-output --trust --approve-mcps \"{{.Prompt}}\""
+    },
+    "tmux-claude": {
+      "cmd": "__wn-tmux-claude {{.Worktree}} {{.ItemID}}",
+      "leave_worktree": true
+    },
+    "tmux-worktree": {
+      "cmd": "tmux new-window -n \"{{.ItemID}}\" -c {{.Worktree}}",
+      "leave_worktree": true
+    }
+  },
+  "agent": {
+    "default": "cursor",
+    "default_launch": "tmux-claude",
+    "delay": "10s",
+    "poll": "60s"
+  },
+  "views": {
+    "agent": "--tag agentic"
+  }
+}
