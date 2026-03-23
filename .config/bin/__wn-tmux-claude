@@ -32,5 +32,5 @@ fi
 # WN_ROOT is set in the environment by wn launch
 mkdir -p "${worktree}/.claude"
 cp ~/.config/claude/wn-worktree-settings.local.json "${worktree}/.claude/settings.local.json"
-tmux new-window -n "$window_name" -c "$worktree" \
+tmux new-window -d -n "$window_name" -c "$worktree" \
   "claude '/wn-implement ${item_id}' ; zsh"
