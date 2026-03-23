@@ -987,6 +987,19 @@
 					<key>Text</key>
 					<string>9</string>
 				</dict>
+				<key>0xd-0x20000-0x24</key>
+				<dict>
+					<key>Action</key>
+					<integer>10</integer>
+					<key>Apply Mode</key>
+					<integer>0</integer>
+					<key>Escaping</key>
+					<integer>2</integer>
+					<key>Text</key>
+					<string>[13;2u</string>
+					<key>Version</key>
+					<integer>2</integer>
+				</dict>
 				<key>0xf700-0x220000</key>
 				<dict>
 					<key>Action</key>
@@ -1742,6 +1755,19 @@
 					<integer>11</integer>
 					<key>Text</key>
 					<string>9</string>
+				</dict>
+				<key>0xd-0x20000-0x24</key>
+				<dict>
+					<key>Action</key>
+					<integer>10</integer>
+					<key>Apply Mode</key>
+					<integer>0</integer>
+					<key>Escaping</key>
+					<integer>2</integer>
+					<key>Text</key>
+					<string>[13;2u</string>
+					<key>Version</key>
+					<integer>2</integer>
 				</dict>
 				<key>0xf700-0x220000</key>
 				<dict>
