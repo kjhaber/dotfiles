@@ -20,6 +20,9 @@ return {
   -- Shortcuts for bullet lists
   "kjhaber/vim-bullet-shortcuts",
 
+  -- Shortcuts for checklists
+  "kjhaber/vim-checklist-shortcuts",
+
   -- Shortcuts for plantuml files
   "kjhaber/vim-plantuml-shortcuts",
 
