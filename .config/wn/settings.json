@@ -1,7 +1,8 @@
 {
   "sort": "tags,priority,updated,alpha",
   "worktree": {
-    "claim": "1h"
+    "claim": "1h",
+    "branch_template": "{{.Slug}}-{{.ID}}"
   },
   "runners": {
     "cursor": {
@@ -26,7 +27,8 @@
     "default": "cursor",
     "default_launch": "tmux-claude",
     "delay": "10s",
-    "poll": "60s"
+    "poll": "60s",
+    "commit_template": "{{.FirstLine}}"
   },
   "views": {
     "agent": "--tag agentic"
