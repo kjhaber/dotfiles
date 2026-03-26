@@ -1,7 +1,7 @@
 {
   "attribution": {
     "commit": "",
-    "pullRequest": ""
+    "pr": ""
   },
   "enabledPlugins": {
     "claude-code-setup@claude-plugins-official": true,
