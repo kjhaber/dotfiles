@@ -10,7 +10,8 @@
     ],
     "ask": [
       "Edit(.claude/**)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "PreToolUse": [
