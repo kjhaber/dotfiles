@@ -54,7 +54,7 @@ If the merge fails (e.g. conflict, nothing to commit), stop and report.
 Run `wn verify` from the main root as a sanity check:
 
 ```bash
-cd <main_root> && wn verify
+wn verify --root
 ```
 
 If it fails, report the failure.
