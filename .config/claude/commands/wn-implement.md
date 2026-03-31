@@ -55,12 +55,10 @@ If discoveries during the green phase require changing the expected test behavio
 git add -A
 git commit -m "<short summary line>
 
-<paragraph describing what was implemented, key design decisions, and any notable edge cases handled>
-
-wn: ITEM_ID"
+<paragraph describing what was implemented, key design decisions, and any notable edge cases handled>"
 ```
 
-Write the message based on what you actually built — don't just restate the work item title. Always include `wn: ITEM_ID` as the last line.
+Write the message based on what you actually built — don't just restate the work item title.
 
 ## Step 5: Mark review-ready
 
