@@ -78,7 +78,6 @@
     "allow": [
       "Bash(awk *)",
       "Bash(cal *)",
-      "Bash(cloc *)",
       "Bash(cut *)",
       "Bash(date *)",
       "Bash(df *)",
@@ -178,8 +177,7 @@
       "Bash(wn show *)",
       "Bash(wn verify:*)",
       "Bash(yarn list *)",
-      "Bash(yarn why *)",
-      "mcp__wn__*"
+      "Bash(yarn why *)"
     ]
   }
 }
