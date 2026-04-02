@@ -7,7 +7,7 @@
 # Functions:
 #   merge_json         src_global src_local dest label  — full-file JSON merge + drift detect
 #   merge_json_partial src_global src_local dest label  — key-scoped JSON merge + patch
-#   merge_dir          src_global src_local dest label  — recursive dir merge + orphan detect
+#   merge_dir          src_global src_local dest label  — recursive dir merge + drift detect
 #   merge_md           src_global src_local dest label  — Markdown concat + drift detect
 
 # jq: deep-merge two JSON values. Objects recurse; arrays concatenate (global then local);
@@ -118,48 +118,47 @@ merge_json_partial() {
 }
 
 # merge_dir: merge global + local dirs -> dest (local wins on conflict).
-# Copies all non-hidden files and subdirectories recursively.
-# Reports files in dest that came from neither source (created by the agent).
+# Builds the merged tree in a temp dir (same as cp global then cp local), compares
+# to dest with diff -r, and prompts on drift — matching merge_json / merge_md.
+# Overwrite uses rsync --delete so dest matches merged (drops agent-only files).
 merge_dir() {
   local src_global="$1" src_local="$2" dest="$3" label="$4"
-  local expected="$TMP/${label}_expected.txt"
+  local merged="$TMP/${label}_merged"
+
+  rm -rf "$merged"
+  mkdir -p "$merged"
+
+  [[ -d "$src_global" || -d "$src_local" ]] || return 0
+
+  if [[ -d "$src_global" ]]; then
+    cp -rp "$src_global/." "$merged/"
+  fi
+  if [[ -d "$src_local" ]]; then
+    cp -rp "$src_local/." "$merged/"
+  fi
 
   mkdir -p "$dest"
 
-  if [[ -d "$src_global" ]]; then
-    cp -rp "$src_global/." "$dest/"
-    while IFS= read -r -d '' f; do
-      echo "${f#"$src_global"/}" >> "$expected"
-    done < <(find "$src_global" -not -name ".*" -type f -print0 2>/dev/null)
+  # First install: empty dest — no drift to compare.
+  if [[ -z "$(ls -A "$dest" 2>/dev/null)" ]]; then
+    rsync -a --delete "$merged/" "$dest/"
+    return 0
   fi
 
-  if [[ -d "$src_local" ]]; then
-    cp -rp "$src_local/." "$dest/"
-    while IFS= read -r -d '' f; do
-      rel="${f#"$src_local"/}"
-      grep -qxF "$rel" "$expected" 2>/dev/null || echo "$rel" >> "$expected"
-    done < <(find "$src_local" -not -name ".*" -type f -print0 2>/dev/null)
+  if diff -qr "$merged" "$dest" > /dev/null 2>&1; then
+    return 0
   fi
 
-  # Detect orphans: non-hidden files in dest not sourced from either dir
-  local orphans=()
-  while IFS= read -r -d '' f; do
-    rel="${f#"$dest"/}"
-    grep -qxF "$rel" "$expected" 2>/dev/null || orphans+=("$rel")
-  done < <(find "$dest" -not -name ".*" -type f -print0 2>/dev/null)
-
-  if [[ ${#orphans[@]} -gt 0 ]]; then
-    echo "⚠️  $label/ has files not in either source:"
-    printf '    %s\n' "${orphans[@]}"
-    echo
-    printf "  [k] Keep  [d] Delete  [e] Exit: "
-    read -r choice
-    case "$choice" in
-      d) for f in "${orphans[@]}"; do rm "$dest/$f"; done ;;
-      k) ;;
-      *) exit 1 ;;
-    esac
-  fi
+  echo "⚠️  $label/ has drifted from merged config:"
+  diff -qr "$merged" "$dest" || true
+  echo
+  printf "  [o] Overwrite (sync merged → dest, delete extras)  [k] Keep  [e] Exit: "
+  read -r choice
+  case "$choice" in
+    o) rsync -a --delete "$merged/" "$dest/" ;;
+    k) ;;
+    *) exit 1 ;;
+  esac
 }
 
 # merge_md: merge global + local Markdown -> dest (global then local, blank line between).
