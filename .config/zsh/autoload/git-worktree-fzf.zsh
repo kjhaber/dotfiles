@@ -55,6 +55,10 @@ mkworktree() {
 
   echo "Created worktree at $dir"
   cd "$dir"
+
+  if [[ -n "$TMUX" ]]; then
+    tmux rename-window "${branch##*/}"
+  fi
 }
 
 # Use fzf to pick an item from 'git worktree list', then remove it
