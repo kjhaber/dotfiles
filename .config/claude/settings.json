@@ -10,6 +10,9 @@
     "gopls-lsp@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true
   },
+  "env": {
+    "DISABLE_AUTOUPDATER": 1
+  },
   "lsp": {
     "bash": {
       "args": [
@@ -179,5 +182,9 @@
       "Bash(yarn list *)",
       "Bash(yarn why *)"
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "sh ~/.claude/scripts/statusline-command.sh"
   }
 }
