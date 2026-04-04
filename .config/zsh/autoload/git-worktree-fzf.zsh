@@ -23,7 +23,7 @@ cdworktree() {
 # Usage: mkworktree <branch>
 # If <branch> doesn't exist locally, creates it (tracking remote if available)
 mkworktree() {
-  local branch dir worktrees_root main_worktree main_name safe_branch
+  local branch dir worktrees_root main_worktree main_name safe_branch add_out add_status
   branch="${1:?usage: mkworktree <branch>}"
 
   # Derive placement from the main worktree path
@@ -44,17 +44,42 @@ mkworktree() {
 
   if git show-ref --verify --quiet "refs/heads/$branch"; then
     # Branch exists locally
-    git worktree add "$dir" "$branch" || return 1
+    add_out=$(git worktree add "$dir" "$branch" 2>&1)
+    add_status=$?
   elif git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
     # Branch exists on remote — create local tracking branch
-    git worktree add --track -b "$branch" "$dir" "origin/$branch" || return 1
+    add_out=$(git worktree add --track -b "$branch" "$dir" "origin/$branch" 2>&1)
+    add_status=$?
   else
     # New branch off current HEAD
-    git worktree add -b "$branch" "$dir" || return 1
+    add_out=$(git worktree add -b "$branch" "$dir" 2>&1)
+    add_status=$?
   fi
 
-  echo "Created worktree at $dir"
-  cd "$dir"
+  if (( add_status == 0 )); then
+    echo "Created worktree at $dir"
+  elif [[ "$add_out" == *"already exists"* ]]; then
+    echo "$add_out" >&2
+    if git worktree list | awk '{print $1}' | grep -Fqx "$dir"; then
+      if read -q "?Switch to existing worktree at $dir? [y/N] "; then
+        echo
+        cd "$dir" || return 1
+        if [[ -n "$TMUX" ]]; then
+          tmux rename-window "${branch##*/}"
+        fi
+        return 0
+      fi
+      echo >&2
+    else
+      echo "Path exists but is not a registered worktree for this repo." >&2
+    fi
+    return 1
+  else
+    echo "$add_out" >&2
+    return 1
+  fi
+
+  cd "$dir" || return 1
 
   if [[ -n "$TMUX" ]]; then
     tmux rename-window "${branch##*/}"
