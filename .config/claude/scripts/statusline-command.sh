@@ -30,10 +30,10 @@ if [ -n "$used_pct" ] && [ -n "$ctx_window_size" ]; then
   ctx_int=$(printf '%.0f' "$used_pct")
   # Convert context window size to nearest k (e.g. 200000 -> 200k)
   ctx_k=$(printf '%.0fk' "$(echo "$ctx_window_size" | awk '{print $1/1000}')")
-  ctx=" ctx:${ctx_int}% ${ctx_k}"
+  ctx=" [ctx:${ctx_int}%% ${ctx_k}]"
 elif [ -n "$used_pct" ]; then
   ctx_int=$(printf '%.0f' "$used_pct")
-  ctx=" ctx:${ctx_int}%"
+  ctx=" [ctx:${ctx_int}%%]"
 fi
 
 # Git branch display (mirrors git_rprompt, magenta)
