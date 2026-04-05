@@ -28,6 +28,9 @@ export VIMWIKI_DIR="$DOC_DIR/vimwiki"
 export VIMWIKI_DIARY_DIR="$VIMWIKI_DIR/diary"
 export PROJECTS_DIR="$HOME/Projects"
 
+# Turn off the "What's New" spam advertising Docker injects into container interactive sessions
+export DOCKER_CLI_HINTS=false
+
 # On home machine $REMOTE_SYNC_DIR is a symlink to ~/Dropbox
 # At work it's a directory configured to sync with network drive
 export REMOTE_SYNC_DIR="$DOC_DIR/RemoteSync"
