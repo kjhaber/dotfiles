@@ -1,0 +1,37 @@
+#!/bin/bash
+set -euo pipefail
+
+GLOBAL="$HOME/.config/cursor"
+LOCAL="$HOME/.config-local/cursor"
+DEST="$HOME/.cursor"
+
+TMP=$(mktemp -d)
+trap 'rm -rf "$TMP"' EXIT
+
+# shellcheck source=lib/merge-config.sh
+source "$(dirname "$0")/lib/merge-config.sh"
+
+# Markdown rules file.
+# Note: cursor-agent does not auto-load a global rules file the way Claude Code
+# loads CLAUDE.md. Wire up $DEST/rules.md manually (e.g. via a project rule or
+# --system flag) if you want it injected into sessions.
+merge_md "$GLOBAL/rules.md" "$LOCAL/rules.md" "$DEST/rules.md" "rules.md"
+
+# JSON files
+# mcp.json: full merge (static, no ephemeral keys)
+merge_json "$GLOBAL/mcp.json" "$LOCAL/mcp.json" "$DEST/mcp.json" "mcp.json"
+
+# cli-config.json: partial merge — source files contain only the stable managed
+# keys (permissions, editor, display, etc.); ephemeral keys (authInfo, model
+# selections, privacyCache) in the live dest are left untouched.
+merge_json_partial "$GLOBAL/cli-config.json" "$LOCAL/cli-config.json" \
+  "$DEST/cli-config.json" "cli-config.json"
+
+# Directories
+for dir in commands skills; do
+  if [[ -d "$GLOBAL/$dir" || -d "$LOCAL/$dir" ]]; then
+    merge_dir "$GLOBAL/$dir" "$LOCAL/$dir" "$DEST/$dir" "$dir"
+  fi
+done
+
+exec "$HOME/.local/bin/cursor-agent" "$@"

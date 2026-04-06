@@ -1,0 +1,59 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(git:add*)",
+      "Shell(git:merge*)",
+      "Shell(git:fetch*)",
+      "Shell(git:checkout*)",
+      "Shell(git:branch*)",
+      "Shell(git:rev-parse*)",
+      "Shell(git:status*)",
+      "Shell(git:diff*)",
+      "Shell(git:worktree*)",
+      "Shell(wn:verify*)",
+      "Shell(wn:pick*)",
+      "Shell(wn:release*)",
+      "Shell(wn:root*)",
+      "Shell(wn:note*)",
+      "Shell(wn:show*)",
+      "Shell(wn:list*)",
+      "Mcp(wn:*)"
+    ],
+    "deny": [
+      "Shell(rm)",
+      "Shell(sudo:*)",
+      "Shell(curl:*)",
+      "Shell(wget:*)",
+      "Shell(ssh:*)",
+      "Shell(scp:*)",
+      "Read(.env*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Write(**/.env)",
+      "Write(**/.env.*)",
+      "Write(**/*.pem)",
+      "Write(**/id_rsa)",
+      "Write(**/id_ed25519)"
+    ]
+  },
+  "editor": {
+    "vimMode": true
+  },
+  "display": {
+    "showLineNumbers": true,
+    "showThinkingBlocks": false,
+    "showStatusIndicators": true
+  },
+  "approvalMode": "allowlist",
+  "sandbox": {
+    "mode": "enabled",
+    "networkAccess": "user_config_with_defaults"
+  },
+  "attribution": {
+    "attributeCommitsToAgent": false,
+    "attributePRsToAgent": false
+  },
+  "network": {
+    "useHttp1ForAgent": false
+  }
+}
