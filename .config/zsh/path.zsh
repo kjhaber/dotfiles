@@ -1,16 +1,27 @@
 export PATH="$HOME/.local/bin:$PATH"
 
-# Load Homebrew into PATH and set up completions
-if [[ -f "/opt/homebrew/bin/brew" ]] then;
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-elif [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then;
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
+# Load Homebrew into PATH and set up completions.
+# Cache shellenv output to avoid a subprocess on every startup.
+# Cache is invalidated when the brew binary itself is updated.
+_brew_env_cache="$HOME/.cache/zsh/brew-env.zsh"
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+  if [[ ! -f "$_brew_env_cache" ]] || [[ "/opt/homebrew/bin/brew" -nt "$_brew_env_cache" ]]; then
+    mkdir -p "${_brew_env_cache:h}"
+    /opt/homebrew/bin/brew shellenv > "$_brew_env_cache"
+  fi
+  source "$_brew_env_cache"
+  fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+elif [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  if [[ ! -f "$_brew_env_cache" ]] || [[ "/home/linuxbrew/.linuxbrew/bin/brew" -nt "$_brew_env_cache" ]]; then
+    mkdir -p "${_brew_env_cache:h}"
+    /home/linuxbrew/.linuxbrew/bin/brew shellenv > "$_brew_env_cache"
+  fi
+  source "$_brew_env_cache"
+  fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 fi
+unset _brew_env_cache
 
 # Allow environment-specific PATH overrides
-# (on Mac/Linux, this is where homebrew is added to PATH)
 test -f "$CONFIG_LOCAL_DIR/zsh/path.zsh" && source "$CONFIG_LOCAL_DIR/zsh/path.zsh"
 
 # Add mise (dev tool version manager) shims to PATH
@@ -25,4 +36,3 @@ export PATH="$CONFIG_LOCAL_DIR/bin:$PATH"
 # Add local completion definitions to fpath
 fpath=("$CONFIG_DIR/zsh/completions" $fpath)
 fpath=("$CONFIG_LOCAL_DIR/zsh/completions" $fpath)
-

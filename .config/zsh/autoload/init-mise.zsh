@@ -17,10 +17,23 @@ export MISE_NODE_DEFAULT_PACKAGES_FILE="$HOME/.cache/mise/default-node-packages-
 export MISE_GO_DEFAULT_PACKAGES_FILE="$HOME/.cache/mise/default-go-packages-merged"
 export MISE_RUBY_DEFAULT_PACKAGES_FILE="$HOME/.cache/mise/default-ruby-packages-merged"
 
-# Combine list of packages from `~/.config/mise/default-*-packages` and
-# `~/.config-local/mise/default-*-packages` into merged files under
-# `~/.cache/mise` directory.
-"$HOME/.config/bin/mise-merge-default-packages"
+# Merge default package lists only when source files have changed.
+# Uses a sentinel file to track the last merge time.
+_mise_sentinel="$HOME/.cache/mise/.last-merge"
+_mise_need_merge=false
+if [[ ! -f "$_mise_sentinel" ]]; then
+  _mise_need_merge=true
+else
+  for _f in "$HOME/.config/mise"/default-*-packages "$HOME/.config-local/mise"/default-*-packages; do
+    [[ -f "$_f" && "$_f" -nt "$_mise_sentinel" ]] && { _mise_need_merge=true; break }
+  done
+fi
+if [[ "$_mise_need_merge" == true ]]; then
+  "$HOME/.config/bin/mise-merge-default-packages"
+  mkdir -p "${_mise_sentinel:h}"
+  touch "$_mise_sentinel"
+fi
+unset _mise_sentinel _mise_need_merge _f
 
 
 # Install node and python if not already installed
@@ -36,4 +49,3 @@ if [[ ! -d "$MISE_DATA_DIR/installs/python" ]]; then
 fi
 
 # see .config/zsh/path.zsh for `mise activate`
-

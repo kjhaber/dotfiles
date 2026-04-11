@@ -4,4 +4,5 @@ Neovim coc.nvim plugins:nvim -e -c 'CocUpdateSync|q'
 mise tools:mise upgrade
 tmux plugins:~/.tmux/plugins/tpm/bin/update_plugins all
 zsh plugins:~/.config/bin/zcomet-update
+zsh startup caches:rm -f ~/.cache/zsh/*.zsh ~/.cache/mise/.last-merge ~/.zcompdump*
 

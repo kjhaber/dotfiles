@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+# Profile zsh startup to identify slow sections.
+#
+# Usage:
+#   zsh-startup-profile          # Full zprof + per-file timing
+#   zsh-startup-profile --time   # Time 5 runs, show median (no profiling overhead)
+#
+# The full profile shows:
+#   1. Per-file timing (ms per sourced file)
+#   2. zprof output (ms per function call)
+#   3. Total startup time
+
+case "${1:-}" in
+  --time)
+    echo "Timing 5 zsh interactive startups..."
+    local times=()
+    for i in {1..5}; do
+      local t=$({ time zsh -i -c exit } 2>&1)
+      local ms=$(echo "$t" | awk '/real/ { split($2, a, /[ms]/); print a[1]*60000 + a[2]*1000 }')
+      times+=($ms)
+      printf "  run %d: %sms\n" $i $ms
+    done
+    ;;
+  *)
+    echo "=== zsh startup profile ==="
+    echo "(set ZSH_PROFILE_STARTUP=1 then open a shell, or run this script)"
+    echo ""
+    ZSH_PROFILE_STARTUP=1 zsh -i -c exit 2>&1
+    ;;
+esac

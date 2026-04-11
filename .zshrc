@@ -2,6 +2,20 @@
 # Declares variables and settings useful for any interactive usage of zsh, such
 # as prompt, shortcuts, zsh feature settings, etc.
 
+# Startup profiling - enable with: ZSH_PROFILE_STARTUP=1 zsh -i -c exit
+# Or use: zsh-startup-profile
+if [[ -n "$ZSH_PROFILE_STARTUP" ]]; then
+  zmodload zsh/zprof
+  zmodload zsh/datetime
+  _zsh_profile_start=$EPOCHREALTIME
+  # Override source to time each file
+  function source() {
+    local _t0=$EPOCHREALTIME
+    builtin source "$@"
+    printf "%6.0fms  source %s\n" "$(( (EPOCHREALTIME - _t0) * 1000 ))" "$1"
+  }
+fi
+
 # Apply local environment-specific config
 test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-before.zsh"
 
@@ -64,6 +78,9 @@ export AUTOSWITCH_DEFAULT_PYTHON="$HOME/.local/share/mise/shims/python"
 export AUTOSWITCH_VIRTUAL_ENV_DIR=".virtualenv"
 export AUTOSWITCH_FILE=".venv-autoswitch"
 
+# Set PATH first so autoload files can rely on $HOMEBREW_PREFIX and other vars
+source "$CONFIG_DIR/zsh/path.zsh"
+
 # Load external configs and plugins
 for file in $CONFIG_DIR/zsh/autoload/*.zsh; do
   source "$file"
@@ -74,14 +91,25 @@ if [[ -f $CONFIG_LOCAL_DIR/zsh/autoload/*.zsh ]]; then
   done
 fi
 
-# Set PATH
-source "$CONFIG_DIR/zsh/path.zsh"
-
 # Apply local environment-specific config
 # (if fpath is changed in zshrc-after.zsh, compinit might need to be re-run or moved..)
 test -f "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh" && source "$CONFIG_LOCAL_DIR/zsh/zshrc-after.zsh"
 
 # Enable completions (after zshrc-after.zsh in case `fpath` is changed in local overrides)
+# Use compinit -C (skip security audit) when dump is <20h old — much faster.
+# To force a full refresh: zsh-completion-refresh
 autoload -U compinit
-compinit
+typeset -a _zcompdump_recent
+_zcompdump_recent=(~/.zcompdump(Nmh-20))
+if (( ${#_zcompdump_recent} )); then
+  compinit -C
+else
+  compinit
+fi
+unset _zcompdump_recent
 
+if [[ -n "$ZSH_PROFILE_STARTUP" ]]; then
+  unfunction source 2>/dev/null  # restore built-in source
+  zprof
+  printf "Total startup: %.0fms\n" "$(( (EPOCHREALTIME - _zsh_profile_start) * 1000 ))"
+fi

@@ -31,3 +31,19 @@ alias cdvimwiki="cd $VIMWIKI_DIR"
 
 alias wnv="wn verify"
 
+# Rebuild zsh completion cache. Use this when developing/testing completion scripts
+# or after installing a new tool with completions.
+function zsh-completion-refresh() {
+  rm -f ~/.zcompdump*
+  autoload -U compinit && compinit
+  echo "Completions refreshed. Run 'exec zsh' if changes don't take effect."
+}
+
+# Clear all zsh startup caches (brew-env, go-env, mise package merge sentinel).
+# Use this after a brew upgrade, Go upgrade, or if startup behavior seems stale.
+# Also clears completion cache. Run 'exec zsh' afterward to rebuild.
+function zsh-cache-refresh() {
+  echo "Clearing zsh startup caches..."
+  rm -f ~/.cache/zsh/*.zsh ~/.cache/mise/.last-merge ~/.zcompdump*(N)
+  echo "All caches cleared. Run 'exec zsh' to rebuild."
+}
