@@ -30,18 +30,20 @@ eval_sup_command ()
 }
 
 # Iterate through set of commands in config file
-# Expects each line to be two colon-separated values -- name:command
+# Each line is two colon-separated values -- name:command
+# Lines starting with # are treated as comments and skipped
 eval_sup_command_file ()
 {
   sup_command_file="$1"
   if [ -f "$sup_command_file" ]; then
     while IFS="" read -r line <&3 || [ -n "$line" ]
     do
-      if [[ -n "$line" ]]; then
-        name="$(echo "$line" | cut -d':' -f1)"
-        command="$(echo "$line" | cut -d':' -f2)"
-        eval_sup_command "$name" "$command"
-      fi
+      # Skip empty lines and comments
+      [[ -z "$line" || "$line" == \#* ]] && continue
+
+      name="${line%%:*}"
+      command="${line#*:}"
+      eval_sup_command "$name" "$command"
     done 3<"$sup_command_file"
   fi
 }
@@ -53,4 +55,3 @@ eval_sup_command_file "$HOME/.config/sup/sup-commands"
 eval_sup_command_file "$HOME/.config-local/sup/sup-commands"
 
 echo "Done"
-

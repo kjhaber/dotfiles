@@ -1,8 +1,11 @@
 Homebrew:brew update && brew upgrade
-Neovim (lazy.nvim) plugins:nvim --headless "+Lazy! sync" +qa
-Neovim coc.nvim plugins:nvim -e -c 'CocUpdateSync|q'
+# --greedy also updates casks with auto_updates=true (Chrome, Cursor, Discord, etc.)
+Homebrew casks (greedy):brew upgrade --cask --greedy
+mise (self):mise self-update
 mise tools:mise upgrade
+npm globals:npm update -g
+Neovim (lazy.nvim) plugins:nvim --headless "+Lazy! sync" +qa
+Neovim coc.nvim plugins:npm --prefix ~/.config/coc/extensions update
 tmux plugins:~/.tmux/plugins/tpm/bin/update_plugins all
 zsh plugins:~/.config/bin/zcomet-update
 zsh startup caches:rm -f ~/.cache/zsh/*.zsh ~/.cache/mise/.last-merge ~/.zcompdump*
-
