@@ -1,29 +1,23 @@
-#!/bin/sh
+#!/bin/bash
 # Creates or decrypts an existing encrypted file as a temp file within editor.
 # Encrypts and saves the temp file result over the existing encrypted file when
 # the editor exits.
+set -o pipefail
 
 TARGET_FILE="$1"
 if [ -z "$TARGET_FILE" ]; then
   echo "Usage: vicrypt <filename>"
-  exit 0
+  exit 1
 fi
 
-# Dependency check: vipe, openssl
 check_dependency() {
-  DEP_COMMAND="$1"
-  INSTALL_HINT="$2"
-  which -s "$DEP_COMMAND"
-  RESULT="$?"
-  # echo "which $DEP_COMMAND -> $RESULT"
-  if [ "$RESULT" -ne "0" ]; then
-    echo "$DEP_COMMAND not found ($INSTALL_HINT)"
+  if ! command -v "$1" > /dev/null 2>&1; then
+    echo "$1 not found ($2)"
     exit 1
   fi
 }
 
 check_dependency "openssl" '`brew install openssl`'
-check_dependency "vipe" '`brew install moreutils`'
 check_dependency "basename" '`brew install coreutils`'
 check_dependency "sha256sum" '`brew install coreutils`'
 
@@ -31,21 +25,22 @@ check_dependency "sha256sum" '`brew install coreutils`'
 filename=$(basename -- "$TARGET_FILE")
 extension="${filename##*.}"
 base_filename="${filename%.*}"
-if [ "$base_filename" == "$filename" ]; then
+if [ "$base_filename" = "$filename" ]; then
   extension="txt"
 fi
 
 # Get password from user for encrypt and decrypt
-read -s -p "Password: " PASSWORD
+read -s -p "Password: " VICRYPT_PASSWORD
 echo
 
 # Create tmp file for unencrypted file content
 # https://stackoverflow.com/questions/687014/removing-created-temp-files-in-unexpected-bash-exit#687052
-INITTMPFILE="$(mktemp /tmp/${filename}.XXXXXX)"
+INITTMPFILE="$(mktemp /tmp/vicrypt.XXXXXX)"
 rm "$INITTMPFILE"
 TMPFILE="$INITTMPFILE.${extension}"
-# echo "tmpfile: $TMPFILE"
-trap '{ rm -f -- "$TMPFILE"; }' EXIT
+ENCTMPFILE=
+
+trap '{ rm -f -- "$TMPFILE" "$ENCTMPFILE"; }' EXIT
 
 INIT_CHECKSUM=
 
@@ -53,53 +48,38 @@ INIT_CHECKSUM=
 # https://superuser.com/questions/370388/simple-built-in-way-to-encrypt-and-decrypt-a-file-on-a-mac-via-command-line
 # https://unix.stackexchange.com/questions/507131/openssl-1-1-1b-warning-using-iter-or-pbkdf2-would-be-better-while-decrypting
 if [ -f "$TARGET_FILE" ]; then
-  cat "$TARGET_FILE" | vicrypt-decrypt "$PASSWORD" > "$TMPFILE"
-  DECRESULT="$?"
-  if [ "$DECRESULT" -ne "0" ]; then
+  openssl enc -d -aes-256-cbc -a -salt -pbkdf2 -iter 100000 -pass fd:3 3<<<"$VICRYPT_PASSWORD" < "$TARGET_FILE" > "$TMPFILE"
+  if [ "$?" -ne "0" ]; then
     echo "Error occurred when decrypting, exiting"
     exit 1
   fi
-
   INIT_CHECKSUM="$(sha256sum "$TMPFILE")"
 fi
-# echo "initial checksum for $TMPFILE: $INIT_CHECKSUM"
 
 # Edit decrypted file in editor
 "$EDITOR" "$TMPFILE"
 if [ ! -f "$TMPFILE" ]; then
-  # echo "No file written, exiting"
   exit 0
 fi
 
 FINAL_CHECKSUM="$(sha256sum "$TMPFILE")"
-# echo "final checksum: $FINAL_CHECKSUM"
 
 # Check for change in file - exit immediately if no change detected
 # https://stackoverflow.com/questions/12900538/fastest-way-to-tell-if-two-files-have-the-same-contents-in-unix-linux
-if [ "$INIT_CHECKSUM" == "$FINAL_CHECKSUM" ]; then
-  # echo "No changes made in file (checksum), exiting"
-  rm -f "$TMPFILE"
+if [ "$INIT_CHECKSUM" = "$FINAL_CHECKSUM" ]; then
   exit 0
 fi
 
-# echo "checksums didn't match, proceed"
-
 # Encrypt tmpfile contents and write to new temp file
-ENCTMPFILE="$(mktemp /tmp/${filename}.enc.XXXXXX)"
-# echo "encrypted tmpfile: $ENCTMPFILE"
-trap '{ rm -f -- "$ENCTMPFILE"; }' EXIT
-cat "$TMPFILE" | vicrypt-encrypt "$PASSWORD" > "$ENCTMPFILE"
+ENCTMPFILE="$(mktemp /tmp/vicrypt.enc.XXXXXX)"
+openssl enc -aes-256-cbc -a -salt -pbkdf2 -iter 100000 -pass fd:3 3<<<"$VICRYPT_PASSWORD" < "$TMPFILE" > "$ENCTMPFILE"
+ENCRESULT="$?"
 rm -f "$TMPFILE"
-# echo "encrypt tmp file: $ENCTMPFILE"
 
 # If no errors in encrypting tmpfile, overwrite target file
-ENCRESULT="$?"
 if [ "$ENCRESULT" -eq "0" ]; then
   cp "$ENCTMPFILE" "$TARGET_FILE"
-  rm -f "$ENCTMPFILE"
 else
-  rm -f "$ENCTMPFILE"
   echo "Error occurred when encrypting result, not modifying target file $TARGET_FILE"
   exit 1
 fi
-
