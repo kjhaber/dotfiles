@@ -39,8 +39,8 @@ setopt complete_in_word
 setopt auto_cd
 
 HISTFILE=$HOME/.zsh-histfile
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=1000000000
+SAVEHIST=1000000000
 setopt inc_append_history
 setopt share_history
 setopt extended_history
