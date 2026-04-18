@@ -397,3 +397,27 @@ call SourceLocalNvimDotfile('init-after.vim')
 
 ]])
 
+-- Resize splits with shift-arrow (mirrors tmux pane resize keybindings).
+-- When a vim split neighbor exists in the relevant direction, resize the vim split.
+-- When at the edge (no vim split in that direction), fall through to resize the tmux pane.
+-- Resize vim split or fall through to tmux pane resize.
+-- toward/away are winnr() direction keys ('h','j','k','l') for the pressed direction
+-- and its opposite. Three cases:
+--   1. Split exists toward the pressed direction: expand current split (separator moves that way)
+--   2. Split exists only on the away side: shrink current split (separator still moves the right way)
+--   3. No splits on either axis: fall through to tmux
+local function resize_vim_or_tmux(expand_cmd, shrink_cmd, tmux_cmd, toward, away)
+  if vim.fn.winnr() ~= vim.fn.winnr(toward) then
+    vim.cmd(expand_cmd)
+  elseif vim.fn.winnr() ~= vim.fn.winnr(away) then
+    vim.cmd(shrink_cmd)
+  elseif vim.env.TMUX then
+    vim.fn.system("tmux " .. tmux_cmd)
+  end
+end
+
+vim.keymap.set("n", "<S-Up>",    function() resize_vim_or_tmux("resize +5",           "resize -5",           "resize-pane -U 5",  "k", "j") end, { silent = true })
+vim.keymap.set("n", "<S-Down>",  function() resize_vim_or_tmux("resize +5",           "resize -5",           "resize-pane -D 5",  "j", "k") end, { silent = true })
+vim.keymap.set("n", "<S-Left>",  function() resize_vim_or_tmux("vertical resize +10", "vertical resize -10", "resize-pane -L 10", "h", "l") end, { silent = true })
+vim.keymap.set("n", "<S-Right>", function() resize_vim_or_tmux("vertical resize +10", "vertical resize -10", "resize-pane -R 10", "l", "h") end, { silent = true })
+
