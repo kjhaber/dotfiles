@@ -4,8 +4,6 @@ vim.cmd([[
 " --------------------------------------------------------------
 " General Settings
 " --------------------------------------------------------------
-scriptencoding utf-8
-
 set backspace=2
 set clipboard=unnamed
 set encoding=utf-8
