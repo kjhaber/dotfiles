@@ -8,6 +8,7 @@ model=$(echo "$input" | jq -r '.model.display_name // ""')
 vim_mode=$(echo "$input" | jq -r '.vim.mode // ""')
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
 ctx_window_size=$(echo "$input" | jq -r '.context_window.context_window_size // empty')
+session_cost=$(echo "$input" | jq -r '.cost.total_cost_usd // empty')
 
 # Current directory (last segment, like %1~ in zsh)
 dir=$(basename "$cwd")
@@ -49,5 +50,9 @@ if [ -n "$model" ]; then
 fi
 if [ -n "$ctx" ]; then
   printf "\033[2m${ctx}\033[0m"
+fi
+if [ -n "$CLAUDE_STATUSLINE_SHOW_SESSION_COST" ] && [ -n "$session_cost" ]; then
+  cost_fmt=$(printf '$%.2f' "$session_cost")
+  printf " \033[2;32m[${cost_fmt}]\033[0m"
 fi
 printf "\n"
