@@ -53,18 +53,20 @@ _worktree_computed_path_for_branch() {
   fi
 }
 
-# True if current session has a window whose name exactly matches $1
+# True if the session (or current session if $2 is empty) has a window whose name exactly matches $1
 _tmux_has_window_named() {
-  local name="$1"
+  local name="$1" session="$2"
   [[ -n "$name" ]] || return 1
-  tmux list-windows -F '#{window_name}' 2>/dev/null | grep -Fqx "$name"
+  local target_args=()
+  [[ -n "$session" ]] && target_args=(-t "$session")
+  tmux list-windows "${target_args[@]}" -F '#{window_name}' 2>/dev/null | grep -Fqx "$name"
 }
 
 # Open a new tmux window in the worktree for <branch>, creating the worktree if needed (non-interactive).
 # If a window named like the branch's short name already exists in this session, select it instead.
 # Intended for tmux key bindings; requires TMUX. Git repo is only required when no matching window exists.
 worktree_tmux_window() {
-  local branch="$1" dir add_out add_status win
+  local branch="$1" session="$2" dir add_out add_status win
   branch="${branch:?usage: worktree_tmux_window <branch>}"
   [[ -n "$TMUX" ]] || {
     echo "worktree_tmux_window: not running inside tmux" >&2
@@ -72,8 +74,8 @@ worktree_tmux_window() {
   }
 
   win="${branch##*/}"
-  if _tmux_has_window_named "$win"; then
-    tmux select-window -t "=$win"
+  if _tmux_has_window_named "$win" "$session"; then
+    tmux select-window -t "${session:+$session:}=$win"
     return 0
   fi
 
@@ -82,8 +84,11 @@ worktree_tmux_window() {
     return 1
   }
 
+  local new_win_args=(-n "$win")
+  [[ -n "$session" ]] && new_win_args=(-t "$session" "${new_win_args[@]}")
+
   if dir=$(_worktree_find_path_for_branch "$branch"); then
-    tmux new-window -n "$win" -c "$dir"
+    tmux new-window "${new_win_args[@]}" -c "$dir"
     return 0
   fi
 
@@ -101,12 +106,12 @@ worktree_tmux_window() {
   fi
 
   if (( add_status == 0 )); then
-    tmux new-window -n "$win" -c "$dir"
+    tmux new-window "${new_win_args[@]}" -c "$dir"
     return 0
   fi
 
   if [[ "$add_out" == *"already exists"* ]] && git worktree list | awk '{print $1}' | grep -Fqx "$dir"; then
-    tmux new-window -n "$win" -c "$dir"
+    tmux new-window "${new_win_args[@]}" -c "$dir"
     return 0
   fi
 

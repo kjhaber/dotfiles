@@ -5,4 +5,4 @@
 
 here=${0:A:h}
 source "$here/../zsh/autoload/git-worktree-fzf.zsh"
-worktree_tmux_window "$1"
+worktree_tmux_window "$1" "$2"
