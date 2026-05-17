@@ -23,7 +23,6 @@ local M = {
         \  'coc-solargraph',
         \  'coc-tsserver',
         \  'coc-vimlsp',
-        \  'coc-xml',
         \  'coc-yaml',
         \  'coc-yank'
         \ ]
