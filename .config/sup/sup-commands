@@ -2,7 +2,7 @@ Homebrew:brew update && brew upgrade
 # --greedy also updates casks with auto_updates=true (Chrome, Cursor, Discord, etc.)
 Homebrew casks (greedy):brew upgrade --cask --greedy
 mise (self):mise self-update
-mise tools:mise upgrade
+mise tools:mise upgrade --yes
 npm globals:npm update -g
 Neovim (lazy.nvim) plugins:nvim --headless "+Lazy! sync" +qa
 Neovim coc.nvim plugins:npm --prefix ~/.config/coc/extensions update
