@@ -92,13 +92,20 @@ return {
         nmap <Leader>w<Space>t :read $VIMWIKI_DIR/TODO.md<CR>
 
 
-        " Open yesterday's journal entry in a new vsplit
+        " Open yesterday's journal entry in a new vsplit to the left
         function! OpenYesterdayWikiSplit()
           vsplit
           execute "normal \<c-w>h"
           execute "normal \<Plug>VimwikiDiaryPrevDay"
         endfunction
         nmap <Leader>w< :call OpenYesterdayWikiSplit()<CR>
+
+        " Open tomorrow's journal entry in a new vsplit to the right
+        function! OpenTomorrowWikiSplit()
+          vsplit
+          execute "normal \<Plug>VimwikiDiaryNextDay"
+        endfunction
+        nmap <Leader>w> :call OpenTomorrowWikiSplit()<CR>
 
 
         " Sometimes I use my LSP 'jump to definition' shortcut to follow urls out of
