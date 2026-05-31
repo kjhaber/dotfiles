@@ -16,6 +16,7 @@ export AWS_PAGER=""
 export CONFIG_DIR="$HOME/.config"
 export CONFIG_LOCAL_DIR="$HOME/.config-local"
 export LUA_PATH=";;$CONFIG_DIR/nvim/lua/?.lua;$CONFIG_LOCAL_DIR/nvim/lua/?.lua"
+export MISE_DATA_DIR="$HOME/.local/share/mise"
 export WN_SETTINGS_USER="$HOME/.config/wn/settings.json"
 export WN_SETTINGS_USER_LOCAL="$HOME/.config-local/wn/settings.json"
 
