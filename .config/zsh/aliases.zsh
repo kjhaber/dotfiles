@@ -1,6 +1,7 @@
 # aliases for common typos and jump to favorite directories
 alias xeit=exit
 alias :q=exit
+alias \/exit=exit
 
 # using dash to go up a directory is same as netrw in vim
 alias -- -='cd ..'
