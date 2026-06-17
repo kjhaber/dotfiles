@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Append stdin as a markdown code block to today's vimwiki diary, before the ## TODO section.
+# Usage: diary-append [--timestamp-label <label>]
+#   --timestamp-label: text for the attribution line (default: "note")
+#                      e.g. diary-append --timestamp-label 'submit to claude'
+set -euo pipefail
+
+label="note"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --timestamp-label) label="$2"; shift 2 ;;
+    *) echo "diary-append: unknown option: $1" >&2; exit 1 ;;
+  esac
+done
+
+if [[ -z "${VIMWIKI_DIARY_DIR:-}" ]]; then
+  echo "diary-append: VIMWIKI_DIARY_DIR is not set" >&2
+  exit 1
+fi
+
+diary="${VIMWIKI_DIARY_DIR}/$(date +%Y-%m-%d).md"
+
+if [[ ! -f "$diary" ]]; then
+  echo "diary-append: diary file not found: $diary" >&2
+  exit 1
+fi
+
+text=$(cat)
+
+[[ -z "$text" ]] && exit 0
+
+timestamp=$(date +'[%H:%M]')
+
+tmpfile=$(mktemp)
+trap 'rm -f "$tmpfile"' EXIT
+
+printf '```\n%s\n```\n- %s %s\n' "$text" "$label" "$timestamp" > "$tmpfile"
+
+awk -v blockfile="$tmpfile" '
+/^## TODO/ {
+    while ((getline line < blockfile) > 0) print line
+    print ""
+}
+{ print }
+' "$diary" > "${diary}.tmp" && mv "${diary}.tmp" "$diary"

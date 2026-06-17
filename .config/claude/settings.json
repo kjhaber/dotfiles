@@ -94,6 +94,14 @@
             "command": "~/.config/bin/__tmux-clear-attention"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.prompt' | ~/.config/bin/diary-append --timestamp-label 'submit to claude' || true"
+          }
+        ]
       }
     ]
   },
