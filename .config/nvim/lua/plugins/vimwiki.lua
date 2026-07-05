@@ -132,6 +132,17 @@ return {
             autocmd FileType vimwiki syntax match VimwikiCode /`[^`]\+`/ contains=@NoSpell
             autocmd FileType vimwiki hi! link VimwikiCode String
         augroup END
+
+        augroup VimwikiAutoReload
+            autocmd!
+            autocmd FileType vimwiki setlocal autoread
+            autocmd FocusGained,BufEnter * if &filetype ==# 'vimwiki' | checktime | endif
+        augroup END
+
+        " Source local wiki list additions before the plugin loads and processes g:vimwiki_list.
+        " vimwiki calls vimwiki#vars#init() at plugin load time (not VimEnter), so any
+        " modifications to g:vimwiki_list must happen here, not in init-after.vim.
+        call SourceLocalNvimDotfile('vimwiki-list.vim')
       ]])
     end
   },
