@@ -101,30 +101,26 @@ hi User1 gui=bold guifg=#ff2b70 guibg=#3a3a3a
 hi User2 gui=none guifg=#ff2b70 guibg=#3a3a3a
 
 " start of default statusline
-set statusline=
-set statusline+=%<\       "cut at start
-set statusline+=%t\       "tail of the filename
-set statusline+=[%{strlen(&fenc)?&fenc:'none'},\  "file encoding
-set statusline+=%{&ff}]\  "file format
-set statusline+=%y\       "filetype
-set statusline+=%r        "read only flag
-
-"modified flag
-set statusline+=%1*%{getbufvar(bufnr('%'),'&mod')?'[+]':''}%*
-
+set statusline=%<\                                                   " cut at start
+set statusline+=%t\                                                  " tail of the filename
+set statusline+=%y\                                                  " filetype
+set statusline+=%{&fenc!='utf-8'&&strlen(&fenc)?'['.&fenc.']\ ':''}  " encoding if not utf-8
+set statusline+=%{&ff!='unix'?'['.&ff.']\ ':''}                      " fileformat if not unix
+set statusline+=%r\                                                  " read only flag
+set statusline+=%1*%{getbufvar(bufnr('%'),'&mod')?'[+]':''}%*        " modified flag
 set statusline+=%#warningmsg#
 set statusline+=%*
-
-set statusline+=%=      "left/right separator
-set statusline+=%{SelectedWordCount()}%*\  "count of selected words
-set statusline+=%c,    "cursor column
-set statusline+=%l/%L\  "cursor line/total lines
-set statusline+=(%P)    "percent through file
+set statusline+=%=                                                   " left/right separator
+set statusline+=%{SelectedWordCount()}%*\                            " count of selected words
+set statusline+=col\ %2c/%{printf('%2d',col('$')-1)},\               " current column indicator
+set statusline+=line\ %2l/%2L\                                       " current line indicator
+set statusline+=(%P)                                                 " percent through file
 
 function SelectedWordCount()
     let l:word_count=" "
     if has_key(wordcount(),'visual_words')
-        let l:word_count="[".wordcount().visual_words." words selected]"
+        let l:wc=wordcount()
+        let l:word_count=printf('[selected %2d words, %3d chars]', l:wc.visual_words, l:wc.visual_chars)
     endif
     return l:word_count
 endfunction
