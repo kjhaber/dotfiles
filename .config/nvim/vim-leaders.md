@@ -74,9 +74,10 @@ u
   urr -- UML reverse both entity + arrow
 v
 w
-  w<leader>w -- vimwiki diary today
-  wi         -- vimwiki diary index
-  w<leader>i -- vimwiki diary index generate links
+  w<leader>w -- open vimwiki diary today
+  wi         -- open vimwiki diary index
+  w<leader>i -- open vimwiki diary index generate links
+  w<leader>p -- open vimwiki llm prompt diary today
   wc         -- open calendar (enter on date opens diary)
   wf         -- set filetype=vimwiki (vimwiki filetype sometimes changes to 'conf' when splitting window)
   wj         -- copy diary todo item to journal

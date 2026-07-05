@@ -28,6 +28,7 @@ return {
         nmap <Leader>wc :Calendar<CR>
         nmap <Leader>w<Space>w <Plug>VimwikiMakeDiaryNote
         nmap <Leader>w<Space>i <Plug>VimwikiDiaryGenerateLinks
+        nmap <silent> <Leader>w<Space>p :execute 'edit ' . $VIMWIKI_LLM_PROMPT_DIARY_DIR . '/' . strftime('%Y-%m-%d') . '.md'<CR>
         nmap <Leader>wy <Plug>VimwikiDiaryPrevDay
         nmap <Leader>wY <Plug>VimwikiDiaryNextDay
         nmap <silent> <Leader>w- :call ToggleDashCheckbox()<CR>
