@@ -99,7 +99,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.prompt' | ~/.config/bin/diary-append --timestamp-label 'submit to claude' || true"
+            "command": "jq -r '.prompt' | ~/.config/bin/diary-append --timestamp-label 'submit to claude' --dir \"${VIMWIKI_LLM_PROMPT_DIARY_DIR}\" --create || true"
           }
         ]
       }

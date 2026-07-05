@@ -27,6 +27,7 @@ export DOC_DIR="$HOME/Documents"
 export DESKTOP_DIR="$HOME/Desktop"
 export VIMWIKI_DIR="$DOC_DIR/vimwiki"
 export VIMWIKI_DIARY_DIR="$VIMWIKI_DIR/diary"
+export VIMWIKI_LLM_PROMPT_DIARY_DIR="$VIMWIKI_DIR/llm-prompt-diary"
 export PROJECTS_DIR="$HOME/Projects"
 
 # Turn off the "What's New" spam advertising Docker injects into container interactive sessions

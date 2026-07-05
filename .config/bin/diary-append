@@ -1,28 +1,42 @@
 #!/usr/bin/env bash
 # Append stdin as a markdown code block to today's vimwiki diary, before the ## TODO section.
-# Usage: diary-append [--timestamp-label <label>]
+# Usage: diary-append [--timestamp-label <label>] [--dir <dir>] [--create]
 #   --timestamp-label: text for the attribution line (default: "note")
 #                      e.g. diary-append --timestamp-label 'submit to claude'
+#   --dir: directory containing diary files (default: $VIMWIKI_DIARY_DIR)
+#   --create: create diary file if it doesn't exist (default: exit with error)
 set -euo pipefail
 
 label="note"
+diary_dir=""
+create=false
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --timestamp-label) label="$2"; shift 2 ;;
+    --dir) diary_dir="$2"; shift 2 ;;
+    --create) create=true; shift ;;
     *) echo "diary-append: unknown option: $1" >&2; exit 1 ;;
   esac
 done
 
-if [[ -z "${VIMWIKI_DIARY_DIR:-}" ]]; then
-  echo "diary-append: VIMWIKI_DIARY_DIR is not set" >&2
-  exit 1
+if [[ -z "$diary_dir" ]]; then
+  if [[ -z "${VIMWIKI_DIARY_DIR:-}" ]]; then
+    echo "diary-append: VIMWIKI_DIARY_DIR is not set and --dir not provided" >&2
+    exit 1
+  fi
+  diary_dir="${VIMWIKI_DIARY_DIR}"
 fi
 
-diary="${VIMWIKI_DIARY_DIR}/$(date +%Y-%m-%d).md"
+diary="${diary_dir}/$(date +%Y-%m-%d).md"
 
 if [[ ! -f "$diary" ]]; then
-  echo "diary-append: diary file not found: $diary" >&2
-  exit 1
+  if [[ "$create" == true ]]; then
+    mkdir -p "$diary_dir"
+    touch "$diary"
+  else
+    echo "diary-append: diary file not found: $diary" >&2
+    exit 1
+  fi
 fi
 
 text=$(cat)
@@ -34,12 +48,18 @@ timestamp=$(date +'[%H:%M]')
 tmpfile=$(mktemp)
 trap 'rm -f "$tmpfile"' EXIT
 
-printf '```\n%s\n```\n- %s %s\n' "$text" "$label" "$timestamp" > "$tmpfile"
+fence='```'
+printf '%s\n%s\n%s\n- %s %s\n' "$fence" "$text" "$fence" "$label" "$timestamp" > "$tmpfile"
 
-awk -v blockfile="$tmpfile" '
-/^## TODO/ {
-    while ((getline line < blockfile) > 0) print line
-    print ""
-}
-{ print }
-' "$diary" > "${diary}.tmp" && mv "${diary}.tmp" "$diary"
+if grep -q "^## TODO" "$diary"; then
+  awk -v blockfile="$tmpfile" '
+  /^## TODO/ {
+      while ((getline line < blockfile) > 0) print line
+      print ""
+  }
+  { print }
+  ' "$diary" > "${diary}.tmp" && mv "${diary}.tmp" "$diary"
+else
+  printf '\n' >> "$diary"
+  cat "$tmpfile" >> "$diary"
+fi
