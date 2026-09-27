@@ -23,6 +23,7 @@ vim.opt.rtp:prepend(lazypath)
 local pluginSpecs = {
   {import = "plugins.appearance"},
   {import = "plugins.filetypes"},
+  {import = "plugins.folding"},
   {import = "plugins.git"},
   {import = "plugins.lsp"},
   {import = "plugins.navigation"},

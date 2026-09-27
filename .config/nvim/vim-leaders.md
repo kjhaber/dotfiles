@@ -62,10 +62,10 @@ p - Paste without clobbering system clipboard
 q
 r
 s
-  sp  strip punctuation
-  sq  strip smart quotes
-  ss  strip all (trailing whitespace, smart quotes, punctuation)
-  st  strip trailing whitespace
+  sp -- strip punctuation
+  sq -- strip smart quotes
+  ss -- strip all (trailing whitespace, smart quotes, punctuation)
+  st -- strip trailing whitespace
 t
   tt -- NERDTree toggle
 u
@@ -93,7 +93,9 @@ w
   w>         -- open tomorrow's wiki journal in new vsplit
 x
 y
-z - Zoom (ZoomWinTab)
+z
+  zf -- toggle z/folding column visibility
+  zz -- Zoom (ZoomWinTab)
 / - search (fzf + ripgrep) (same as <leader>[t )
   // -- search text (all files under vim pwd - on enter, uses loclist)
   /b -- search buffers
@@ -129,9 +131,9 @@ z - Zoom (ZoomWinTab)
   >| -- align selected text using bar character
 
 #
-  ## set line numbers relative with current
-  #a set line numbers absolute
-  #x set line numbers hidden
+  ## -- set line numbers relative with current
+  #a -- set line numbers absolute
+  #x -- set line numbers hidden
 = - evaluate math expression
   =a -- coc-Calc Append
   =r -- coc-Calc Replace
