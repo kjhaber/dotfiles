@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+# firefox-userchrome
+# Create/update userChrome.css in the Firefox profile to hide UI that clutters
+# Tree Style Tab usage: native horizontal tabs, sidebar header, sidebar launcher.
+# Also enables toolkit.legacyUserProfileCustomizations.stylesheets via user.js.
+#
+# Usage: firefox-userchrome [profile-dir]
+#   With no argument, uses the default profile from profiles.ini.
+#   Set FIREFOX_DIR to override ~/Library/Application Support/Firefox.
+# Restart Firefox afterwards to apply.
+
+set -euo pipefail
+
+FIREFOX_DIR="${FIREFOX_DIR:-$HOME/Library/Application Support/Firefox}"
+PREF_NAME="toolkit.legacyUserProfileCustomizations.stylesheets"
+
+die () { echo "firefox-userchrome: $*" >&2; exit 1; }
+
+# Print the default profile dir from profiles.ini: prefer the [Install...]
+# section's Default (what Firefox actually launches), else the [Profile*]
+# section marked Default=1, else the only profile.
+find_default_profile ()
+{
+  local ini="$FIREFOX_DIR/profiles.ini"
+  [ -f "$ini" ] || die "no profiles.ini found in $FIREFOX_DIR"
+
+  local path
+  path=$(awk -F= '
+    /^\[/ { section = $0; next }
+    section ~ /^\[Install/ && $1 == "Default" { print $2; exit }
+  ' "$ini")
+
+  if [ -z "$path" ]; then
+    path=$(awk -F= '
+      /^\[/ { if (p != "" && d == "1") { print p; exit } section = $0; p = ""; d = ""; next }
+      section ~ /^\[Profile/ && $1 == "Path" { p = $2 }
+      section ~ /^\[Profile/ && $1 == "Default" { d = $2 }
+      END { if (p != "" && d == "1") print p }
+    ' "$ini" | head -1)
+  fi
+
+  if [ -z "$path" ]; then
+    local count
+    count=$(grep -c '^Path=' "$ini" || true)
+    [ "$count" -eq 1 ] || die "could not determine default profile; pass profile dir as argument"
+    path=$(awk -F= '$1 == "Path" { print $2 }' "$ini")
+  fi
+
+  # Install section paths and IsRelative=1 paths are relative to FIREFOX_DIR
+  case "$path" in
+    /*) echo "$path" ;;
+    *)  echo "$FIREFOX_DIR/$path" ;;
+  esac
+}
+
+write_userchrome ()
+{
+  local chrome_dir="$1/chrome"
+  local css="$chrome_dir/userChrome.css"
+  local tmp
+  mkdir -p "$chrome_dir"
+  tmp=$(mktemp)
+  cat > "$tmp" <<'CSS'
+/* Managed by ~/.config/bin/firefox-userchrome -- edits here will be overwritten */
+
+/* Hide Tree Style Tabs menu in sidebar (legacy sidebar, pre-revamp) */
+#sidebar-header {
+  display: none;
+}
+
+/* Hide sidebar panel header ("Tree Style Tab" title + close button) in
+   the revamped sidebar. Lives in webext-panels.xhtml, not browser.xhtml. */
+#sidebar-panel-header {
+  display: none !important;
+}
+
+/* Hide the revamped sidebar launcher (far-left icon strip) */
+#sidebar-container,
+#sidebar-launcher-splitter {
+  display: none !important;
+}
+
+/* Hide native horizontal tabs (Tree Style Tab replaces them) */
+#TabsToolbar {
+  visibility: collapse !important;
+}
+CSS
+
+  if [ -f "$css" ] && cmp -s "$tmp" "$css"; then
+    rm "$tmp"
+    echo "Unchanged: $css"
+    return
+  fi
+  if [ -f "$css" ]; then
+    local backup
+    backup="$css.bak-$(date +%Y%m%d-%H%M%S)"
+    cp "$css" "$backup"
+    echo "Backed up existing file to $backup"
+  fi
+  mv "$tmp" "$css"
+  echo "Wrote $css"
+}
+
+enable_stylesheet_pref ()
+{
+  local user_js="$1/user.js"
+  local line="user_pref(\"$PREF_NAME\", true);"
+  if [ -f "$user_js" ] && grep -qF "$line" "$user_js"; then
+    echo "Unchanged: $user_js"
+    return
+  fi
+  if [ -f "$user_js" ] && grep -qF "\"$PREF_NAME\"" "$user_js"; then
+    sed -i '' "/\"${PREF_NAME//./\\.}\"/d" "$user_js"
+  fi
+  echo "$line" >> "$user_js"
+  echo "Enabled $PREF_NAME in $user_js"
+}
+
+if [ $# -gt 0 ]; then
+  profile="$1"
+  [ -d "$profile" ] || die "profile dir not found: $profile"
+else
+  profile=$(find_default_profile)
+  [ -d "$profile" ] || die "default profile dir not found: $profile"
+fi
+
+echo "Firefox profile: $profile"
+write_userchrome "$profile"
+enable_stylesheet_pref "$profile"
+echo "Restart Firefox to apply changes."
