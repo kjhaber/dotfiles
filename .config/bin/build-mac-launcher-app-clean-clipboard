@@ -1,0 +1,3 @@
+#!/bin/sh
+mkdir -p "$HOME/Applications"
+build-mac-launcher-app "$HOME/.config/bin/clean-clipboard" "Clean Clipboard" "$HOME/Applications"

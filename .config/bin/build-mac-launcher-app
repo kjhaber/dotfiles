@@ -1,0 +1,16 @@
+#!/bin/sh
+# Wraps a shell script in a tiny AppleScript applet (.app) so QuickSilver
+# (or Spotlight/Finder) can launch it like any other app.
+# Usage: build-quicksilver-app <script-path> <App Name> [output-dir]
+set -eu
+
+if [ $# -lt 2 ]; then
+  echo "usage: build-quicksilver-app <script-path> <App Name> [output-dir]" >&2
+  exit 1
+fi
+
+script="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+name="$2"
+outdir="${3:-$HOME/Applications}"
+
+osacompile -o "$outdir/$name.app" -e "do shell script \"$script\""
