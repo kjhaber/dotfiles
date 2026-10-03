@@ -47,3 +47,5 @@ Thumbs.db
 
 .venv-autoswitch
 .virtualenv
+
+**/.claude/settings.local.json
