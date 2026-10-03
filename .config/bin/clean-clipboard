@@ -1,0 +1,26 @@
+#!/bin/sh
+# Replaces the "Plain Clip" app: takes the clipboard and strips rich text
+# formatting, smart quotes, invisible control characters, and stray
+# leading/trailing whitespace or blank lines.
+set -eu
+
+# Invisible Unicode characters sed can't spell directly in its pattern.
+zwsp=$(printf '\xE2\x80\x8B')  # zero width space
+zwnj=$(printf '\xE2\x80\x8C')  # zero width non-joiner
+zwj=$(printf '\xE2\x80\x8D')   # zero width joiner
+wj=$(printf '\xE2\x81\xA0')    # word joiner
+bom=$(printf '\xEF\xBB\xBF')   # BOM / zero width no-break space
+
+pbpaste \
+  | tr -d '\001-\010\013\014\016-\037\177' \
+  | sed -E \
+      -e "s/‘/'/g" -e "s/’/'/g" \
+      -e 's/“/"/g' -e 's/”/"/g' \
+      -e "s/${zwsp}//g" -e "s/${zwnj}//g" -e "s/${zwj}//g" \
+      -e "s/${wj}//g" -e "s/${bom}//g" \
+      -e 's/[[:space:]]+$//' -e 's/^[[:space:]]+//' \
+  | awk '
+      { lines[NR] = $0; if ($0 != "") { if (!first) first = NR; last = NR } }
+      END { if (first) for (i = first; i <= last; i++) print lines[i] }
+    ' \
+  | pbcopy
