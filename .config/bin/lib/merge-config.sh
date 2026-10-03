@@ -121,9 +121,20 @@ merge_json_partial() {
 # Builds the merged tree in a temp dir (same as cp global then cp local), compares
 # to dest with diff -r, and prompts on drift — matching merge_json / merge_md.
 # Overwrite uses rsync --delete so dest matches merged (drops agent-only files).
+#
+# Extra args after label are basename patterns to exclude from the comparison and
+# from the overwrite's --delete (e.g. "synced" under skills/, which Claude Code's
+# plugin system writes into at runtime and is not sourced from GLOBAL/LOCAL).
 merge_dir() {
   local src_global="$1" src_local="$2" dest="$3" label="$4"
+  shift 4
   local merged="$TMP/${label}_merged"
+  local diff_opts=() rsync_opts=()
+  local pattern
+  for pattern in "$@"; do
+    diff_opts+=(-x "$pattern")
+    rsync_opts+=(--exclude="$pattern")
+  done
 
   rm -rf "$merged"
   mkdir -p "$merged"
@@ -141,21 +152,21 @@ merge_dir() {
 
   # First install: empty dest — no drift to compare.
   if [[ -z "$(ls -A "$dest" 2>/dev/null)" ]]; then
-    rsync -a --delete "$merged/" "$dest/"
+    rsync -a --delete "${rsync_opts[@]+"${rsync_opts[@]}"}" "$merged/" "$dest/"
     return 0
   fi
 
-  if diff -qr "$merged" "$dest" > /dev/null 2>&1; then
+  if diff -qr "${diff_opts[@]+"${diff_opts[@]}"}" "$merged" "$dest" > /dev/null 2>&1; then
     return 0
   fi
 
   echo "⚠️  $label/ has drifted from merged config:"
-  diff -qr "$merged" "$dest" || true
+  diff -qr "${diff_opts[@]+"${diff_opts[@]}"}" "$merged" "$dest" || true
   echo
   printf "  [o] Overwrite (sync merged → dest, delete extras)  [k] Keep  [e] Exit: "
   read -r choice
   case "$choice" in
-    o) rsync -a --delete "$merged/" "$dest/" ;;
+    o) rsync -a --delete "${rsync_opts[@]+"${rsync_opts[@]}"}" "$merged/" "$dest/" ;;
     k) ;;
     *) exit 1 ;;
   esac
