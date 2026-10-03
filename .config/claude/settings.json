@@ -220,5 +220,6 @@
     "command": "sh ~/.claude/scripts/statusline-command.sh"
   },
   "tui": "fullscreen",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "defaultMode": "auto"
 }
