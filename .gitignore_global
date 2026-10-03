@@ -48,4 +48,6 @@ Thumbs.db
 .venv-autoswitch
 .virtualenv
 
-**/.claude/settings.local.json
+.mise.local.toml
+mise.local.toml
+settings.local.json
