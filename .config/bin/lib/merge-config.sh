@@ -5,10 +5,10 @@
 # Requires: $TMP set to a writable temp dir (caller creates it and traps cleanup).
 #
 # Functions:
-#   merge_json         src_global src_local dest label  — full-file JSON merge + drift detect
-#   merge_json_partial src_global src_local dest label  — key-scoped JSON merge + patch
-#   merge_dir          src_global src_local dest label  — recursive dir merge + drift detect
-#   merge_md           src_global src_local dest label  — Markdown concat + drift detect
+#   merge_json         src_global src_local dest label [key...]     — full-file JSON merge + drift detect
+#   merge_json_partial src_global src_local dest label              — key-scoped JSON merge + patch
+#   merge_dir          src_global src_local dest label [pattern...] — recursive dir merge + drift detect
+#   merge_md           src_global src_local dest label              — Markdown concat + drift detect
 
 # jq: deep-merge two JSON values. Objects recurse; arrays concatenate (global then local);
 # local wins for scalars and when types disagree (matches prior $a * $b intent).
@@ -38,23 +38,30 @@ JQ
 # merge_json: merge global + local JSON -> dest (replaces dest entirely).
 # Arrays at any depth are concatenated (global + local); scalars in local override global.
 # Prompts if dest has drifted from the merged result.
+#
+# Extra args after label are top-level keys left unmanaged: they are dropped from
+# the merged result, ignored in drift comparison, and dest's values are preserved
+# on overwrite (e.g. "model" in Claude's settings.json, which changes often).
 merge_json() {
   local src_global="$1" src_local="$2" dest="$3" label="$4"
-  local merged dest_fmt
+  shift 4
+  local merged dest_fmt ignore
   merged="$TMP/$(basename "$dest")"
   dest_fmt="$TMP/$(basename "$dest").orig"
+  ignore=$(jq -cn '$ARGS.positional' --args "$@")
 
   [[ -f "$src_global" ]] || return 0
 
   # Use -r not -f: local may be a FIFO (e.g. process substitution); -f is false for pipes.
   if [[ -r "$src_local" ]]; then
-    jq -s "$_MERGE_JSON_DEEP_JQ" "$src_global" "$src_local" | jq -S . > "$merged"
+    jq -s "$_MERGE_JSON_DEEP_JQ" "$src_global" "$src_local" > "$merged.raw"
   else
-    jq -S . "$src_global" > "$merged"
+    cp "$src_global" "$merged.raw"
   fi
+  jq -S --argjson ignore "$ignore" 'delpaths($ignore | map([.]))' "$merged.raw" > "$merged"
 
   if [[ -f "$dest" ]]; then
-    jq -S . "$dest" > "$dest_fmt"
+    jq -S --argjson ignore "$ignore" 'delpaths($ignore | map([.]))' "$dest" > "$dest_fmt"
     if ! diff -q "$merged" "$dest_fmt" > /dev/null 2>&1; then
       echo "⚠️  $label has drifted from merged config:"
       diff --color=always "$merged" "$dest_fmt" || true
@@ -62,7 +69,13 @@ merge_json() {
       printf "  [o] Overwrite  [k] Keep  [e] Exit: "
       read -r choice
       case "$choice" in
-        o) cp "$merged" "$dest" ;;
+        o)
+          # Carry dest's values for ignored keys over into the merged result
+          jq -S -s --argjson ignore "$ignore" \
+            '.[0] + (.[1] | with_entries(select(.key as $k | $ignore | index($k))))' \
+            "$merged" "$dest" > "$merged.patched"
+          cp "$merged.patched" "$dest"
+          ;;
         k) ;;
         *) exit 1 ;;
       esac
