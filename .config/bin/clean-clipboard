@@ -21,6 +21,6 @@ pbpaste \
       -e 's/[[:space:]]+$//' -e 's/^[[:space:]]+//' \
   | awk '
       { lines[NR] = $0; if ($0 != "") { if (!first) first = NR; last = NR } }
-      END { if (first) for (i = first; i <= last; i++) print lines[i] }
+      END { if (first) for (i = first; i <= last; i++) printf "%s%s", lines[i], (i < last ? "\n" : "") }
     ' \
   | pbcopy
