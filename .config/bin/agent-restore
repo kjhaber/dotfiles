@@ -1,0 +1,167 @@
+#!/usr/bin/env bash
+# agent-restore
+# Reads agent-capture output and reopens each Claude Code session in tmux:
+#
+#   session:window,path,claude:session-id # optional session name
+#
+# - Creates any tmux session that doesn't exist yet.
+# - Creates each window at its captured index (appends if that index is taken in
+#   an existing session). Lines sharing a session:window key become split panes
+#   in one window, arranged with the tiled layout.
+# - Types `claude --resume <id>` into each pane's shell, so your normal shell
+#   environment and `claude` launcher apply and the pane survives claude exiting.
+# - Skips sessions that are already running, and lines it can't restore
+#   (missing directory, unsupported app, malformed). Skips for those reasons
+#   make the exit status 1.
+#
+# Usage: agent-restore [-c]    (reads stdin; -c reads the clipboard instead)
+#
+# Environment: AGENT_CLAUDE_CMD overrides the command used to start claude.
+
+set -uo pipefail
+
+# shellcheck source=lib/agent-common.sh
+source "$(dirname "${BASH_SOURCE[0]}")/lib/agent-common.sh"
+
+usage() {
+  echo "Usage: agent-restore [-c]" >&2
+  echo "  Reads agent-capture output from stdin; -c reads it from the clipboard." >&2
+}
+
+from_clipboard=0
+while getopts ":ch" opt; do
+  case "$opt" in
+    c) from_clipboard=1 ;;
+    h) usage; exit 0 ;;
+    *) usage; exit 2 ;;
+  esac
+done
+shift $((OPTIND - 1))
+if [ $# -gt 0 ]; then usage; exit 2; fi
+
+claude_cmd="${AGENT_CLAUDE_CMD:-claude}"
+status=0
+
+warn() {
+  echo "agent-restore: $*" >&2
+}
+
+fail_line() {
+  warn "$*"
+  status=1
+}
+
+# Session ids that are running now (and ones we launch below), one per line.
+running_ids=$(agent_live_claude_sessions | awk -F "$US" '{ print $3 }')
+
+# Maps "session:window" -> tmux window id for windows created during this run.
+window_map=""
+new_pane=""
+
+lookup_window() {
+  awk -F "$US" -v k="$1" '$1 == k { print $2; exit }' <<<"$window_map"
+}
+
+# open_pane <session> <window-index> <dir> -> sets $new_pane to the new pane's id and
+# records the window for the key. (Not run in a subshell, so window_map persists.)
+open_pane() {
+  local sess="$1" idx="$2" dir="$3" key="$1:$2" wid pane out target
+
+  wid=$(lookup_window "$key")
+  if [ -n "$wid" ]; then
+    pane=$(agent_tmux split-window -d -P -F '#{pane_id}' -t "$wid" -c "$dir") || return 1
+    agent_tmux select-layout -t "$wid" tiled >/dev/null 2>&1 || true
+    new_pane="$pane"
+    return 0
+  fi
+
+  if ! agent_tmux has-session -t "=$sess" 2>/dev/null; then
+    out=$(agent_tmux new-session -d -x 200 -y 50 -s "$sess" -c "$dir" \
+      -P -F "#{window_id}${US}#{pane_id}${US}#{window_index}") || return 1
+    IFS="$US" read -r wid pane cur <<<"$out"
+    if [ "$cur" != "$idx" ]; then
+      agent_tmux move-window -s "$wid" -t "=$sess:$idx" >/dev/null 2>&1 || true
+    fi
+  else
+    target="=$sess:$idx"
+    if agent_tmux list-windows -t "=$sess" -F '#{window_index}' | grep -qx "$idx"; then
+      target="=$sess:" # index taken: append instead
+    fi
+    out=$(agent_tmux new-window -d -t "$target" -c "$dir" \
+      -P -F "#{window_id}${US}#{pane_id}") || return 1
+    IFS="$US" read -r wid pane <<<"$out"
+  fi
+
+  window_map="$window_map$key$US$wid"$'\n'
+  new_pane="$pane"
+}
+
+restore_line() {
+  local raw="$1" line key rest dir spec app id sess idx
+
+  line="${raw%% \#*}"                    # drop trailing " # comment"
+  line="${line#"${line%%[![:space:]]*}"}" # trim leading whitespace
+  line="${line%"${line##*[![:space:]]}"}" # trim trailing whitespace
+  case "$line" in "" | "#"*) return 0 ;; esac
+
+  if [[ "$line" != *,*,* ]]; then
+    fail_line "skipping malformed line: $raw"
+    return 0
+  fi
+  key="${line%%,*}"
+  rest="${line#*,}"
+  spec="${rest##*,}"
+  dir="${rest%,*}"
+
+  if [[ ! "$key" =~ ^([^:]+):([0-9]+)$ ]]; then
+    fail_line "skipping malformed session:window '$key' in line: $raw"
+    return 0
+  fi
+  sess="${BASH_REMATCH[1]}"
+  idx="${BASH_REMATCH[2]}"
+
+  if [[ ! "$spec" =~ ^([a-z]+):(.+)$ ]]; then
+    fail_line "skipping malformed line: $raw"
+    return 0
+  fi
+  app="${BASH_REMATCH[1]}"
+  id="${BASH_REMATCH[2]}"
+  if [ "$app" != "claude" ]; then
+    fail_line "skipping unsupported app '$spec' in $key"
+    return 0
+  fi
+  if [[ ! "$id" =~ ^[A-Za-z0-9_-]+$ ]]; then
+    fail_line "skipping invalid session id '$id' in $key"
+    return 0
+  fi
+
+  dir="${dir/#\~/$HOME}"
+  if [ ! -d "$dir" ]; then
+    fail_line "skipping claude:$id in $key: directory not found: $dir"
+    return 0
+  fi
+
+  if grep -qxF -- "$id" <<<"$running_ids"; then
+    warn "skipping claude:$id in $key: already running"
+    return 0
+  fi
+
+  if ! open_pane "$sess" "$idx" "$dir"; then
+    fail_line "could not create tmux pane for claude:$id in $key"
+    return 0
+  fi
+  agent_tmux send-keys -t "$new_pane" "$claude_cmd --resume $(printf '%q' "$id")" Enter
+  running_ids="$running_ids"$'\n'"$id"
+}
+
+if [ "$from_clipboard" -eq 1 ]; then
+  input=$(pbpaste)
+else
+  input=$(cat)
+fi
+
+while IFS= read -r raw || [ -n "$raw" ]; do
+  restore_line "$raw"
+done <<<"$input"
+
+exit "$status"

@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# agent-capture
+# Prints the Claude Code sessions running in tmux panes, one per line, in a
+# human-readable form that agent-restore can read back:
+#
+#   session:window,path,claude:session-id # optional session name
+#
+# Panes of the same window share the same session:window key.
+#
+# Usage: agent-capture [-c]
+#   -c  copy to the clipboard instead of printing
+
+set -euo pipefail
+
+# shellcheck source=lib/agent-common.sh
+source "$(dirname "${BASH_SOURCE[0]}")/lib/agent-common.sh"
+
+usage() {
+  echo "Usage: agent-capture [-c]" >&2
+  echo "  -c  copy to the clipboard instead of printing" >&2
+}
+
+to_clipboard=0
+while getopts ":ch" opt; do
+  case "$opt" in
+    c) to_clipboard=1 ;;
+    h) usage; exit 0 ;;
+    *) usage; exit 2 ;;
+  esac
+done
+shift $((OPTIND - 1))
+if [ $# -gt 0 ]; then usage; exit 2; fi
+
+panes=$(agent_tmux list-panes -a \
+  -F "#{pane_id}${US}#{session_name}${US}#{window_index}${US}#{pane_index}" 2>/dev/null) || {
+  echo "agent-capture: could not list tmux panes (is a tmux server running?)" >&2
+  exit 1
+}
+
+# Replace a leading $HOME with ~ for readability.
+abbreviate_home() {
+  # shellcheck disable=SC2088 # literal tilde is intended
+  case "$1" in
+    "$HOME") echo "~" ;;
+    "$HOME"/*) echo "~/${1#"$HOME"/}" ;;
+    *) echo "$1" ;;
+  esac
+}
+
+capture() {
+  local pane id cwd name match sess win pidx line
+  agent_live_claude_sessions | while IFS="$US" read -r pane _ id cwd name; do
+    [ -n "$pane" ] || continue
+    match=$(awk -F "$US" -v p="$pane" '$1 == p { print; exit }' <<<"$panes")
+    [ -n "$match" ] || continue
+    IFS="$US" read -r _ sess win pidx <<<"$match"
+    printf '%s\n' "$sess$US$win$US$pidx$US$(abbreviate_home "$cwd")$US$id$US$name"
+  done | LC_ALL=C sort -t "$US" -k1,1 -k2,2n -k3,3n |
+    while IFS="$US" read -r sess win _ cwd id name; do
+      line="$sess:$win,$cwd,claude:$id"
+      if [ -n "$name" ]; then line="$line # $name"; fi
+      printf '%s\n' "$line"
+    done
+}
+
+if [ "$to_clipboard" -eq 1 ]; then
+  capture | pbcopy
+else
+  capture
+fi
