@@ -1,4 +1,8 @@
 -- kjhaber vim config
+
+-- Use global mise tool installs before plugins (and their language servers) start.
+require("global-tools").pin_mise()
+
 vim.cmd([[
 
 " --------------------------------------------------------------
