@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Installs default packages into a freshly installed mise tool version.  Meant to
+# be run as a tool-level `postinstall` in mise config, e.g.:
+#   node = { version = "latest", postinstall = "mise-install-default-packages" }
+#
+# Packages come from `~/.config/mise/default-<tool>-packages` and
+# `~/.config-local/mise/default-<tool>-packages` (one per line, merged and
+# de-duplicated), so defaults can be set in both public/global .config and
+# machine-specific .config-local.  Replaces mise's deprecated
+# `default_packages_file` settings.
+#
+# mise provides MISE_TOOL_NAME and MISE_TOOL_INSTALL_PATH to postinstall commands.
+
+set -euo pipefail
+
+tool="${MISE_TOOL_NAME:?must be run as a mise tool postinstall (MISE_TOOL_NAME unset)}"
+
+packages=()
+while IFS= read -r line; do
+    packages+=("${line}")
+done < <(
+    cat "${HOME}/.config/mise/default-${tool}-packages" \
+        "${HOME}/.config-local/mise/default-${tool}-packages" 2>/dev/null |
+        grep -v -E '^\s*$' | sort -u || true
+)
+
+[[ ${#packages[@]} -eq 0 ]] && exit 0
+
+case "${tool}" in
+    node)
+        npm install -g "${packages[@]}"
+        ;;
+    python)
+        pip install "${packages[@]}"
+        ;;
+    ruby)
+        gem install "${packages[@]}"
+        ;;
+    go)
+        export GOBIN="${MISE_TOOL_INSTALL_PATH}/bin"
+        for pkg in "${packages[@]}"; do
+            go install "${pkg}"
+        done
+        ;;
+    *)
+        echo "mise-install-default-packages: no installer for '${tool}'" >&2
+        ;;
+esac

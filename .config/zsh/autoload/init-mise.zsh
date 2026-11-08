@@ -10,30 +10,10 @@ if [[ ! -f "$MISE_INSTALL_PATH" ]]; then
   curl https://mise.run | sh
 fi
 
-# Set mise default package lists
-# (e.g. https://mise.jdx.dev/lang/python.html#default-python-packages )
-export MISE_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.cache/mise/default-python-packages-merged"
-export MISE_NODE_DEFAULT_PACKAGES_FILE="$HOME/.cache/mise/default-node-packages-merged"
-export MISE_GO_DEFAULT_PACKAGES_FILE="$HOME/.cache/mise/default-go-packages-merged"
-export MISE_RUBY_DEFAULT_PACKAGES_FILE="$HOME/.cache/mise/default-ruby-packages-merged"
-
-# Merge default package lists only when source files have changed.
-# Uses a sentinel file to track the last merge time.
-_mise_sentinel="$HOME/.cache/mise/.last-merge"
-_mise_need_merge=false
-if [[ ! -f "$_mise_sentinel" ]]; then
-  _mise_need_merge=true
-else
-  for _f in "$HOME/.config/mise"/default-*-packages "$HOME/.config-local/mise"/default-*-packages; do
-    [[ -f "$_f" && "$_f" -nt "$_mise_sentinel" ]] && { _mise_need_merge=true; break }
-  done
-fi
-if [[ "$_mise_need_merge" == true ]]; then
-  "$HOME/.config/bin/mise-merge-default-packages"
-  mkdir -p "${_mise_sentinel:h}"
-  touch "$_mise_sentinel"
-fi
-unset _mise_sentinel _mise_need_merge _f
+# Default packages for each tool version come from default-<tool>-packages files
+# under ~/.config/mise and ~/.config-local/mise.  They're installed by the
+# `postinstall = "$HOME/.config/bin/mise-install-default-packages"` option on
+# each tool in mise config (mise's default_packages_file settings are deprecated).
 
 
 # Install node and python if not already installed
