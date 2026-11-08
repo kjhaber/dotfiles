@@ -12,8 +12,8 @@ fi
 
 # Default packages for each tool version come from default-<tool>-packages files
 # under ~/.config/mise and ~/.config-local/mise.  They're installed by the
-# `postinstall = "$HOME/.config/bin/mise-install-default-packages"` option on
-# each tool in mise config (mise's default_packages_file settings are deprecated).
+# `[hooks] postinstall = "$HOME/.config/bin/mise-install-default-packages"` in
+# the global mise config (mise's default_packages_file settings are deprecated).
 
 
 # Install node and python if not already installed

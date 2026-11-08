@@ -1,48 +1,71 @@
 #!/usr/bin/env bash
-# Installs default packages into a freshly installed mise tool version.  Meant to
-# be run as a tool-level `postinstall` in mise config, e.g.:
-#   node = { version = "latest", postinstall = "mise-install-default-packages" }
+# Installs default packages into freshly installed mise tool versions.  Replaces
+# mise's deprecated `default_packages_file` settings.
 #
 # Packages come from `~/.config/mise/default-<tool>-packages` and
 # `~/.config-local/mise/default-<tool>-packages` (one per line, merged and
 # de-duplicated), so defaults can be set in both public/global .config and
-# machine-specific .config-local.  Replaces mise's deprecated
-# `default_packages_file` settings.
+# machine-specific .config-local.
 #
-# mise provides MISE_TOOL_NAME and MISE_TOOL_INSTALL_PATH to postinstall commands.
+# Run it once from the global mise config, so every tool install is covered
+# without repeating it on each tool entry (including project overrides):
+#   [hooks]
+#   postinstall = "$HOME/.config/bin/mise-install-default-packages"
+# mise passes MISE_INSTALLED_TOOLS, a JSON array of what was just installed.
+#
+# It also works as a single tool's `postinstall` option, where mise passes
+# MISE_TOOL_NAME and MISE_TOOL_INSTALL_PATH instead.
 
 set -euo pipefail
 
-tool="${MISE_TOOL_NAME:?must be run as a mise tool postinstall (MISE_TOOL_NAME unset)}"
+# install_defaults <tool> <install-path> : installs the merged package list for
+# <tool> using the package manager from <install-path>/bin.
+install_defaults() {
+    local tool="$1" install_path="$2"
 
-packages=()
-while IFS= read -r line; do
-    packages+=("${line}")
-done < <(
-    cat "${HOME}/.config/mise/default-${tool}-packages" \
-        "${HOME}/.config-local/mise/default-${tool}-packages" 2>/dev/null |
-        grep -v -E '^\s*$' | sort -u || true
-)
+    case "${tool}" in
+        node | python | ruby | go) ;;
+        *) return 0 ;;
+    esac
 
-[[ ${#packages[@]} -eq 0 ]] && exit 0
+    local packages=()
+    while IFS= read -r line; do
+        packages+=("${line}")
+    done < <(
+        cat "${HOME}/.config/mise/default-${tool}-packages" \
+            "${HOME}/.config-local/mise/default-${tool}-packages" 2>/dev/null |
+            grep -v -E '^\s*$' | sort -u || true
+    )
 
-case "${tool}" in
-    node)
-        npm install -g "${packages[@]}"
-        ;;
-    python)
-        pip install "${packages[@]}"
-        ;;
-    ruby)
-        gem install "${packages[@]}"
-        ;;
-    go)
-        export GOBIN="${MISE_TOOL_INSTALL_PATH}/bin"
-        for pkg in "${packages[@]}"; do
-            go install "${pkg}"
-        done
-        ;;
-    *)
-        echo "mise-install-default-packages: no installer for '${tool}'" >&2
-        ;;
-esac
+    [[ ${#packages[@]} -eq 0 ]] && return 0
+
+    (
+        export PATH="${install_path}/bin:${PATH}"
+        case "${tool}" in
+            node)
+                npm install -g "${packages[@]}"
+                ;;
+            python)
+                pip install "${packages[@]}"
+                ;;
+            ruby)
+                gem install "${packages[@]}"
+                ;;
+            go)
+                export GOBIN="${install_path}/bin"
+                for pkg in "${packages[@]}"; do
+                    go install "${pkg}"
+                done
+                ;;
+        esac
+    )
+}
+
+if [[ -n "${MISE_INSTALLED_TOOLS:-}" ]]; then
+    while IFS=$'\t' read -r name install_path; do
+        install_defaults "${name}" "${install_path}"
+    done < <(jq -r '.[] | [.name, .install_path] | @tsv' <<<"${MISE_INSTALLED_TOOLS}")
+else
+    tool="${MISE_TOOL_NAME:?must be run as a mise postinstall (MISE_INSTALLED_TOOLS and MISE_TOOL_NAME unset)}"
+    install_defaults "${tool}" "${MISE_TOOL_INSTALL_PATH:-}"
+fi
