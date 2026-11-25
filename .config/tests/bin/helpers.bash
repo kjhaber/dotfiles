@@ -49,14 +49,16 @@ live_pid() {
   echo "$pid"
 }
 
-# write_session_file <pid> <session-id> <cwd> <tmux-field> [name] [kind]
+# write_session_file <pid> <session-id> <cwd> <tmux-field> [name] [kind] [name-source]
+# name-source is "user" for /rename names, "derived" for auto-generated ones.
 write_session_file() {
-  local pid="$1" id="$2" cwd="$3" tmuxf="$4" name="${5:-}" kind="${6:-interactive}"
+  local pid="$1" id="$2" cwd="$3" tmuxf="$4" name="${5:-}" kind="${6:-interactive}" name_source="${7:-}"
   jq -n --argjson pid "$pid" --arg id "$id" --arg cwd "$cwd" --arg tmux "$tmuxf" \
-        --arg name "$name" --arg kind "$kind" \
+        --arg name "$name" --arg kind "$kind" --arg ns "$name_source" \
     '{pid:$pid, sessionId:$id, cwd:$cwd, kind:$kind}
      + (if $tmux == "" then {} else {tmux:$tmux} end)
-     + (if $name == "" then {} else {name:$name} end)' \
+     + (if $name == "" then {} else {name:$name} end)
+     + (if $ns == "" then {} else {nameSource:$ns} end)' \
     > "$CLAUDE_SESSIONS_DIR/$pid.json"
 }
 

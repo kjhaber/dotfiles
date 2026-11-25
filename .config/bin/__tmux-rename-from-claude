@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# __tmux-rename-from-claude [window_id]
+# Renames a tmux window to the name of the Claude Code session running in it,
+# if exactly one live session in that window has an explicit (/rename) name.
+# Otherwise shows a brief status-bar message and leaves the window alone.
+#
+# Bound to <prefix>N in tmux-keybindings.conf. window_id defaults to the
+# current window. Reads Claude's live session registry (~/.claude/sessions).
+#
+# Env (for tests):
+#   CLAUDE_SESSIONS_DIR  session registry directory (default ~/.claude/sessions)
+#   AGENT_TMUX_SOCKET    tmux socket name (-L) to talk to instead of the default server
+
+set -u
+shopt -s nullglob
+
+tm() { tmux ${AGENT_TMUX_SOCKET:+-L "$AGENT_TMUX_SOCKET"} "$@"; }
+
+window=${1:-$(tm display-message -p '#{window_id}')}
+sessions_dir=${CLAUDE_SESSIONS_DIR:-$HOME/.claude/sessions}
+
+names=""
+for f in "$sessions_dir"/*.json; do
+  # Emits "pid<TAB>name" for user-named sessions whose tmux target
+  # ("session:@window.%pane") is in this window
+  line=$(jq -r --arg w "$window" '
+    select(.nameSource == "user" and (.name // "") != "")
+    | select((.tmux // "") | split(":") | last | split(".") | first == $w)
+    | "\(.pid)\t\(.name)"' "$f" 2>/dev/null) || continue
+  [ -n "$line" ] || continue
+  # Skip stale registry entries from sessions that are no longer running
+  kill -0 "${line%%$'\t'*}" 2>/dev/null || continue
+  names+="${line#*$'\t'}"$'\n'
+done
+
+names=$(printf '%s' "$names" | sort -u)
+count=$(printf '%s' "$names" | grep -c '^')
+
+if [ "$count" -eq 1 ]; then
+  tm rename-window -t "$window" "$names"
+elif [ "$count" -eq 0 ]; then
+  tm display-message "No named Claude session in this window"
+else
+  tm display-message "Multiple named Claude sessions in this window: $(printf '%s' "$names" | paste -sd, - | sed 's/,/, /g')"
+fi
